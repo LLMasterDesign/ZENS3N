@@ -258,15 +258,10 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
 
 def clean_for_inline(text: str) -> str:
-    """Strip HTML tags and formatting artifacts for inline queries"""
+    """Strip HTML tags but keep block characters"""
     import re
-    # Remove HTML tags
+    # Remove HTML tags ONLY
     text = re.sub(r'<[^>]+>', '', text)
-    # Remove ▛▞ box characters
-    text = re.sub(r'▛▞\s*', '', text)
-    text = re.sub(r'▸\s*', '', text)
-    # Remove extra whitespace
-    text = re.sub(r'\n{3,}', '\n\n', text)
     text = text.strip()
     return text
 
@@ -291,7 +286,7 @@ async def inline_query(update: Update, context: ContextTypes.DEFAULT_TYPE):
         
         answer = response.choices[0].message.content
         
-        # Clean HTML and formatting for inline display
+        # Clean HTML but keep blocks
         clean_answer = clean_for_inline(answer)
         
         # Create inline result with branding
