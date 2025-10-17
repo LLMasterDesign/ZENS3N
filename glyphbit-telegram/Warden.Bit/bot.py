@@ -34,10 +34,33 @@ logger = logging.getLogger(__name__)
 # ═══════════════════════════════════════════════════════════
 
 WILDLIFE = {
-    "noctua": {"emoji": "🦉", "name": "Noctua", "species": "Owl"},
-    "vulpes": {"emoji": "🦊", "name": "Vulpes", "species": "Fox"},
-    "trickoon": {"emoji": "🦝", "name": "Trickoon", "species": "Raccoon"}
+    "noctua": {
+        "emoji": "🦉",
+        "name": "Noctua",
+        "species": "Owl",
+        "aliases": ["noctua", "owl", "🦉"]
+    },
+    "vulpes": {
+        "emoji": "🦊",
+        "name": "Vulpes",
+        "species": "Fox",
+        "aliases": ["vulpes", "fox", "🦊"]
+    },
+    "trickoon": {
+        "emoji": "🦝",
+        "name": "Trickoon",
+        "species": "Raccoon",
+        "aliases": ["trickoon", "raccoon", "trash panda", "🦝"]
+    }
 }
+
+def resolve_bot_name(alias: str) -> str:
+    """Resolve bot name from alias (e.g., 'fox' -> 'vulpes')"""
+    alias_lower = alias.lower().strip()
+    for bot_id, info in WILDLIFE.items():
+        if alias_lower in info["aliases"]:
+            return bot_id
+    return None
 
 # Warden's state file (writable location)
 STATE_DIR = Path(__file__).parent / 'data'
@@ -144,10 +167,12 @@ async def warden(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     # MUTE
     if subcommand == "mute" and len(context.args) > 1:
-        bot_name = context.args[1].lower()
-        if bot_name not in WILDLIFE:
+        bot_alias = context.args[1].lower()
+        bot_name = resolve_bot_name(bot_alias)
+        
+        if not bot_name:
             await update.message.reply_text(
-                f"🦌 <b>Warden:</b> Unknown critter. Try: noctua, vulpes, or trickoon",
+                f"🦌 <b>Warden:</b> Unknown critter. Try: owl, fox, raccoon",
                 parse_mode='HTML'
             )
             return
@@ -175,10 +200,12 @@ async def warden(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     # UNMUTE
     elif subcommand == "unmute" and len(context.args) > 1:
-        bot_name = context.args[1].lower()
-        if bot_name not in WILDLIFE:
+        bot_alias = context.args[1].lower()
+        bot_name = resolve_bot_name(bot_alias)
+        
+        if not bot_name:
             await update.message.reply_text(
-                f"🦌 <b>Warden:</b> Unknown critter.",
+                f"🦌 <b>Warden:</b> Unknown critter. Try: owl, fox, raccoon",
                 parse_mode='HTML'
             )
             return

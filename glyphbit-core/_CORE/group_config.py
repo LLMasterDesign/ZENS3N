@@ -6,6 +6,7 @@ Chat-level settings + per-bot topic muting - Hybrid Mode
 import json
 import os
 import re
+from pathlib import Path
 
 # ═══════════════════════════════════════════════════════════
 # GLYPHBIT TRINITY MANIFEST
@@ -37,6 +38,34 @@ GLYPHBIT_ROSTER = {
         "aliases": ["trickoon", "raccoon", "trash panda", "🦝"]
     }
 }
+
+# ═══════════════════════════════════════════════════════════
+# WARDEN STATE INTEGRATION
+# ═══════════════════════════════════════════════════════════
+
+# Warden's state file location (shared volume in Docker)
+WARDEN_STATE_FILE = Path("/app/telegram-data/warden_state.json")
+
+def load_warden_state() -> dict:
+    """Load Warden's state from file (read-only check)"""
+    try:
+        if WARDEN_STATE_FILE.exists():
+            with open(WARDEN_STATE_FILE, 'r') as f:
+                return json.load(f)
+    except Exception:
+        pass
+    return {"muted_bots": {}, "chat_modes": {}, "activity_log": []}
+
+def get_warden_chat_mode(chat_id: int) -> str:
+    """Get chat mode from Warden's state"""
+    state = load_warden_state()
+    return state.get("chat_modes", {}).get(str(chat_id), None)
+
+def is_bot_muted_by_warden(bot_name: str, chat_id: int) -> bool:
+    """Check if Warden has muted this bot"""
+    state = load_warden_state()
+    muted_in_chat = state.get("muted_bots", {}).get(str(chat_id), [])
+    return bot_name.lower() in muted_in_chat
 
 # ═══════════════════════════════════════════════════════════
 # CHAT MODES (set by group admin)
@@ -231,10 +260,11 @@ def should_respond(bot_name: str, update) -> bool:
     """
     HYBRID MODE: Determine if bot should respond.
     
-    Logic:
-    1. Check if bot is muted in this chat/topic → return False
-    2. Check chat mode (group/inline/live)
-    3. Respond accordingly with context awareness
+    Priority:
+    1. Warden's mute state (if set) > local mute state
+    2. Warden's chat mode (if set) > local mode
+    3. Always respond in private chats
+    4. Always respond to inline queries
     """
     # Handle inline queries first
     if hasattr(update, 'inline_query') and update.inline_query is not None:
@@ -248,22 +278,44 @@ def should_respond(bot_name: str, update) -> bool:
     chat_type = update.message.chat.type
     topic_id = getattr(update.message, 'message_thread_id', None)
     
-    # Check if muted
+    # Always respond in private chats
+    if chat_type == "private":
+        return True
+    
+    # PRIORITY 1: Check Warden's mute state first
+    if is_bot_muted_by_warden(bot_name, chat_id):
+        return False
+    
+    # PRIORITY 2: Check local mute state (fallback)
     if is_bot_muted(bot_name, chat_id, topic_id):
         return False
     
-    # Get chat mode
-    mode = get_chat_mode(chat_id) if chat_type in ["group", "supergroup"] else "live"
+    # PRIORITY 3: Get chat mode (Warden first, then local)
+    mode = get_warden_chat_mode(chat_id)
+    if mode is None:
+        mode = get_chat_mode(chat_id) if chat_type in ["group", "supergroup"] else "live"
     
-    # Inline mode - don't respond to regular messages
+    # PRIORITY 4: Check for mentions (needed for inline mode)
+    is_mentioned = False
+    if update.message.text:
+        text_lower = update.message.text.lower()
+        bot_info = GLYPHBIT_ROSTER.get(bot_name, {})
+        # Check if bot name or any alias is mentioned
+        for alias in bot_info.get("aliases", []):
+            if alias.lower() in text_lower:
+                is_mentioned = True
+                break
+    
+    # Apply mode logic
     if mode == "inline":
-        return False
-    
-    # Group mode - respond in groups, DMs, everywhere (unless muted)
-    if mode == "group" or mode == "live":
+        # Only respond if mentioned
+        return is_mentioned
+    elif mode == "live":
+        # Always respond (most active)
         return True
-    
-    return True  # Default: respond
+    else:  # mode == "group" (default)
+        # Respond normally (current behavior)
+        return True
 
 
 def get_sibling_awareness(current_bot: str, chat_type: str) -> str:
