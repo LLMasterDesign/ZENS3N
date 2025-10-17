@@ -257,6 +257,19 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             parse_mode='HTML'
         )
 
+def clean_for_inline(text: str) -> str:
+    """Strip HTML tags and formatting artifacts for inline queries"""
+    import re
+    # Remove HTML tags
+    text = re.sub(r'<[^>]+>', '', text)
+    # Remove ▛▞ box characters
+    text = re.sub(r'▛▞\s*', '', text)
+    text = re.sub(r'▸\s*', '', text)
+    # Remove extra whitespace
+    text = re.sub(r'\n{3,}', '\n\n', text)
+    text = text.strip()
+    return text
+
 async def inline_query(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Handle inline queries - allows bot to be used in any chat."""
     query = update.inline_query.query
@@ -278,13 +291,16 @@ async def inline_query(update: Update, context: ContextTypes.DEFAULT_TYPE):
         
         answer = response.choices[0].message.content
         
+        # Clean HTML and formatting for inline display
+        clean_answer = clean_for_inline(answer)
+        
         # Create inline result with branding
         results = [
             InlineQueryResultArticle(
                 id=str(uuid.uuid4()),
                 title="🦉 Noctua :: GlyphBit",
-                input_message_content=InputTextMessageContent(answer),
-                description=answer[:100] + "..." if len(answer) > 100 else answer
+                input_message_content=InputTextMessageContent(clean_answer),
+                description=clean_answer[:100] + "..." if len(clean_answer) > 100 else clean_answer
             )
         ]
         
