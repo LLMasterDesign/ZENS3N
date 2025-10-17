@@ -1,0 +1,171 @@
+# ///▙▖▙▖▞▞▙▂▂▂▂▂▂▂▂▂| 3ox v2.0.0 | LIMITS.TOML |▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂///
+# ▛//▞▞ ⟦⎊⟧ :: ⧗-25.73 ▸ Token/Cost/Resource Limits Configuration
+
+[meta]
+version = "v2.0.0"
+timestamp = "⧗-25.73"
+description = "Resource limits and constraints for 3OX framework"
+
+# ============================================================================
+# Token Limits per Model
+# ============================================================================
+
+[tokens.models.claude-sonnet-4]
+max_context = 200_000
+warning_threshold = 160_000  # 80%
+critical_threshold = 180_000 # 90%
+encoding = "o200k_base"
+cost_per_1k_input = 0.003
+cost_per_1k_output = 0.015
+
+[tokens.models.gpt-4o]
+max_context = 128_000
+warning_threshold = 102_400  # 80%
+critical_threshold = 115_200 # 90%
+encoding = "o200k_base"
+cost_per_1k_input = 0.0025
+cost_per_1k_output = 0.010
+
+[tokens.models.gpt-4]
+max_context = 8_000
+warning_threshold = 6_400    # 80%
+critical_threshold = 7_200   # 90%
+encoding = "cl100k_base"
+cost_per_1k_input = 0.03
+cost_per_1k_output = 0.06
+
+[tokens.models.gpt-3-5-turbo]
+max_context = 4_000
+warning_threshold = 3_200    # 80%
+critical_threshold = 3_600   # 90%
+encoding = "cl100k_base"
+cost_per_1k_input = 0.0015
+cost_per_1k_output = 0.002
+
+# ============================================================================
+# Workspace-Specific Limits
+# ============================================================================
+
+[workspace.RVNx-BASE]
+brain_type = "Sentinel"
+max_turns = 10
+tools_enabled = ["FileValidator", "ConflictResolver", "GitPusher", "GitPuller", "ReceiptGenerator", "TokenCounter"]
+enforce_rules = ["AtomicOpsOnly", "LastWriteWins", "AlwaysBackup", "ChecksumValidation"]
+max_file_size_mb = 100
+max_batch_files = 50
+
+[workspace.SYNTH-BASE]
+brain_type = "Alchemist"
+max_turns = 15
+tools_enabled = ["DeployValidator", "CloudManager", "CostTracker", "GitPusher", "ReceiptGenerator", "TokenCounter"]
+enforce_rules = ["DevStagingProd", "RollbackReady", "CloudCostAware"]
+max_deployment_size_mb = 500
+max_cloud_cost_per_deploy = 10.00  # USD
+
+[workspace.OBSIDIAN-BASE]
+brain_type = "Lighthouse"
+max_turns = 20
+tools_enabled = ["LibraryCatalog", "LinkValidator", "MOCGenerator", "FileValidator", "TokenCounter", "ContextAnalyzer"]
+enforce_rules = ["LinkIntegrityCheck", "SemanticConnections", "BidirectionalLinks"]
+max_notes = 10_000
+max_moc_entries = 100
+
+[workspace.CMD-BRIDGE]
+brain_type = "Sentinel"
+max_turns = 25
+tools_enabled = ["FileValidator", "ConflictResolver", "LibraryCatalog", "TokenCounter", "ContextAnalyzer"]
+enforce_rules = ["AtomicOpsOnly", "AlwaysBackup", "ChecksumValidation"]
+consolidation_enabled = true
+max_stations = 10
+
+# ============================================================================
+# Cost & Budget Limits
+# ============================================================================
+
+[cost.daily]
+max_api_calls = 1_000
+max_spend_usd = 50.00
+alert_threshold_usd = 40.00  # 80%
+
+[cost.monthly]
+max_api_calls = 30_000
+max_spend_usd = 1_000.00
+alert_threshold_usd = 800.00  # 80%
+
+[cost.per_session]
+max_tokens = 200_000
+max_duration_minutes = 60
+max_spend_usd = 5.00
+
+# ============================================================================
+# File & Resource Limits
+# ============================================================================
+
+[resources.files]
+max_file_size_mb = 100
+max_total_size_gb = 10
+max_files_per_operation = 100
+backup_retention_days = 30
+
+[resources.git]
+max_commit_size_mb = 50
+max_push_files = 100
+require_atomic_push = true
+auto_backup_before_push = true
+
+[resources.cloud]
+max_deployment_size_mb = 500
+max_concurrent_deploys = 3
+rollback_window_minutes = 30
+health_check_required = true
+
+# ============================================================================
+# Session & Context Limits
+# ============================================================================
+
+[session.context]
+check_interval_messages = 10
+auto_save_interval_messages = 50
+max_session_duration_hours = 8
+idle_timeout_minutes = 30
+
+[session.logging]
+trace_log_max_mb = 50
+receipts_log_max_mb = 25
+token_log_max_mb = 25
+auto_rotate_at_mb = 100
+
+# ============================================================================
+# Routing & Handoff Limits
+# ============================================================================
+
+[handoff.limits]
+max_payload_size_mb = 10
+max_concurrent_handoffs = 5
+retry_attempts = 3
+retry_delay_seconds = 5
+timeout_seconds = 30
+
+[handoff.manifest]
+max_entries = 1_000
+auto_archive_at = 500
+archive_retention_days = 90
+
+# ============================================================================
+# Emergency & Safety Limits
+# ============================================================================
+
+[emergency.thresholds]
+context_utilization_critical = 95  # percent
+cost_spike_multiplier = 5.0        # compared to average
+error_rate_critical = 0.1          # 10% error rate
+disk_space_critical_mb = 100       # minimum free space
+
+[emergency.actions]
+halt_on_critical_error = true
+auto_backup_on_emergency = true
+notify_cmd_bridge = true
+create_emergency_receipt = true
+
+# ///▙▖▙▖▞▞▙▂▂▂▂▂▂▂▂▂| v2.0.0 | ⧗-25.73 |▂▂▂▂▂▂▂▂▂▂▂▂///
+

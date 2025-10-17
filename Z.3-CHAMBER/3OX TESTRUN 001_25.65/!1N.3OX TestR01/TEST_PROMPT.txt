@@ -1,0 +1,31 @@
+///▙▖▙▖▞▞▙▂▂▂▂▂▂▂▂▂| 3OX TESTRUN 001 | ACTIVATION PROMPT |▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂///
+
+COPY THIS ENTIRE PROMPT AND PASTE INTO A FRESH LLM CHAT:
+
+---
+
+I have attached a test folder for the 3OX Framework. Please execute the following:
+
+1. **Read the activation key**: `.3ox/3ox.key`
+2. **Load the test instructions**: `!1N.3OX TestR01/1n.3ox`
+3. **Execute all 6 test tasks** using the tools defined in `.3ox/tools.yml`
+
+Important:
+- Use **XXH3 hashing** for all file validation and receipts
+- Save receipts to: **3OX.DEV/**
+- Route task outputs to: **0ut.3ox/**
+- Create manifest entries in: **0ut.3ox/FILE.MANIFEST.json**
+
+Report format:
+🔑 Framework Status
+📂 Workspace Detected
+🛠️ Tools Loaded
+📋 Tasks Executed (with receipts and routing confirmation)
+📊 Final Summary (PASS/FAIL)
+
+Begin execution now.
+
+---
+
+///▙▖▙▖▞▞▙▂▂▂▂▂▂▂▂▂| START TEST |▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂///
+

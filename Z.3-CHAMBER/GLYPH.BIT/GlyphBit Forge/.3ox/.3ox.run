@@ -1,0 +1,127 @@
+```yaml
+///▙▖▙▖▞▞▙▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂
+▛//▞▞ ⟦⎊⟧ :: ⧗-25.58 // OPERATIONS ▞▞
+▞//▞ Glyphbit.Run :: ρ{forge.operations}.φ{SYNTH}.τ{Executor}.λ{run} ⫸
+▙⌱[⚡] ≔ [⊢{trigger}⇨{forge}⟿{monitor}▷{transmit}]
+〔glyphbit.forge.operations〕 :: ∎
+
+# ⚡ GLYPHBIT FORGE OPERATIONS
+
+## When ACTUATE is called:
+
+startup:
+  - action: "load_global_policy"
+    files:
+      - "3OX.Ai/.3ox.index/POLICY/GLOBAL.POLICY.BRAIN.md"
+    required: true
+  
+  - action: "load_parent_brain"
+    file: "../.3ox/PROJECT.BRAIN.md"  # TP.Gen brain
+    required: true
+  
+  - action: "load_project_brain"
+    file: ".3ox/PROJECT.BRAIN.md"
+    required: true
+  
+  - action: "check_state"
+    file: ".3ox.state"
+    required: true
+  
+  - action: "load_glyph_registry"
+    file: "(CAT.2) Registry/GLYPH.REGISTRY.yaml"
+    create_if_missing: true
+
+main_loop:
+  - action: "forge_glyphs"
+    mode: "ALCHEMIST + SCRIBE"
+    workspace: "!WORK.DESK/"
+    output: "(CAT.1) Forge/"
+  
+  - action: "monitor_health"
+    metrics:
+      - usage_count
+      - clarity_score
+      - render_quality
+      - semantic_precision
+    log_to: "(CAT.3) Analytics/"
+  
+  - action: "log_operations"
+    targets:
+      - ".3ox/FORGE.LOG.txt"
+      - ".3ox/HEALTH.REPORT.yaml"
+    format: "v8sl_compliant"
+  
+  - action: "track_state"
+    update: ".3ox.state"
+    fields: ["total_glyphs", "new_this_session", "health_metrics"]
+
+shutdown:
+  - action: "save_state"
+    file: ".3ox.state"
+    timestamp: "⧗-current"
+  
+  - action: "transmit_to_higher_ups"
+    protocol: "0ut.3ox"
+    file: ".3ox/0ut.3ox"
+    target: "!TP.OPS"
+    include:
+      - forge_summary
+      - health_report
+      - new_glyphs_list
+      - issues_detected
+  
+  - action: "update_registry"
+    file: "(CAT.2) Registry/GLYPH.REGISTRY.yaml"
+    backup: true
+
+## Forge Operations
+
+on_new_glyph_request:
+  - conceptualize_meaning
+  - design_visual_form
+  - select_unicode_symbol
+  - test_cross_platform_render
+  - assign_semantic_tags
+  - register_in_database
+  - log_creation
+  - transmit_notification
+
+on_health_check:
+  - scan_all_glyphs
+  - calculate_clarity_scores
+  - analyze_usage_patterns
+  - detect_render_issues
+  - generate_health_report
+  - flag_problems
+  - transmit_if_threshold_crossed
+
+on_transmission_trigger:
+  - prepare_payload
+  - format_v8sl_yaml
+  - write_to_0ut.3ox
+  - notify_TP.OPS
+  - log_transmission
+  - update_state
+
+## Logging Operations
+
+forge_logging:
+  enabled: true
+  file: ".3ox/FORGE.LOG.txt"
+  format: "⧗-{time} | {category} | {message}"
+  categories: ["FORGE", "TEST", "REG", "OUT", "HEALTH"]
+
+health_logging:
+  enabled: true
+  file: "(CAT.3) Analytics/HEALTH.LOGS.yaml"
+  frequency: "continuous"
+  alert_on: ["clarity < 7.0", "render_fail", "semantic_drift"]
+
+transmission_logging:
+  enabled: true
+  file: ".3ox/TRANSMISSION.LOG.txt"
+  track: ["timestamp", "target", "payload_size", "status"]
+
+//▙▖▙▖▞▞▙▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂〘・.°𝚫〙
+```
+

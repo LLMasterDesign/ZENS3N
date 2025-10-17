@@ -1,0 +1,135 @@
+///▙▖▙▖▞▞▙ TOOLS.YML - POT CAPABILITIES ▙▖▙▖▞▞▙///
+version: 1
+namespace: pot
+tools:
+
+  textile_ops:
+    - name: weave_align
+      component: textile_algorithms_layer
+      schema: "Sense → Align → Interleave → Braid → Commit"
+      input:
+        bytes: bytes
+      output:
+        bytes: bytes
+      notes: "Hex tessellation, braid_depth=4"
+
+  routing_ops:
+    - name: route_packet
+      component: routing_circuits_lattice
+      schema: "Admit → Queue → Route → Deliver → Ack"
+      input:
+        priority: u8
+      output:
+        path: array<u32>
+
+  storage_ops:
+    - name: tier_select
+      component: storage_vessels_array
+      schema: "Ingest → Seal → Age → Consolidate → Recall"
+      input:
+        priority: u8
+      output:
+        tier: enum[Hot,Warm,Cold]
+
+  cores_ops:
+    - name: tokenize_evaluate_reduce
+      component: processing_cores_ring
+      schema: "Tokenize → Evaluate → Reduce → Emit → Persist"
+      input:
+        bytes: bytes
+        gain: i32
+      output:
+        summary: i64
+
+  rim_ops:
+    - name: pulse_tick
+      component: synchronization_rim
+      schema: "Pulse → Phase estimate → Lock → Drift correct → Re lock"
+      input: {}
+      output:
+        tick: u64
+
+  ecc_ops:
+    - name: parity_correct_rate
+      component: error_correction_glaze
+      schema: "Encode → Scatter → Sense → Correct → Verify"
+      input: {}
+      output:
+        ecc_rate: f32
+
+  compress_ops:
+    - name: spiral_pack
+      component: compression_spiral
+      schema: "Detect → Quantize → Pack → Emit"
+      input:
+        bytes: bytes
+      output:
+        bytes: bytes
+
+  address_ops:
+    - name: resolve_name
+      component: address_weave
+      schema: "Name → Bind → Resolve → Route → Confirm"
+      input:
+        name: string
+      output:
+        hub: u32
+
+  io_ops:
+    - name: aperture_detect
+      component: io_apertures
+      schema: "Detect → Demodulate → Validate → Dispatch"
+      input:
+        bytes: bytes
+      output:
+        braid: bytes
+
+    - name: aperture_emit
+      component: io_apertures
+      schema: "Produce → Modulate → Emit → Log"
+      input:
+        bytes: bytes
+      output:
+        ok: bool
+
+  power_ops:
+    - name: rail_status
+      component: power_bus
+      schema: "Sense → Harvest → Store → Regulate → Supply"
+      input: {}
+      output:
+        v_bus: f32
+        v_logic: f32
+
+  seal_ops:
+    - name: seal_receipt
+      component: security_seal
+      schema: "Hash → Encode → Seal → Verify → Audit"
+      input:
+        ref: string
+      output:
+        receipt: string
+
+  kernel_ops:
+    - name: kernel_infer
+      component: meta_recursion_kernel
+      schema: "Observe → Infer → Rewrite → Re ignite"
+      input:
+        rail_voltage: f32
+        rim_tick: u64
+        load_avg: f32
+        ecc_rate: f32
+      output:
+        rule_key: string
+        rule_expr: string
+
+  memory_ops:
+    - name: pin_state
+      component: memory_nodes
+      schema: "Input → Reflect → Transform → Persist"
+      input:
+        key: string
+        value: bytes
+      output:
+        ok: bool
+

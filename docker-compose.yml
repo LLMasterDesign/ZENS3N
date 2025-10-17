@@ -1,0 +1,82 @@
+version: '3.8'
+
+services:
+  # ════════════════════════════════════════════════════════════
+  # GLYPHBIT-CORE :: Shared Foundation (Forge, _CORE, Archetypes)
+  # ════════════════════════════════════════════════════════════
+  glyphbit-core:
+    build:
+      context: ./glyphbit-core
+      dockerfile: Dockerfile
+    container_name: glyphbit-core
+    restart: unless-stopped
+    volumes:
+      - ./glyphbit-core:/app/core
+      - core-data:/app/data
+    networks:
+      - glyphbit-network
+
+  # ════════════════════════════════════════════════════════════
+  # GLYPHBIT-TELEGRAM :: The Trinity (All Bot Instances)
+  # ════════════════════════════════════════════════════════════
+  glyphbit-telegram:
+    build:
+      context: ./glyphbit-telegram
+      dockerfile: Dockerfile
+    container_name: glyphbit-telegram
+    restart: unless-stopped
+    volumes:
+      - ./glyphbit-telegram:/app/bots
+      - ./glyphbit-core/_CORE:/app/_CORE:ro  # Mount core as read-only
+      - telegram-data:/app/data
+    environment:
+      # OpenAI API Key
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      
+      # Telegram Bot Tokens (add more as you scale)
+      - TELEGRAM_BOT_TOKEN_NOCTUA=${TELEGRAM_BOT_TOKEN_NOCTUA}
+      - TELEGRAM_BOT_TOKEN_VULPES=${TELEGRAM_BOT_TOKEN_VULPES}
+      - TELEGRAM_BOT_TOKEN_TRICKOON=${TELEGRAM_BOT_TOKEN_TRICKOON}
+      
+      # Optional: Future Redis connection
+      # - REDIS_HOST=muninn
+      # - REDIS_PORT=6379
+    depends_on:
+      - glyphbit-core
+    networks:
+      - glyphbit-network
+
+# ════════════════════════════════════════════════════════════
+# NETWORKS
+# ════════════════════════════════════════════════════════════
+networks:
+  glyphbit-network:
+    driver: bridge
+
+# ════════════════════════════════════════════════════════════
+# VOLUMES :: Persistent Storage
+# ════════════════════════════════════════════════════════════
+volumes:
+  core-data:
+    driver: local
+  telegram-data:
+    driver: local
+
+# ════════════════════════════════════════════════════════════
+# FUTURE: Uncomment when adding Redis/Muninn
+# ════════════════════════════════════════════════════════════
+#  muninn:
+#    image: redis:7-alpine
+#    container_name: muninn-memory
+#    restart: unless-stopped
+#    ports:
+#      - "6379:6379"
+#    volumes:
+#      - muninn-data:/data
+#    command: redis-server --appendonly yes
+#    networks:
+#      - glyphbit-network
+#
+# volumes:
+#   muninn-data:
+#     driver: local

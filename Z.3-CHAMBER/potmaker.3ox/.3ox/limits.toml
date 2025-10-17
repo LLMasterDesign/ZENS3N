@@ -1,0 +1,70 @@
+///▙▖▙▖▞▞▙ LIMITS.TOML - POT CONSTRAINTS ▙▖▙▖▞▞▙///
+
+[textile]
+max_tension = 1.0
+thread_density_warp = 320
+thread_density_weft = 180
+braid_depth = 4
+schema = "Sense → Align → Interleave → Braid → Commit"
+
+[routing]
+hubs = 64
+ttl_max = 255
+schema = "Admit → Queue → Route → Deliver → Ack"
+
+[storage_tiers.hot]
+effective_density = 400
+max_burst = "10 MBps"
+[storage_tiers.warm]
+effective_density = 280
+[storage_tiers.cold]
+effective_density = 160
+
+[cores]
+count = 12
+tick_nominal_hz = 8000
+tick_boost_hz = 32000
+mapreduce = true
+
+[rim]
+sectors = 360
+
+[ecc_glaze]
+coats = 3
+max_repair_rate = 0.01
+schema = "Encode → Scatter → Sense → Correct → Verify"
+
+[compression_spiral]
+checkpoints = 8
+max_ratio = 0.5
+schema = "Detect → Quantize → Pack → Emit"
+
+[address_weave]
+tablets = 120
+threads_per_tablet = 4
+trie_depth = 6
+
+[io_apertures]
+ports = 4
+carrier_nm = 940
+thermal_hz = 20
+
+[power]
+bus_voltage = 12.0
+logic_voltage = 3.3
+kernel_voltage = 0.8
+piezo_min_mv = 50
+thermo_min_mv_per_k = 5
+
+[security_seal]
+write_current_ma = 60
+audit_required = true
+
+[memory_nodes]
+hex_nodes = 4096
+
+[kernel]
+version_seed = 1
+allow_rewrite = true
+schema = "Observe → Infer → Rewrite → Re ignite"
+

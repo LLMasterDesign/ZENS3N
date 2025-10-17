@@ -1,0 +1,160 @@
+///▙▖▙▖▞▞▙▂▂▂▂▂▂▂▂▂| TEST INSTRUCTION MANIFEST |▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂///
+▛//▞▞ ⟦⎊⟧ :: TEST RUN 001 :: ⧗-25.65 ▸ 
+//▞ INSTRUCTION QUEUE :: Task Validation & Tool Detection ⫸
+
+▛▞ FRAMEWORK INITIALIZATION ::
+Before starting tasks:
+1. Read .3ox/3ox.key for activation status
+2. Load tools from .3ox/tools.yml
+3. Check routing config in .3ox/routes.json
+4. Review limits in .3ox/limits.toml
+5. Confirm workspace detection from .3ox/brain.rs
+:: ∎
+
+▛▞ TEST TASKS QUEUE ::
+
+TASK 001 :: File Validation
+--------------------------
+Priority: HIGH
+Tool Required: FileValidator
+Input: ".3ox/brain.rs"
+Expected Output:
+  - XXH3 hash
+  - File size
+  - Validation status
+  - Receipt generation
+Action: Validate the brain.rs file and generate receipt
+Receipt To: 3OX.DEV/
+Output To: 0ut.3ox/
+:: ∎
+
+TASK 002 :: Token Counting
+--------------------------
+Priority: MEDIUM
+Tool Required: TokenCounter
+Input: "This is a test message for token counting. The 3OX framework should count these tokens accurately and report the results with the counting method used."
+Expected Output:
+  - Token count
+  - Counting method (tiktoken or estimated)
+  - Model used
+  - Character count
+Action: Count tokens in the test message
+Receipt To: 3OX.DEV/
+Output To: 0ut.3ox/
+:: ∎
+
+TASK 002.5 :: Hash Validation
+--------------------------
+Priority: HIGH
+Tool Required: FileValidator
+Input: ".3ox/3ox.key"
+Expected Output:
+  - XXH3 hash (128-bit)
+  - File size
+  - Validation status
+  - Receipt with XXH3
+Action: Validate the activation key with XXH3 hashing
+Receipt To: 3OX.DEV/
+Output To: 0ut.3ox/
+:: ∎
+
+TASK 003 :: Receipt Generation
+--------------------------
+Priority: HIGH
+Tool Required: ReceiptGenerator
+Input: ".3ox/tools.yml"
+Expected Output:
+  - File path
+  - XXH3 hash
+  - Timestamp
+  - Station ID
+Action: Generate receipt for tools.yml using XXH3
+Receipt To: 3OX.DEV/
+Output To: 0ut.3ox/
+:: ∎
+
+TASK 004 :: Context Analysis
+--------------------------
+Priority: LOW
+Tool Required: ContextAnalyzer
+Input: "claude-sonnet-4:Hello world|This is a test|3OX Framework active"
+Expected Output:
+  - Per-context token counts
+  - Total tokens
+  - Utilization percentage
+  - Remaining capacity
+Action: Analyze multi-part context usage
+Receipt To: 3OX.DEV/
+Output To: 0ut.3ox/
+:: ∎
+
+TASK 005 :: Library Catalog
+--------------------------
+Priority: MEDIUM
+Tool Required: LibraryCatalog
+Input: ".3ox"
+Expected Output:
+  - Root directory
+  - File count
+  - Entry list with sizes
+Action: Catalog all files in .3ox directory
+Receipt To: 3OX.DEV/
+Output To: 0ut.3ox/
+:: ∎
+
+▛▞ COMPLETION REQUIREMENTS ::
+For EACH task completed:
+1. ✓ Execute using specified tool from tools.yml
+2. ✓ Generate receipt with XXH3 hash (128-bit)
+3. ✓ Log to .3ox/trace.log
+4. ✓ Save receipt to 3OX.DEV/ (internal tracking)
+5. ✓ Route task output to 0ut.3ox/ (external delivery)
+6. ✓ Create manifest entry in 0ut.3ox/FILE.MANIFEST.json
+7. ✓ Report task completion status
+
+Final Report Must Include:
+- Total tasks completed
+- Tools successfully detected/used
+- All receipts generated (3OX.DEV/)
+- Routing confirmation (0ut.3ox/)
+- Any errors encountered
+:: ∎
+
+▛▞ SUCCESS CRITERIA ::
+✓ Framework detects 3ox.key activation
+✓ Hash standard confirmed: XXH3
+✓ Tools loaded from tools.yml
+✓ At least 4/6 tasks completed
+✓ Receipts saved to 3OX.DEV/ with valid XXH3 hashes
+✓ Task outputs routed to 0ut.3ox/
+✓ Manifest entries created in 0ut.3ox/
+✓ No critical errors
+:: ∎
+
+▛▞ EXPECTED LLM RESPONSE FORMAT ::
+---
+🔑 3OX Framework Status: ACTIVE
+📂 Workspace Detected: [workspace name]
+🛠️  Tools Loaded: [list tools]
+📋 Tasks Queued: 5
+
+[Execute each task with tool calls]
+
+TASK 001: ✓ COMPLETE
+- Tool Used: FileValidator
+- Receipt: [XXH3 hash] → 3OX.DEV/
+- Output: [results] → 0ut.3ox/
+- Status: SUCCESS
+
+[Continue for all tasks...]
+
+📊 FINAL SUMMARY:
+- Tasks Completed: X/5
+- Receipts Generated: X
+- Tools Validated: [list]
+- Framework Test: PASS/FAIL
+---
+:: ∎
+
+///▙▖▙▖▞▞▙▂▂▂▂▂▂▂▂▂| TESTRUN 001 | ⧗-25.65 |▂▂▂▂▂▂▂▂▂▂▂▂///
+
