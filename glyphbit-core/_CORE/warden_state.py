@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Dict, List, Optional
 
 # Warden's state file location (shared volume)
-WARDEN_STATE_FILE = Path("/app/telegram-data/warden_state.json")
+WARDEN_STATE_FILE = Path("/app/data/warden_state.json")
 
 def load_warden_state() -> Dict:
     """Load Warden's state from file"""

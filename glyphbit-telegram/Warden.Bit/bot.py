@@ -62,8 +62,13 @@ def resolve_bot_name(alias: str) -> str:
             return bot_id
     return None
 
-# Warden's state file (writable location)
-STATE_DIR = Path(__file__).parent / 'data'
+# Warden's state file (shared volume for Trinity to read)
+# In Docker: /app/data (mounted telegram-data volume)
+# Local dev: ./data fallback
+STATE_DIR = Path("/app/data")
+if not STATE_DIR.exists():
+    # Fallback for local dev
+    STATE_DIR = Path(__file__).parent / 'data'
 STATE_DIR.mkdir(exist_ok=True)
 STATE_FILE = STATE_DIR / 'warden_state.json'
 

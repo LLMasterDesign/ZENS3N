@@ -44,7 +44,7 @@ GLYPHBIT_ROSTER = {
 # ═══════════════════════════════════════════════════════════
 
 # Warden's state file location (shared volume in Docker)
-WARDEN_STATE_FILE = Path("/app/telegram-data/warden_state.json")
+WARDEN_STATE_FILE = Path("/app/data/warden_state.json")
 
 def load_warden_state() -> dict:
     """Load Warden's state from file (read-only check)"""
