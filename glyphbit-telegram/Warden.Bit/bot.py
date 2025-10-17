@@ -143,8 +143,9 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         '<b>Commands:</b>\n'
         '/warden mute &lt;bot&gt; — Cage a critter\n'
         '/warden unmute &lt;bot&gt; — Release a critter\n'
-        '/warden status — Check all wildlife\n'
-        '/warden mode &lt;mode&gt; — Set chat behavior\n'
+        '/warden unmute — Release ALL\n'
+        '/warden status — Check wildlife\n'
+        '/warden mode &lt;mode&gt; — Set chat mode\n'
         '/warden logs — Recent activity\n\n'
         '<b>Wildlife Under Management:</b>\n'
         '🦉 Noctua (Owl)\n'
@@ -235,6 +236,25 @@ async def warden(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 parse_mode='HTML'
             )
     
+    # UNMUTE ALL
+    elif subcommand == "unmute" and len(context.args) == 1:
+        state = load_state()
+        if chat_id in state["muted_bots"] and state["muted_bots"][chat_id]:
+            count = len(state["muted_bots"][chat_id])
+            del state["muted_bots"][chat_id]
+            save_state(state)
+            log_action("unmute_all", f"Released all {count} bots in chat {chat_id}")
+            
+            await update.message.reply_text(
+                f"🦌 <b>Warden:</b> All wildlife released. {count} critters freed.",
+                parse_mode='HTML'
+            )
+        else:
+            await update.message.reply_text(
+                f"🦌 <b>Warden:</b> No one's caged here.",
+                parse_mode='HTML'
+            )
+    
     # STATUS
     elif subcommand == "status":
         state = load_state()
@@ -306,12 +326,13 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Show help"""
     help_text = (
         "<b>🦌 Warden Commands:</b>\n\n"
-        "/warden mute &lt;bot&gt;\n"
-        "/warden unmute &lt;bot&gt;\n"
-        "/warden status\n"
-        "/warden mode &lt;group|inline|live&gt;\n"
-        "/warden logs\n\n"
-        "<b>Bots:</b> noctua, vulpes, trickoon"
+        "/warden mute &lt;bot&gt; — Cage a critter\n"
+        "/warden unmute &lt;bot&gt; — Release a critter\n"
+        "/warden unmute — Release ALL critters\n"
+        "/warden status — Check wildlife\n"
+        "/warden mode &lt;group|inline|live&gt; — Set chat mode\n"
+        "/warden logs — Recent activity\n\n"
+        "<b>Bots:</b> owl, fox, raccoon"
     )
     await update.message.reply_text(help_text, parse_mode='HTML')
 
