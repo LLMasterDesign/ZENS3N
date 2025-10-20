@@ -108,6 +108,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         '• Inline queries: @trickoonbot\n\n'
         '<b>Commands:</b>\n'
         '/start — Wake the raccoon\n'
+        '/dig — Dig through trash for deeper meaning\n'
         '/clear — Empty the trash\n'
         '/about — Learn my ways\n\n'
         '🦝 <i>Got questions about souls, death, dreams, or meaning?</i>\n'
@@ -155,6 +156,69 @@ async def clear(update: Update, context: ContextTypes.DEFAULT_TYPE):
         '✨ What cosmic questions you got?',
         parse_mode='HTML'
     )
+
+async def dig_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Dig through trash to uncover deeper meaning in a message."""
+    if not context.args:
+        await update.message.reply_text(
+            '🦝 **How to Dig Through Trash**\n\n'
+            'Usage: `/dig <message>`\n'
+            'Example: `/dig I feel lost in life`\n\n'
+            'I\'ll rummage through the cosmic dumpster of your words and find the hidden treasures underneath.',
+            parse_mode='HTML'
+        )
+        return
+    
+    # Get the message to analyze
+    message_to_dig = ' '.join(context.args)
+    
+    # Create a special "trash digging" prompt
+    dig_prompt = f"""You are Trickoon, the trash mystic raccoon. A user wants you to "dig through the trash" of their message to find deeper meaning.
+
+Their message: "{message_to_dig}"
+
+Your task: Dig through the surface words like rummaging through cosmic dumpster contents. Find the hidden treasures, the deeper truths, the spiritual residue underneath. Look for:
+- What they're really saying beneath the surface
+- Hidden fears, hopes, or truths
+- Spiritual/metaphysical implications
+- The "divine garbage" that contains wisdom
+
+Respond in your playful trash mystic style, but focus on uncovering the deeper meaning like a raccoon finding treasure in discarded items.
+
+Format your response as:
+▛▞ 🦝 <b>Trickoon</b> ▸
+
+[Your trash-digging analysis]
+
+🗑️ [A follow-up question that digs even deeper]"""
+
+    try:
+        # Send "typing" action
+        await update.message.chat.send_action(action="typing")
+        
+        # Call OpenAI API for trash digging analysis
+        response = client.chat.completions.create(
+            model=MODEL_NAME,
+            messages=[
+                {"role": "system", "content": dig_prompt}
+            ],
+            max_tokens=MAX_TOKENS,
+            temperature=TEMPERATURE
+        )
+        
+        # Get the trash digging response
+        dig_response = response.choices[0].message.content
+        
+        # Send response to user
+        await update.message.reply_text(dig_response, parse_mode='HTML')
+        
+    except Exception as e:
+        logger.error(f"Dig command error: {e}")
+        await update.message.reply_text(
+            '▛▞ 🦝 Trickoon ▞// Oops! The cosmic dumpster lid got stuck.\n\n'
+            'Try that dig again? Sometimes the trash is too deep for even a raccoon to reach.',
+            parse_mode='HTML'
+        )
 
 async def restart_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Restart the bot"""
@@ -373,6 +437,7 @@ def main():
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("about", about))
     application.add_handler(CommandHandler("clear", clear))
+    application.add_handler(CommandHandler("dig", dig_command))
     application.add_handler(CommandHandler("restart", restart_cmd))
     application.add_handler(CommandHandler("mode", mode_command))
     application.add_handler(CommandHandler("mute", mute_command))
