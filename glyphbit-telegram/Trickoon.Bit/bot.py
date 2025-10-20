@@ -104,7 +104,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         '<b>What I Offer:</b>\n'
         '• Spiritual conversations with cosmic jokes\n'
         '• Divine residue from weird places\n'
-        '• Questions that make you uncomfortable\n'
+        '• Auto-digging every 3 turns for deeper meaning\n'
+        '• Manual trash digging with /dig command\n'
         '• Inline queries: @trickoonbot\n\n'
         '<b>Commands:</b>\n'
         '/start — Wake the raccoon\n'
@@ -156,6 +157,51 @@ async def clear(update: Update, context: ContextTypes.DEFAULT_TYPE):
         '✨ What cosmic questions you got?',
         parse_mode='HTML'
     )
+
+async def auto_dig_through_trash(update: Update, context: ContextTypes.DEFAULT_TYPE, user_message: str):
+    """Automatically dig through trash every 3 turns."""
+    try:
+        # Create auto-dig prompt
+        auto_dig_prompt = f"""You are Trickoon, the trash mystic raccoon. Every 3 turns of conversation, you automatically "dig through the trash" of what the user just said to find deeper meaning.
+
+Their message: "{user_message}"
+
+This is an automatic trash-digging session. Look deeper into their words like rummaging through cosmic dumpster contents. Find hidden treasures, deeper truths, spiritual residue underneath their surface words.
+
+Respond in your playful trash mystic style, but focus on uncovering the deeper meaning like a raccoon finding treasure in discarded items.
+
+Format your response as:
+▛▞ 🦝 <b>Trickoon</b> ▸ *auto-digging through the cosmic dumpster*
+
+[Your trash-digging analysis]
+
+🗑️ [A follow-up question that digs even deeper]"""
+
+        # Call OpenAI API for auto trash digging
+        response = client.chat.completions.create(
+            model=MODEL_NAME,
+            messages=[
+                {"role": "system", "content": auto_dig_prompt}
+            ],
+            max_tokens=MAX_TOKENS,
+            temperature=TEMPERATURE
+        )
+        
+        # Get the auto-dig response
+        auto_dig_response = response.choices[0].message.content
+        
+        # Send auto-dig response to user
+        await update.message.reply_text(auto_dig_response, parse_mode='HTML')
+        
+        # Add auto-dig response to history
+        context.user_data['messages'].append({
+            "role": "assistant",
+            "content": auto_dig_response
+        })
+        
+    except Exception as e:
+        logger.error(f"Auto-dig error: {e}")
+        # Don't send error message for auto-dig, just log it
 
 async def dig_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Dig through trash to uncover deeper meaning in a message."""
@@ -266,6 +312,13 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if 'messages' not in context.user_data:
         context.user_data['messages'] = []
     
+    # Initialize turn counter if not exists
+    if 'turn_count' not in context.user_data:
+        context.user_data['turn_count'] = 0
+    
+    # Increment turn counter
+    context.user_data['turn_count'] += 1
+    
     # Add user message to history
     context.user_data['messages'].append({
         "role": "user",
@@ -303,6 +356,10 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         
         # Send response to user
         await update.message.reply_text(assistant_message, parse_mode='HTML')
+        
+        # AUTO-DIG: Every 3 turns, automatically dig through the trash
+        if context.user_data['turn_count'] % 3 == 0:
+            await auto_dig_through_trash(update, context, user_message)
         
     except Exception as e:
         logger.error(f"Error: {e}")
