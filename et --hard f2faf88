@@ -1,0 +1,173 @@
+.dockerignore
+DEPLOY.md
+README.md
+Z.3-CHAMBER/3OX TESTRUN 001_25.65/!1N.3OX TestR01/1n.3ox
+Z.3-CHAMBER/3OX TESTRUN 001_25.65/!1N.3OX TestR01/TEST_PROMPT.txt
+Z.3-CHAMBER/3OX TESTRUN 001_25.65/0ut.3ox/FILE.MANIFEST.json
+Z.3-CHAMBER/3OX TESTRUN 001_25.65/0ut.3ox/SELFTEST_SUMMARY.md
+Z.3-CHAMBER/3OX TESTRUN 001_25.65/0ut.3ox/TASK_001_OUTPUT.md
+Z.3-CHAMBER/3OX TESTRUN 001_25.65/0ut.3ox/TASK_0025_OUTPUT.md
+Z.3-CHAMBER/3OX TESTRUN 001_25.65/0ut.3ox/TASK_002_OUTPUT.md
+Z.3-CHAMBER/3OX TESTRUN 001_25.65/0ut.3ox/TASK_003_OUTPUT.md
+Z.3-CHAMBER/3OX TESTRUN 001_25.65/0ut.3ox/TASK_004_OUTPUT.md
+Z.3-CHAMBER/3OX TESTRUN 001_25.65/0ut.3ox/TASK_005_OUTPUT.md
+Z.3-CHAMBER/3OX TESTRUN 001_25.65/0ut.3ox/TESTRUN_001_FINAL_REPORT.md
+Z.3-CHAMBER/3OX TESTRUN 001_25.65/0ut.3ox/TESTRUN_001_FRESH_FINAL_REPORT.md
+Z.3-CHAMBER/3OX TESTRUN 001_25.65/3OX.DEV/SELFTEST_BRAIN_RECEIPT.md
+Z.3-CHAMBER/3OX TESTRUN 001_25.65/3OX.DEV/SELFTEST_LIMITS_RECEIPT.md
+Z.3-CHAMBER/3OX TESTRUN 001_25.65/3OX.DEV/SELFTEST_ROUTES_RECEIPT.md
+Z.3-CHAMBER/3OX TESTRUN 001_25.65/3OX.DEV/SELFTEST_RUNTIME_RECEIPT.md
+Z.3-CHAMBER/3OX TESTRUN 001_25.65/3OX.DEV/SELFTEST_TOOLS_RECEIPT.md
+Z.3-CHAMBER/3OX TESTRUN 001_25.65/3OX.DEV/TASK_001_RECEIPT.md
+Z.3-CHAMBER/3OX TESTRUN 001_25.65/3OX.DEV/TASK_0025_RECEIPT.md
+Z.3-CHAMBER/3OX TESTRUN 001_25.65/3OX.DEV/TASK_002_RECEIPT.md
+Z.3-CHAMBER/3OX TESTRUN 001_25.65/3OX.DEV/TASK_003_RECEIPT.md
+Z.3-CHAMBER/3OX TESTRUN 001_25.65/3OX.DEV/TASK_004_RECEIPT.md
+Z.3-CHAMBER/3OX TESTRUN 001_25.65/3OX.DEV/TASK_005_RECEIPT.md
+Z.3-CHAMBER/3OX TESTRUN 001_25.65/Test.3ox/!3ox.key
+Z.3-CHAMBER/3OX TESTRUN 001_25.65/Test.3ox/3ox.log
+Z.3-CHAMBER/3OX TESTRUN 001_25.65/Test.3ox/brain.rs
+Z.3-CHAMBER/3OX TESTRUN 001_25.65/Test.3ox/limits.toml
+Z.3-CHAMBER/3OX TESTRUN 001_25.65/Test.3ox/routes.json
+Z.3-CHAMBER/3OX TESTRUN 001_25.65/Test.3ox/run.rb
+Z.3-CHAMBER/3OX TESTRUN 001_25.65/Test.3ox/tools.yml
+Z.3-CHAMBER/GLYPH.BIT/.bit/README.md
+Z.3-CHAMBER/GLYPH.BIT/.gitignore
+Z.3-CHAMBER/GLYPH.BIT/BOT.DESCRIPTIONS.md
+Z.3-CHAMBER/GLYPH.BIT/CLEANUP.ps1
+Z.3-CHAMBER/GLYPH.BIT/CONTROL_PANEL_EXTENDED.ps1
+Z.3-CHAMBER/GLYPH.BIT/CONTROL_PANEL_README.md
+Z.3-CHAMBER/GLYPH.BIT/CONTROL_PANEL_TABS.ps1
+Z.3-CHAMBER/GLYPH.BIT/EXTENDED_PANEL_CONCEPT.md
+Z.3-CHAMBER/GLYPH.BIT/FOLDER_STRUCTURE.md
+Z.3-CHAMBER/GLYPH.BIT/FORMAT.REFERENCE.md
+Z.3-CHAMBER/GLYPH.BIT/GLYPHBIT.TRINITY.SPEC.md
+Z.3-CHAMBER/GLYPH.BIT/GROUP.MAGIC.DEPLOY.md
+Z.3-CHAMBER/GLYPH.BIT/GROUP.MAGIC.GUIDE.md
+Z.3-CHAMBER/GLYPH.BIT/GROUP.MAGIC.SUMMARY.md
+Z.3-CHAMBER/GLYPH.BIT/GROUP_MAGIC_INTEGRATION.md
+Z.3-CHAMBER/GLYPH.BIT/GlyphBit Forge/.3ox/.3ox.config
+Z.3-CHAMBER/GLYPH.BIT/GlyphBit Forge/.3ox/.3ox.map
+Z.3-CHAMBER/GLYPH.BIT/GlyphBit Forge/.3ox/.3ox.run
+Z.3-CHAMBER/GLYPH.BIT/GlyphBit Forge/.3ox/.3ox.state
+Z.3-CHAMBER/GLYPH.BIT/GlyphBit Forge/.3ox/PROJECT.BRAIN.md
+Z.3-CHAMBER/GLYPH.BIT/GlyphBit.Tools/README.md
+Z.3-CHAMBER/GLYPH.BIT/GlyphBit.Tools/Shared.Mind.Artifact/ARTIFACT.MANIFEST.yaml
+Z.3-CHAMBER/GLYPH.BIT/GlyphBit.Tools/Shared.Mind.Artifact/DEPLOYMENT_GUIDE.md
+Z.3-CHAMBER/GLYPH.BIT/GlyphBit.Tools/Shared.Mind.Artifact/INTEGRATION_EXAMPLE.py
+Z.3-CHAMBER/GLYPH.BIT/GlyphBit.Tools/Shared.Mind.Artifact/README.md
+Z.3-CHAMBER/GLYPH.BIT/GlyphBit.Tools/Shared.Mind.Artifact/global_policy.json
+Z.3-CHAMBER/GLYPH.BIT/GlyphBit.Tools/Shared.Mind.Artifact/shared_mind.py
+Z.3-CHAMBER/GLYPH.BIT/KEYS.REFERENCE.md
+Z.3-CHAMBER/GLYPH.BIT/LAUNCH_ALL.ps1
+Z.3-CHAMBER/GLYPH.BIT/LAUNCH_CONTROL_PANEL.bat
+Z.3-CHAMBER/GLYPH.BIT/LAUNCH_GUIDE.md
+Z.3-CHAMBER/GLYPH.BIT/NUMEROLOGY.SPEC.md
+Z.3-CHAMBER/GLYPH.BIT/Noctua.Bit/.bit/config.toml
+Z.3-CHAMBER/GLYPH.BIT/Noctua.Bit/.bit/noctua.bit.v3.md
+Z.3-CHAMBER/GLYPH.BIT/Noctua.Bit/.bit/wiseowl.cfg
+Z.3-CHAMBER/GLYPH.BIT/Noctua.Bit/.env.txt
+Z.3-CHAMBER/GLYPH.BIT/Noctua.Bit/README.md
+Z.3-CHAMBER/GLYPH.BIT/Noctua.Bit/RUN_BOT.bat
+Z.3-CHAMBER/GLYPH.BIT/Noctua.Bit/bot.py
+Z.3-CHAMBER/GLYPH.BIT/Noctua.Bit/requirements.txt
+Z.3-CHAMBER/GLYPH.BIT/SETUP.GUIDE.md
+Z.3-CHAMBER/GLYPH.BIT/SET_DEFAULT_PATH.ps1
+Z.3-CHAMBER/GLYPH.BIT/SYMBOL.GUIDE.md
+Z.3-CHAMBER/GLYPH.BIT/TRINITY.READY.md
+Z.3-CHAMBER/GLYPH.BIT/Trickoon.Bit/.bit/config.toml
+Z.3-CHAMBER/GLYPH.BIT/Trickoon.Bit/.bit/trashmystic.cfg
+Z.3-CHAMBER/GLYPH.BIT/Trickoon.Bit/.bit/trickoon.bit.v3.md
+Z.3-CHAMBER/GLYPH.BIT/Trickoon.Bit/README.md
+Z.3-CHAMBER/GLYPH.BIT/Trickoon.Bit/RUN_BOT.bat
+Z.3-CHAMBER/GLYPH.BIT/Trickoon.Bit/bot.py
+Z.3-CHAMBER/GLYPH.BIT/Trickoon.Bit/requirements.txt
+Z.3-CHAMBER/GLYPH.BIT/V8.SUMMARY.md
+Z.3-CHAMBER/GLYPH.BIT/VARIANT.PLAN.md
+Z.3-CHAMBER/GLYPH.BIT/Vulpes.Bit/.bit/config.toml
+Z.3-CHAMBER/GLYPH.BIT/Vulpes.Bit/.bit/slyfox.cfg
+Z.3-CHAMBER/GLYPH.BIT/Vulpes.Bit/.bit/vulpes.bit.v3.md
+Z.3-CHAMBER/GLYPH.BIT/Vulpes.Bit/README.md
+Z.3-CHAMBER/GLYPH.BIT/Vulpes.Bit/RUN_BOT.bat
+Z.3-CHAMBER/GLYPH.BIT/Vulpes.Bit/bot.py
+Z.3-CHAMBER/GLYPH.BIT/Vulpes.Bit/requirements.txt
+Z.3-CHAMBER/GLYPH.BIT/_ARCHIVE/1N.3OX.MONITOR.ps1
+Z.3-CHAMBER/GLYPH.BIT/_ARCHIVE/CONTROL_PANEL.ps1
+Z.3-CHAMBER/GLYPH.BIT/_ARCHIVE/CONTROL_PANEL_SIMPLE.ps1
+Z.3-CHAMBER/GLYPH.BIT/_ARCHIVE/GROUP.AGENT/ARCHETYPE.MANIFEST.md
+Z.3-CHAMBER/GLYPH.BIT/_ARCHIVE/SIMPLE.MONITOR.ps1
+Z.3-CHAMBER/GLYPH.BIT/_ARCHIVE/gyphbit-noctua/README.md
+Z.3-CHAMBER/GLYPH.BIT/_ARCHIVE/gyphbit-noctua/RUN_BOT.bat
+Z.3-CHAMBER/GLYPH.BIT/_ARCHIVE/gyphbit-noctua/bot.py
+Z.3-CHAMBER/GLYPH.BIT/_ARCHIVE/gyphbit-noctua/requirements.txt
+Z.3-CHAMBER/GLYPH.BIT/_CORE/README.md
+Z.3-CHAMBER/GLYPH.BIT/_CORE/SHARED_MIND_README.md
+Z.3-CHAMBER/GLYPH.BIT/_CORE/global_policy.json
+Z.3-CHAMBER/GLYPH.BIT/_CORE/glyphbit_engine.py
+Z.3-CHAMBER/GLYPH.BIT/_CORE/group_config.py
+Z.3-CHAMBER/GLYPH.BIT/_CORE/shared_mind.py
+Z.3-CHAMBER/GLYPH.BIT/_PROMPTS/noctua.v8.rb
+Z.3-CHAMBER/GLYPH.BIT/_PROMPTS/trickoon.v8.rb
+Z.3-CHAMBER/GLYPH.BIT/_PROMPTS/vulpes.v8.rb
+Z.3-CHAMBER/potmaker.3ox/.3ox-README.md
+Z.3-CHAMBER/potmaker.3ox/.3ox/3ox.log
+Z.3-CHAMBER/potmaker.3ox/.3ox/brain.rs
+Z.3-CHAMBER/potmaker.3ox/.3ox/config.toml
+Z.3-CHAMBER/potmaker.3ox/.3ox/limits.toml
+Z.3-CHAMBER/potmaker.3ox/.3ox/potmaker.agent.v8.md
+Z.3-CHAMBER/potmaker.3ox/.3ox/routes.json
+Z.3-CHAMBER/potmaker.3ox/.3ox/run.rb
+Z.3-CHAMBER/potmaker.3ox/.3ox/tools.yml
+Z.3-CHAMBER/potmaker.3ox/README.md
+Z.3-CHAMBER/potmaker.3ox/TEST_PROMPT.txt
+Z.3-CHAMBER/potmaker.3ox/config.toml
+Z.3-CHAMBER/potmaker.3ox/potmaker.agent.v8.md
+docker-compose.yml
+glyphbit-core/.dockerignore
+glyphbit-core/Dockerfile
+glyphbit-core/README.md
+glyphbit-core/_CORE/README.md
+glyphbit-core/_CORE/SHARED_MIND_README.md
+glyphbit-core/_CORE/__pycache__/group_config.cpython-312.pyc
+glyphbit-core/_CORE/__pycache__/group_config.cpython-313.pyc
+glyphbit-core/_CORE/__pycache__/shared_mind.cpython-312.pyc
+glyphbit-core/_CORE/global_policy.json
+glyphbit-core/_CORE/glyphbit_engine.py
+glyphbit-core/_CORE/group_config.py
+glyphbit-core/_CORE/shared_mind.py
+glyphbit-core/_CORE/warden_state.py
+glyphbit-core/archetypes/slyfox.cfg
+glyphbit-core/archetypes/trashmystic.cfg
+glyphbit-core/archetypes/wiseowl.cfg
+glyphbit-core/forge/LAUNCH_TRINITY.bat
+glyphbit-core/forge/README.md
+glyphbit-core/forge/launch_trinity.py
+glyphbit-core/forge/launch_trinity.sh
+glyphbit-telegram/.dockerignore
+glyphbit-telegram/Dockerfile
+glyphbit-telegram/Noctua.Bit/.bit/config.toml
+glyphbit-telegram/Noctua.Bit/.bit/noctua.bit.v3.md
+glyphbit-telegram/Noctua.Bit/.bit/wiseowl.cfg
+glyphbit-telegram/Noctua.Bit/.env
+glyphbit-telegram/Noctua.Bit/README.md
+glyphbit-telegram/Noctua.Bit/RUN_BOT.bat
+glyphbit-telegram/Noctua.Bit/bot.py
+glyphbit-telegram/Noctua.Bit/requirements.txt
+glyphbit-telegram/README.md
+glyphbit-telegram/Trickoon.Bit/.bit/config.toml
+glyphbit-telegram/Trickoon.Bit/.bit/trashmystic.cfg
+glyphbit-telegram/Trickoon.Bit/.bit/trickoon.bit.v3.md
+glyphbit-telegram/Trickoon.Bit/.env
+glyphbit-telegram/Trickoon.Bit/README.md
+glyphbit-telegram/Trickoon.Bit/RUN_BOT.bat
+glyphbit-telegram/Trickoon.Bit/bot.py
+glyphbit-telegram/Trickoon.Bit/requirements.txt
+glyphbit-telegram/Vulpes.Bit/.bit/config.toml
+glyphbit-telegram/Vulpes.Bit/.bit/slyfox.cfg
+glyphbit-telegram/Vulpes.Bit/.bit/vulpes.bit.v3.md
+glyphbit-telegram/Vulpes.Bit/.env
+glyphbit-telegram/Vulpes.Bit/README.md
+glyphbit-telegram/Vulpes.Bit/RUN_BOT.bat
+glyphbit-telegram/Vulpes.Bit/bot.py
+glyphbit-telegram/Vulpes.Bit/requirements.txt
+glyphbit-telegram/Warden.Bit/.bit/gamewarden.cf
