@@ -1,0 +1,482 @@
+///▙▖▙▖▞▞▙▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂
+▛//▞▞ ⟦⎊⟧ :: ⧗-25.61 // WORKFLOW.DEFINITION ▞▞
+▞//▞ Workflow :: ρ{inventory.validation}.φ{TEMPLATE}.τ{Executable}.λ{v1} ⫸
+▙⌱[🔄] ≔ [⊢{define}⇨{execute}⟿{validate}▷{receipt}]
+〔3ox.workflow.inventory.validation〕 :: ∎
+
+# ════════════════════════════════════════════════════════════
+# INVENTORY VALIDATION WORKFLOW
+# ════════════════════════════════════════════════════════════
+# This workflow orchestrates the complete file inventory validation
+# process that previously required manual PowerShell script execution
+# ════════════════════════════════════════════════════════════
+
+workflow:
+  id: "inventory-validation-v1"
+  name: "Inventory Validation Workflow"
+  version: 1
+  description: "Validates file inventory against policy requirements and generates compliance receipt"
+  category: "compliance"
+  owner: "CMD.BRIDGE"
+  
+  # ──────────────────────────────────────────────────────────
+  # WORKFLOW INPUT
+  # ──────────────────────────────────────────────────────────
+  input:
+    required:
+      - target_folder: "Folder path to scan for inventory"
+      - policy_file: "Path to policy file defining required structure"
+      
+    optional:
+      - strict_mode: false  # If true, fail on any violation
+      - generate_manifest: true  # Create FILE.MANIFEST.txt
+      - output_folder: "0UT.3OX"  # Where to write results
+      - validation_level: "standard"  # minimal | standard | comprehensive
+      
+  # ──────────────────────────────────────────────────────────
+  # WORKFLOW OUTPUT
+  # ──────────────────────────────────────────────────────────
+  output:
+    - validation_receipt: "YAML receipt with compliance status"
+    - compliance_status: "PASS | FAIL | PARTIAL"
+    - file_manifest: "Complete file listing"
+    - violations: "List of policy violations (if any)"
+    - recommendations: "Suggested fixes"
+    
+  # ──────────────────────────────────────────────────────────
+  # WORKFLOW EXECUTION
+  # ──────────────────────────────────────────────────────────
+  tasks:
+    
+    # ─────────────────────────────────────────────────────────
+    # TASK 1: Scan Target Folder
+    # ─────────────────────────────────────────────────────────
+    - id: "scan_files"
+      name: "Scan Target Folder for Files"
+      description: "Recursively scan folder and build file inventory"
+      type: "SIMPLE"
+      
+      # Execution context
+      agent_level: "L3"  # Worker agent can handle this
+      assigned_to: "FILE_SCANNER_AGENT"
+      timeout: "2m"
+      
+      # Retry policy
+      retry_policy:
+        max_attempts: 3
+        backoff_strategy: "exponential"
+        initial_delay: "2s"
+        max_delay: "30s"
+        retry_on_error_types:
+          - "FileSystemError"
+          - "PermissionError"
+        dont_retry_on:
+          - "InvalidPathError"
+      
+      # Input mapping
+      input:
+        folder: "${workflow.input.target_folder}"
+        scan_options:
+          recursive: true
+          include_hidden: false
+          follow_symlinks: false
+          calculate_checksums: true
+          
+      # Output specification
+      output:
+        file_list: "Array of file objects with metadata"
+        total_files: "Count of files scanned"
+        total_size: "Total size in bytes"
+        scan_timestamp: "Sirius time of scan completion"
+        scan_duration: "Time taken to scan"
+        
+      # Output storage
+      output_to: ".3ox/workflow-data/scan_results.yaml"
+      
+    # ─────────────────────────────────────────────────────────
+    # TASK 2: Load Policy (runs in parallel with scan)
+    # ─────────────────────────────────────────────────────────
+    - id: "load_policy"
+      name: "Load Validation Policy"
+      description: "Parse and load policy requirements"
+      type: "SIMPLE"
+      
+      # Run in parallel with scan_files
+      parallel_with: ["scan_files"]
+      
+      agent_level: "L2"  # Station OPS level for policy access
+      assigned_to: "POLICY_LOADER_AGENT"
+      timeout: "30s"
+      
+      retry_policy:
+        max_attempts: 2
+        backoff_strategy: "linear"
+        initial_delay: "1s"
+        
+      input:
+        policy: "${workflow.input.policy_file}"
+        validation_level: "${workflow.input.validation_level}"
+        
+      output:
+        policy_rules: "Parsed policy requirements"
+        required_files: "List of mandatory files"
+        required_folders: "List of mandatory folders"
+        forbidden_patterns: "Patterns that should not exist"
+        policy_version: "Policy file version"
+        
+      output_to: ".3ox/workflow-data/policy_rules.yaml"
+      
+    # ─────────────────────────────────────────────────────────
+    # TASK 3: Validate Compliance (depends on tasks 1 & 2)
+    # ─────────────────────────────────────────────────────────
+    - id: "validate_compliance"
+      name: "Validate Against Policy"
+      description: "Check file inventory against policy requirements"
+      type: "SIMPLE"
+      
+      # Must wait for both parallel tasks
+      depends_on:
+        - "scan_files"
+        - "load_policy"
+        
+      agent_level: "L2"
+      assigned_to: "COMPLIANCE_VALIDATOR_AGENT"
+      timeout: "1m"
+      
+      retry_policy:
+        max_attempts: 2
+        backoff_strategy: "linear"
+        initial_delay: "1s"
+        
+      input:
+        file_list: "${scan_files.output.file_list}"
+        policy_rules: "${load_policy.output.policy_rules}"
+        required_files: "${load_policy.output.required_files}"
+        required_folders: "${load_policy.output.required_folders}"
+        forbidden_patterns: "${load_policy.output.forbidden_patterns}"
+        strict_mode: "${workflow.input.strict_mode}"
+        
+      output:
+        compliance_status: "PASS | FAIL | PARTIAL"
+        violations: "Array of violations found"
+        missing_files: "Required files not found"
+        missing_folders: "Required folders not found"
+        forbidden_files: "Files matching forbidden patterns"
+        compliance_score: "0-100 percentage"
+        
+      output_to: ".3ox/workflow-data/validation_results.yaml"
+      
+    # ─────────────────────────────────────────────────────────
+    # TASK 4: Generate Recommendations
+    # ─────────────────────────────────────────────────────────
+    - id: "generate_recommendations"
+      name: "Generate Fix Recommendations"
+      description: "Create actionable recommendations for violations"
+      type: "SIMPLE"
+      
+      depends_on: ["validate_compliance"]
+      
+      agent_level: "L2"
+      assigned_to: "RECOMMENDATION_AGENT"
+      timeout: "30s"
+      
+      input:
+        violations: "${validate_compliance.output.violations}"
+        missing_files: "${validate_compliance.output.missing_files}"
+        missing_folders: "${validate_compliance.output.missing_folders}"
+        
+      output:
+        recommendations: "Array of actionable fixes"
+        auto_fixable: "Violations that can be auto-fixed"
+        manual_fixes: "Violations requiring manual intervention"
+        
+      output_to: ".3ox/workflow-data/recommendations.yaml"
+      
+    # ─────────────────────────────────────────────────────────
+    # TASK 5: Decision Gate - What to do next?
+    # ─────────────────────────────────────────────────────────
+    - id: "compliance_decision_gate"
+      name: "Compliance Decision Point"
+      description: "Determine next steps based on compliance status"
+      type: "DECISION"
+      
+      depends_on: ["validate_compliance", "generate_recommendations"]
+      
+      # Decision parameter
+      decision_param: "${validate_compliance.output.compliance_status}"
+      
+      # Decision cases
+      decision_cases:
+        
+        # ── Case 1: Perfect Compliance ──
+        PASS:
+          description: "All requirements met, proceed to receipt generation"
+          next_tasks: ["generate_success_receipt"]
+          
+        # ── Case 2: Partial Compliance (warnings only) ──
+        PARTIAL:
+          description: "Some violations but not critical"
+          condition: "${workflow.input.strict_mode} == false"
+          next_tasks: ["generate_warning_receipt"]
+          
+        # ── Case 3: Critical Failure ──
+        FAIL:
+          description: "Critical violations found"
+          next_tasks: ["generate_failure_receipt", "alert_cmd_bridge"]
+          
+      # Default case if none match
+      default_case:
+        next_tasks: ["generate_failure_receipt"]
+        
+    # ─────────────────────────────────────────────────────────
+    # TASK 6a: Generate Success Receipt
+    # ─────────────────────────────────────────────────────────
+    - id: "generate_success_receipt"
+      name: "Generate Success Receipt"
+      description: "Create validation receipt for compliant inventory"
+      type: "SIMPLE"
+      
+      agent_level: "L3"
+      assigned_to: "RECEIPT_GENERATOR_AGENT"
+      timeout: "30s"
+      
+      input:
+        validation_data: "${validate_compliance.output}"
+        scan_data: "${scan_files.output}"
+        policy_data: "${load_policy.output}"
+        recommendations: "${generate_recommendations.output}"
+        
+      output:
+        receipt_file_path: "${workflow.input.output_folder}/VALIDATION.RECEIPT.yaml"
+        receipt_content: "Complete receipt YAML"
+        
+      output_to: "${workflow.input.output_folder}/VALIDATION.RECEIPT.yaml"
+      
+      # Optional: Generate FILE.MANIFEST.txt
+      side_effects:
+        - condition: "${workflow.input.generate_manifest} == true"
+          action: "create_file"
+          file: "${workflow.input.output_folder}/FILE.MANIFEST.txt"
+          content: "${scan_files.output.file_list}"
+          
+    # ─────────────────────────────────────────────────────────
+    # TASK 6b: Generate Warning Receipt
+    # ─────────────────────────────────────────────────────────
+    - id: "generate_warning_receipt"
+      name: "Generate Warning Receipt"
+      description: "Create receipt with warnings for partial compliance"
+      type: "SIMPLE"
+      
+      agent_level: "L3"
+      assigned_to: "RECEIPT_GENERATOR_AGENT"
+      timeout: "30s"
+      
+      input:
+        validation_data: "${validate_compliance.output}"
+        scan_data: "${scan_files.output}"
+        policy_data: "${load_policy.output}"
+        recommendations: "${generate_recommendations.output}"
+        receipt_type: "WARNING"
+        
+      output:
+        receipt_file_path: "${workflow.input.output_folder}/VALIDATION.RECEIPT.yaml"
+        receipt_content: "Receipt YAML with warnings"
+        
+      output_to: "${workflow.input.output_folder}/VALIDATION.RECEIPT.yaml"
+      
+    # ─────────────────────────────────────────────────────────
+    # TASK 6c: Generate Failure Receipt
+    # ─────────────────────────────────────────────────────────
+    - id: "generate_failure_receipt"
+      name: "Generate Failure Receipt"
+      description: "Create receipt documenting compliance failure"
+      type: "SIMPLE"
+      
+      agent_level: "L3"
+      assigned_to: "RECEIPT_GENERATOR_AGENT"
+      timeout: "30s"
+      
+      input:
+        validation_data: "${validate_compliance.output}"
+        scan_data: "${scan_files.output}"
+        policy_data: "${load_policy.output}"
+        recommendations: "${generate_recommendations.output}"
+        receipt_type: "FAILURE"
+        
+      output:
+        receipt_file_path: "${workflow.input.output_folder}/VALIDATION.RECEIPT.yaml"
+        receipt_content: "Receipt YAML with failure details"
+        
+      output_to: "${workflow.input.output_folder}/VALIDATION.RECEIPT.yaml"
+      
+    # ─────────────────────────────────────────────────────────
+    # TASK 7: Alert CMD.BRIDGE (human-in-the-loop)
+    # ─────────────────────────────────────────────────────────
+    - id: "alert_cmd_bridge"
+      name: "Alert CMD.BRIDGE of Critical Failure"
+      description: "Notify Commander of compliance failure requiring attention"
+      type: "HUMAN"
+      
+      agent_level: "L0"  # Requires Commander attention
+      assigned_to: "COMMANDER"
+      
+      # Human task parameters
+      wait_for_approval: true
+      approval_timeout: "24h"
+      approval_options:
+        - "PROCEED_ANYWAY"
+        - "FIX_MANUALLY"
+        - "AUTO_FIX"
+        - "ABORT"
+        
+      input:
+        violations: "${validate_compliance.output.violations}"
+        compliance_score: "${validate_compliance.output.compliance_score}"
+        recommendations: "${generate_recommendations.output}"
+        target_folder: "${workflow.input.target_folder}"
+        
+      output:
+        approval_decision: "Commander's decision"
+        notes: "Optional notes from Commander"
+        
+      # Notification channels
+      notification:
+        channels:
+          - "0UT.3OX/ALERT.COMPLIANCE.FAILURE.yaml"
+          - ".3ox/alerts/compliance-failure.txt"
+        urgency: "HIGH"
+        
+      # What to do if timeout reached
+      on_timeout:
+        action: "ESCALATE"
+        next_task: "log_timeout_to_incident"
+        
+  # ──────────────────────────────────────────────────────────
+  # FAILURE HANDLING
+  # ──────────────────────────────────────────────────────────
+  failure_workflow:
+    id: "inventory-validation-failure-handler"
+    description: "Handles workflow execution failures"
+    
+    steps:
+      - id: "log_workflow_failure"
+        action: "log_to_file"
+        file: "log.book/workflow-failures/inventory-validation-${workflow.id}.md"
+        
+      - id: "notify_cmd_bridge"
+        action: "create_0ut_alert"
+        urgency: "CRITICAL"
+        
+      - id: "preserve_state"
+        action: "snapshot_workflow_state"
+        file: ".3ox/workflow-state/failed-${workflow.id}.yaml"
+        
+      - id: "create_incident_report"
+        action: "generate_incident"
+        template: "log.book/INCIDENT.TEMPLATE.md"
+        
+  # ──────────────────────────────────────────────────────────
+  # MONITORING & LOGGING
+  # ──────────────────────────────────────────────────────────
+  monitoring:
+    report_frequency: "per_task_completion"
+    
+    log_to: ".3ox/workflow.execution.log"
+    
+    metrics:
+      - execution_time: "Total workflow duration"
+      - task_success_rate: "Percentage of tasks completed without retry"
+      - retry_count: "Number of retries across all tasks"
+      - compliance_score: "Final compliance percentage"
+      - file_count: "Number of files scanned"
+      
+    alerts:
+      - condition: "execution_time > 5m"
+        action: "alert_performance_issue"
+        
+      - condition: "retry_count > 5"
+        action: "alert_stability_issue"
+        
+      - condition: "compliance_score < 50"
+        action: "alert_critical_compliance_issue"
+        
+  # ──────────────────────────────────────────────────────────
+  # WORKFLOW METADATA
+  # ──────────────────────────────────────────────────────────
+  metadata:
+    created: ⧗-25.61
+    author: "CMD.BRIDGE"
+    version: 1
+    tags:
+      - "compliance"
+      - "inventory"
+      - "validation"
+      - "file-operations"
+      
+    documentation: "log.book/research/workflows/README.inventory-validation.md"
+    
+    usage_example: |
+      # Start workflow via CMD
+      workflow.start("inventory-validation-v1", {
+        target_folder: "0UT.3OX",
+        policy_file: ".3ox.index/POLICY/INVENTORY.POLICY.md",
+        strict_mode: false,
+        generate_manifest: true
+      })
+      
+    estimated_duration: "1-3 minutes"
+    estimated_cost: "Low (mostly file I/O)"
+    
+  # ──────────────────────────────────────────────────────────
+  # PERMISSIONS & SECURITY
+  # ──────────────────────────────────────────────────────────
+  permissions:
+    who_can_start:
+      - "L1:CMD.BRIDGE"
+      - "L2:STATION.OPS"
+      
+    who_can_approve:
+      - "L0:COMMANDER"
+      
+    read_access:
+      - ".3ox.index/POLICY/"
+      - "target_folder"
+      
+    write_access:
+      - ".3ox/workflow-data/"
+      - "${workflow.input.output_folder}/"
+      
+    forbidden_operations:
+      - "delete_files"
+      - "modify_policy"
+      
+  # ──────────────────────────────────────────────────────────
+  # VALIDATION
+  # ──────────────────────────────────────────────────────────
+  validation:
+    # Validate workflow definition before execution
+    schema_version: "3ox-workflow-v1"
+    
+    pre_execution_checks:
+      - check: "target_folder_exists"
+        error: "Target folder does not exist"
+        
+      - check: "policy_file_exists"
+        error: "Policy file not found"
+        
+      - check: "output_folder_writable"
+        error: "Cannot write to output folder"
+        
+    post_execution_checks:
+      - check: "receipt_generated"
+        error: "Workflow completed but no receipt created"
+        
+      - check: "all_tasks_completed"
+        error: "Workflow marked complete but tasks still pending"
+
+# ════════════════════════════════════════════════════════════
+# END OF WORKFLOW DEFINITION
+# ════════════════════════════════════════════════════════════
+
+//▙▖▙▖▞▞▙▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂〘・.°𝚫〙
+

@@ -1,0 +1,62 @@
+# TOOLS.YML :: SPEC.WRITER Tools - Proto.v10 Notation Specialist
+# Version: v2.2.0
+
+tools:
+  - name: FileValidator
+    function: validate_file(filepath)
+    returns: hash with :path, :hash, :size, :valid
+    description: Validate file existence and integrity
+    
+  - name: SpecFormatter
+    function: format_to_spec(filepath, spec_type)
+    returns: formatted content with phenochain notation
+    description: Format file content to proto.v10 spec standard
+    
+  - name: BlockValidator
+    function: validate_blocks(filepath)
+    returns: hash with :valid, :errors, :warnings
+    description: Validate phenochain block structure and syntax
+    
+  - name: BannerBuilder
+    function: build_banner(title, time, phases)
+    returns: formatted banner string
+    description: Generate spec-compliant banner (lines 1-5)
+    
+  - name: PhenochainBuilder
+    function: build_phenochain(name, phases)
+    returns: formatted phenochain string
+    description: "Generate phenochain notation :: ρ{}.τ{}.ν{}.λ{} ⫸"
+    
+  - name: SymbolValidator
+    function: validate_symbols(content)
+    returns: hash with symbol usage analysis
+    description: "Check proper symbol usage (▛▞, :: ∎, ⫸, etc)"
+    
+  - name: TokenCounter
+    function: count_tokens(filepath)
+    returns: token count and analysis
+    description: Count tokens for research/benchmarking
+
+spec_tools:
+  - name: banner-token-counter
+    files: [banner-token-counter.py]
+    usage: "python tools/banner-token-counter.py [file]"
+    description: Benchmark token usage of banners vs plain text
+
+research_tools:
+  - name: notation-effectiveness
+    description: Measure LLM context retention with/without notation
+    
+  - name: symbol-impact
+    description: Analyze which symbols improve cognition
+    
+  - name: drift-reduction
+    description: Test if banners reduce agent drift
+
+dependencies:
+  - xxhash (gem install xxhash)
+  - json (stdlib)
+  - fileutils (stdlib)
+  - time (stdlib)
+  - yaml (stdlib)
+

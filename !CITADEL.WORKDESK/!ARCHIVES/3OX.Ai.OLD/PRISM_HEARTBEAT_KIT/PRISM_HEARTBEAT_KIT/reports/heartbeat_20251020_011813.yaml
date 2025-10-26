@@ -1,0 +1,99 @@
+timestamp: '2025-10-20T01:18:12.283618-05:00'
+sirius_time_guess: ⧗-25.??
+root_detected: P:\!CMD.BRIDGE
+stations:
+  RVNx:
+    paths:
+      cloud: P:\!CMD.BRIDGE\RVNx.BASE\!1N.3OX RVNX.BASE
+      ops: P:\!CMD.BRIDGE\RVNx.BASE\!RVNX.OPS
+      out: P:\!CMD.BRIDGE\RVNx.BASE\!RVNX.OPS\0UT.3OX
+      receipts: P:\!CMD.BRIDGE\RVNx.BASE\!RVNX.OPS\RECEIPTS
+      brain: P:\!CMD.BRIDGE\RVNx.BASE\!1N.3OX RVNX.BASE\.3ox\station.brain.md
+      rules: P:\!CMD.BRIDGE\RVNx.BASE\!RVNX.OPS\.3ox\STATION.RULES.md
+    invariants:
+      .3ox_present: false
+      ops_present: true
+      out_folder_present: true
+    prism_ok: true
+    out_fresh_minutes: null
+    freshness_state: NONE
+    receipts:
+      present: false
+      count: 0
+      latest_minutes: null
+      summaries: []
+      errors:
+      - '[RECEIPTS] Folder missing'
+    notes:
+    - '[INFO] Optional file not found: P:\!CMD.BRIDGE\RVNx.BASE\!1N.3OX RVNX.BASE\.3ox\station.brain.md'
+    - '[INFO] Optional file not found: P:\!CMD.BRIDGE\RVNx.BASE\!RVNX.OPS\.3ox\STATION.RULES.md'
+    - '[OUT] No recent files detected in 0UT.3OX'
+    - '[RECEIPTS] Folder missing'
+    errors:
+    - '[INV] Missing required path: .3ox_present'
+  SYNTH:
+    paths:
+      cloud: P:\!CMD.BRIDGE\SYNTH.BASE\!1N.3OX SYNTH.BASE
+      ops: P:\!CMD.BRIDGE\SYNTH.BASE\!SYNTH.OPS
+      out: P:\!CMD.BRIDGE\SYNTH.BASE\!SYNTH.OPS\0UT.3OX
+      receipts: P:\!CMD.BRIDGE\SYNTH.BASE\!SYNTH.OPS\RECEIPTS
+      brain: P:\!CMD.BRIDGE\SYNTH.BASE\!1N.3OX SYNTH.BASE\.3ox\station.brain.md
+      rules: P:\!CMD.BRIDGE\SYNTH.BASE\!SYNTH.OPS\.3ox\STATION.RULES.md
+    invariants:
+      .3ox_present: true
+      ops_present: true
+      out_folder_present: true
+    prism_ok: true
+    out_fresh_minutes: null
+    freshness_state: NONE
+    receipts:
+      present: false
+      count: 0
+      latest_minutes: null
+      summaries: []
+      errors:
+      - '[RECEIPTS] Folder missing'
+    notes:
+    - '[INFO] Optional file not found: P:\!CMD.BRIDGE\SYNTH.BASE\!1N.3OX SYNTH.BASE\.3ox\station.brain.md'
+    - '[INFO] Optional file not found: P:\!CMD.BRIDGE\SYNTH.BASE\!SYNTH.OPS\.3ox\STATION.RULES.md'
+    - '[OUT] No recent files detected in 0UT.3OX'
+    - '[RECEIPTS] Folder missing'
+    errors: []
+  OBSIDIAN:
+    paths:
+      cloud: P:\!CMD.BRIDGE\OBSIDIAN.BASE\!1N.3OX OBSIDIAN.BASE
+      ops: P:\!CMD.BRIDGE\OBSIDIAN.BASE\!OBSIDIAN.OPS
+      out: P:\!CMD.BRIDGE\OBSIDIAN.BASE\!OBSIDIAN.OPS\0UT.3OX
+      receipts: P:\!CMD.BRIDGE\OBSIDIAN.BASE\!OBSIDIAN.OPS\RECEIPTS
+      brain: P:\!CMD.BRIDGE\OBSIDIAN.BASE\!1N.3OX OBSIDIAN.BASE\.3ox\station.brain.md
+      rules: P:\!CMD.BRIDGE\OBSIDIAN.BASE\!OBSIDIAN.OPS\.3ox\STATION.RULES.md
+    invariants:
+      .3ox_present: true
+      ops_present: true
+      out_folder_present: false
+    prism_ok: true
+    out_fresh_minutes: null
+    freshness_state: NONE
+    receipts:
+      present: false
+      count: 0
+      latest_minutes: null
+      summaries: []
+      errors:
+      - '[RECEIPTS] Folder missing'
+    notes:
+    - '[INFO] Optional file not found: P:\!CMD.BRIDGE\OBSIDIAN.BASE\!1N.3OX OBSIDIAN.BASE\.3ox\station.brain.md'
+    - '[INFO] Optional file not found: P:\!CMD.BRIDGE\OBSIDIAN.BASE\!OBSIDIAN.OPS\.3ox\STATION.RULES.md'
+    - '[OUT] No recent files detected in 0UT.3OX'
+    - '[RECEIPTS] Folder missing'
+    errors:
+    - '[INV] Missing required path: out_folder_present'
+    - '[OUT] 0UT.3OX folder missing'
+policy:
+  missing:
+  - P:\!CMD.BRIDGE\3OX.Ai\.3ox.index\POLICY\SIRIUS.CALENDAR.CLOCK.md
+  - P:\!CMD.BRIDGE\3OX.Ai\.3ox.index\CORE\GENESIS.SYSTEM.ARCHITECTURE.md
+  - P:\!CMD.BRIDGE\3OX.Ai\.3ox.index\OPS\BASE.CMD\REGISTRY\STATION.REGISTRY.yaml
+summary:
+  status: FAIL
+  details: 3 policy docs missing ; Invariant path(s) missing

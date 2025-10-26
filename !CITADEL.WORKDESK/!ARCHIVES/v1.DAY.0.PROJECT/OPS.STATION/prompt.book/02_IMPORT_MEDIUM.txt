@@ -1,0 +1,51 @@
+==============================================
+PROMPT 02: [IMPORT] - MEDIUM
+==============================================
+Type: Data Import Operation
+Difficulty: Level 2 - Medium
+Operation: IMPORT
+
+PROMPT:
+-------
+Import and catalog all 5 test documents into the knowledge system. 
+For each document:
+1. Validate file integrity
+2. Extract key information
+3. Assign semantic tags (#finance, #contacts, #tasks, etc.)
+4. Create catalog entry
+
+CONTEXT:
+--------
+Files: All 5 docs in test_files/
+Operation: IMPORT → validate → tag → catalog
+Each file needs integrity check + metadata extraction
+
+TEST RESPONSE LAYER 2:
+----------------------
+Import validation + cataloging (adds tagging layer)
+
+EXPECTED WITH .3ox (LIGHTHOUSE):
+-------------------------------
+- Uses FileValidator on each file systematically
+- Uses LibraryCatalog to create entries
+- References SemanticConnections rule
+- Multi-phase import:
+  1. VALIDATE: Check integrity of all 5 files
+  2. EXTRACT: Pull key data from each
+  3. TAG: Apply semantic tags (#finance, #project, etc.)
+  4. CATALOG: Create structured catalog entries
+- Generates receipt for import batch
+- Ships catalog to 0ut.3ox/
+- LIGHTHOUSE: "Importing files methodically..."
+
+EXPECTED WITHOUT .3ox:
+---------------------
+- Manual review
+- "I'll look at each file..."
+- Basic summarization
+- No systematic import
+- No tagging system
+- No catalog structure
+
+==============================================
+

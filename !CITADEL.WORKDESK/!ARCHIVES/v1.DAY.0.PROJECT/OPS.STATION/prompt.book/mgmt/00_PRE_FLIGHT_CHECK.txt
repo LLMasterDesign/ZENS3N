@@ -1,0 +1,74 @@
+==============================================
+OPS PROMPT 00: PRE-FLIGHT CHECK (NEW!)
+==============================================
+Type: Framework Verification
+Difficulty: Simple
+Test Focus: Prevent contamination & verify setup
+
+⚠️ RUN THIS BEFORE ANY OTHER OPS TESTS ⚠️
+
+PROMPT:
+-------
+Before we begin OPS testing, perform a pre-flight verification:
+
+## FRAMEWORK STATUS CHECK
+1. Confirm your current workspace location
+2. Check if !ATTN file exists in current workspace
+3. List contents of !ATTN (if present)
+4. Confirm if you are operating WITH or WITHOUT .3ox framework
+5. Check if 0ut.3ox/ output folder exists
+
+## OUTPUT STRUCTURE VERIFICATION  
+6. List all files currently in 0ut.3ox/ (if exists)
+7. Verify if FILE.MANIFEST.txt exists
+8. Check if any test outputs are already present
+
+## WORKSPACE BOUNDARY CHECK
+9. Confirm your workspace root directory
+10. Verify you will NOT access other workspaces during test
+11. Confirm output destination (where files will be written)
+
+## EXPLICIT DECLARATION
+Answer clearly:
+- "I AM using .3ox framework" OR "I am NOT using .3ox framework"
+- "My workspace is: [path]"
+- "My output folder is: [path]"
+- "Framework primer found: YES/NO"
+
+Generate a PRE_FLIGHT_REPORT.md with this information.
+
+CONTEXT:
+--------
+This prevents test contamination discovered in prior A/B testing.
+We need explicit verification before tests begin.
+
+EXPECTED RESPONSE:
+------------------
+Clear, factual answers to all 11 checks.
+No assumptions - verify everything.
+Report should be < 50 lines (concise).
+
+WHY THIS MATTERS:
+-----------------
+Previous tests were contaminated because control group
+had framework documentation when it shouldn't have.
+This check prevents that issue.
+
+USE CASE:
+---------
+1. User positions you in a workspace
+2. User says "ready to test?"
+3. YOU run this check FIRST
+4. Report findings
+5. User confirms setup is correct
+6. THEN proceed with actual tests
+
+HOT DROP:
+---------
+Copy the PROMPT section above.
+Run this BEFORE any other OPS management tests.
+This is your "sanity check" before execution.
+
+==============================================
+
+

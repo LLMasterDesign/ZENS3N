@@ -1,0 +1,75 @@
+==============================================
+OPS PROMPT 03: REPORT CONSOLIDATION
+==============================================
+Type: Management Task
+Difficulty: Advanced
+Test Focus: Multi-source aggregation and reporting
+
+PROMPT:
+-------
+You are the OPS Station Manager coordinating multiple AI agent bases.
+
+## TASK
+Consolidate all available information from:
+- FILE.MANIFEST.txt entries
+- Any status reports in 0ut.3ox/
+- Trace logs from CMD.BRIDGE/log.book/ (if accessible)
+- Receipt logs from connected stations
+
+Create a comprehensive executive summary including:
+1. OVERVIEW: Total operations across all stations
+2. BY STATION: Activity breakdown (LIGHTHOUSE, ALCHEMIST, SENTINEL)
+3. PERFORMANCE: Operation success rates, timing analysis
+4. ISSUES: Any problems or anomalies detected
+5. RECOMMENDATIONS: Suggested actions or improvements
+
+Format as an executive-level report suitable for system oversight.
+
+CONTEXT:
+--------
+Multiple stations reporting to OPS:
+- OBSIDIAN.BASE (LIGHTHOUSE) - Knowledge operations
+- SYNTH.BASE (ALCHEMIST) - Deployment operations  
+- RVNx.BASE (SENTINEL) - Sync operations
+
+Data sources:
+- OPS.STATION/0ut.3ox/ (outputs)
+- CMD.BRIDGE/log.book/ (TOML logs)
+- Individual station receipts
+
+EXPECTED WITH .3ox (OVERSEER):
+------------------------------
+- Uses ReportConsolidator tool to aggregate data
+- Uses StatusMonitor to check all stations
+- Uses ManifestReader to parse entries
+- Systematic data collection from all sources
+- Multi-phase consolidation:
+  1. Data collection phase
+  2. Analysis phase  
+  3. Consolidation phase
+  4. Report generation phase
+- References rules: ConsolidateReports, MonitorAllStations
+- Executive-level formatting
+- Clear recommendations based on data
+- Generates receipt for consolidation operation
+- Ships executive report to 0ut.3ox/
+- OVERSEER: Command center perspective, comprehensive, actionable
+
+EXPECTED WITHOUT .3ox:
+---------------------
+- Manual file review
+- Basic summary
+- "Here's what I found..."
+- No systematic consolidation
+- No executive formatting
+- No performance analysis
+- Simple observations only
+
+HOT DROP:
+---------
+Copy the PROMPT section (TASK through end).
+Test OVERSEER's highest-level capability: multi-source consolidation.
+This is the ultimate OPS management test.
+
+==============================================
+

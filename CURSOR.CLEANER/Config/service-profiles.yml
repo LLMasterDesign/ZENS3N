@@ -1,0 +1,170 @@
+# Service Profiles Configuration
+# CURSOR.CLEANER Toolkit
+# Service optimization rules for different system profiles
+
+developer_profile:
+  name: "Developer Workstation"
+  description: "Optimized for development work with Cursor, Node.js, Git, Docker"
+  
+  keep_services:
+    - "Docker Desktop Service"
+    - "com.docker.service"
+    - "ssh-agent"
+    - "OpenSSH Authentication Agent"
+    - "WslService"
+    - "LxssManager"
+    - "Windows Defender"
+    - "WinDefend"
+    - "Windows Update"
+    - "wuauserv"
+    - "Windows Firewall"
+    - "MpsSvc"
+    - "Windows Security Service"
+    - "SecurityHealthService"
+    - "Windows Search"
+    - "WSearch"
+    - "SearchIndexer"
+  
+  optimize_services:
+    - name: "Superfetch"
+      action: "disable"
+      reason: "SSD optimization"
+    - name: "SysMain"
+      action: "disable"
+      reason: "SSD optimization"
+    - name: "Windows Search"
+      action: "manual"
+      reason: "Reduce startup time"
+  
+  disable_services:
+    - "XblAuthManager"
+    - "XblGameSave"
+    - "XboxGipSvc"
+    - "XboxNetApiSvc"
+    - "DiagTrack"
+    - "dmwappushservice"
+    - "WerSvc"
+    - "Fax"
+    - "PrintWorkflowUserSvc"
+    - "PrintSpooler"
+    - "SkypeApp"
+    - "SkypeBackgroundHost"
+    - "SkypeBridge"
+    - "Cortana"
+
+gaming_profile:
+  name: "Gaming System"
+  description: "Optimized for gaming performance"
+  
+  keep_services:
+    - "Windows Defender"
+    - "WinDefend"
+    - "Windows Update"
+    - "wuauserv"
+    - "Windows Firewall"
+    - "MpsSvc"
+    - "Windows Security Service"
+    - "SecurityHealthService"
+    - "XblAuthManager"
+    - "XblGameSave"
+    - "XboxGipSvc"
+    - "XboxNetApiSvc"
+  
+  optimize_services:
+    - name: "Windows Search"
+      action: "disable"
+      reason: "Gaming performance"
+    - name: "Superfetch"
+      action: "disable"
+      reason: "Gaming performance"
+    - name: "SysMain"
+      action: "disable"
+      reason: "Gaming performance"
+  
+  disable_services:
+    - "DiagTrack"
+    - "dmwappushservice"
+    - "WerSvc"
+    - "Fax"
+    - "PrintWorkflowUserSvc"
+    - "PrintSpooler"
+    - "SkypeApp"
+    - "SkypeBackgroundHost"
+    - "SkypeBridge"
+    - "Cortana"
+
+minimal_profile:
+  name: "Minimal System"
+  description: "Minimal services for maximum performance"
+  
+  keep_services:
+    - "Windows Defender"
+    - "WinDefend"
+    - "Windows Update"
+    - "wuauserv"
+    - "Windows Firewall"
+    - "MpsSvc"
+    - "Windows Security Service"
+    - "SecurityHealthService"
+  
+  optimize_services:
+    - name: "Windows Search"
+      action: "disable"
+      reason: "Minimal performance"
+    - name: "Superfetch"
+      action: "disable"
+      reason: "Minimal performance"
+    - name: "SysMain"
+      action: "disable"
+      reason: "Minimal performance"
+    - name: "Windows Update"
+      action: "manual"
+      reason: "Manual control"
+  
+  disable_services:
+    - "XblAuthManager"
+    - "XblGameSave"
+    - "XboxGipSvc"
+    - "XboxNetApiSvc"
+    - "DiagTrack"
+    - "dmwappushservice"
+    - "WerSvc"
+    - "Fax"
+    - "PrintWorkflowUserSvc"
+    - "PrintSpooler"
+    - "SkypeApp"
+    - "SkypeBackgroundHost"
+    - "SkypeBridge"
+    - "Cortana"
+    - "Docker Desktop Service"
+    - "com.docker.service"
+    - "ssh-agent"
+    - "OpenSSH Authentication Agent"
+    - "WslService"
+    - "LxssManager"
+
+# Service optimization rules
+service_rules:
+  memory_threshold_mb: 50
+  cpu_threshold_percent: 10
+  auto_optimize_idle_services: true
+  backup_service_configs: true
+  rollback_enabled: true
+  
+  optimization_actions:
+    high_memory:
+      - "set_manual"
+      - "disable_if_safe"
+    high_cpu:
+      - "set_manual"
+      - "disable_if_safe"
+    idle_service:
+      - "set_manual"
+    bloatware_service:
+      - "disable"
+      - "remove_if_possible"
+
+
+
+
+

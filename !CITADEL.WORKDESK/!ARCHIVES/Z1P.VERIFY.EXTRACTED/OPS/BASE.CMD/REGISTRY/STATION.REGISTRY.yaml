@@ -1,0 +1,181 @@
+# 🎯 STATION REGISTRY
+# Central registry of all Atlas.Legacy stations
+# Each station IS a stratos with its own 1N.3OX cloud
+# Managed by: CMD.BRIDGE (L1)
+# Last Updated: ⧗-25.60
+
+stations:
+  # ═══════════════════════════════════════
+  # STRATOS-1: STATIONS (Complete Ecosystems)
+  # ═══════════════════════════════════════
+  
+  SYNTH:
+    name: "SYNTH.BASE"
+    stratos: "STRATOS-1"
+    status: "ACTIVE"
+    established: "⧗-25.58"
+    location: "SYNTH.BASE/"
+    cloud_location: "SYNTH.BASE/!1N.3OX SYNTH.BASE/"
+    ops_location: "SYNTH.BASE/!SYNTH.OPS/"
+    brain_type: "ALCHEMIST"
+    mission: "Cloud storage, SaaS orchestration, rapid prototyping, creative development"
+    scale:
+      major_projects: 8
+      tools: 12
+      total_items: 20
+      complexity: "very_high"
+    reporting:
+      health_check: "15min"
+      status_summary: "hourly"
+      daily_report: "yes"
+    rules:
+      station_rules: "TODO" # Need to create from template
+      ops_protocols: "TODO"
+      error_escalation: "TODO"
+      resource_management: "TODO"
+    contact:
+      primary_agent: "SGL.Ai"
+      backup_agent: null
+    notes: "Primary development and deployment station - creative synthesis focus"
+
+  RVNx:
+    name: "RVNx.BASE"
+    stratos: "STRATOS-1"
+    status: "ACTIVE"
+    established: "⧗-25.58"
+    location: "RVNx.BASE/"
+    cloud_location: "RVNx.BASE/!1N.3OX RVNX.BASE/"
+    ops_location: "RVNx.BASE/!RVNX.OPS/"
+    brain_type: "SENTINEL"
+    mission: "File synchronization, remote access, cross-platform coordination, data safety"
+    scale:
+      major_projects: 6
+      tools: 8
+      total_items: 14
+      complexity: "very_high"
+    reporting:
+      health_check: "15min"
+      status_summary: "hourly"
+      daily_report: "yes"
+    rules:
+      station_rules: "TODO" # Need to create from template
+      ops_protocols: "TODO"
+      error_escalation: "TODO"
+      resource_management: "TODO"
+    contact:
+      primary_agent: "TP.Gen"
+      backup_agent: null
+    notes: "Critical sync infrastructure - data safety and integrity priority"
+
+  OBSIDIAN:
+    name: "OBSIDIAN.BASE"
+    stratos: "STRATOS-1"
+    status: "ACTIVE"
+    established: "⧗-25.58"
+    location: "OBSIDIAN.BASE/"
+    cloud_location: "OBSIDIAN.BASE/!1N.3OX OBSIDIAN.BASE/"
+    ops_location: "OBSIDIAN.BASE/!OBSIDIAN.OPS/"
+    brain_type: "LIGHTHOUSE"
+    mission: "Knowledge management, PKM, note organization, knowledge graph"
+    scale:
+      major_projects: 3
+      tools: 5
+      total_items: 8
+      complexity: "high"
+    reporting:
+      health_check: "30min"
+      status_summary: "4hr"
+      daily_report: "yes"
+    rules:
+      station_rules: "TODO" # Need to create from template
+      ops_protocols: "TODO"
+      error_handling: "TODO"
+    contact:
+      primary_agent: null
+      backup_agent: null
+    notes: "Knowledge base and documentation hub - librarian-weaver focus"
+
+# ═══════════════════════════════════════
+# NOTABLE PROJECTS (STRATOS-2/3/4)
+# ═══════════════════════════════════════
+
+notable_projects:
+  # STRATOS-2: Major Projects within Stations
+  TP.Gen:
+    name: "TP.Gen"
+    stratos: "STRATOS-2"
+    parent_station: "RVNx"
+    location: "RVNx.BASE/!1N.3OX RVNX.BASE/!1N.3OX TP.Gen/"
+    project_brain: "TODO"
+    mission: "Telegram prompt generation and management system"
+    agent: "TP.Gen"
+    
+  # STRATOS-3: Tools within Stations
+  SunsetGlow:
+    name: "SunsetGlow"
+    stratos: "STRATOS-3"
+    parent_station: "SYNTH"
+    location: "SYNTH.BASE/SunsetGlow/"
+    project_brain: "TODO"
+    mission: "Web application project"
+    agent: "SGL.Ai"
+    
+  Glyphbit:
+    name: "Glyphbit"
+    stratos: "STRATOS-3"
+    parent_station: "RVNx"
+    location: "RVNx.BASE/!1N.3OX RVNX.BASE/!1N.3OX TP.Gen/Glyphbit/"
+    project_brain: "TODO"
+    mission: "Icon/glyph generation tool"
+    agent: "TP.Gen"
+
+# ═══════════════════════════════════════
+# 1N.3OX CLOUD ARCHITECTURE
+# ═══════════════════════════════════════
+
+cloud_architecture:
+  structure:
+    station_cloud: "!1N.3OX [STATION]/"
+    brain_infrastructure: "!1N.3OX [STATION]/.3ox/"
+    transmission_folder: "!1N.3OX [STATION]/0UT.3OX/"
+    projects_folder: "!1N.3OX [STATION]/[projects]/"
+  
+  communication_flow:
+    inbound: "CMD.BRIDGE → !1N.3OX [STATION]/.3ox/1N.3OX"
+    outbound: "!1N.3OX [STATION]/0UT.3OX/ → CMD.BRIDGE"
+    monitoring: "3OX.Ai/.3ox.index/OPS/CMD.STATIONS/CMD.listener/"
+  
+  file_types:
+    brain_files:
+      - "station.brain.md"
+      - "1n.3ox.operator.md"
+      - "0ut.3ox.operator.md"
+    transmission_files:
+      - "status_[sirius_time].yaml"
+      - "error_[sirius_time].yaml"
+      - "completion_[sirius_time].yaml"
+
+# ═══════════════════════════════════════
+# SYSTEM METADATA
+# ═══════════════════════════════════════
+
+metadata:
+  total_stations: 3
+  stratos_1_stations: 3
+  total_notable_projects: 3
+  stratos_2_projects: 1
+  stratos_3_tools: 2
+  last_audit: "⧗-25.60"
+  next_audit: "⧗-25.90"
+  architecture_version: "2.0"
+  notes: "Each station is a complete stratos with its own 1N.3OX cloud"
+
+# ═══════════════════════════════════════
+# USAGE NOTES
+# ═══════════════════════════════════════
+
+# This registry is the single source of truth for all stations
+# Each station operates as STRATOS-1 with complete autonomy
+# 0UT.3OX transmissions go to active folder for immediate processing
+# CMD.listener monitors all station transmission folders
+# Only CMD.BRIDGE (L1) can modify this registry

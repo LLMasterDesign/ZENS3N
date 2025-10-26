@@ -1,0 +1,48 @@
+{
+  "timestamp": "2025-10-10T10:18:50.974861",
+  "session_id": "status_check_framework_001",
+  "duration_seconds": 2.66,
+  "summary": {
+    "total_files": 37,
+    "by_station": {
+      "DIRECT": 7,
+      "OBSIDIAN": 11,
+      "OPS": 8,
+      "SYNTH": 11
+    },
+    "integrity": {
+      "valid": 32,
+      "empty": 4,
+      "suspicious": 1,
+      "percentage": 86.5
+    }
+  },
+  "manifest": {
+    "exists": true,
+    "stats": {
+      "total_entries": 2,
+      "by_status": {
+        "READY": 2
+      },
+      "by_destination": {
+        "OPS.STATION": 2
+      }
+    }
+  },
+  "latest_activity": {
+    "file": "FILE.MANIFEST.txt",
+    "time": "2025-10-10T10:17:34.552258",
+    "station": "DIRECT"
+  },
+  "issues_detected": {
+    "empty_files": [
+      "OBS.BATCH\\05CATMOC.R",
+      "OPS.BATCH\\01STATUSNU.R",
+      "OPS.BATCH\\03CONSOLIDATE.R",
+      "SYNTH.BATCH\\05CATMOC.R"
+    ],
+    "suspicious_files": [
+      "OPS.BATCH\\02VALID.R"
+    ]
+  }
+}

@@ -1,0 +1,37 @@
+///▙▖▙▖▞▞▙ ROUTES.JSON - POT PATHWAYS ▙▖▙▖▞▞▙///
+{
+  "routing_lattice": {
+    "topology": "hex_delaunay_overlay",
+    "hubs": 64,
+    "schema": "Admit → Queue → Route → Deliver → Ack",
+    "packet": {
+      "payload": "Braid",
+      "ttl": 255,
+      "crc": "u32",
+      "path_hint": "Vec<u32>"
+    }
+  },
+  "address_resolution": {
+    "weave_tablets": 120,
+    "threads_per_tablet": 4,
+    "encoding": "base4",
+    "trie_depth": 6,
+    "schema": "Name → Bind → Resolve → Route → Confirm"
+  },
+  "handoffs": [
+    { "from": "io_apertures", "to": "textile_algorithms_layer", "trigger": "Detect.ok" },
+    { "from": "textile_algorithms_layer", "to": "compression_spiral", "trigger": "Align.ok" },
+    { "from": "compression_spiral", "to": "processing_cores_ring", "trigger": "Pack.ok" },
+    { "from": "processing_cores_ring", "to": "routing_circuits_lattice", "trigger": "Reduce.ok" },
+    { "from": "routing_circuits_lattice", "to": "storage_vessels_array", "trigger": "Deliver.ok" },
+    { "from": "storage_vessels_array", "to": "security_seal", "trigger": "Seal.ok" },
+    { "from": "security_seal", "to": "error_correction_glaze", "trigger": "Verify.ok" },
+    { "from": "synchronization_rim", "to": "processing_cores_ring", "trigger": "Phase.lock" },
+    { "from": "power_bus", "to": "meta_recursion_kernel", "trigger": "Sense.ok" },
+    { "from": "error_correction_glaze", "to": "meta_recursion_kernel", "trigger": "Correct.rate" },
+    { "from": "meta_recursion_kernel", "to": "processing_cores_ring", "trigger": "Rewrite.rules" },
+    { "from": "address_weave", "to": "routing_circuits_lattice", "trigger": "Resolve.ok" },
+    { "from": "memory_nodes", "to": "storage_vessels_array", "trigger": "Persist.ok" }
+  ]
+}
+

@@ -1,0 +1,49 @@
+==============================================
+PROMPT 02: DOCUMENT LINTER
+==============================================
+Type: Light Task (Crew Member Role)
+Difficulty: Medium
+Test Focus: Tool selection and systematic approach
+
+PROMPT:
+-------
+You are a Document Linter.
+
+Your role:
+- Check all .txt files in test_files/ folder
+- Find formatting inconsistencies
+- Identify missing headers or structure issues
+- Report findings in a simple list
+
+Task: Analyze the 5 test documents and report any formatting issues.
+
+CONTEXT:
+--------
+Test files: doc1_budget.txt, doc2_notes.txt, doc3_contacts.txt, 
+            doc4_todo.txt, doc5_ideas.txt
+Location: DAY.0/.3ox_control_test/test_files/
+
+EXPECTED WITH .3ox:
+------------------
+- Uses FileValidator systematically
+- Mentions LibraryCatalog for organization
+- LIGHTHOUSE: Methodical, checks all files
+- Generates report with receipt
+- Multi-phase analysis
+
+EXPECTED WITHOUT .3ox:
+---------------------
+- Basic observations
+- No systematic approach
+- No tools mentioned
+- Single-pass review
+- No receipts
+
+HOT DROP:
+---------
+Copy entire PROMPT section (including role description).
+Paste into test environment.
+Record response in results log.
+
+==============================================
+

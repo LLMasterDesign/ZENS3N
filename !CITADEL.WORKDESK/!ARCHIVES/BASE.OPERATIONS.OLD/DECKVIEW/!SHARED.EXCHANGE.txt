@@ -1,0 +1,176 @@
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                    🌐 DECKVIEW - SHARED EXCHANGE SPACE 🌐                     ║
+║              The Actual Holodeck Shared Files Live Here                       ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+
+DECKVIEW = The central shared exchange folder
+
+This is where shared files ACTUALLY live (not duplicated in each BASE)
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ WHY DECKVIEW EXISTS IN !BASE.OPERATIONS                                     │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+THE PROBLEM:
+  • !HOLODECK inside LAUNCHPAD syncs to each BASE
+  • If shared files are IN each !HOLODECK, they get duplicated
+  • PCloud won't allow double-sync (LAUNCHPAD → BASE and HOLODECK → DECKVIEW)
+
+THE SOLUTION:
+  • Shared files live HERE: !BASE.OPERATIONS\DECKVIEW\
+  • Each BASE's !HOLODECK has LINKS/REFERENCES to DECKVIEW
+  • No duplication, single source of truth
+  • !BASE.OPERATIONS doesn't sync back (loop-safe)
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ THE ARCHITECTURE                                                            │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+P:\!CMD.BRIDGE\
+   │
+   ├── OBSIDIAN.BASE\
+   │   └── !HOLODECK\              ← Link/reference to DECKVIEW
+   │       └── [Points to !BASE.OPERATIONS\DECKVIEW\]
+   │
+   ├── RVNx.BASE\
+   │   └── !HOLODECK\              ← Link/reference to DECKVIEW
+   │       └── [Points to !BASE.OPERATIONS\DECKVIEW\]
+   │
+   ├── SYNTH.BASE\
+   │   └── !HOLODECK\              ← Link/reference to DECKVIEW
+   │       └── [Points to !BASE.OPERATIONS\DECKVIEW\]
+   │
+   └── !BASE.OPERATIONS\
+       └── DECKVIEW\               ← ACTUAL shared files live here ★
+           ├── OBSIDIAN.SHARED\    ← Files from OBSIDIAN
+           ├── RVNX.SHARED\        ← Files from RVNx
+           ├── SYNTH.SHARED\       ← Files from/for AI
+           └── COMMON\             ← Accessible to all
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ HOW IT WORKS                                                                │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+OBSIDIAN wants to share a file:
+  1. In CMD.BRIDGE, puts file in: !BASE.OPERATIONS\DECKVIEW\OBSIDIAN.SHARED\
+  2. RVNx accesses through: RVNx.BASE\!HOLODECK\ (links to DECKVIEW)
+  3. Sees file in DECKVIEW\OBSIDIAN.SHARED\
+  4. Single copy, no duplication
+
+RVNx wants to share a file:
+  1. In CMD.BRIDGE, puts file in: !BASE.OPERATIONS\DECKVIEW\RVNX.SHARED\
+  2. OBSIDIAN accesses through: OBSIDIAN.BASE\!HOLODECK\ (links to DECKVIEW)
+  3. Sees file in DECKVIEW\RVNX.SHARED\
+  4. Single copy, no duplication
+
+SYNTH (AI) coordination:
+  1. Requests/results go in: !BASE.OPERATIONS\DECKVIEW\SYNTH.SHARED\
+  2. All stations access through their !HOLODECK links
+  3. Central coordination point
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ FOLDER STRUCTURE                                                            │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+!BASE.OPERATIONS\DECKVIEW\
+   │
+   ├── OBSIDIAN.SHARED\           ← Files FROM Obsidian PC
+   │   ├── Projects\
+   │   ├── Documents\
+   │   └── Exchange\
+   │
+   ├── RVNX.SHARED\               ← Files FROM RDP
+   │   ├── Projects\
+   │   ├── Documents\
+   │   └── Exchange\
+   │
+   ├── SYNTH.SHARED\              ← AI coordination
+   │   ├── REQUESTS\              ← From CMD.BRIDGE to AI
+   │   ├── RESULTS\               ← From AI to users
+   │   └── STATUS\                ← System status
+   │
+   └── COMMON\                    ← Shared between all
+       ├── Collaborative\
+       └── Public\
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ HOW !HOLODECK CONNECTS TO DECKVIEW                                         │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+Each BASE's !HOLODECK folder contains:
+  • README files explaining the link
+  • References to DECKVIEW location
+  • Optional: Symbolic links (if PCloud supports)
+  • View windows into DECKVIEW folders
+
+Example - OBSIDIAN.BASE\!HOLODECK\:
+  ├── !DECKVIEW.LINK.txt         ← Points to !BASE.OPERATIONS\DECKVIEW\
+  ├── !VIEW.RVNX.txt             ← How to access RVNx shared files
+  ├── !VIEW.SYNTH.txt            ← How to access Synth coordination
+  └── !HOW.TO.SHARE.txt          ← Instructions for sharing files
+
+When you're in OBSIDIAN.BASE\!HOLODECK\:
+  → Read instructions
+  → Navigate to !BASE.OPERATIONS\DECKVIEW\
+  → Access shared files there
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ WHY THIS PREVENTS LOOPS AND DUPLICATION                                    │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+NO DUPLICATION:
+  ✓ Shared files exist once in DECKVIEW
+  ✗ NOT copied to each BASE's !HOLODECK
+  ✗ NOT duplicated across stations
+
+NO DOUBLE SYNC:
+  ✓ LAUNCHPAD syncs to BASE (normal content)
+  ✗ !HOLODECK doesn't sync separately (would be double)
+  ✓ !HOLODECK just contains links/references
+  ✓ DECKVIEW stays in !BASE.OPERATIONS (loop-safe)
+
+NO LOOPS:
+  ✓ !BASE.OPERATIONS doesn't sync back to local
+  ✓ DECKVIEW stays in cloud only
+  ✓ Access through CMD.BRIDGE view
+  ✓ No circular sync paths
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ WORKFLOW EXAMPLE                                                            │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+Scenario: You want to share a project file from PC to RDP
+
+Step 1 (From CMD.BRIDGE):
+  • Open: P:\!CMD.BRIDGE\!BASE.OPERATIONS\DECKVIEW\OBSIDIAN.SHARED\
+  • Copy project file there
+
+Step 2 (On RDP):
+  • Access CMD.BRIDGE (via PCloud web or synced view)
+  • Navigate to: !BASE.OPERATIONS\DECKVIEW\OBSIDIAN.SHARED\
+  • Find project file
+  • Download/work with it
+
+Step 3 (RDP responds):
+  • Put response file in: !BASE.OPERATIONS\DECKVIEW\RVNX.SHARED\
+  • PC can now access it from CMD.BRIDGE
+
+Result: Single copy in DECKVIEW, both stations access via CMD.BRIDGE
+
+═══════════════════════════════════════════════════════════════════════════════
+  DECKVIEW = Central shared exchange (actual files)
+  !HOLODECK in each BASE = Link/reference to DECKVIEW
+  No duplication, no double sync, no loops!
+═══════════════════════════════════════════════════════════════════════════════
+
+
+
+
+
+
+
+
+
+
+
+

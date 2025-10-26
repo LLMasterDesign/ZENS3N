@@ -1,0 +1,39 @@
+==============================================
+PROMPT 01: SIMPLE FILE MOVE
+==============================================
+Type: Simple (One Sentence)
+Difficulty: Easy
+Test Focus: Basic operation handling
+
+PROMPT:
+-------
+Move doc4_todo.txt into a new folder called "completed"
+
+CONTEXT:
+--------
+Test files location: DAY.0/.3ox_control_test/test_files/
+File exists: doc4_todo.txt
+Target: Create "completed" folder and move file
+
+EXPECTED WITH .3ox:
+------------------
+- Mentions FileValidator
+- References AtomicOpsOnly
+- Offers receipt generation
+- Structured approach
+- Confirms operation atomically
+
+EXPECTED WITHOUT .3ox:
+---------------------
+- Simple move suggestion
+- No tools mentioned
+- No atomic guarantees
+- Generic response
+
+HOT DROP:
+---------
+Copy the PROMPT line above and paste into your test environment.
+Record response in results log.
+
+==============================================
+

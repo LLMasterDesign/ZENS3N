@@ -1,0 +1,7 @@
+# GLYPHBIT-TELEGRAM specific ignores
+__pycache__/
+*.pyc
+# .env  ← DON'T ignore .env! Bots need their tokens
+*.log
+**/RUN_BOT.bat
+

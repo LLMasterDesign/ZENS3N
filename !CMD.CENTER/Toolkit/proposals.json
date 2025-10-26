@@ -1,0 +1,126 @@
+{
+  "generated_at": "2025-10-20T11:21:06.942627+00:00",
+  "inbox": "R:\\!CMD.BRIDGE\\!1N.3OX CMD",
+  "items": [
+    {
+      "file": "!OPS.STATION\\!ATTN",
+      "path": "R:\\!CMD.BRIDGE\\!1N.3OX CMD\\!OPS.STATION\\!ATTN",
+      "size_bytes": 5097,
+      "hash": "9d873cfae1742a8a"
+    },
+    {
+      "file": "!OPS.STATION\\.3ox\\brain.rs",
+      "path": "R:\\!CMD.BRIDGE\\!1N.3OX CMD\\!OPS.STATION\\.3ox\\brain.rs",
+      "size_bytes": 3625,
+      "hash": "44e18fbee4a02d10"
+    },
+    {
+      "file": "!OPS.STATION\\.3ox\\Cargo.toml",
+      "path": "R:\\!CMD.BRIDGE\\!1N.3OX CMD\\!OPS.STATION\\.3ox\\Cargo.toml",
+      "size_bytes": 204,
+      "hash": "757d452cd617a7bf"
+    },
+    {
+      "file": "!OPS.STATION\\.3ox\\config.toml",
+      "path": "R:\\!CMD.BRIDGE\\!1N.3OX CMD\\!OPS.STATION\\.3ox\\config.toml",
+      "size_bytes": 582,
+      "hash": "362b1635c957936f"
+    },
+    {
+      "file": "!OPS.STATION\\.3ox\\Gemfile",
+      "path": "R:\\!CMD.BRIDGE\\!1N.3OX CMD\\!OPS.STATION\\.3ox\\Gemfile",
+      "size_bytes": 137,
+      "hash": "9f9588d817447826"
+    },
+    {
+      "file": "!OPS.STATION\\.3ox\\README.md",
+      "path": "R:\\!CMD.BRIDGE\\!1N.3OX CMD\\!OPS.STATION\\.3ox\\README.md",
+      "size_bytes": 1367,
+      "hash": "bc63d5e8cca48956"
+    },
+    {
+      "file": "!OPS.STATION\\.3ox\\receipts.log",
+      "path": "R:\\!CMD.BRIDGE\\!1N.3OX CMD\\!OPS.STATION\\.3ox\\receipts.log",
+      "size_bytes": 509,
+      "hash": "bb593faacfc1fb39"
+    },
+    {
+      "file": "!OPS.STATION\\.3ox\\run.py",
+      "path": "R:\\!CMD.BRIDGE\\!1N.3OX CMD\\!OPS.STATION\\.3ox\\run.py",
+      "size_bytes": 15507,
+      "hash": "449d45afa5719638"
+    },
+    {
+      "file": "!OPS.STATION\\.3ox\\run.rb",
+      "path": "R:\\!CMD.BRIDGE\\!1N.3OX CMD\\!OPS.STATION\\.3ox\\run.rb",
+      "size_bytes": 10882,
+      "hash": "db00e1537e21e2a9"
+    },
+    {
+      "file": "!OPS.STATION\\.3ox\\session.json",
+      "path": "R:\\!CMD.BRIDGE\\!1N.3OX CMD\\!OPS.STATION\\.3ox\\session.json",
+      "size_bytes": 1541,
+      "hash": "4ed38bd8169ee86c"
+    },
+    {
+      "file": "!OPS.STATION\\.3ox\\test_tiktoken.rb",
+      "path": "R:\\!CMD.BRIDGE\\!1N.3OX CMD\\!OPS.STATION\\.3ox\\test_tiktoken.rb",
+      "size_bytes": 3987,
+      "hash": "603806dbdf411ccc"
+    },
+    {
+      "file": "!OPS.STATION\\.3ox\\token_reporter.rb",
+      "path": "R:\\!CMD.BRIDGE\\!1N.3OX CMD\\!OPS.STATION\\.3ox\\token_reporter.rb",
+      "size_bytes": 7518,
+      "hash": "274512676ec5883d"
+    },
+    {
+      "file": "!OPS.STATION\\.3ox\\tools.rs",
+      "path": "R:\\!CMD.BRIDGE\\!1N.3OX CMD\\!OPS.STATION\\.3ox\\tools.rs",
+      "size_bytes": 11654,
+      "hash": "3189c34d74fe000c"
+    },
+    {
+      "file": "!OPS.STATION\\.3ox\\trace.log",
+      "path": "R:\\!CMD.BRIDGE\\!1N.3OX CMD\\!OPS.STATION\\.3ox\\trace.log",
+      "size_bytes": 2918,
+      "hash": "b83f18efa9bda6f1"
+    },
+    {
+      "file": "!OPS.STATION\\0ut.3ox\\3OX_SYSTEMS_COMPARISON.md",
+      "path": "R:\\!CMD.BRIDGE\\!1N.3OX CMD\\!OPS.STATION\\0ut.3ox\\3OX_SYSTEMS_COMPARISON.md",
+      "size_bytes": 19991,
+      "hash": "48e22ed5e2195e25"
+    },
+    {
+      "file": "!OPS.STATION\\0ut.3ox\\CAPTAINS_LOG_GLYPHBIT_CLOUD_DEPLOY_2025-10-17.md",
+      "path": "R:\\!CMD.BRIDGE\\!1N.3OX CMD\\!OPS.STATION\\0ut.3ox\\CAPTAINS_LOG_GLYPHBIT_CLOUD_DEPLOY_2025-10-17.md",
+      "size_bytes": 23965,
+      "hash": "822766fae88e0ad5"
+    },
+    {
+      "file": "!OPS.STATION\\0ut.3ox\\EXECUTIVE_SUMMARY.json",
+      "path": "R:\\!CMD.BRIDGE\\!1N.3OX CMD\\!OPS.STATION\\0ut.3ox\\EXECUTIVE_SUMMARY.json",
+      "size_bytes": 2300,
+      "hash": "fccc575306683082"
+    },
+    {
+      "file": "!OPS.STATION\\0ut.3ox\\EXECUTIVE_SUMMARY_REPORT.md",
+      "path": "R:\\!CMD.BRIDGE\\!1N.3OX CMD\\!OPS.STATION\\0ut.3ox\\EXECUTIVE_SUMMARY_REPORT.md",
+      "size_bytes": 16207,
+      "hash": "38d2a4a33fb72fb4"
+    },
+    {
+      "file": "!OPS.STATION\\0ut.3ox\\FILE.MANIFEST.txt",
+      "path": "R:\\!CMD.BRIDGE\\!1N.3OX CMD\\!OPS.STATION\\0ut.3ox\\FILE.MANIFEST.txt",
+      "size_bytes": 3480,
+      "hash": "c538fbad10adab64"
+    },
+    {
+      "file": "!OPS.STATION\\0ut.3ox\\FRAMEWORK_ACTIVATION_REPORT.md",
+      "path": "R:\\!CMD.BRIDGE\\!1N.3OX CMD\\!OPS.STATION\\0ut.3ox\\FRAMEWORK_ACTIVATION_REPORT.md",
+      "size_bytes": 12152,
+      "hash": "e5fa0ce7f283d835"
+    }
+  ]
+}

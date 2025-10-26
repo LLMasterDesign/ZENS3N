@@ -1,0 +1,16 @@
+{
+  "routes": {
+    "default": "!0UT.3OX CITADEL",
+    "reports": "!0UT.3OX CITADEL",
+    "receipts": "!0UT.3OX CITADEL/receipts",
+    "logs": ".3ox",
+    "calibration_updates": "Promptbook",
+    "discoveries": "Promptbook"
+  },
+  "enforcement": {
+    "no_cat_contamination": true,
+    "citadel_outputs_only": "!CITADEL.OPS/!0UT.3OX CITADEL",
+    "never_use_cat_space": "!CITADEL.WORKDESK/(CAT.0) ADMIN"
+  }
+}
+

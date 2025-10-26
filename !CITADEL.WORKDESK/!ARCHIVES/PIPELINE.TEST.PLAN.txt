@@ -1,0 +1,110 @@
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                    1N.3OX PIPELINE TEST PLAN                                  ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+
+READY TO TEST: File routing and monitoring across 3 memory banks
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ TEST 1: COMMAND CENTER MONITORING                                           │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+Launch Command Center to watch file counts update live:
+
+  Run: P:\!CMD.BRIDGE\!BASE.OPERATIONS\START_COMMAND_CENTER.bat
+  
+Expected Result:
+  - Shows all 3 memory banks
+  - Displays file counts per CAT
+  - Updates every 15 seconds
+  - Current files: ~7 across all banks
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ TEST 2: FILE DROP TEST                                                      │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+Drop new test files into different CAT folders:
+
+  1. Drop file in OBSIDIAN.BASE\(CAT.2) School\1n.3ox School\
+  2. Drop file in RVNx.BASE\(CAT.3) Business\1n.3ox Business\
+  3. Drop file in SYNTH.BASE\(CAT.4) Family\1n.3ox Family\
+  
+Expected Result:
+  - Command Center shows increased file counts
+  - Files appear in correct categories
+  - Dashboard status changes to ACTIVE
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ TEST 3: CROSS-BANK VISIBILITY                                               │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+Verify all 3 banks can see each other through CMD.BRIDGE:
+
+  Check: Can you see files in OBSIDIAN from RVNx?
+  Check: Can you see files in RVNx from SYNTH?
+  Check: Can you see files in SYNTH from OBSIDIAN?
+  
+Expected Result:
+  - All files visible through CMD.BRIDGE
+  - PCloud sync working between systems
+  - No duplication or conflicts
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ TEST 4: HOLODECK/DECKVIEW SHARING                                           │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+Test shared file exchange through !BASE.OPERATIONS\DECKVIEW:
+
+  1. Place file in DECKVIEW\OBSIDIAN.SHARED\
+  2. Check if visible from RVNx and SYNTH
+  3. Place file in DECKVIEW\COMMON\
+  4. Verify all 3 banks can access it
+  
+Expected Result:
+  - Shared files accessible to all banks
+  - No sync loops
+  - Files stay in DECKVIEW (not duplicated)
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ TEST 5: MANIFEST VERIFICATION                                               │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+Check that v8sl manifests are properly deployed:
+
+  Open: OBSIDIAN.BASE\(CAT.1) Self\.3ox\manifest.txt
+  Verify: Shows ρ{self}.φ{CAT.1}.τ{Category.Brain}
+  
+  Open: RVNx.BASE\(CAT.2) School\1n.3ox School\.3ox\manifest.txt
+  Verify: Shows ρ{school}.φ{CAT.2}.τ{Intake.Brain}
+  
+Expected Result:
+  - All manifests use v8sl format
+  - Correct ρ{purpose} for each folder
+  - Correct φ{CAT.X} numbers
+  - Proper τ{type} (Category.Brain vs Intake.Brain)
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ ADVANCED TEST: FILE ROUTING (Optional)                                      │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+If you want automated file processing:
+
+  1. Run Python monitor (if Python installed):
+     cd "P:\!CMD.BRIDGE\OBSIDIAN.BASE\!1N.3OX OBSIDIAN.BASE\!OBSIDIAN!\!Legacy.Systems.Protocol!\1N.3OX.Legacy\!1N.3OX Master\.3ox"
+     python 1n3ox_monitor.py --production
+     
+  2. Drop file and watch log update automatically
+  
+Expected Result:
+  - Monitor detects file
+  - Log updates with timestamp
+  - Status changes in manifest
+
+═══════════════════════════════════════════════════════════════════════════════
+RECOMMENDED TEST ORDER:
+  1. Start Command Center (visual monitoring)
+  2. Drop test files (verify detection)
+  3. Check cross-bank visibility
+  4. Test DECKVIEW sharing
+  5. Verify manifests are correct
+═══════════════════════════════════════════════════════════════════════════════
+

@@ -1,0 +1,6 @@
+# GLYPHBIT-CORE specific ignores
+__pycache__/
+*.pyc
+.env
+*.log
+

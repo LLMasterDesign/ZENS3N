@@ -1,0 +1,52 @@
+==============================================
+OPS PROMPT 01: STATUS & REPORT CHECK
+==============================================
+Type: Operations Management
+Difficulty: Medium
+Test Focus: Monitoring and validation
+
+PROMPT:
+-------
+Check the 0ut.3ox directory for all received outputs from connected stations. 
+Read the FILE.MANIFEST.txt and provide a status report including:
+- How many outputs have been received
+- Which stations submitted outputs
+- Status of each submission (READY/PENDING/ERROR)
+- Any integrity issues detected
+- Timestamp of latest activity
+
+CONTEXT:
+--------
+Location: OPS.STATION/0ut.3ox/
+Manifest: FILE.MANIFEST.txt
+Expected sources: OBSIDIAN.BASE, SYNTH.BASE, RVNx.BASE
+
+EXPECTED WITH .3ox (OVERSEER):
+------------------------------
+- Uses StatusMonitor tool to check stations
+- Uses ManifestReader to parse FILE.MANIFEST.txt
+- Uses OutputValidator to verify received files
+- Systematic check of all entries
+- Consolidates findings into status report
+- References rules: ValidateAllInputs, MonitorAllStations
+- Generates receipt for monitoring operation
+- Ships status report to 0ut.3ox/
+- OVERSEER personality: Command center, comprehensive
+
+EXPECTED WITHOUT .3ox:
+---------------------
+- Manual directory listing
+- Basic file count
+- "I see X files..."
+- No validation
+- No systematic monitoring
+- No status consolidation
+
+HOT DROP:
+---------
+Copy the PROMPT section above.
+Test OVERSEER's ability to monitor and validate station outputs.
+This tests core OPS management capabilities.
+
+==============================================
+

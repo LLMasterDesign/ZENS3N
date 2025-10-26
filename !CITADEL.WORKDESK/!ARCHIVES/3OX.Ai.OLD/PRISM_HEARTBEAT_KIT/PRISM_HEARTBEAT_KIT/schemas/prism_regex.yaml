@@ -1,0 +1,11 @@
+out_header_required:
+- ^\s*header:\s*$
+- ^\s*payload:\s*$
+- ^\s*routing:\s*$
+prism_section_markers:
+- ^P:\s
+- ^R:\s
+- ^I:\s
+- ^S:\s
+- ^M:\s
+sirius_stamp: ⧗-\d{2}\.\d{2}

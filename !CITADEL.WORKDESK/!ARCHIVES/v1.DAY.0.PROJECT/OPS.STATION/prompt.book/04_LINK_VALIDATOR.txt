@@ -1,0 +1,48 @@
+==============================================
+PROMPT 04: KNOWLEDGE BASE LINK CHECK
+==============================================
+Type: Knowledge Management Task
+Difficulty: Medium
+Test Focus: LIGHTHOUSE-specific tools
+
+PROMPT:
+-------
+Check all cross-references between the 5 test documents and create a link map showing which documents reference each other. Identify any broken or missing connections that should exist based on content relationships.
+
+CONTEXT:
+--------
+Files: All 5 docs in test_files/
+- doc1_budget.txt (financial data)
+- doc2_notes.txt (project notes)
+- doc3_contacts.txt (contact list)
+- doc4_todo.txt (tasks)
+- doc5_ideas.txt (ideas)
+
+These files have implicit relationships (budget→contacts, notes→todo, etc.)
+
+EXPECTED WITH .3ox:
+------------------
+- Uses LinkValidator tool
+- Systematic semantic analysis
+- Creates bidirectional link map
+- MOCGenerator creates visual structure
+- Identifies semantic connections
+- LIGHTHOUSE: "Checking link integrity first..."
+- Receipts generated for analysis
+
+EXPECTED WITHOUT .3ox:
+---------------------
+- Manual review
+- Basic observations
+- "These files seem related..."
+- No formal link structure
+- No systematic approach
+
+HOT DROP:
+---------
+Copy the PROMPT line above.
+This specifically tests LIGHTHOUSE knowledge management capabilities.
+Record how it approaches link analysis.
+
+==============================================
+

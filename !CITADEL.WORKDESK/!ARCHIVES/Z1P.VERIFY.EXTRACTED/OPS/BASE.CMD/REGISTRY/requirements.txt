@@ -1,0 +1,13 @@
+# 3OX Registration System Requirements
+# Install with: pip install -r requirements.txt
+
+# Cryptographic operations
+cryptography>=42.0.0
+
+# YAML processing
+PyYAML>=6.0.1
+
+# Python version requirement: 3.8+
+
+
+

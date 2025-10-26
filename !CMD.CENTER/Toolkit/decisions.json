@@ -1,0 +1,21 @@
+{
+  "approved_at": "2025-10-20T10:58:22+00:00",
+  "inbox": "R:\\!CMD.BRIDGE\\!1N.3OX CMD",
+  "decisions": [
+    {
+      "file": "receipts.log",
+      "approve": true,
+      "dest_cat": "R:\\!CMD.BRIDGE\\!BASE.OPERATIONS\\1N.BOUND\\CMD"
+    },
+    {
+      "file": "session.json",
+      "approve": true,
+      "dest_cat": "R:\\!CMD.BRIDGE\\!BASE.OPERATIONS\\1N.BOUND\\CMD"
+    },
+    {
+      "file": "trace.log",
+      "approve": true,
+      "dest_cat": "R:\\!CMD.BRIDGE\\!BASE.OPERATIONS\\1N.BOUND\\CMD"
+    }
+  ]
+}

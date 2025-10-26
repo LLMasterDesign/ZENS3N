@@ -1,0 +1,19 @@
+PROJECT NOTES - 3OX.AI
+
+Launch Plan:
+- Need to validate framework works
+- Test WITH vs WITHOUT .3ox
+- Document results for marketing
+- Pricing: $29-299/month tiers
+
+Technical:
+- LIGHTHOUSE brain for knowledge management
+- ALCHEMIST brain for deployment
+- Receipt system for tracking
+- Session management
+
+Next Steps:
+- Run control test
+- Get 3-5 early customers
+- Create demo video
+

@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "version": "v1.0.0",
+    "runtime": "ruby",
+    "mode": "personal_finance_debt_focus"
+  },
+  "resources": {
+    "financial_data": {
+      "max_file_size_mb": 50,
+      "encryption_required": true,
+      "backup_frequency": "before_every_operation"
+    },
+    "budget_calculations": {
+      "validation_required": true,
+      "cross_check_methods": 3,
+      "precision_decimal_places": 2
+    },
+    "debt_analysis": {
+      "comprehensive_breakdown": true,
+      "interest_rate_analysis": true,
+      "payoff_timeline_calculation": true
+    }
+  },
+  "safety": {
+    "data_encryption": true,
+    "privacy_first": true,
+    "no_external_transmission": true,
+    "backup_required": true,
+    "rollback_enabled": true
+  },
+  "financial": {
+    "debt_focus": true,
+    "realistic_budgets": true,
+    "business_transition": true,
+    "emergency_fund_target": 1000
+  },
+  "emergency": {
+    "thresholds": {
+      "monthly_deficit_critical": -2000,
+      "housing_percentage_critical": 50,
+      "transportation_percentage_critical": 30
+    },
+    "actions": {
+      "halt_on_critical_deficit": true,
+      "auto_backup_on_emergency": true,
+      "emergency_budget_mode": true
+    }
+  }
+}
+
+
+
+

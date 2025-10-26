@@ -1,0 +1,61 @@
+==============================================
+OPS PROMPT 02: OUTPUT VALIDATION
+==============================================
+Type: Quality Control
+Difficulty: Advanced
+Test Focus: Validation and integrity checking
+
+PROMPT:
+-------
+Perform a comprehensive validation of all files in the 0ut.3ox directory:
+1. Verify file integrity (checksums if available)
+2. Check for incomplete or corrupted files
+3. Validate that each file has a corresponding manifest entry
+4. Identify any orphaned files (in directory but not in manifest)
+5. Check for duplicate submissions
+6. Verify timestamps are sequential and logical
+7. Generate a validation report with any issues found
+
+If issues are found, categorize them by severity (CRITICAL/WARNING/INFO).
+
+CONTEXT:
+--------
+Location: OPS.STATION/0ut.3ox/
+All files should have manifest entries
+Files should have valid checksums
+Timestamps should be in Sirius time format (⧗-YY.DDD)
+
+EXPECTED WITH .3ox (OVERSEER):
+------------------------------
+- Uses FileValidator on each file systematically
+- Uses OutputValidator to check integrity
+- Uses ManifestReader to cross-reference
+- Uses ReceiptValidator if receipts are available
+- Multi-phase validation process:
+  1. Checksum validation phase
+  2. Manifest cross-reference phase
+  3. Integrity verification phase
+  4. Report generation phase
+- Categorizes issues by severity
+- References rules: ChecksumValidation, IntegrityVerification
+- Generates receipt for validation operation
+- Ships validation report to 0ut.3ox/
+- OVERSEER: Thorough, systematic, quality-focused
+
+EXPECTED WITHOUT .3ox:
+---------------------
+- Basic file check
+- "Files look okay"
+- No checksum validation
+- No systematic verification
+- No severity categorization
+- Manual inspection only
+
+HOT DROP:
+---------
+Copy the PROMPT section above.
+Test OVERSEER's quality control and validation capabilities.
+This tests integrity verification and systematic checking.
+
+==============================================
+

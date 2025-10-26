@@ -1,0 +1,15 @@
+[package]
+name = "budget_builder_brain"
+version = "1.0.0"
+edition = "2021"
+
+[[bin]]
+name = "brain"
+path = "brain.rs"
+
+[dependencies]
+serde_json = "1.0"
+
+
+
+

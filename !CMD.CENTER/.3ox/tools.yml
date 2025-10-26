@@ -1,0 +1,61 @@
+# TOOLS.YML :: Available Tools for Ruby Runtime
+# Version: v2.1.0
+
+tools:
+  - name: FileValidator
+    function: validate_file(filepath)
+    returns: hash with :path, :hash, :size, :valid
+    
+  - name: ReceiptGenerator
+    function: generate_receipt(filepath, operation)
+    returns: hash with :file, :operation, :hash, :timestamp, :status
+    
+  - name: RouteOutput
+    function: route_output(operation, receipt)
+    returns: destination path string
+    
+  - name: LoadRoutes
+    function: load_routes
+    returns: hash of routes
+    
+  - name: SurgicalEdit
+    function: surgical_edit(filepath, start_line, end_line, new_content)
+    returns: hash with :status, :file, :line_range, :original_hash, :new_hash, :backup
+    description: Edit specific line ranges without exposing full file (HIPAA/GDPR compliant)
+
+  - name: GateScan
+    function: gate_scan(inbox_dir, output_proposals_json)
+    returns: writes proposals JSON to path; also returns { status, found }
+    description: Scan !1N.3OX for new files and propose destinations without moving anything
+
+  - name: GateApply
+    function: gate_apply(decisions_json)
+    returns: { moved, skipped, receipts }
+    description: Apply approved moves from decisions JSON, emit receipts, update logs
+
+dependencies:
+  - xxhash (gem install xxhash)
+  - json (stdlib)
+  - fileutils (stdlib)
+  - time (stdlib)
+  - yaml (stdlib)
+
+# JSON Contracts
+# proposals.json
+# {
+#   "generated_at": "2025-10-20T01:59:00Z",
+#   "inbox": "<path>",
+#   "items": [
+#     { "file": "invoice_123.pdf", "path": "<abs or rel>", "suggested_cat": "(CAT.3) Business", "reason": "name contains 'invoice'", "size_bytes": 12345, "hash": "abcd1234..." }
+#   ]
+# }
+
+# decisions.json
+# {
+#   "inbox": "<path>",
+#   "decisions": [
+#     { "file": "invoice_123.pdf", "approve": true, "dest_cat": "(CAT.3) Business" },
+#     { "file": "unknown.txt", "approve": false }
+#   ]
+# }
+

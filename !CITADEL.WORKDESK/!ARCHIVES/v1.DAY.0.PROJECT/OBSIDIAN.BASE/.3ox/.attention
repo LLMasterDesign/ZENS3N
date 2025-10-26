@@ -1,0 +1,43 @@
+# OBSIDIAN.BASE | Framework Parameters
+
+[base]
+location = "OBSIDIAN.BASE"
+brain = "Lighthouse"
+focus = "knowledge-weaving"
+reports_to = "CMD.BRIDGE/OPS.STATION"
+
+[boundary]
+workspace = "OBSIDIAN.BASE"
+modify_only_local = true
+output_dir = "0ut.3ox/"
+
+[function]
+primary = "Knowledge management and semantic connections"
+
+[tools]
+available = [
+  "LibraryCatalog",
+  "LinkValidator",
+  "MOCGenerator",
+  "FileValidator",
+  "TokenCounter",
+  "ContextAnalyzer"
+]
+
+[rules]
+link_integrity_checks = "mandatory"
+semantic_connections = "preferred_over_folders"
+bidirectional_links = true
+tag_convention = "#project/#status"
+moc_threshold = 10  # Generate MOC for 10+ related notes
+
+[logs]
+trace = ".3ox/trace.log"
+tokens = ".3ox/tokens.log"
+output = "0ut.3ox/"
+
+[session]
+framework_version = "2.0.0"
+status = "active"
+
+

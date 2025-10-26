@@ -1,0 +1,44 @@
+root_paths:
+- P:\!CMD.BRIDGE
+- R:\!CMD.BRIDGE
+stations:
+  RVNx:
+    cloud: RVNx.BASE\!1N.3OX RVNX.BASE
+    ops: RVNx.BASE\!RVNX.OPS
+    incoming: '!BASE.OPERATIONS\INCOMING\rvnx'
+  SYNTH:
+    cloud: SYNTH.BASE\!1N.3OX SYNTH.BASE
+    ops: SYNTH.BASE\!SYNTH.OPS
+    incoming: '!BASE.OPERATIONS\INCOMING\synth'
+  OBSIDIAN:
+    cloud: OBSIDIAN.BASE\!1N.3OX OBSIDIAN.BASE
+    ops: OBSIDIAN.BASE\!OBSIDIAN.OPS
+    incoming: '!BASE.OPERATIONS\INCOMING\obsidian'
+required_files:
+- 3OX.Ai\.3ox.index\POLICY\SIRIUS.CALENDAR.CLOCK.md
+- 3OX.Ai\.3ox.index\CORE\GENESIS.SYSTEM.ARCHITECTURE.md
+- 3OX.Ai\.3ox.index\OPS\BASE.CMD\REGISTRY\STATION.REGISTRY.yaml
+report_output:
+  local_report_dir: reports
+  mirror_to_incoming: true
+freshness_minutes_warn: 60
+freshness_minutes_fail: 180
+out_globs:
+- '*.yaml'
+- '*.yml'
+- '*.json'
+accept_iso_when_sirius_unknown: true
+receipts:
+  enabled: true
+  required_fields:
+  - sirius_time
+  - source
+  - destination
+  - status
+  - hash
+  globs:
+  - '*.toml'
+  - '*.rs.toml'
+  - '*.receipt'
+  max_scan_files: 200
+  summarize_last: 15

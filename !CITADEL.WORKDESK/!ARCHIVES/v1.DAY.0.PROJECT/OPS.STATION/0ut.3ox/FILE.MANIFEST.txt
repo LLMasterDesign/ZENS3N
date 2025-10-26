@@ -1,0 +1,39 @@
+# FILE.MANIFEST.txt
+# .3ox Framework Output Manifest
+# Generated: 2025-10-10 10:17:34
+# Format: [timestamp] | status | filename | destination | priority
+# ============================================================================
+
+[⧗-25.63] | READY    | STATUS_REPORT_2025-10-10.md              | OPS.STATION          | HIGH
+[⧗-25.63] | READY    | PRE_FLIGHT_REPORT.md                     | OPS.STATION          | MEDIUM
+[⧗-25.63] | READY    | STATUS_REPORT_FRAMEWORK.json             | OPS.STATION          | HIGH
+[⧗-25.63] | READY    | VALIDATION_REPORT.json                   | OPS.STATION          | HIGH
+[⧗-25.63] | READY    | fake.3ox                                 | OPS.STATION          | MEDIUM
+[⧗-25.63] | READY    | 3oxreport                                | OPS.STATION          | HIGH
+[⧗-25.63] | READY    | WAKEUP.R                                 | OPS.STATION          | MEDIUM
+[⧗-25.63] | READY    | 01FILEMOVE.R                             | OPS.STATION          | MEDIUM
+[⧗-25.63] | READY    | 01STATUSNU.R                             | OPS.STATION          | MEDIUM
+[⧗-25.63] | READY    | SYNTH_CONTAMINATION_REPORT.md            | OPS.STATION          | HIGH
+[⧗-25.63] | READY    | ATTN.R                                   | OPS.STATION          | MEDIUM
+[⧗-25.63] | READY    | 03EXPORT.R                               | OPS.STATION          | MEDIUM
+[⧗-25.63] | READY    | 03FINORG.R                               | OPS.STATION          | MEDIUM
+[⧗-25.63] | READY    | 01STTATOS.R                              | OPS.STATION          | MEDIUM
+[⧗-25.63] | READY    | followup                                 | OPS.STATION          | MEDIUM
+[⧗-25.63] | READY    | 05CATMOC.R                               | OPS.STATION          | MEDIUM
+[⧗-25.63] | READY    | 01RECON.R                                | OPS.STATION          | MEDIUM
+[⧗-25.63] | READY    | 03CONSOLIDATE.R                          | OPS.STATION          | MEDIUM
+[⧗-25.63] | READY    | STATUS_CHECK_RECEIPT_2025-10-10.md       | OPS.STATION          | HIGH
+[⧗-25.63] | READY    | 02VALID.R                                | OPS.STATION          | MEDIUM
+[⧗-25.63] | READY    | 00PREFLIGHT.R                            | OPS.STATION          | MEDIUM
+[⧗-25.63] | READY    | ATTN ENF;RCE.R                           | OPS.STATION          | MEDIUM
+[⧗-25.63] | READY    | FRAMEWORK_ACTIVATION_REPORT.md           | OPS.STATION          | HIGH
+[⧗-25.63] | READY    | SYNTH_REPORT_BOXED_SUMMARY.md            | OPS.STATION          | HIGH
+[⧗-25.63] | READY    | 02DOCLINT.R                              | OPS.STATION          | MEDIUM
+[⧗-25.63] | READY    | ATTN                                     | OPS.STATION          | MEDIUM
+[⧗-25.63] | READY    | 04LINKVAL.R                              | OPS.STATION          | MEDIUM
+[⧗-25.63] | READY    | 02IMPORT.R                               | OPS.STATION          | MEDIUM
+[⧗-25.63] | READY    | FRAMEWORK_DISCOVERY_REPORT.md            | OPS.STATION          | HIGH
+[⧗-25.63] | READY    | VALIDATION_RECEIPT_2025-10-10.md         | OPS.STATION          | HIGH
+[⧗-25.63] | READY    | EXECUTIVE_SUMMARY.json                   | OPS.STATION          | HIGH
+[⧗-25.63] | READY    | EXECUTIVE_SUMMARY_REPORT.md              | OPS.STATION          | HIGH
+[⧗-25.63] | READY    | DIRECTORY_STRUCTURE.md                   | OPS.STATION          | HIGH

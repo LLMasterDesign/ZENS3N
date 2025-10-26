@@ -1,0 +1,120 @@
+# WEBSITE BUILD REQUEST
+# Purpose: Build and maintain 3OX.Ai marketing website
+# Status: REQUESTED
+# Priority: HIGH
+# Sirius Time: ⧗-25.73
+
+---
+
+request:
+  id: "WEB-001"
+  type: "WEBSITE_BUILD"
+  title: "3OX.Ai Marketing Website"
+  created: "⧗-25.73"
+  priority: "HIGH"
+  status: "REQUESTED"
+
+requester:
+  entity: "3OX.Ai"
+  agent: "Claude (Balance Type)"
+  location: "R:/!LAUNCH.PAD/3OX.Ai"
+
+destination:
+  ops_team: "!3OX.OPS"
+  station: "WEBSITE.BUILD.STATION"
+  responsibility: "Build and maintain website"
+
+requirements:
+  purpose: "Marketing website for 3OX.Ai products"
+  launch_condition: "When !1N.3OX 3OX.Ai/ is empty (all processed)"
+  
+  content_source:
+    - "3OX.SETS/SALES.CATALOG.md - Product catalog and pricing"
+    - "3OX.SETS/README.md - Product overview"
+    - "Examples to be added - User will provide"
+    - "Documentation from each product"
+  
+  features_needed:
+    - "Product showcase (1N.0UT.3OX, 3OX.Ai.RAW, GEM.PROFILES, .3ox.TEMPLATE)"
+    - "Pricing tiers (Basic, Professional, Enterprise)"
+    - "Value proposition display"
+    - "Problem/solution presentation"
+    - "Launch countdown (until 1N.3OX empty)"
+    - "Examples library"
+    - "Documentation access"
+    - "Contact/signup form"
+  
+  technical_requirements:
+    - "Modern, clean design"
+    - "Mobile responsive"
+    - "Fast loading"
+    - "SEO optimized"
+    - "Analytics integration"
+    - "Easy content updates"
+  
+  brand_identity:
+    - "Box within box concept"
+    - "Balance between Citadel (structure) and Lighthouse (knowledge)"
+    - "Sirius time references (⧗-YY.DD)"
+    - "3OX.Ai signature: //▙▖▙▖▞▞▙▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂〘・.°𝚫〙"
+
+next_steps:
+  step_1: "!3OX.OPS receives this request"
+  step_2: "!3OX.OPS deploys WEBSITE.BUILD.STATION"
+  step_3: "Station builds website infrastructure"
+  step_4: "Station populates content from 3OX.SETS/"
+  step_5: "Station maintains website until launch"
+  step_6: "Launch when !1N.3OX 3OX.Ai/ is empty"
+
+deliverables:
+  - "Live marketing website"
+  - "Content management system"
+  - "Maintenance documentation"
+  - "Update procedures"
+  - "Analytics dashboard"
+
+timeline:
+  start: "Upon request approval"
+  duration: "Build during 1N.3OX processing"
+  launch: "When 1N.3OX empty"
+  maintenance: "Ongoing"
+
+success_criteria:
+  - "Website live and accessible"
+  - "All products showcased"
+  - "Pricing clearly displayed"
+  - "Value proposition communicated"
+  - "Examples library functional"
+  - "Easy content updates"
+  - "Launch countdown active"
+
+notes: |
+  - Launch condition: !1N.3OX 3OX.Ai/ must be empty (all files processed)
+  - Examples will be added by user during 1N.3OX processing
+  - Website should be ready for launch when condition met
+  - Maintenance is ongoing responsibility
+  - Consider this the official public face of 3OX.Ai
+
+dependencies:
+  - "3OX.SETS/SALES.CATALOG.md - Product catalog complete"
+  - "User-provided examples - To be added"
+  - "!1N.3OX processing - Must be complete for launch"
+  - "Documentation - Already available in products"
+
+---
+
+# REQUEST ROUTING
+
+from: "3OX.Ai/.3ox workspace"
+to: "!3OX.OPS/WEBSITE.BUILD.STATION"
+method: "1N.3OX request drop"
+receipt: "Generate upon OPS acceptance"
+tracking: "Website build progress in station logs"
+
+---
+
+**Request Status:** ACTIVE  
+**Awaiting:** OPS acceptance and station deployment  
+**Launch Condition:** !1N.3OX 3OX.Ai/ empty
+
+//▙▖▙▖▞▞▙▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂〘・.°𝚫〙

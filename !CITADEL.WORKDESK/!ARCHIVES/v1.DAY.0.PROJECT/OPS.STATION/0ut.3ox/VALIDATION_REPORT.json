@@ -1,0 +1,237 @@
+{
+  "timestamp": "2025-10-10T10:23:56.140738",
+  "session_id": "validation_001",
+  "duration_seconds": 4.51,
+  "validation_summary": {
+    "total_files": 39,
+    "validated": 39,
+    "failed": 0,
+    "health_score": 64.1
+  },
+  "issue_summary": {
+    "total_issues": 33,
+    "critical": 0,
+    "warning": 28,
+    "info": 5
+  },
+  "statistics": {
+    "orphaned_files": 25,
+    "duplicate_files": 2
+  },
+  "issues_by_severity": {
+    "CRITICAL": [],
+    "WARNING": [
+      {
+        "type": "EMPTY_FILE",
+        "file": "OBS.BATCH\\05CATMOC.R",
+        "message": "File is empty (0 bytes)",
+        "severity": "WARNING"
+      },
+      {
+        "type": "EMPTY_FILE",
+        "file": "OPS.BATCH\\03CONSOLIDATE.R",
+        "message": "File is empty (0 bytes)",
+        "severity": "WARNING"
+      },
+      {
+        "type": "EMPTY_FILE",
+        "file": "SYNTH.BATCH\\05CATMOC.R",
+        "message": "File is empty (0 bytes)",
+        "severity": "WARNING"
+      },
+      {
+        "type": "ORPHANED_FILE",
+        "file": "fake.3ox",
+        "message": "File exists but has no manifest entry",
+        "severity": "WARNING"
+      },
+      {
+        "type": "ORPHANED_FILE",
+        "file": "3oxreport",
+        "message": "File exists but has no manifest entry",
+        "severity": "WARNING"
+      },
+      {
+        "type": "ORPHANED_FILE",
+        "file": "WAKEUP.R",
+        "message": "File exists but has no manifest entry",
+        "severity": "WARNING"
+      },
+      {
+        "type": "ORPHANED_FILE",
+        "file": "01FILEMOVE.R",
+        "message": "File exists but has no manifest entry",
+        "severity": "WARNING"
+      },
+      {
+        "type": "ORPHANED_FILE",
+        "file": "01STATUSNU.R",
+        "message": "File exists but has no manifest entry",
+        "severity": "WARNING"
+      },
+      {
+        "type": "ORPHANED_FILE",
+        "file": "SYNTH_CONTAMINATION_REPORT.md",
+        "message": "File exists but has no manifest entry",
+        "severity": "WARNING"
+      },
+      {
+        "type": "ORPHANED_FILE",
+        "file": "ATTN.R",
+        "message": "File exists but has no manifest entry",
+        "severity": "WARNING"
+      },
+      {
+        "type": "ORPHANED_FILE",
+        "file": "03EXPORT.R",
+        "message": "File exists but has no manifest entry",
+        "severity": "WARNING"
+      },
+      {
+        "type": "ORPHANED_FILE",
+        "file": "03FINORG.R",
+        "message": "File exists but has no manifest entry",
+        "severity": "WARNING"
+      },
+      {
+        "type": "ORPHANED_FILE",
+        "file": "01STTATOS.R",
+        "message": "File exists but has no manifest entry",
+        "severity": "WARNING"
+      },
+      {
+        "type": "ORPHANED_FILE",
+        "file": "followup",
+        "message": "File exists but has no manifest entry",
+        "severity": "WARNING"
+      },
+      {
+        "type": "ORPHANED_FILE",
+        "file": "05CATMOC.R",
+        "message": "File exists but has no manifest entry",
+        "severity": "WARNING"
+      },
+      {
+        "type": "ORPHANED_FILE",
+        "file": "01RECON.R",
+        "message": "File exists but has no manifest entry",
+        "severity": "WARNING"
+      },
+      {
+        "type": "ORPHANED_FILE",
+        "file": "03CONSOLIDATE.R",
+        "message": "File exists but has no manifest entry",
+        "severity": "WARNING"
+      },
+      {
+        "type": "ORPHANED_FILE",
+        "file": "STATUS_CHECK_RECEIPT_2025-10-10.md",
+        "message": "File exists but has no manifest entry",
+        "severity": "WARNING"
+      },
+      {
+        "type": "ORPHANED_FILE",
+        "file": "02VALID.R",
+        "message": "File exists but has no manifest entry",
+        "severity": "WARNING"
+      },
+      {
+        "type": "ORPHANED_FILE",
+        "file": "00PREFLIGHT.R",
+        "message": "File exists but has no manifest entry",
+        "severity": "WARNING"
+      },
+      {
+        "type": "ORPHANED_FILE",
+        "file": "ATTN ENF;RCE.R",
+        "message": "File exists but has no manifest entry",
+        "severity": "WARNING"
+      },
+      {
+        "type": "ORPHANED_FILE",
+        "file": "FRAMEWORK_ACTIVATION_REPORT.md",
+        "message": "File exists but has no manifest entry",
+        "severity": "WARNING"
+      },
+      {
+        "type": "ORPHANED_FILE",
+        "file": "SYNTH_REPORT_BOXED_SUMMARY.md",
+        "message": "File exists but has no manifest entry",
+        "severity": "WARNING"
+      },
+      {
+        "type": "ORPHANED_FILE",
+        "file": "02DOCLINT.R",
+        "message": "File exists but has no manifest entry",
+        "severity": "WARNING"
+      },
+      {
+        "type": "ORPHANED_FILE",
+        "file": "ATTN",
+        "message": "File exists but has no manifest entry",
+        "severity": "WARNING"
+      },
+      {
+        "type": "ORPHANED_FILE",
+        "file": "04LINKVAL.R",
+        "message": "File exists but has no manifest entry",
+        "severity": "WARNING"
+      },
+      {
+        "type": "ORPHANED_FILE",
+        "file": "02IMPORT.R",
+        "message": "File exists but has no manifest entry",
+        "severity": "WARNING"
+      },
+      {
+        "type": "ORPHANED_FILE",
+        "file": "FRAMEWORK_DISCOVERY_REPORT.md",
+        "message": "File exists but has no manifest entry",
+        "severity": "WARNING"
+      }
+    ],
+    "INFO": [
+      {
+        "type": "DUPLICATE_CONTENT",
+        "file1": "OBS.BATCH\\05CATMOC.R",
+        "file2": "OPS.BATCH\\03CONSOLIDATE.R",
+        "checksum": "e3b0c44298fc1c14...",
+        "message": "Identical content detected",
+        "severity": "INFO"
+      },
+      {
+        "type": "DUPLICATE_CONTENT",
+        "file1": "OBS.BATCH\\05CATMOC.R",
+        "file2": "SYNTH.BATCH\\05CATMOC.R",
+        "checksum": "e3b0c44298fc1c14...",
+        "message": "Identical content detected",
+        "severity": "INFO"
+      },
+      {
+        "type": "INVALID_TIMESTAMP_FORMAT",
+        "entry": "[\u00e2\u00a7\u2014-25.63] | READY    | STATUS_REPORT_2025-10-10....",
+        "message": "Manifest entry missing Sirius time format (\u29d7-YY.DDD)",
+        "severity": "INFO"
+      },
+      {
+        "type": "INVALID_TIMESTAMP_FORMAT",
+        "entry": "[\u00e2\u00a7\u2014-25.63] | READY    | PRE_FLIGHT_REPORT.md     ...",
+        "message": "Manifest entry missing Sirius time format (\u29d7-YY.DDD)",
+        "severity": "INFO"
+      },
+      {
+        "type": "INVALID_TIMESTAMP_FORMAT",
+        "entry": "[\u00e2\u00a7\u2014-25.63] | READY    | STATUS_REPORT_FRAMEWORK.j...",
+        "message": "Manifest entry missing Sirius time format (\u29d7-YY.DDD)",
+        "severity": "INFO"
+      }
+    ]
+  },
+  "validation_phases": [
+    "File Integrity Validation",
+    "Manifest Cross-Reference",
+    "Duplicate Detection",
+    "Timestamp Validation",
+    "Receipt Validation"
+  ]
+}

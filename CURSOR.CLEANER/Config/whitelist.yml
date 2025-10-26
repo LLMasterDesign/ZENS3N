@@ -1,0 +1,92 @@
+# Whitelist Configuration - Protected Items
+# CURSOR.CLEANER Toolkit
+# Items that should NEVER be touched by the cleaner
+
+protected_paths:
+  - "C:\\Program Files\\Cursor"
+  - "C:\\Users\\*\\AppData\\Local\\Cursor"
+  - "C:\\Users\\*\\AppData\\Roaming\\Cursor"
+  - "C:\\Program Files\\nodejs"
+  - "C:\\Program Files\\Git"
+  - "C:\\Ruby*"
+  - "C:\\Python*"
+  - "C:\\Program Files\\Docker"
+  - "C:\\Program Files\\WindowsApps\\*Cursor*"
+  - "%APPDATA%\\Cursor"
+  - "%LOCALAPPDATA%\\Cursor"
+  - "%PROGRAMDATA%\\Cursor"
+
+protected_services:
+  - Docker Desktop Service
+  - com.docker.service
+  - ssh-agent
+  - OpenSSH Authentication Agent
+  - WslService
+  - LxssManager
+  - Windows Defender
+  - WinDefend
+  - MsMpEng
+  - Windows Update
+  - wuauserv
+  - Windows Firewall
+  - MpsSvc
+  - Windows Security Service
+  - SecurityHealthService
+
+protected_processes:
+  - cursor.exe
+  - node.exe
+  - ruby.exe
+  - python.exe
+  - git.exe
+  - docker.exe
+  - wsl.exe
+  - ssh.exe
+  - powershell.exe
+  - pwsh.exe
+
+protected_registry_keys:
+  - "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*Cursor*"
+  - "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*Node*"
+  - "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*Git*"
+  - "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*Docker*"
+
+protected_file_extensions:
+  - ".cursor"
+  - ".cursor-settings"
+  - ".cursor-workspace"
+  - ".git"
+  - ".gitignore"
+  - ".gitattributes"
+  - "package.json"
+  - "package-lock.json"
+  - "yarn.lock"
+  - "Gemfile"
+  - "Gemfile.lock"
+  - "requirements.txt"
+  - "Dockerfile"
+  - "docker-compose.yml"
+
+protected_directories:
+  - ".git"
+  - "node_modules"
+  - ".vscode"
+  - ".cursor"
+  - ".docker"
+  - "venv"
+  - ".venv"
+  - "env"
+  - ".env"
+
+# Critical system files that should never be modified
+critical_system_files:
+  - "C:\\Windows\\System32\\*"
+  - "C:\\Windows\\SysWOW64\\*"
+  - "C:\\Windows\\WinSxS\\*"
+  - "C:\\Windows\\System32\\drivers\\*"
+  - "C:\\Windows\\System32\\config\\*"
+
+
+
+
+

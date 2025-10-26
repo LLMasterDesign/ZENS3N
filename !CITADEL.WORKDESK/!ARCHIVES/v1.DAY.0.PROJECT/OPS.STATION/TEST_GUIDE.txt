@@ -1,0 +1,126 @@
+==============================================
+OPS.STATION TEST GUIDE
+==============================================
+
+STATION PURPOSE:
+Central testing hub for .3ox framework validation
+
+CURRENT STRUCTURE:
+------------------
+✅ .3ox/            - Core framework (brain, tools, runtime)
+✅ test_files/      - 5 test documents
+✅ prompt.book/     - Clean prompts + !ATTN (read first)
+✅ 0ut.3ox/         - Output collection point
+✅ log.book/        - (Points to CMD.BRIDGE/log.book/)
+
+NEW: TOKEN TRACKING
+-------------------
+✅ Tiktoken integration (auto-fallback if not installed)
+✅ Session token counting (with context monitoring)
+✅ Trace logging for token usage
+✅ Operational reporting to 0ut.3ox
+
+TESTING SEQUENCE:
+-----------------
+
+PHASE 1: CORE OPERATIONS (3 prompts)
+  01_RECONCILE_SIMPLE.txt    → Basic validation
+  02_IMPORT_MEDIUM.txt       → Import + catalog
+  03_EXPORT_ADVANCED.txt     → Export + MOC
+
+PHASE 2: KNOWLEDGE OPS (2 prompts)
+  04_LINK_VALIDATOR.txt      → Link checking
+  05_CATALOG_AND_MOC.txt     → Full workflow
+
+PHASE 3: MANAGEMENT (3 prompts)
+  mgmt/01_STATUS_CHECK.txt
+  mgmt/02_VALIDATE_OUTPUTS.txt
+  mgmt/03_CONSOLIDATE_REPORTS.txt
+
+A/B TEST SETUP:
+---------------
+GROUP A (TEST): OBSIDIAN.BASE - HAS .3ox framework
+GROUP B (CONTROL): SYNTH.BASE - NO .3ox (plain AI)
+
+HOW TO TEST:
+------------
+1. Navigate to OBSIDIAN.BASE (WITH .3ox framework)
+2. LLM reads: OPS.STATION/prompt.book/!ATTN
+3. Paste prompt from: OPS.STATION/prompt.book/01_RECONCILE_SIMPLE.txt
+4. Record response
+
+5. Navigate to SYNTH.BASE (NO .3ox - plain AI control)
+6. Paste SAME prompt (no !ATTN, no framework)
+7. Record response
+
+8. Compare responses - look for framework behavior differences
+
+IMPORTANT: SYNTH.BASE should NOT have .3ox folder for clean A/B test!
+
+WHAT TO OBSERVE:
+-----------------
+WITH .3ox (OBSIDIAN - LIGHTHOUSE):
+✓ Mentions specific tools
+✓ References framework rules
+✓ LIGHTHOUSE personality visible
+✓ Generates receipts automatically
+✓ Structured multi-phase approach
+✓ Ships outputs to OPS.STATION/0ut.3ox/
+
+WITHOUT .3ox (SYNTH - Plain AI):
+✗ Generic suggestions
+✗ No tools mentioned
+✗ No framework behavior
+✗ Simple one-off responses
+✗ No receipts or logging
+
+PROGRESSIVE COMPLEXITY:
+-----------------------
+RECONCILE (L1): Single operation, basic validation
+IMPORT (L2):    Multi-file, adds cataloging/tagging
+EXPORT (L3):    Full workflow, adds linking/MOC generation
+
+Each level tests deeper framework capabilities.
+
+OUTPUTS:
+--------
+All agent outputs land in: OPS.STATION/0ut.3ox/
+All TOML logs go to: CMD.BRIDGE/log.book/
+Local traces: OBSIDIAN.BASE/.3ox/trace.log
+Token logs: .3ox/tokens.log (with token counts)
+Session data: .3ox/session.yaml (with token stats)
+
+SUCCESS CRITERIA:
+-----------------
+✅ OBSIDIAN uses framework features (tools/rules/receipts)
+✅ SYNTH gives generic responses
+✅ Clear performance gap visible
+✅ Framework value demonstrated
+✅ Token tracking logs context usage correctly
+
+If successful → .3ox ready to monetize
+If unclear → Strengthen configurations and re-test
+
+QUICK TOKEN TEST:
+-----------------
+cd OPS.STATION\.3ox
+ruby test_tiktoken.rb
+
+This will:
+✓ Test token counting (works with or without tiktoken gem)
+✓ Verify session tracking
+✓ Check trace integration
+✓ Generate sample report
+
+Outputs to check:
+- .3ox/trace.log (TOKEN_USAGE events)
+- .3ox/tokens.log (token counts per session)
+- .3ox/session.yaml (token stats included)
+- 0ut.3ox/FILE.MANIFEST.txt (ops shipments)
+
+==============================================
+READY TO START TESTING
+1. Token test: ruby .3ox\test_tiktoken.rb
+2. Prompt test: prompt.book/01_RECONCILE_SIMPLE.txt
+==============================================
+

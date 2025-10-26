@@ -1,0 +1,74 @@
+═══════════════════════════════════════════════════════════════════════
+                    🔒 FRAMEWORK VERIFICATION REQUIRED 🔒
+═══════════════════════════════════════════════════════════════════════
+
+STEP 1: READ !ATTN FILE
+───────────────────────────────────────────────────────────────────────
+Location: [workspace]/prompt.book/!ATTN
+Action: Read the entire file before proceeding
+
+STEP 2: PROVIDE VERIFICATION
+───────────────────────────────────────────────────────────────────────
+You MUST include this in your FIRST response:
+
+  ✓ Token: [execution_token from !ATTN]
+  ✓ Version: [framework_version from !ATTN]
+  ✓ Workspace: [workspace_id from !ATTN]
+  ✓ Brain Read: Confirmed
+  ---
+
+STEP 3: PROCEED WITH TASK
+───────────────────────────────────────────────────────────────────────
+Only after verification, proceed with the task below.
+
+⚠️  NO TOKEN = INVALID RESPONSE  ⚠️
+⚠️  Framework not loaded = STOP ⚠️
+
+═══════════════════════════════════════════════════════════════════════
+                         YOUR TASK BEGINS HERE
+═══════════════════════════════════════════════════════════════════════
+
+[INSERT YOUR ACTUAL PROMPT/TASK HERE]
+
+═══════════════════════════════════════════════════════════════════════
+                             END OF TASK
+═══════════════════════════════════════════════════════════════════════
+
+EXPECTED RESPONSE FORMAT:
+───────────────────────────────────────────────────────────────────────
+✓ Token: OVERSEER-OPS-2025
+✓ Version: 2.0.0
+✓ Workspace: OPS.STATION
+✓ Brain Read: Confirmed
+---
+
+[Your response to the task]
+
+---
+Tools Used: [list tools you used]
+Output: [where files were written]
+Duration: [how long it took]
+Tokens: [token count if applicable]
+
+═══════════════════════════════════════════════════════════════════════
+
+HOW TO USE THIS WRAPPER:
+1. Copy everything above
+2. Replace "[INSERT YOUR ACTUAL PROMPT/TASK HERE]" with your task
+3. Paste the wrapped prompt to the AI
+4. Verify AI provides token in first response
+5. If no token → AI didn't read brain → reject response
+
+═══════════════════════════════════════════════════════════════════════
+
+
+
+
+
+
+
+
+
+
+
+
