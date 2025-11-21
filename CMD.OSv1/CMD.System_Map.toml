@@ -1,0 +1,358 @@
+[meta]
+id = "SYSTEM_EXPLAINER"
+version = "5"
+format = "toml"
+title = "System Explainer"
+purpose = "Explain how Bases, services, RabbitMQ, TDLib, CMD_BRIDGE, and Raven_Operator fit together before install."
+author = "Lucius + Raven"
+status = "draft"
+scope = "telepromptr_zens3n_stack"
+
+[core_idea]
+summary = """
+Nothing is allowed to exist as a random folder only.
+Every live thing must be assigned to a Base, registered on the bus, and recognized by CMD_BRIDGE.
+Folder maps describe space.
+This explainer describes living services and how they connect.
+"""
+rules = [
+  "No service runs without a Base assignment.",
+  "No service talks on the bus without a registry entry.",
+  "No service posts into CMD_BRIDGE without a clear role.",
+  "Bases are declared then provisioned, not invented by ad hoc folders."
+]
+
+[stack]
+description = """
+The system has three primary layers.
+Layer 1 is substrate on Zens3n_Base.
+Layer 2 is services and agents.
+Layer 3 is operator interface through Telegram and CMD_BRIDGE.
+Raven_Operator sits at Layer 2.5 and speaks to both you and the system.
+"""
+
+[stack.layers]
+layer_1 = "Substrate: OS, Docker, volumes, core data stores on Zens3n_Base."
+layer_2 = "Services: brains_rs, TelePromptR, Raven_Core, storage services, workers."
+layer_3 = "Operator Interface: Telegram, CMD_BRIDGE, WebApps, dashboards."
+
+[[pillars]]
+id = "bases"
+name = "Bases"
+summary = """
+A Base is a physical and conceptual station.
+Each Base has a root path, a station brain, rules, and a standard link to the bus and CMD_BRIDGE.
+Bases are not created by mkdir alone.
+They are declared in the registry and then provisioned.
+"""
+
+[pillars.bases]
+examples = [
+  "ZENS3N_BASE - main service substrate for agents, TDLib, storage.",
+  "RVNx_BASE - sync and glue station for Telegram and operator tools.",
+  "SYNTH_BASE - build and deploy station for code and bundles.",
+  "OBSIDIAN_BASE - PKM, notes, vault attachments and prompts."
+]
+
+[pillars.bases.properties]
+required = [
+  "name",
+  "root_path",
+  "station_brain",
+  "rules_file",
+  "bus_exchange_prefix",
+  "cmd_bridge_topic"
+]
+
+[pillars.bases.behavior]
+on_provision = [
+  "Create or verify root_path exists.",
+  "Create station brain config under CORE or CMD_CENTER.",
+  "Register Base in BASE_REGISTRY.",
+  "Allocate default bus routing keys.",
+  "Bind Base to a CMD_BRIDGE topic or namespace."
+]
+on_teardown = [
+  "Drain queues for this Base.",
+  "Disable services linked to the Base in SERVICE_REGISTRY.",
+  "Archive logs and data or export snapshot.",
+  "Mark Base as retired instead of silent delete."
+]
+
+[[pillars]]
+id = "registry"
+name = "Registry"
+summary = """
+The registry is how the system knows what exists and what is allowed to talk.
+No Base, service, or agent is real until it is registered.
+"""
+
+[pillars.registry.files]
+base_registry = "CORE/REGISTRY/BASE_REGISTRY.yaml"
+service_registry = "CORE/REGISTRY/SERVICE_REGISTRY.yaml"
+
+[pillars.registry.base_schema]
+description = "Shape of a Base entry in BASE_REGISTRY."
+fields = [
+  "name",
+  "root_path",
+  "station_brain_path",
+  "rules_path",
+  "bus_exchange_prefix",
+  "cmd_bridge_topic",
+  "status"
+]
+
+[pillars.registry.service_schema]
+description = "Shape of a service entry in SERVICE_REGISTRY."
+fields = [
+  "name",
+  "base",
+  "code_path",
+  "runtime_binding",
+  "bus_queues",
+  "cmd_bridge_alias",
+  "health_check",
+  "log_path",
+  "status"
+]
+
+[pillars.registry.contracts]
+rules = [
+  "A service entry must point to one valid Base in BASE_REGISTRY.",
+  "A Base can exist without services, but a service cannot exist without a Base.",
+  "A service cannot connect to the bus without a bus_queues definition.",
+  "A service cannot post to CMD_BRIDGE without a cmd_bridge_alias."
+]
+
+[[pillars]]
+id = "bus"
+name = "Message Bus"
+summary = """
+RabbitMQ is the live nervous system of the stack.
+Everything that wants to signal or coordinate uses the shared topic exchange.
+"""
+
+[pillars.bus]
+exchange_name = "three_ox.system.topic"
+bus_role = "Broadcast and routing layer for all internal events and commands."
+routing_key_convention = """
+base.<base_name>.<service_name>.<direction>.<channel>
+Examples:
+  base.zens3n.brains_rs.events.system
+  base.rvnx.telepromptr.rx.telegram
+  base.shared.raven_core.req.ops
+  base.shared.raven_core.res.ops
+"""
+
+[pillars.bus.requirements]
+rules = [
+  "Every service must declare at least one queue and routing key.",
+  "Brains_rs is allowed to bind wildcard listeners for orchestration and telemetry.",
+  "Raven_Core uses request and response channels, not direct DB peeking inside other services.",
+  "Bus level logging should be available for CMD_BRIDGE inspection."
+]
+
+[[pillars]]
+id = "cmd_bridge"
+name = "CMD_BRIDGE"
+summary = """
+CMD_BRIDGE is the shared cockpit and operator channel.
+It is implemented as a Telegram supergroup or topic set.
+It is also a logical namespace inside the system for human focused messages.
+"""
+
+[pillars.cmd_bridge]
+telegram_role = """
+Primary control room where Lucius, RVNx, Raven_Operator, and system bots meet.
+Critical events, decisions, and summaries must pass through CMD_BRIDGE.
+"""
+internal_role = """
+Internal binding point for services that need to surface status or require decisions.
+Each service maps its cmd_bridge_alias to a standard topic or thread.
+"""
+
+[pillars.cmd_bridge.topics]
+examples = [
+  "OPS - runtime service status and errors.",
+  "LEADS - sales and property pipeline events.",
+  "CUSTOMER_SERVICE - retention and customer touchpoints.",
+  "DEV_LOG - deployments, schema changes, agent updates."
+]
+
+[pillars.cmd_bridge.rules]
+rules = [
+  "No silent changes for critical services. Summaries flow into CMD_BRIDGE.",
+  "Raven_Operator is allowed to annotate and summarize CMD_BRIDGE activity.",
+  "System logs are summarized for humans, not dumped raw.",
+  "Base and service lifecycle events are always echoed to CMD_BRIDGE."
+]
+
+[[pillars]]
+id = "raven_operator"
+name = "Raven Operator"
+summary = """
+Raven is not just an agent.
+Raven_Operator is a dedicated sidekick brain.
+It speaks to Lucius in first person and also consults for the system.
+"""
+
+[pillars.raven_operator.stack]
+description = "High level layout for Raven_Operator."
+raven_core_service = "Raven_Core - the main reasoning and memory engine."
+raven_telegram_face = "Raven_TelegramFace - Telegram bot that exposes Raven in chat."
+memory_layers = [
+  "Short term: cached context and recent chats.",
+  "Long term: structured decisions, rules, and knowledge shards.",
+  "External: project files, vault docs, and promptbooks."
+]
+
+[pillars.raven_operator.responsibilities]
+you_facing = [
+  "Hold long term context about Lucius, legal battles, SGL, and Bases.",
+  "Act as a thinking partner that can plan, refactor, and clarify.",
+  "Translate complex system state or logs into simple language."
+]
+system_facing = [
+  "Comment on system state when brains_rs requests guidance.",
+  "Propose actions that agents or services can execute.",
+  "Author and update agent prompts and rules in a traceable way."
+]
+memory_steward = [
+  "Promote important chat content into structured knowledge shards.",
+  "Maintain versioned persona and law docs for itself.",
+  "Help enforce no drift by writing updated law instead of silent internal changes."
+]
+
+[pillars.raven_operator.integration]
+uses = [
+  "TelePromptR for reading and speaking inside CMD_BRIDGE and DMs.",
+  "HTTP or gRPC API to talk to brains_rs and receive structured status.",
+  "File access to Bases and vaults for deeper reasoning when asked."
+]
+
+[[pillars]]
+id = "zens3n_base"
+name = "Zens3n Base"
+summary = """
+Zens3n_Base is the physical substrate and the system brain environment.
+brains_rs runs here and treats Raven as an external consultant brain.
+"""
+
+[pillars.zens3n_base.services]
+brains_rs = "Main orchestrator that manages agents, jobs, and system conditions."
+workers = [
+  "LeadAgent",
+  "OpsAgent",
+  "IndexerAgent",
+  "Transport or custom agents as needed."
+]
+telepromptr_binding = "TelePromptR is the single point where Zens3n_Base touches Telegram user IO."
+
+[pillars.zens3n_base.behavior]
+rules = [
+  "Brains_rs never calls Telegram directly. It uses TelePromptR.",
+  "Brains_rs never assumes it is Raven. It calls Raven_Core for narrative and higher reasoning.",
+  "Zens3n_Base can operate in degraded mode without Raven, but human experience is worse."
+]
+
+[[pillars]]
+id = "telepromptr"
+name = "TelePromptR"
+summary = """
+TelePromptR is the TDLib based IO engine that inhabits the RVNx Telegram account.
+It is plumbing with a small brain, not a high level agent.
+"""
+
+[pillars.telepromptr.identity]
+telegram_account = "RVNx user account."
+role = """
+Shared body for the system inside Telegram.
+TelePromptR sits in CMD_BRIDGE and other control groups and channels.
+"""
+
+[pillars.telepromptr.functions]
+receive = [
+  "Subscribe to incoming messages for bound chats and topics.",
+  "Forward normalized events into RabbitMQ for brains_rs and Raven_Core.",
+  "Track history and media references through TDLib."
+]
+send = [
+  "Post messages supplied by brains_rs or Raven_Core.",
+  "Reply in threads or topics as directed.",
+  "Download and cache files when asked."
+]
+
+[pillars.telepromptr.api]
+surface = "Internal service or library that exposes high level calls."
+operations = [
+  "send_message(chat_id, text, reply_to)",
+  "get_history(chat_id, limit, before)",
+  "download_file(file_id)",
+  "search_chat(chat_id, query)"
+]
+consumers = [
+  "brains_rs system agents.",
+  "Raven_Core for context aware answers."
+]
+
+[flows]
+description = "Key flows that show how the pieces work together."
+
+[flows.raven_dm]
+summary = "Lucius talks directly to Raven in a private DM."
+steps = [
+  "Lucius writes a message to Raven_TelegramFace.",
+  "Raven_TelegramFace forwards the message to Raven_Core.",
+  "Raven_Core consults memory and tools as needed.",
+  "Raven_Core replies and Raven_TelegramFace sends the response back to Telegram.",
+  "Important decisions or rules may be promoted into memory shards or law docs."
+]
+
+[flows.cmd_bridge_event]
+summary = "System surfaces an event into CMD_BRIDGE and Raven helps interpret."
+steps = [
+  "A service on Zens3n_Base emits an event into RabbitMQ.",
+  "Brains_rs or a log collector summarizes and posts the event into CMD_BRIDGE through TelePromptR.",
+  "Raven_Operator sees the CMD_BRIDGE message.",
+  "Raven may automatically annotate or wait for Lucius to ask for explanation.",
+  "Raven_Core can call back into brains_rs via API for more structured status."
+]
+
+[flows.zens3n_consults_raven]
+summary = "Brains_rs asks Raven for narrative guidance."
+steps = [
+  "Brains_rs compiles a structured JSON view of a situation.",
+  "Brains_rs sends it to Raven_Core through an internal request channel.",
+  "Raven_Core reasons and returns a narrative summary and suggested actions.",
+  "Brains_rs may execute some actions automatically or present them to Lucius in CMD_BRIDGE."
+]
+
+[flows.service_registration]
+summary = "New service comes online using registry and bus."
+steps = [
+  "Service entry is added to SERVICE_REGISTRY tied to a valid Base.",
+  "Service container starts with its Base and name.",
+  "Service registers its queues and routing keys on RabbitMQ.",
+  "Service announces availability via a system event.",
+  "Brains_rs and Raven_Operator learn about the new service from registry and events."
+]
+
+[guardrails]
+description = "Constraints that keep the system coherent over time."
+rules = [
+  "No service without a Base.",
+  "No Base without a registry entry.",
+  "No direct Telegram access outside TelePromptR.",
+  "No direct persona changes without writing or updating a law doc.",
+  "No silent critical changes. CMD_BRIDGE is always informed."
+]
+
+[install_notes]
+summary = """
+Use this explainer as the mental wiring diagram.
+The folder map attaches paths to each concept.
+Install scripts and Docker compose files should follow this logic.
+Start with Bases and registry, then storage, then TelePromptR, then brains_rs, then Raven_Operator.
+"""
+
