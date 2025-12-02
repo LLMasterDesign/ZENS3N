@@ -5,16 +5,18 @@
   ✅ Completed: Created Notepad.md for QA tracking
   ✅ Completed: Created tasker.cfg for backend tracking
   ✅ Completed: Created verify.sh script
-  ⚫︎ Active: Verify Notepad.md appears in Projects view
+  ✅ Completed: Created initial git commit
+  🔺 Critical: dashboard.html missing - UI worker responsibility
+  ⚫︎ Active: Verify Notepad.md appears in Projects view (requires dashboard.html)
   ⚪︎ Pending: Test tasker.cfg readability via Config button
   ⚪︎ Pending: Run verification script and update tasker.cfg
 :: ∎
 
 🔷 Git Management ::
   ✅ Completed: Set up .gitignore
-  ⚫︎ Active: Create initial commit with tracking files
-  ⚪︎ Pending: Establish regular commit workflow
-  ⚪︎ Pending: Document commit message format
+  ✅ Completed: Create initial commit with tracking files
+  ⚫︎ Active: Establish regular commit workflow
+  ⚪︎ Pending: Document commit message format in HOWTO.md
 :: ∎
 
 🔷 Integration Coordination ::
