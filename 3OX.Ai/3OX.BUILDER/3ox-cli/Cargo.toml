@@ -1,5 +1,5 @@
 [package]
-name = "3ox-cli"
+name = "ox3-cli"
 version = "1.0.0"
 edition = "2021"
 authors = ["Lucius Larz Master"]
