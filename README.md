@@ -23,6 +23,12 @@ Active working space (local, untracked)
 - Where active development happens
 - Merged from legacy `ZENS3N/` folder
 
+### ZENS3N.DOCS/
+- Internal docs and phase summaries
+
+### !ZEN.CENTER/
+- Public‑facing center for completed work and origins
+
 ## Organization Notes
 - SPEC.WRITER moved to `OBSIDIAN.BASE/!1N.3OX OBSIDIAN/`
 - !CMD.CENTER merged into main `/root/!CMD.BRIDGE/!CMD.CENTER/`
