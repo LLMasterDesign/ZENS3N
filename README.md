@@ -1,4 +1,4 @@
-# ZENS3N Systems
+# ▛▞// Z E N S 3 N . S Y S T E M S ⫎▸
 
 ![ZENS3N Systems Logo](brand/assets/zensen-logo.png)
 
