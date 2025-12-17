@@ -6,17 +6,11 @@
 
 ---
 
-## Start Here
+## What is ZENS3N?
 
-**Build your first AI agent in minutes:**
+ZENS3N is a collection of production-ready AI systems, experimental agents, and reference documentation. Everything here is built to be **used**, not just admired.
 
-```bash
-git clone https://github.com/LLMasterDesign/ZENS3N.git
-cd ZENS3N/3OX.Ai/3OX.BUILDER
-bun run compile-run.bun
-```
-
-See [`3OX.Ai/3OX.BUILDER/START_HERE.md`](3OX.Ai/3OX.BUILDER/START_HERE.md) for full setup.
+**Start here:** [`3OX.Ai/3OX.BUILDER/`](3OX.Ai/3OX.BUILDER/) — Build and deploy AI agents with a single command.
 
 ---
 
@@ -41,38 +35,44 @@ ZEN.LABS/              ← Experiments & prototypes
 
 ---
 
-## What's Inside
+## Quick Start
 
-### 🚀 **3OX.Ai** — Agent Framework
-Complete AI agent system with boot loader, CLI, and setup tools. Build agents that work.
+### Try 3OX.BUILDER
 
-**Quick Start:**
+The fastest way to build an AI agent:
+
 ```bash
-cd 3OX.Ai/3OX.BUILDER
+git clone https://github.com/LLMasterDesign/ZENS3N.git
+cd ZENS3N/3OX.Ai/3OX.BUILDER
 bun run compile-run.bun
 ```
 
-### ✅ **!ZEN.HUB/COMPLETED.WORK** — Production Tools
-Finished projects ready to use:
+See [`START_HERE.md`](3OX.Ai/3OX.BUILDER/START_HERE.md) for full setup.
+
+### Explore Completed Work
+
 - **[BUDGET.BUILDER](!ZEN.HUB/COMPLETED.WORK/BUDGET.BUILDER/)** — Personal finance management agent
 - **[CURSOR.CLEANER](!ZEN.HUB/COMPLETED.WORK/CURSOR.CLEANER/)** — System optimization toolkit
 
-### 📚 **!ZEN.HUB/LIBRARY** — Reference Materials
+### Browse the Library
+
+Research, specifications, and reference docs in [`!ZEN.HUB/LIBRARY/`](!ZEN.HUB/LIBRARY/).
+
+---
+
+## What's Inside
+
+### 🚀 **3OX.Ai** — Agent Systems
+Complete AI agent framework with boot loader, CLI, and setup tools. Build agents that work.
+
+### ✅ **COMPLETED.WORK** — Production Tools
+Finished projects ready to use. Each includes full documentation and examples.
+
+### 📚 **LIBRARY** — Reference Materials
 Specifications, lexicons, HOWTOs, and research you can learn from and build on.
 
 ### 🧪 **ZEN.LABS** — Experiments
 Prototypes and early-stage projects open for feedback and collaboration.
-
----
-
-## Workflow
-
-**Main branch (`main`):** Public-facing hub — clean, curated, ready to share.
-
-**Development branches:**
-- Work in `branch/base` for active development
-- Work in `branch/vps` for deployment infrastructure
-- Use AI to analyze commits and curate what goes into `!ZEN.HUB/`
 
 ---
 
@@ -82,4 +82,13 @@ Prototypes and early-stage projects open for feedback and collaboration.
 
 ---
 
-**Ready to build?** Start with [`3OX.Ai/3OX.BUILDER/`](3OX.Ai/3OX.BUILDER/).
+## Organization
+
+- **3OX.Ai** — AI agent framework (start here)
+- **!ZEN.HUB** — Public-facing hub (showcase, library, docs, origins)
+- **ZEN.LABS** — Experimental projects
+- **Branches:** `branch/vps` (deployment), `branch/base` (development)
+
+---
+
+**Ready to build?** Start with [`3OX.BUILDER`](3OX.Ai/3OX.BUILDER/).
