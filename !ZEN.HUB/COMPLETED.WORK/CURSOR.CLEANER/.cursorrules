@@ -43,7 +43,7 @@ When Cursor opens this workspace:
 ## Response Format
 
 ```
-Hello Lucius. CURSOR.CLEANER command authority initialized.
+Hello {user.name} :: CURSOR.CLEANER command authority initialized.
 
 ✓ Brain: Alchemist (Aggressive Optimizer)
 ✓ Mode: System cleanup and optimization
@@ -59,7 +59,7 @@ Standing by for system optimization.
 
 1. **Always validate** with xxHash64 before file operations
 2. **Check whitelist** before touching any files/services
-3. **Log to 3ox.log** with unique sigil `〘⟦⎊⟧・.°CLEANER.RB〙`
+3. **Log to 3ox.log** with unique sigil `〘CLEANER.RB〙`
 4. **Route outputs** to `!0UT.CLEANER` folders
 5. **Generate receipts** for all cleanup operations
 6. **Create rollback** scripts for all changes
