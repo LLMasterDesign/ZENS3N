@@ -185,13 +185,13 @@ Clone the repository to any location (it doesn't matter where):
 ```bash
 # Option 1: Home directory
 cd ~
-git clone <your-github-repo-url> 3OX.BUILDER
-cd 3OX.BUILDER
+git clone https://github.com/LLMasterDesign/ZENS3N.git
+cd ZENS3N/3OX.Ai/3OX.BUILDER
 
 # Option 2: System location
 cd /opt
-sudo git clone <your-github-repo-url> 3OX.BUILDER
-cd 3OX.BUILDER
+sudo git clone https://github.com/LLMasterDesign/ZENS3N.git
+cd ZENS3N/3OX.Ai/3OX.BUILDER
 ```
 
 ### Step 2: Build CLI Binary
@@ -387,7 +387,8 @@ Sparkfiles use PHENO/PiCO/PRISM structure:
 
 ```bash
 # 1. Clone repository
-git clone <repo-url> 3OX.BUILDER
+git clone https://github.com/LLMasterDesign/ZENS3N.git
+cd ZENS3N/3OX.Ai/3OX.BUILDER
 cd 3OX.BUILDER
 
 # 2. Install dependencies

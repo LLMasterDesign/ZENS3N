@@ -111,8 +111,8 @@ ruby 3OX.BUILD/setup-3ox.rb ./MyAgent AGENT Sentinel
 
 ```bash
 # On VPS
-git clone <repository>
-cd 3OX.BUILDER
+git clone https://github.com/LLMasterDesign/ZENS3N.git
+cd ZENS3N/3OX.Ai/3OX.BUILDER
 bun install
 bun compile-run.bun
 ```

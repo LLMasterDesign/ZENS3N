@@ -60,7 +60,7 @@ git commit -m "Initial commit: 3OX.BUILDER v1.0.0"
 
 ```bash
 # Create repo on GitHub, then:
-git remote add origin <repository-url>
+git remote add origin https://github.com/LLMasterDesign/ZENS3N.git
 git branch -M main
 git push -u origin main
 ```
@@ -98,8 +98,8 @@ zip -r 3ox-builder-v1.0.0.zip 3OX.BUILDER/
 ssh user@vps-ip
 
 # Clone repo
-git clone <repository-url>
-cd 3OX.BUILDER
+git clone https://github.com/LLMasterDesign/ZENS3N.git
+cd ZENS3N/3OX.Ai/3OX.BUILDER
 ```
 
 ### 2. Install Dependencies

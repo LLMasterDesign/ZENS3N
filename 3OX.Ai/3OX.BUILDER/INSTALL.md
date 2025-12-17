@@ -62,8 +62,8 @@ ruby --version
 
 ```bash
 # From GitHub
-git clone <repository-url>
-cd 3OX.BUILDER
+git clone https://github.com/LLMasterDesign/ZENS3N.git
+cd ZENS3N/3OX.Ai/3OX.BUILDER
 
 # Or extract from archive
 tar -xzf 3ox-builder-v1.0.0.tar.gz
