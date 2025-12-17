@@ -1,5 +1,7 @@
 # !ZENS3N.CMD Repository
 
+![ZENS3N Systems Logo](brand/assets/zensen-logo.jpg)
+
 **Purpose:** VPS deployment repository for Zens3n  
 **Git Remote:** `git@github.com:LLMasterDesign/ZENS3N.git`
 
