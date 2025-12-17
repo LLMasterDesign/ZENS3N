@@ -1,0 +1,137 @@
+# Aggressive Targets Configuration
+# CURSOR.CLEANER Toolkit
+# Items approved for automatic removal/optimization
+
+auto_remove_apps:
+  - "Microsoft.XboxApp"
+  - "Microsoft.XboxGameBar"
+  - "Microsoft.XboxGamingOverlay"
+  - "Microsoft.BingWeather"
+  - "Microsoft.GetHelp"
+  - "Microsoft.GetStarted"
+  - "Microsoft.Microsoft3DViewer"
+  - "Microsoft.MicrosoftOfficeHub"
+  - "Microsoft.MicrosoftSolitaireCollection"
+  - "Microsoft.MixedReality.Portal"
+  - "Microsoft.Office.OneNote"
+  - "Microsoft.People"
+  - "Microsoft.SkypeApp"
+  - "Microsoft.StorePurchaseApp"
+  - "Microsoft.Wallet"
+  - "Microsoft.WindowsAlarms"
+  - "Microsoft.WindowsCamera"
+  - "Microsoft.WindowsMaps"
+  - "Microsoft.WindowsSoundRecorder"
+  - "Microsoft.Xbox.TCUI"
+  - "Microsoft.XboxGameOverlay"
+  - "Microsoft.XboxGamingOverlay"
+  - "Microsoft.XboxIdentityProvider"
+  - "Microsoft.XboxSpeechToTextOverlay"
+  - "Microsoft.ZuneMusic"
+  - "Microsoft.ZuneVideo"
+  - "CandyCrushSaga"
+  - "CandyCrushSodaSaga"
+  - "Disney"
+  - "Facebook"
+  - "Instagram"
+  - "Netflix"
+  - "Spotify"
+  - "TikTok"
+
+auto_disable_services:
+  - "XblAuthManager"
+  - "XblGameSave"
+  - "XboxGipSvc"
+  - "XboxNetApiSvc"
+  - "DiagTrack"
+  - "dmwappushservice"
+  - "WerSvc"
+  - "PcaSvc"
+  - "Fax"
+  - "PrintWorkflowUserSvc"
+  - "PrintSpooler"
+  - "WSearch"
+  - "Superfetch"
+  - "SysMain"
+  - "SkypeApp"
+  - "SkypeBackgroundHost"
+  - "SkypeBridge"
+  - "Cortana"
+  - "SearchUI"
+  - "SearchIndexer"
+
+auto_clean_paths:
+  - "%TEMP%"
+  - "%LOCALAPPDATA%\\Temp"
+  - "C:\\Windows\\Temp"
+  - "C:\\Windows\\SoftwareDistribution\\Download"
+  - "C:\\Windows\\Prefetch"
+  - "C:\\Windows\\Logs"
+  - "C:\\Windows\\Panther"
+  - "C:\\Windows\\ServiceProfiles\\LocalService\\AppData\\Local\\Microsoft\\Windows\\INetCache"
+  - "C:\\Windows\\ServiceProfiles\\NetworkService\\AppData\\Local\\Microsoft\\Windows\\INetCache"
+  - "%LOCALAPPDATA%\\Microsoft\\Windows\\INetCache"
+  - "%LOCALAPPDATA%\\Microsoft\\Windows\\WebCache"
+  - "%LOCALAPPDATA%\\Microsoft\\Windows\\Explorer\\thumbcache_*.db"
+
+auto_remove_file_patterns:
+  - "*.tmp"
+  - "*.temp"
+  - "*.log"
+  - "*.cache"
+  - "*.bak"
+  - "*.old"
+  - "*.~*"
+  - "Thumbs.db"
+  - "desktop.ini"
+  - "*.lnk"
+
+auto_clean_registry_keys:
+  - "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RecentDocs"
+  - "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RunMRU"
+  - "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\TypedPaths"
+  - "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\WordWheelQuery"
+
+auto_optimize_startup_programs:
+  - "Adobe*"
+  - "Java*"
+  - "Skype*"
+  - "Spotify*"
+  - "Steam*"
+  - "Discord*"
+  - "Slack*"
+  - "Zoom*"
+  - "Microsoft Teams*"
+  - "OneDrive*"
+  - "Dropbox*"
+  - "GoogleDrive*"
+
+# Windows features to disable (optional - requires admin)
+optional_windows_features:
+  - "FaxServicesClientPackage"
+  - "Printing-XPSServices-Features"
+  - "Printing-PrintToPDFServices-Features"
+  - "Printing-Foundation-Features"
+  - "MediaPlayback"
+  - "WindowsMediaPlayer"
+  - "WorkFolders-Client"
+  - "SMB1Protocol"
+  - "SMB1Protocol-Client"
+  - "SMB1Protocol-Server"
+
+# Performance optimizations
+performance_tweaks:
+  - disable_visual_effects: true
+  - disable_animations: true
+  - disable_transparency: true
+  - optimize_virtual_memory: true
+  - disable_hibernation: true
+  - optimize_power_plan: "high_performance"
+  - disable_windows_search_indexing: false  # Keep enabled for developer workflow
+  - disable_windows_defender_realtime: false  # Keep enabled for security
+
+
+
+
+
+

@@ -100,3 +100,17 @@ credentials/
 !ZENS3N.VPS/_Runtime/
 !ZENS3N.VPS/_Runtime/**/*
 
+# Local workspace (not for VPS)
+ZENS3N.BASE/
+
+# Legacy/archive folders (evaluate if needed)
+# Uncomment if these should be excluded:
+# 3OX.Ai/
+# BUDGET.BUILDER/
+# CURSOR.CLEANER/
+# SPEC.WRITER/
+# ZENS3N/
+
+# VPS configs (sensitive, keep local only)
+!ZENS3N.VPS/config/
+!ZENS3N.VPS/runtime/
