@@ -6,70 +6,73 @@
 
 ---
 
-## What is ZENS3N?
+## Start Here
 
-ZENS3N is a collection of production-ready AI systems, experimental agents, and reference documentation. Everything here is built to be **used**, not just admired.
+**Build your first AI agent in minutes:**
 
-**Start here:** [`ZENS3N.CENTER/3OX.Ai/3OX.BUILDER/`](ZENS3N.CENTER/3OX.Ai/3OX.BUILDER/) — Build and deploy AI agents with a single command.
+```bash
+git clone https://github.com/LLMasterDesign/ZENS3N.git
+cd ZENS3N/3OX.Ai/3OX.BUILDER
+bun run compile-run.bun
+```
+
+See [`3OX.Ai/3OX.BUILDER/START_HERE.md`](3OX.Ai/3OX.BUILDER/START_HERE.md) for full setup.
 
 ---
 
 ## Structure
 
 ```
-ZENS3N.CENTER/          ← Everything you need to explore
-├── 3OX.Ai/            ← AI agent systems
-│   └── 3OX.BUILDER/   ← Start here: Build agents
+3OX.Ai/                 ← Start here: AI agent framework
+└── 3OX.BUILDER/       ← Build and deploy agents
+
+!ZEN.HUB/              ← Public showcase hub
 ├── COMPLETED.WORK/    ← Production-ready tools
 ├── LIBRARY/           ← Research, specs, HOWTOs
 ├── DOCS/              ← Internal documentation
 └── ORIGINS/           ← The story behind ZENS3N
 
-ZENS3N.VPS/            ← Deployment infrastructure
-ZENS3N.BASE/           ← Active development (local)
 ZEN.LABS/              ← Experiments & prototypes
 ```
 
----
-
-## Quick Start
-
-### Try 3OX.BUILDER
-
-The fastest way to build an AI agent:
-
-```bash
-git clone https://github.com/LLMasterDesign/ZENS3N.git
-cd ZENS3N/ZENS3N.CENTER/3OX.Ai/3OX.BUILDER
-bun run compile-run.bun
-```
-
-See [`START_HERE.md`](ZENS3N.CENTER/3OX.Ai/3OX.BUILDER/START_HERE.md) for full setup.
-
-### Explore Completed Work
-
-- **[BUDGET.BUILDER](ZENS3N.CENTER/COMPLETED.WORK/BUDGET.BUILDER/)** — Personal finance management agent
-- **[CURSOR.CLEANER](ZENS3N.CENTER/COMPLETED.WORK/CURSOR.CLEANER/)** — System optimization toolkit
-
-### Browse the Library
-
-Research, specifications, and reference docs in [`ZENS3N.CENTER/LIBRARY/`](ZENS3N.CENTER/LIBRARY/).
+**Branches:**
+- `branch/vps` — VPS deployment infrastructure
+- `branch/base` — Active development workspace
 
 ---
 
 ## What's Inside
 
-### 🚀 **3OX.Ai** — Agent Systems
-Complete AI agent framework with boot loader, CLI, and setup tools. Build agents that work.
+### 🚀 **3OX.Ai** — Agent Framework
+Complete AI agent system with boot loader, CLI, and setup tools. Build agents that work.
 
-### ✅ **COMPLETED.WORK** — Production Tools
-Finished projects ready to use. Each includes full documentation and examples.
+**Quick Start:**
+```bash
+cd 3OX.Ai/3OX.BUILDER
+bun run compile-run.bun
+```
 
-### 📚 **LIBRARY** — Reference Materials
+### ✅ **!ZEN.HUB/COMPLETED.WORK** — Production Tools
+Finished projects ready to use:
+- **[BUDGET.BUILDER](!ZEN.HUB/COMPLETED.WORK/BUDGET.BUILDER/)** — Personal finance management agent
+- **[CURSOR.CLEANER](!ZEN.HUB/COMPLETED.WORK/CURSOR.CLEANER/)** — System optimization toolkit
+
+### 📚 **!ZEN.HUB/LIBRARY** — Reference Materials
 Specifications, lexicons, HOWTOs, and research you can learn from and build on.
 
 ### 🧪 **ZEN.LABS** — Experiments
 Prototypes and early-stage projects open for feedback and collaboration.
+
+---
+
+## Workflow
+
+**Main branch (`main`):** Public-facing hub — clean, curated, ready to share.
+
+**Development branches:**
+- Work in `branch/base` for active development
+- Work in `branch/vps` for deployment infrastructure
+- Use AI to analyze commits and curate what goes into `!ZEN.HUB/`
 
 ---
 
@@ -79,13 +82,4 @@ Prototypes and early-stage projects open for feedback and collaboration.
 
 ---
 
-## Organization
-
-- **ZENS3N.CENTER** — Public-facing hub (everything you see here)
-- **ZENS3N.VPS** — Deployment infrastructure
-- **ZENS3N.BASE** — Active development workspace (local)
-- **ZEN.LABS** — Experimental projects
-
----
-
-**Ready to build?** Start with [`3OX.BUILDER`](ZENS3N.CENTER/3OX.Ai/3OX.BUILDER/).
+**Ready to build?** Start with [`3OX.Ai/3OX.BUILDER/`](3OX.Ai/3OX.BUILDER/).
