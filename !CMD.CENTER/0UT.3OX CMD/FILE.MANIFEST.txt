@@ -1,8 +1,0 @@
-# FILE.MANIFEST.txt
-# .3ox Framework Output Manifest
-# Generated: 2025-10-18 13:20:46
-# Format: [timestamp] | status | filename | destination | priority
-# ============================================================================
-
-[⧗-25.71] | READY    | STATUS_REPORT_2025-10-10.md              | OPS.STATION          | HIGH
-[⧗-25.71] | READY    | PRE_FLIGHT_REPORT.md                     | OPS.STATION          | MEDIUM

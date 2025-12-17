@@ -95,3 +95,8 @@ credentials/
 # Cursor specific (if needed)
 .cursor/
 
+# VPS Deployment - Sensitive/Local Only
+!ZENS3N.VPS/config/
+!ZENS3N.VPS/_Runtime/
+!ZENS3N.VPS/_Runtime/**/*
+

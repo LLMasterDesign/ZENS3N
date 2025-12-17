@@ -1,9 +1,0 @@
-{
-  "turn_count": 0,
-  "last_discovery_turn": 0,
-  "discovery_interval": 20,
-  "session_start": "2025-10-20T18:30:00Z",
-  "auto_discovery_enabled": true,
-  "pending_observations": []
-}
-

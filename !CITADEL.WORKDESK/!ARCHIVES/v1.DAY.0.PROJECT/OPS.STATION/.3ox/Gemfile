@@ -1,8 +1,0 @@
-source 'https://rubygems.org'
-
-gem 'yaml'
-gem 'tiktoken_ruby', '~> 0.0.7'
-
-# For AI API integration
-gem 'anthropic', '~> 0.3.0'
-
