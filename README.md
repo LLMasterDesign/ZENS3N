@@ -30,8 +30,8 @@ ZEN.LABS/              ← Experiments & prototypes
 ```
 
 **Branches:**
-- `branch/vps` — VPS deployment infrastructure
-- `branch/base` — Active development workspace
+- `branch/VPS` — VPS deployment infrastructure
+- `branch/BASE` — Active development workspace
 
 ---
 
@@ -87,7 +87,7 @@ Prototypes and early-stage projects open for feedback and collaboration.
 - **3OX.Ai** — AI agent framework (start here)
 - **!ZEN.HUB** — Public-facing hub (showcase, library, docs, origins)
 - **ZEN.LABS** — Experimental projects
-- **Branches:** `branch/vps` (deployment), `branch/base` (development)
+- **Branches:** `branch/VPS` (deployment), `branch/BASE` (development)
 
 ---
 
