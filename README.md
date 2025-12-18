@@ -1,4 +1,4 @@
-# Z E N S 3 N . S Y S ⫎▸ START
+# Z E N S 3 N . S Y S ⫎▸ START HERE
 
 ![ZENS3N Systems Logo](brand/assets/zensen-logo.png)
 
