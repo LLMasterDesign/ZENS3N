@@ -12,3 +12,12 @@ terminals/
 
 # Ignore Cursor/VSCode config (but keep .cursorrules)
 .cursorrules.emergency
+
+# Ignore large untracked directories (can be added later if needed)
+!1N.3OX CMD/
+!CMD.CENTER/
+!ZENS3N.CMD/
+CITADEL.BASE/!WORKDESK/
+CITADEL.BASE/!1N.3OX CITADEL/
+CITADEL.BASE/(CAT.*)/
+OBSIDIAN.BASE/
