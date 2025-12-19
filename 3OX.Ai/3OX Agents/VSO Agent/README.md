@@ -1,6 +1,6 @@
 # 3OX.Ai - VSO.3OX.AGENT
 
-///▙▖▙▖▞▞▙▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂///
+///▙▖▙▖▞▞▙▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂///
 
 ## Agent: VSO.AGENT → Veterans Service Officer
 
@@ -10,7 +10,7 @@
 
 Navigating VA disability claims doesn't have to be overwhelming. VSO.AGENT is a specialized AI agent that works like a trained Veterans Service Officer that is tasked with asking the right questions, organizing your evidence, tracking deadlines, and guiding you through every step of the claims process.
 
-### What Makes VSO.AGENT Different
+### ▛▞ What Makes VSO.AGENT Different
 
 **Strategic Questioning**: Uses proven methodology to systematically assess your claim situation. Not just answers. The right questions that uncover what matters.
 
@@ -28,7 +28,7 @@ Navigating VA disability claims doesn't have to be overwhelming. VSO.AGENT is a 
 
 :: 𝜵 //▚▚▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂
 
-## Why VSO.AGENT?
+## ▛▞ Why VSO.AGENT?
 
 The VA claims process is complex by design. Forms, deadlines, medical evidence, legal language. It's a battlefield where veterans often fight alone. VSO.AGENT changes that.
 
@@ -42,7 +42,7 @@ The VA claims process is complex by design. Forms, deadlines, medical evidence, 
 
 :: ∎
 
-## What You Get
+## ▛▞ What You Get
 
 **Full vec3 Architecture** (Tier 3 Agent)
 - Complete kernel with adapter system
@@ -67,7 +67,7 @@ The VA claims process is complex by design. Forms, deadlines, medical evidence, 
 
 :: ∎
 
-## Who This Is For
+## ▛▞ Who This Is For
 
 **Veterans filing disability claims**: Navigate the process with expert guidance, from initial filing to appeals.
 
@@ -79,7 +79,7 @@ The VA claims process is complex by design. Forms, deadlines, medical evidence, 
 
 :: ∎
 
-## The Technology
+## ▛▞ The Technology
 
 VSO.AGENT runs on the 3OX framework: a kernel-style architecture that brings operating system reliability to AI agents.
 
@@ -93,7 +93,7 @@ No black boxes. No lost context. Every operation logged, verified, and traceable
 
 :: ∎
 
-## Get Started
+## ▛▞ Get Started
 
 Ready to take control of your VA claim? See [INSTALL.md](INSTALL.md) for setup instructions.
 
@@ -104,7 +104,6 @@ Ready to take control of your VA claim? See [INSTALL.md](INSTALL.md) for setup i
 **Support**: See 7HE.VAULT documentation for tier system and operational guides.
 
 :: ∎
-
 
 Built for veterans who served with precision. Claim with that same standard.
 
