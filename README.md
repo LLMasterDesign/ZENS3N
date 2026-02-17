@@ -1,8 +1,9 @@
-# Z E N S 3 N . S Y S ⫎ ▸ START
+# ▛▞// Z E N S 3 N . S Y S ⫎ ▸ 
 
 ![ZENS3N Systems Logo](brand/assets/zensen-logo.png)
 
 **AI systems, agents, and tools built for real work.**
+
 
 ---
 
