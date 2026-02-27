@@ -52,26 +52,41 @@
 ## Run
 
 ```bash
+# Ruby (chars/4 estimate)
 ruby DAY.0/3OX_TOKEN_BENCHMARK.rb
+
+# Python (tiktoken cl100k_base — exact GPT-4 counts)
+python3 DAY.0/3OX_TOKEN_BENCHMARK.py
 ```
 
 ## Results (2026-02-27)
 
+### tiktoken (exact GPT-4)
+
 | Pair | Prose | Gensing | Savings |
 |------|-------|---------|---------|
-| Input-Process-Output | ~53 tok | ~52 tok | 1.9% |
-| PiCO trace | ~63 tok | ~84 tok | -33% (Unicode adds bytes) |
-| File operation | ~30 tok | ~43 tok | -43% |
-| Sparkfile header | ~46 tok | ~35 tok | 23.9% |
-| Section delimiter ×1 | ~18 tok | ~2 tok | **88.9%** |
-| Section delimiter ×10 | ~85 tok | ~18 tok | **78.8%** |
-| Conversation end | ~20 tok | ~2 tok | **90.0%** |
-| **TOTAL** | ~315 tok | ~236 tok | **25.1%** |
+| Input-Process-Output | 43 tok | 56 tok | -30% |
+| PiCO trace | 45 tok | 82 tok | -82% |
+| File operation | 25 tok | 48 tok | -92% |
+| Sparkfile header | 49 tok | 63 tok | -29% |
+| Section delimiter ×1 | 15 tok | 3 tok | **80.0%** |
+| Section delimiter ×10 | 61 tok | 39 tok | **36.1%** |
+| Conversation end | 18 tok | 4 tok | **77.8%** |
+| **TOTAL** | 256 tok | 295 tok | -15.2% |
+
+### chars/4 (Ruby estimate)
+
+| Pair | Savings |
+|------|---------|
+| Section delimiter ×1 | 88.9% |
+| Conversation end | 90.0% |
+| Section delimiter ×10 | 78.8% |
+| Overall | 25.1% |
 
 **Findings:**
-- **:: ∎ and :: 𝜵** drive the largest savings (88–90% per use)
-- **Banner/imprint** (▛//▞▞) saves ~24% vs prose headers
-- **Unicode symbols** (⊢⇨⟿▷) add bytes; use where semantic density justifies
-- **98% claim** likely applies to output-heavy flows with repeated delimiters
+- **:: ∎ and :: 𝜵** — 77–80% savings (tiktoken); use these for output
+- **Unicode** (⊢⇨⟿▷ρφτ∙) — tokenize to 2–3 tokens each; avoid in high-frequency paths
+- **98% claim** — applies to delimiter-only output, not full gensing flow
+- **Recommendation:** Use delimiters (:: ∎, :: 𝜵) everywhere; use ρφτ/⊢⇨⟿▷ sparingly in config
 
 :: ∎
