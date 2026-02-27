@@ -126,4 +126,18 @@ OPENAI_API_KEY=sk-... python3 DAY.0/3OX_TOKEN_BENCHMARK_AGENT.py
 
 **Output quality:** Same task, both formats. Gensing: 64 completion tokens, prose: 134. Quality capture saved to `DAY.0/benchmark_outputs/quality_capture.json` for review.
 
+### Extended list (full run)
+
+| # | Test | Prose | Gensing | Savings |
+|---|------|-------|---------|---------|
+| 1 | Output tokens | 135 | 78 | **42.2%** |
+| 2 | Multi-turn 5 | 2888 | 2576 | **10.8%** |
+| 4 | Multi-turn 15 | 19635 | 20970 | -6.8% |
+| 5 | Tool flow (JSON vs gensing) | 95 | 62 | **34.7%** |
+| 6 | Session resume (CHECKPOINT) | 140 | 152 | -8.6% |
+| 7 | gpt-4o-mini | 140 | 88 | **37.1%** |
+| 7 | gpt-4o | 141 | 128 | 9.2% |
+
+**Findings:** Output and tool flow show strong savings. Multi-turn 15 and session resume (minimal state) favor prose. gpt-4o shows smaller savings than gpt-4o-mini. Traces spec: `DAY.0/benchmark_outputs/traces_spec.json`.
+
 :: ∎

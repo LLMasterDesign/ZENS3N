@@ -1,0 +1,11 @@
+{
+  "purpose": "Analyze Cursor/Codex agent logs for prose vs gensing token usage",
+  "capture": [
+    "prompt_tokens per request",
+    "completion_tokens per response",
+    "cumulative context size over session"
+  ],
+  "compare": "Same task: agent with prose rules vs agent with gensing rules",
+  "format": "JSONL: {ts, role, tokens, model}",
+  "output": "traces_analysis.json"
+}
