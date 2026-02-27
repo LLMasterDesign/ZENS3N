@@ -1,0 +1,29 @@
+# 3OX.BUILDER CI — build, test, cube validation
+name: 3OX CI
+on:
+  push:
+    branches: [main, "3ox.agent/*"]
+  pull_request:
+    branches: [main, "3ox.agent/*"]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Build release
+        run: cargo build --release
+        working-directory: 3OX.Ai/3OX.BUILDER
+      - name: Run tests
+        run: cargo test
+        working-directory: 3OX.Ai/3OX.BUILDER
+      - name: Cube validation
+        run: |
+          test -f .3ox/_meta/SESSION.CHECKPOINT.toml
+          test -d .3ox/\(1\)Spark
+          test -d .3ox/\(2\)Brains
+          test -d .3ox/\(3\)Rules
+          test -d .3ox/\(4\)Toolkit
+          test -d .3ox/\(5\)Links
+          test -d .3ox/\(6\)Pulse
+          echo "Cube structure OK"
