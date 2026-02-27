@@ -137,3 +137,8 @@ first_fixes = [
 
 [handoff]
 message = "System is now on single proto authority for lifecycle, with index-only registry and shorter proto names. Resume by running startup sequence (Spark doc), normalizing stale metadata, then expanding lifecycle contracts."
+
+# :: ∎
+
+[reminders]
+telepromptr_integration = "Search branch/TelePromptR for common-to-telegram: lib/providers/telegram.rb (Teleprompter), telegram_bus.rb, dev/io/tg/telegram.bridge.*, dev/io/inference/telegram_typing.rb. LAW: Teleprompter is the only component that speaks to Telegram."
