@@ -18,6 +18,40 @@ cp -n _forge/.env.example _forge/.env
 ./_forge/forge.sh status
 ```
 
+## 3ox Integration
+
+To set up TelePromptR for use with 3ox agents:
+
+```bash
+# Run the setup script (reads branch and configures proto)
+./setup.3ox.proto.sh
+
+# This will:
+# - Create telegram_bus directory structure in .3ox
+# - Copy proto definitions to .3ox/specs/tpr/
+# - Create integration helper: .3ox/vec3/lib/core/telegram.tpr.rb
+# - Set up registration and routing files
+```
+
+See `COMMO.SNIP.md` for detailed integration instructions and what TPR needs to change for Telegram communication.
+
+**Quick integration example:**
+```ruby
+require_relative '.3ox/vec3/lib/core/telegram.tpr'
+
+# Register agent
+TelegramTPR.register_agent(agent_id: 'my_agent', chat_id: -1001234567890)
+
+# Send message
+TelegramTPR.send_message(agent_id: 'my_agent', text: 'Hello from 3ox!')
+
+# Read inbox
+TelegramTPR.read_inbox.each do |envelope|
+  puts "Received: #{envelope['text']}"
+  TelegramTPR.mark_processed(envelope['_filepath'])
+end
+```
+
 ## tui2go (Small Panel)
 
 TelePromptR does not require a TUI to run, but `tui2go` is a tiny operator panel
