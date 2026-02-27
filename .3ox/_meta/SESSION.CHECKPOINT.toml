@@ -81,13 +81,13 @@ state_machine = ["TRACK", "PLAN", "DRY_RUN", "FIX", "EXECUTE", "SEAL"]
 # :: ∎
 
 [known_drift]
-whoami_may_be_stale = true
-changelog_may_be_stale = true
+whoami_may_be_stale = false
+changelog_may_be_stale = false
 stale_examples = [
-  "legacy wrksdsk references in old entries",
+  "legacy wrksdsk references in old entries (historical only)",
   "legacy _meta/cmd script evidence entries"
 ]
-reason = "historical entries were not fully normalized after architecture corrections"
+reason = "WHOAMI and CHANGELOG normalized 2026-02-27 per first_fixes"
 
 # :: ∎
 
