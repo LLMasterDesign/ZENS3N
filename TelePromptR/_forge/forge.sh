@@ -121,8 +121,8 @@ append_semicolon_list_args() {
 }
 
 default_loadtest_outbox_dir() {
-  if [[ -n "${TPR_BUS_OUTBOX_DIR:-}" ]]; then
-    printf '%s' "$TPR_BUS_OUTBOX_DIR"
+  if [[ -n "${TPR_RELAY_OUTBOX_DIR:-}" ]]; then
+    printf '%s' "$TPR_RELAY_OUTBOX_DIR"
     return 0
   fi
 
@@ -132,7 +132,7 @@ default_loadtest_outbox_dir() {
     return 0
   fi
 
-  printf '%s' "$TPR_CMD_ROOT/.vec3/var/telegram_bus/outbox"
+  printf '%s' "$TPR_CMD_ROOT/.vec3/var/relay/outbox"
 }
 
 default_loadtest_reg_path() {
