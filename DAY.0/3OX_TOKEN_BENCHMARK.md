@@ -113,4 +113,17 @@ OPENAI_API_KEY=sk-... python3 DAY.0/3OX_TOKEN_BENCHMARK_API.py
 
 Prism + pico with ASCII and :: ∎ saves ~10%. Unicode adds tokens.
 
+### Agent system (output, multi-turn, quality)
+
+```bash
+OPENAI_API_KEY=sk-... python3 DAY.0/3OX_TOKEN_BENCHMARK_AGENT.py
+```
+
+| Test | Prose | Gensing | Savings |
+|------|-------|---------|---------|
+| **Output tokens** (completion) | 127 | 88 | **30.7%** |
+| **Multi-turn** (5 turns total) | 2835 | 2293 | **19.1%** |
+
+**Output quality:** Same task, both formats. Gensing: 64 completion tokens, prose: 134. Quality capture saved to `DAY.0/benchmark_outputs/quality_capture.json` for review.
+
 :: ∎
