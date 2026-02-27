@@ -37,7 +37,10 @@ registry_rule = "index_metadata_only_no_proto_contract_files"
 
 proto_files = [
   "_TRON/systemd/lifecycle/proto/whoami.watch.proto",
-  "_TRON/systemd/lifecycle/proto/wrkdsk.proto"
+  "_TRON/systemd/lifecycle/proto/wrkdsk.proto",
+  "_TRON/systemd/lifecycle/proto/state.guard.proto",
+  "_TRON/systemd/lifecycle/proto/receipt.emit.proto",
+  "_TRON/systemd/lifecycle/proto/queue.dispatch.proto"
 ]
 
 # :: ∎
@@ -52,6 +55,24 @@ state = "active"
 id = "lifecycle.wrkdsk.scratchpad"
 unit = "none"
 proto = "_TRON/systemd/lifecycle/proto/wrkdsk.proto"
+state = "contract"
+
+[[truth.services]]
+id = "lifecycle.state.guard"
+unit = "none"
+proto = "_TRON/systemd/lifecycle/proto/state.guard.proto"
+state = "contract"
+
+[[truth.services]]
+id = "lifecycle.receipt.emit"
+unit = "none"
+proto = "_TRON/systemd/lifecycle/proto/receipt.emit.proto"
+state = "contract"
+
+[[truth.services]]
+id = "lifecycle.queue.dispatch"
+unit = "none"
+proto = "_TRON/systemd/lifecycle/proto/queue.dispatch.proto"
 state = "contract"
 
 # :: ∎
@@ -110,6 +131,7 @@ first_fixes = [
   "append normalized CHANGELOG entry describing canonical model",
   "add lifecycle proto contracts for state.guard, receipt.emit, queue.dispatch"
 ]
+# first_fixes completed 2026-02-27
 
 # :: ∎
 

@@ -80,3 +80,13 @@ section = "identity"
 status = "ok"
 summary = "Normalized metadata to canonical model per SESSION.CHECKPOINT first_fixes"
 ts = "2026-02-27T00:00:00Z"
+[[entries]]
+actor = "agent.drift_normalize"
+event = "lifecycle.proto.add"
+evidence = ["_TRON/systemd/lifecycle/proto/state.guard.proto", "_TRON/systemd/lifecycle/proto/receipt.emit.proto", "_TRON/systemd/lifecycle/proto/queue.dispatch.proto"]
+id = "chg_1771036900_002"
+notes = "state.guard, receipt.emit, queue.dispatch per first_fixes"
+section = "runtime"
+status = "ok"
+summary = "Added lifecycle proto contracts for state.guard, receipt.emit, queue.dispatch"
+ts = "2026-02-27T00:00:00Z"
