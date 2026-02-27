@@ -1,0 +1,22 @@
+# PROTO.LOCK.toml :: Lock manifest for lifecycle proto v1
+# Authority: SESSION.CHECKPOINT truth.proto
+# Batched: TID.PROTO.LIFECYCLE.001 | Sealed: 2026-02-27
+
+[lock]
+schema = "v1"
+version = "1.0.0"
+locked_at = "2026-02-27T00:00:00Z"
+batch_tid = "TID.PROTO.LIFECYCLE.001"
+batch_root = ".3ox/.vec3/var/wrkdsk/TID.PROTO.LIFECYCLE.001/"
+
+[contracts]
+state_guard = "state.guard.proto"
+receipt_emit = "receipt.emit.proto"
+queue_dispatch = "queue.dispatch.proto"
+
+[governance]
+promotion_requires = ["warden_approval", "user_approval"]
+promotion_complete = true
+canonical = true
+
+# :: ∎

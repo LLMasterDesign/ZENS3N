@@ -90,3 +90,13 @@ section = "runtime"
 status = "ok"
 summary = "Added lifecycle proto contracts for state.guard, receipt.emit, queue.dispatch"
 ts = "2026-02-27T00:00:00Z"
+[[entries]]
+actor = "agent.drift_normalize"
+event = "proto.lock.v1"
+evidence = ["_TRON/systemd/lifecycle/proto/v1/PROTO.LOCK.toml", ".3ox/.vec3/var/wrkdsk/TID.PROTO.LIFECYCLE.001/"]
+id = "chg_1771037000_003"
+notes = "Protos moved to v1/, batched TID.PROTO.LIFECYCLE.001, sealed"
+section = "runtime"
+status = "ok"
+summary = "Locked lifecycle protos in proto/v1/ with TID batch and PROTO.LOCK.toml"
+ts = "2026-02-27T00:00:00Z"

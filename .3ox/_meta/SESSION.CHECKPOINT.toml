@@ -38,9 +38,9 @@ registry_rule = "index_metadata_only_no_proto_contract_files"
 proto_files = [
   "_TRON/systemd/lifecycle/proto/whoami.watch.proto",
   "_TRON/systemd/lifecycle/proto/wrkdsk.proto",
-  "_TRON/systemd/lifecycle/proto/state.guard.proto",
-  "_TRON/systemd/lifecycle/proto/receipt.emit.proto",
-  "_TRON/systemd/lifecycle/proto/queue.dispatch.proto"
+  "_TRON/systemd/lifecycle/proto/v1/state.guard.proto",
+  "_TRON/systemd/lifecycle/proto/v1/receipt.emit.proto",
+  "_TRON/systemd/lifecycle/proto/v1/queue.dispatch.proto"
 ]
 
 # :: ∎
@@ -60,19 +60,19 @@ state = "contract"
 [[truth.services]]
 id = "lifecycle.state.guard"
 unit = "none"
-proto = "_TRON/systemd/lifecycle/proto/state.guard.proto"
+proto = "_TRON/systemd/lifecycle/proto/v1/state.guard.proto"
 state = "contract"
 
 [[truth.services]]
 id = "lifecycle.receipt.emit"
 unit = "none"
-proto = "_TRON/systemd/lifecycle/proto/receipt.emit.proto"
+proto = "_TRON/systemd/lifecycle/proto/v1/receipt.emit.proto"
 state = "contract"
 
 [[truth.services]]
 id = "lifecycle.queue.dispatch"
 unit = "none"
-proto = "_TRON/systemd/lifecycle/proto/queue.dispatch.proto"
+proto = "_TRON/systemd/lifecycle/proto/v1/queue.dispatch.proto"
 state = "contract"
 
 # :: ∎
