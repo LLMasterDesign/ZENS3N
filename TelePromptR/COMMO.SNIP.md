@@ -52,7 +52,7 @@ message BusOutboxEnvelope {
 - Speaker mesh reads inbox and routes to agents
 
 **Outbound (TPR → Telegram):**
-- Agents write `BusOutboxEnvelope` to `var/telegram_bus/outbox/`
+- Agents write `BusOutboxEnvelope` to `var/relay/outbox/`
 - `telepromptr_bridge.rb` drains outbox
 - Resolves routing (agent_id → chat_id/topic_thread_id)
 - Calls Telegram `sendMessage` API
@@ -81,14 +81,14 @@ envelope = {
   'trace_id' => SecureRandom.hex(8)
 }
 
-outbox_path = File.join('.3ox', '.vec3', 'var', 'telegram_bus', 'outbox', "#{Time.now.to_i}_#{SecureRandom.hex(4)}.json")
+outbox_path = File.join('.3ox', '.vec3', 'var', 'relay', 'outbox', "#{Time.now.to_i}_#{SecureRandom.hex(4)}.json")
 File.write(outbox_path, JSON.pretty_generate(envelope))
 ```
 
 **2. TPR Inbox → 3ox Agent Input:**
 ```ruby
 # In .3ox agent code, read from TPR inbox:
-inbox_dir = File.join('.3ox', '.vec3', 'var', 'telegram_bus', 'inbox')
+inbox_dir = File.join('.3ox', '.vec3', 'var', 'relay', 'inbox')
 Dir.glob(File.join(inbox_dir, '*.json')).each do |path|
   envelope = JSON.parse(File.read(path))
   # Process envelope['text'], envelope['from_user'], etc.
@@ -116,8 +116,8 @@ TELEGRAM_BOT_TOKEN=your_bot_token_here
 
 # Optional
 TPR_CMD_ROOT=/root/!ZENS3N.CMD/.3ox
-TPR_BUS_OUTBOX_DIR=.3ox/.vec3/var/telegram_bus/outbox
-TPR_BUS_REG_PATH=.3ox/.vec3/var/telegram_bus/registrations.json
+TPR_RELAY_OUTBOX_DIR=.3ox/.vec3/var/relay/outbox
+TPR_RELAY_REG_PATH=.3ox/.vec3/var/relay/registrations.json
 TPR_TOPICS_PATH=.3ox/.vec3/var/telegram_topics.json
 TPR_ROUTE_MAP_PATH=CyberDeck/TPR.ROUTE.MAP.json
 TPR_POLL_INTERVAL_S=0.5
@@ -129,7 +129,7 @@ TPR_POLL_INTERVAL_S=0.5
 .3ox/
 └── .vec3/
     └── var/
-        └── telegram_bus/
+        └── relay/
             ├── inbox/          # TPR writes here (Telegram → agents)
             ├── outbox/         # Agents write here (agents → Telegram)
             │   ├── sent/       # Processed successfully
@@ -167,7 +167,7 @@ echo '{
   "text": "Hello from 3ox!",
   "chat_id": -1001234567890,
   "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"
-}' > .3ox/.vec3/var/telegram_bus/outbox/test_$(date +%s).json
+}' > .3ox/.vec3/var/relay/outbox/test_$(date +%s).json
 
 # 3. Check bridge status
 ./tools/telepromptr_bridge.rb status

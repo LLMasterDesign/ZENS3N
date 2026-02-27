@@ -27,7 +27,7 @@ To set up TelePromptR for use with 3ox agents:
 ./setup.3ox.proto.sh
 
 # This will:
-# - Create telegram_bus directory structure in .3ox
+# - Create relay directory structure in .3ox
 # - Copy proto definitions to .3ox/specs/tpr/
 # - Create integration helper: .3ox/vec3/lib/core/telegram.tpr.rb
 # - Set up registration and routing files

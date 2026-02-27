@@ -40,15 +40,15 @@ if default_cmd_root.empty?
   default_cmd_root = '/root/!ZENS3N.CMD/.3ox'
 end
 
-outbox_dir = ENV['TPR_BUS_OUTBOX_DIR'].to_s.strip
-if outbox_dir.empty?
-  outbox_dir = File.join(default_cmd_root, '.vec3', 'var', 'telegram_bus', 'outbox')
-end
+outbox_dir = ENV['TPR_RELAY_OUTBOX_DIR'].to_s.strip
+  if outbox_dir.empty?
+    outbox_dir = File.join(default_cmd_root, '.vec3', 'var', 'relay', 'outbox')
+  end
 
-reg_path = ENV['TPR_BUS_REG_PATH'].to_s.strip
-if reg_path.empty?
-  reg_path = File.join(default_cmd_root, '.vec3', 'var', 'telegram_bus', 'registrations.json')
-end
+  reg_path = ENV['TPR_RELAY_REG_PATH'].to_s.strip
+  if reg_path.empty?
+    reg_path = File.join(default_cmd_root, '.vec3', 'var', 'relay', 'registrations.json')
+  end
 
 route_map_path = ENV['TPR_ROUTE_MAP_PATH'].to_s.strip
 if route_map_path.empty?

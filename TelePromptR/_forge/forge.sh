@@ -136,8 +136,8 @@ default_loadtest_outbox_dir() {
 }
 
 default_loadtest_reg_path() {
-  if [[ -n "${TPR_BUS_REG_PATH:-}" ]]; then
-    printf '%s' "$TPR_BUS_REG_PATH"
+  if [[ -n "${TPR_RELAY_REG_PATH:-}" ]]; then
+    printf '%s' "$TPR_RELAY_REG_PATH"
     return 0
   fi
 
@@ -358,8 +358,8 @@ cmd_mesh_logs() {
 cmd_loadtest() {
   local agents="${1:-$FORGE_LOADTEST_AGENTS}"
   local messages="${2:-$FORGE_LOADTEST_MESSAGES_PER_AGENT}"
-  TPR_BUS_OUTBOX_DIR="$(default_loadtest_outbox_dir)" \
-    TPR_BUS_REG_PATH="$(default_loadtest_reg_path)" \
+  TPR_RELAY_OUTBOX_DIR="$(default_loadtest_outbox_dir)" \
+    TPR_RELAY_REG_PATH="$(default_loadtest_reg_path)" \
     "$TPR_BIN" "$ROOT_DIR/tools/loadtest_bus.rb" --agents "$agents" --messages "$messages"
 }
 

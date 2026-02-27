@@ -36,8 +36,8 @@ FileUtils.mkdir_p(outbox_dir)
 FileUtils.mkdir_p(File.dirname(reg_path))
 FileUtils.mkdir_p(keys_dir)
 
-ENV['TPR_BUS_OUTBOX_DIR'] = outbox_dir
-ENV['TPR_BUS_REG_PATH'] = reg_path
+ENV['TPR_RELAY_OUTBOX_DIR'] = outbox_dir
+ENV['TPR_RELAY_REG_PATH'] = reg_path
 ENV['TPR_KEYS_DIR'] = keys_dir
 ENV['TPR_ROUTE_MAP_PATH'] = route_map_path
 ENV['TPR_ROUTE_AUDIT_PATH'] = audit_path

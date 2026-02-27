@@ -20,11 +20,11 @@ class TelePromptRBridge
     @keys_dir = ENV['TPR_KEYS_DIR'].to_s.strip
     @keys_dir = File.join(@repo_root, '_forge', 'runtime', 'keys') if @keys_dir.empty?
 
-    @bus_outbox_dir = ENV['TPR_BUS_OUTBOX_DIR'].to_s.strip
-    @bus_outbox_dir = File.join(@cmd_root, '.vec3', 'var', 'telegram_bus', 'outbox') if @bus_outbox_dir.empty?
+    @bus_outbox_dir = ENV['TPR_RELAY_OUTBOX_DIR'].to_s.strip
+    @bus_outbox_dir = File.join(@cmd_root, '.vec3', 'var', 'relay', 'outbox') if @bus_outbox_dir.empty?
 
-    @bus_reg_path = ENV['TPR_BUS_REG_PATH'].to_s.strip
-    @bus_reg_path = File.join(@cmd_root, '.vec3', 'var', 'telegram_bus', 'registrations.json') if @bus_reg_path.empty?
+    @bus_reg_path = ENV['TPR_RELAY_REG_PATH'].to_s.strip
+    @bus_reg_path = File.join(@cmd_root, '.vec3', 'var', 'relay', 'registrations.json') if @bus_reg_path.empty?
 
     @route_map_path = ENV['TPR_ROUTE_MAP_PATH'].to_s.strip
     @route_map_path = File.join(@repo_root, 'CyberDeck', 'TPR.ROUTE.MAP.json') if @route_map_path.empty?

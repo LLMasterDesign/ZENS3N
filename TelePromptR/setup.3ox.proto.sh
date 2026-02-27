@@ -8,7 +8,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TPR_ROOT="$SCRIPT_DIR"
 CMD_ROOT="${TPR_CMD_ROOT:-/root/!ZENS3N.CMD/.3ox}"
 VEC3_VAR="${CMD_ROOT}/.vec3/var"
-TELEGRAM_BUS="${VEC3_VAR}/telegram_bus"
+RELAY_DIR="${VEC3_VAR}/relay"
 
 echo "▛//▞▞ TELEPROMPTR → 3OX PROTO SETUP ▞▞"
 echo "TPR_ROOT: $TPR_ROOT"
@@ -29,10 +29,9 @@ fi
 
 # Create directory structure
 echo "📁 Creating directory structure..."
-mkdir -p "${TELEGRAM_BUS}/inbox"
-mkdir -p "${TELEGRAM_BUS}/outbox/sent"
-mkdir -p "${TELEGRAM_BUS}/outbox/denied"
-mkdir -p "${VEC3_VAR}/telegram_bus"
+mkdir -p "${RELAY_DIR}/inbox"
+mkdir -p "${RELAY_DIR}/outbox/sent"
+mkdir -p "${RELAY_DIR}/outbox/denied"
 
 # Copy proto and schema files to 3ox for reference
 echo "📋 Copying proto definitions..."
@@ -41,7 +40,7 @@ cp -v "${TPR_ROOT}/specs/TPR.MSG.v1.proto" "${CMD_ROOT}/.3ox/specs/tpr/" 2>/dev/
 cp -v "${TPR_ROOT}/specs/"*.json "${CMD_ROOT}/.3ox/specs/tpr/" 2>/dev/null || true
 
 # Create registration file if it doesn't exist
-REG_FILE="${TELEGRAM_BUS}/registrations.json"
+REG_FILE="${RELAY_DIR}/registrations.json"
 if [[ ! -f "$REG_FILE" ]]; then
   echo "📝 Creating agent registration file..."
   cat > "$REG_FILE" <<'EOF'
@@ -103,21 +102,21 @@ module TelegramTPR
     def outbox_dir
       @outbox_dir ||= begin
         cmd_root = ENV['TPR_CMD_ROOT'] || '/root/!ZENS3N.CMD/.3ox'
-        File.join(cmd_root, '.vec3', 'var', 'telegram_bus', 'outbox')
+        File.join(cmd_root, '.vec3', 'var', 'relay', 'outbox')
       end
     end
 
     def inbox_dir
       @inbox_dir ||= begin
         cmd_root = ENV['TPR_CMD_ROOT'] || '/root/!ZENS3N.CMD/.3ox'
-        File.join(cmd_root, '.vec3', 'var', 'telegram_bus', 'inbox')
+        File.join(cmd_root, '.vec3', 'var', 'relay', 'inbox')
       end
     end
 
     def registrations_file
       @registrations_file ||= begin
         cmd_root = ENV['TPR_CMD_ROOT'] || '/root/!ZENS3N.CMD/.3ox'
-        File.join(cmd_root, '.vec3', 'var', 'telegram_bus', 'registrations.json')
+        File.join(cmd_root, '.vec3', 'var', 'relay', 'registrations.json')
       end
     end
 
