@@ -1,0 +1,14 @@
+/root/!LAUNCHPAD/!CMD.CENTER/!CORE/ARC.Logic.Core/target/release/deps/serde-a01e0bef0f38ed0e.d: /root/CORE/rust/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /root/CORE/rust/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /root/CORE/rust/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /root/CORE/rust/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /root/CORE/rust/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /root/!LAUNCHPAD/!CMD.CENTER/!CORE/ARC.Logic.Core/target/release/build/serde-cfe125327cacaf16/out/private.rs
+
+/root/!LAUNCHPAD/!CMD.CENTER/!CORE/ARC.Logic.Core/target/release/deps/libserde-a01e0bef0f38ed0e.rlib: /root/CORE/rust/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /root/CORE/rust/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /root/CORE/rust/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /root/CORE/rust/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /root/CORE/rust/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /root/!LAUNCHPAD/!CMD.CENTER/!CORE/ARC.Logic.Core/target/release/build/serde-cfe125327cacaf16/out/private.rs
+
+/root/!LAUNCHPAD/!CMD.CENTER/!CORE/ARC.Logic.Core/target/release/deps/libserde-a01e0bef0f38ed0e.rmeta: /root/CORE/rust/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /root/CORE/rust/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /root/CORE/rust/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /root/CORE/rust/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /root/CORE/rust/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /root/!LAUNCHPAD/!CMD.CENTER/!CORE/ARC.Logic.Core/target/release/build/serde-cfe125327cacaf16/out/private.rs
+
+/root/CORE/rust/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs:
+/root/CORE/rust/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs:
+/root/CORE/rust/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs:
+/root/CORE/rust/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs:
+/root/CORE/rust/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs:
+/root/!LAUNCHPAD/!CMD.CENTER/!CORE/ARC.Logic.Core/target/release/build/serde-cfe125327cacaf16/out/private.rs:
+
+# env-dep:OUT_DIR=/root/!LAUNCHPAD/!CMD.CENTER/!CORE/ARC.Logic.Core/target/release/build/serde-cfe125327cacaf16/out

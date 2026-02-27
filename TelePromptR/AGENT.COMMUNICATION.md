@@ -28,7 +28,7 @@ File.write(File.join(outbox_dir, filename), JSON.pretty_generate(envelope))
 ```
 
 **What happens next:**
-1. `telepromptr_bridge.rb` polls the outbox directory (every 0.5s by default)
+1. `telepromptr_bridge.rb` polls the outbox directory (every 3s by default, configurable via `TPR_POLL_INTERVAL_S`)
 2. Bridge reads envelope, validates `agent_id` and `text`
 3. Bridge resolves routing (agent_id → chat_id/topic_thread_id via route map)
 4. Bridge checks agent registration and permissions

@@ -1,0 +1,20 @@
+# Keep Cursor indexing focused on active source files.
+!1N.3OX ZENS3N/
+!ZENS3N.OPS/
+codex53-work/
+
+# Generated/runtime/build artifacts
+**/.git/
+**/.cursor/
+**/.vscode/
+**/node_modules/
+**/target/
+**/_build/
+**/deps/
+**/tmp/
+**/*.log
+**/erl_crash.dump
+
+# Large backups/snapshots
+**/ROOT.LEGACY.*/
+**/CORE.backup.*/

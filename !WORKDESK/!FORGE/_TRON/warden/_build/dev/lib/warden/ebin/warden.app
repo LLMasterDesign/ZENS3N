@@ -1,0 +1,9 @@
+{application,warden,
+             [{config_mtime,1769502425},
+              {optional_applications,[]},
+              {applications,[kernel,stdlib,elixir,logger,jason]},
+              {description,"warden"},
+              {modules,['Elixir.Warden','Elixir.WardenApp']},
+              {registered,[]},
+              {vsn,"0.1.0"},
+              {mod,{'Elixir.WardenApp',[]}}]}.

@@ -35,8 +35,9 @@ class TelePromptRBridge
     @topics_file = ENV['TPR_TOPICS_PATH'].to_s.strip
     @topics_file = File.join(@cmd_root, '.vec3', 'var', 'telegram_topics.json') if @topics_file.empty?
 
-    @poll_interval_s = ENV.fetch('TPR_POLL_INTERVAL_S', '0.5').to_f
-    @poll_interval_s = 0.5 if @poll_interval_s <= 0
+    # Default to 3s polling (runtime.init: aggressive polling is frowned upon)
+    @poll_interval_s = ENV.fetch('TPR_POLL_INTERVAL_S', '3.0').to_f
+    @poll_interval_s = 3.0 if @poll_interval_s <= 0
 
     FileUtils.mkdir_p(@bus_outbox_dir)
     FileUtils.mkdir_p(File.join(@bus_outbox_dir, 'sent'))

@@ -11,7 +11,8 @@ require 'uri'
 $stdout.sync = true
 
 class SpeakerMesh
-  DEFAULT_POLL_INTERVAL_S = 0.5
+  # Default to 3s polling (runtime.init: aggressive polling is frowned upon)
+  DEFAULT_POLL_INTERVAL_S = 3.0
   DEFAULT_MEMORY_WINDOW = 28
   DEFAULT_MAX_REPLY_CHARS = 1200
   DEFAULT_API_TIMEOUT_S = 60

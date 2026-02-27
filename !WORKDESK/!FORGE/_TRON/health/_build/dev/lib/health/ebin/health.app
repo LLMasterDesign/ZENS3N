@@ -1,0 +1,9 @@
+{application,health,
+             [{config_mtime,1769502206},
+              {optional_applications,[]},
+              {applications,[kernel,stdlib,elixir,logger,jason]},
+              {description,"health"},
+              {modules,['Elixir.Health','Elixir.HealthApp']},
+              {registered,[]},
+              {vsn,"0.1.0"},
+              {mod,{'Elixir.HealthApp',[]}}]}.

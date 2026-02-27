@@ -120,7 +120,7 @@ TPR_RELAY_OUTBOX_DIR=.3ox/.vec3/var/relay/outbox
 TPR_RELAY_REG_PATH=.3ox/.vec3/var/relay/registrations.json
 TPR_TOPICS_PATH=.3ox/.vec3/var/telegram_topics.json
 TPR_ROUTE_MAP_PATH=CyberDeck/TPR.ROUTE.MAP.json
-TPR_POLL_INTERVAL_S=0.5
+TPR_POLL_INTERVAL_S=3.0  # Default 3s (runtime.init: aggressive polling frowned upon)
 ```
 
 ### 5. **Directory Structure**

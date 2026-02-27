@@ -1,0 +1,9 @@
+{application,ledger,
+             [{config_mtime,1769775159},
+              {optional_applications,[]},
+              {applications,[kernel,stdlib,elixir,logger,jason]},
+              {description,"ledger"},
+              {modules,['Elixir.Ledger','Elixir.LedgerApp']},
+              {registered,[]},
+              {vsn,"0.1.0"},
+              {mod,{'Elixir.LedgerApp',[]}}]}.

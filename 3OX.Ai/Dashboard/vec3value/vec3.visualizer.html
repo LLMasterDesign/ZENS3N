@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vec3 :: Agent State Visualizer</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&family=Orbitron:wght@400;700;900&display=swap');
+        
+        :root {
+            --bg-deep: #0a0a0f;
+            --bg-panel: #12121a;
+            --border: #2a2a3a;
+            --accent-tape: #ff6b35;
+            --accent-pulse: #00d4aa;
+            --accent-gate: #7b5cff;
+            --text-primary: #e8e8f0;
+            --text-dim: #6a6a7a;
+            --glow-tape: rgba(255, 107, 53, 0.3);
+            --glow-pulse: rgba(0, 212, 170, 0.3);
+            --glow-gate: rgba(123, 92, 255, 0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+            gap: 15px;
+        }
+        
+        /* Header - Compact */
+        .header {
+            text-align: center;
+            flex-shrink: 0;
+        }
+        
+        .header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: 0.2em;
+            background: linear-gradient(135deg, var(--accent-tape), var(--accent-pulse), var(--accent-gate));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header .glyph {
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            opacity: 0.6;
+        }
+        
+        /* Main Layout - Flex to fill */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 300px 400px 280px;
+            gap: 15px;
+            flex: 1;
+            min-height: 0;
+        }
+        
+        @media (max-width: 1000px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+                overflow-y: auto;
+            }
+        }
+        
+        /* Panel Styling - Compact */
+        .panel {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+            overflow: hidden;
+            pointer-events: auto;
+        }
+        
+        .panel-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            color: var(--text-dim);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+        
+        .panel-title::before {
+            content: '▛▞';
+            opacity: 0.5;
+        }
+        
+        /* Sliders - Compact */
+        .slider-group {
+            margin-bottom: 10px;
+        }
+        
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+        
+        .slider-name {
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .slider-name.tape { color: var(--accent-tape); }
+        .slider-name.pulse { color: var(--accent-pulse); }
+        .slider-name.gate { color: var(--accent-gate); }
+        
+        .slider-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+        
+        .slider-desc {
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            margin-bottom: 8px;
+        }
+        
+        .slider-scale {
+            display: flex;
+            position: relative;
+            font-size: 0.5rem;
+            color: var(--text-dim);
+            opacity: 0.7;
+            margin-top: 4px;
+        }
+        .slider-scale span {
+            flex: 1;
+            text-align: center;
+            min-width: 0;
+        }
+        
+        input[type="range"] {
+            pointer-events: auto;
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--border);
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        input[type="range"]:active {
+            cursor: grabbing;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        input[type="range"].tape::-webkit-slider-thumb {
+            background: var(--accent-tape);
+            box-shadow: 0 0 15px var(--glow-tape);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        input[type="range"].tape.snap-zone::-webkit-slider-thumb {
+            box-shadow: 0 0 20px var(--glow-tape), 0 0 30px var(--glow-tape);
+        }
+        input[type="range"].tape.snap-bounce::-webkit-slider-thumb {
+            animation: thumb-bounce 0.25s ease;
+        }
+        
+        input[type="range"].pulse::-webkit-slider-thumb {
+            background: var(--accent-pulse);
+            box-shadow: 0 0 15px var(--glow-pulse);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        input[type="range"].pulse.snap-zone::-webkit-slider-thumb {
+            box-shadow: 0 0 20px var(--glow-pulse), 0 0 30px var(--glow-pulse);
+        }
+        input[type="range"].pulse.snap-bounce::-webkit-slider-thumb {
+            animation: thumb-bounce 0.25s ease;
+        }
+        
+        input[type="range"].gate::-webkit-slider-thumb {
+            background: var(--accent-gate);
+            box-shadow: 0 0 15px var(--glow-gate);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        input[type="range"].gate.snap-zone::-webkit-slider-thumb {
+            box-shadow: 0 0 20px var(--glow-gate), 0 0 30px var(--glow-gate);
+        }
+        input[type="range"].gate.snap-bounce::-webkit-slider-thumb {
+            animation: thumb-bounce 0.25s ease;
+        }
+        
+        @keyframes thumb-bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        /* 3D Visualization - Fill available space */
+        .viz-panel {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .viz-container {
+            position: relative;
+            flex: 1;
+            perspective: 800px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .cube-space {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transform: rotateX(-20deg) rotateY(-30deg);
+            animation: subtle-rotate 20s linear infinite;
+        }
+        
+        @keyframes subtle-rotate {
+            from { transform: rotateX(-20deg) rotateY(-30deg); }
+            to { transform: rotateX(-20deg) rotateY(330deg); }
+        }
+        
+        .cube-space:hover {
+            animation-play-state: paused;
+        }
+        
+        /* Axes */
+        .axis {
+            position: absolute;
+            transform-origin: 0 0 0;
+        }
+        
+        .axis-x {
+            width: 150px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-tape), transparent);
+            left: 50%;
+            top: 50%;
+        }
+        
+        .axis-y {
+            width: 2px;
+            height: 150px;
+            background: linear-gradient(0deg, transparent, var(--accent-pulse));
+            left: 50%;
+            top: 50%;
+            transform: translateY(-150px);
+        }
+        
+        .axis-z {
+            width: 150px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-gate));
+            left: 50%;
+            top: 50%;
+            transform: rotateY(90deg) translateX(-150px);
+        }
+        
+        .axis-label {
+            position: absolute;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 700;
+        }
+        
+        .label-x { color: var(--accent-tape); right: 10px; top: 50%; }
+        .label-y { color: var(--accent-pulse); left: 50%; top: 10px; }
+        .label-z { color: var(--accent-gate); left: 10px; top: 50%; transform: translateY(8px); }
+        
+        /* Agent Point - 3D Orb */
+        .agent-point {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: 
+                radial-gradient(circle at 25% 25%, rgba(255,255,255,1) 0%, rgba(255,255,255,0.9) 15%, rgba(240,245,255,0.7) 40%, rgba(200,220,255,0.5) 70%, rgba(150,180,220,0.3) 100%);
+            left: 50%;
+            top: 50%;
+            margin-left: -12px;
+            margin-top: -12px;
+            transform-style: preserve-3d;
+            transform-origin: center center;
+            transition: transform 0.3s ease-out;
+            box-shadow: 
+                0 0 25px rgba(255,255,255,0.9),
+                0 0 50px rgba(255,255,255,0.6),
+                0 0 75px rgba(200,220,255,0.3),
+                inset -8px -8px 16px rgba(0,0,0,0.3),
+                inset 8px 8px 16px rgba(255,255,255,0.4),
+                inset -4px -4px 8px rgba(50,50,100,0.2);
+            filter: drop-shadow(0 0 12px rgba(255,255,255,0.8));
+            z-index: 10;
+        }
+        
+        .agent-point::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle at 70% 30%, rgba(255,255,255,0.6), transparent 60%);
+            pointer-events: none;
+        }
+        
+        .agent-trail {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            left: 50%;
+            top: 50%;
+        }
+        
+        /* State Display - Compact */
+        .state-display {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 8px;
+            margin-top: 8px;
+            font-size: 0.7rem;
+            flex-shrink: 0;
+        }
+        
+        .state-vector { margin-bottom: 4px; }
+        .state-vector .label { color: var(--text-dim); }
+        
+        .magnitude-bar {
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 6px;
+        }
+        
+        .magnitude-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-tape), var(--accent-pulse), var(--accent-gate));
+            border-radius: 2px;
+            transition: width 0.3s;
+        }
+        
+        /* Archetype Display - below state/mag, subtle glow */
+        .archetype-panel {
+            text-align: center;
+            padding: 8px;
+            margin-top: 8px;
+            flex-shrink: 0;
+        }
+        
+        .archetype-glyph {
+            font-size: 1.8rem;
+            margin-bottom: 3px;
+            filter: drop-shadow(0 0 6px currentColor);
+        }
+        
+        .archetype-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            margin-bottom: 3px;
+            text-shadow: 0 0 6px currentColor, 0 0 12px currentColor;
+        }
+        
+        .archetype-desc {
+            color: var(--text-dim);
+            font-size: 0.65rem;
+            line-height: 1.4;
+        }
+        
+        /* Archetype Colors */
+        .archetype-VOID .archetype-glyph { color: #444; }
+        .archetype-VOID .archetype-name { color: #666; }
+        .archetype-SAGE .archetype-glyph, .archetype-SAGE .archetype-name { color: var(--accent-tape); }
+        .archetype-STORM .archetype-glyph, .archetype-STORM .archetype-name { color: var(--accent-pulse); }
+        .archetype-ORACLE .archetype-glyph, .archetype-ORACLE .archetype-name { color: var(--accent-gate); }
+        .archetype-FLAME .archetype-glyph, .archetype-FLAME .archetype-name { color: #ff9500; }
+        .archetype-WEAVER .archetype-glyph, .archetype-WEAVER .archetype-name { color: #c77dff; }
+        .archetype-TIDE .archetype-glyph, .archetype-TIDE .archetype-name { color: #00b4d8; }
+        .archetype-CROWN .archetype-glyph, .archetype-CROWN .archetype-name { color: #ffd700; }
+        .archetype-MIRROR .archetype-glyph, .archetype-MIRROR .archetype-name { color: #aaa; }
+        
+        /* Business Value - Compact */
+        .value-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            pointer-events: auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .value-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 10px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 6px;
+            border-left: 3px solid;
+            transition: opacity 0.4s, background 0.3s;
+            flex-shrink: 0;
+            cursor: pointer;
+            user-select: none;
+            pointer-events: auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .value-item:hover {
+            background: rgba(255,255,255,0.05);
+        }
+        
+        .value-item.active {
+            background: rgba(255,255,255,0.08);
+            border-left-width: 4px;
+        }
+        
+        .value-item.tape { border-color: var(--accent-tape); }
+        .value-item.pulse { border-color: var(--accent-pulse); }
+        .value-item.gate { border-color: var(--accent-gate); }
+        .value-item.flame { border-color: #ff9500; }
+        .value-item.watcher { border-color: #9ca3af; }
+        .value-item.weaver { border-color: #c77dff; }
+        .value-item.crown { border-color: #ffd700; }
+        .value-item.dim { opacity: 0.2; transition: opacity 0.4s; }
+        
+        .value-icon { font-size: 1.2rem; }
+        .value-content h4 { font-size: 0.7rem; margin-bottom: 2px; }
+        .value-content p { font-size: 0.55rem; color: var(--text-dim); line-height: 1.3; }
+        
+        /* Health text */
+        .health-box {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 10px;
+            margin-top: 10px;
+            flex-shrink: 0;
+        }
+        
+        .health-box h4 { font-size: 0.65rem; color: var(--text-dim); margin-bottom: 6px; }
+        .health-box p { font-size: 0.65rem; line-height: 1.4; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>VEC3</h1>
+            <p class="glyph">▛//▞▞ ⟦⎊⟧ :: Agent State Visualizer :: 3OX.Ai</p>
+        </header>
+        
+        <div class="main-grid">
+            <!-- Left Panel: Sliders -->
+            <div class="panel">
+                <div class="panel-title">CONTROL VECTOR</div>
+                <div class="slider-group">
+                    <div class="slider-label">
+                        <span class="slider-name tape">📼 TAPE</span>
+                        <span class="slider-value tape" id="tape-value">MID</span>
+                    </div>
+                    <p class="slider-desc">History • Receipts • Audit</p>
+                    <input type="range" class="tape" id="tape-slider" min="0" max="6" value="3" step="0.01">
+                    <div class="slider-scale"><span>VOID</span><span>LOW</span><span>LOW+</span><span>MID</span><span>MID+</span><span>HIGH</span><span>MAX</span></div>
+                </div>
+                
+                <div class="slider-group">
+                    <div class="slider-label">
+                        <span class="slider-name pulse">⚡ PULSE</span>
+                        <span class="slider-value pulse" id="pulse-value">MID</span>
+                    </div>
+                    <p class="slider-desc">Activity • Events • Status</p>
+                    <input type="range" class="pulse" id="pulse-slider" min="0" max="6" value="3" step="0.01">
+                    <div class="slider-scale"><span>VOID</span><span>LOW</span><span>LOW+</span><span>MID</span><span>MID+</span><span>HIGH</span><span>MAX</span></div>
+                </div>
+                
+                <div class="slider-group">
+                    <div class="slider-label">
+                        <span class="slider-name gate">🔐 WARDEN</span>
+                        <span class="slider-value gate" id="gate-value">MID</span>
+                    </div>
+                    <p class="slider-desc">Permissions • Authority • Access</p>
+                    <input type="range" class="gate" id="gate-slider" min="0" max="6" value="3" step="0.01">
+                    <div class="slider-scale"><span>VOID</span><span>LOW</span><span>LOW+</span><span>MID</span><span>MID+</span><span>HIGH</span><span>MAX</span></div>
+                </div>
+                
+                <div class="state-display">
+                    <div class="state-vector">
+                        <span class="label">State:</span> 
+                        <span id="state-text">( 0.50, 0.50, 0.50 )</span>
+                    </div>
+                    <div>
+                        <span class="label">Magnitude:</span> 
+                        <span id="magnitude-text">0.87</span>
+                    </div>
+                    <div class="magnitude-bar">
+                        <div class="magnitude-fill" id="magnitude-bar" style="width: 50%"></div>
+                    </div>
+                </div>
+                
+                <div class="archetype-panel" id="archetype-panel">
+                    <div class="archetype-glyph" id="archetype-glyph">◉</div>
+                    <div class="archetype-name" id="archetype-name">MIRROR</div>
+                    <p class="archetype-desc" id="archetype-desc">Balanced state. Reflects input without bias.</p>
+                </div>
+            </div>
+            
+            <!-- Center: 3D Visualization -->
+            <div class="panel viz-panel">
+                <div class="panel-title">AGENT POSITION</div>
+                <div class="viz-container">
+                    <div class="cube-space" id="cube-space">
+                        <div class="axis axis-x"></div>
+                        <div class="axis axis-y"></div>
+                        <div class="axis axis-z"></div>
+                        <div class="agent-trail" id="trail-1"></div>
+                        <div class="agent-trail" id="trail-2"></div>
+                        <div class="agent-trail" id="trail-3"></div>
+                        <div class="agent-point" id="agent-point"></div>
+                    </div>
+                    <div class="axis-label label-x">TAPE →</div>
+                    <div class="axis-label label-y">↑ PULSE</div>
+                    <div class="axis-label label-z">← WARDEN</div>
+                </div>
+            </div>
+            
+            <!-- Right Panel: Business Value -->
+            <div class="panel">
+                <div class="panel-title">BUSINESS VALUE</div>
+                <div class="value-grid">
+                    <div class="value-item tape" id="value-tape">
+                        <span class="value-icon">📜</span>
+                        <div class="value-content">
+                            <h4>Audit Trail</h4>
+                            <p>Cryptographic logging. Compliance ready.</p>
+                        </div>
+                    </div>
+                    <div class="value-item pulse" id="value-pulse">
+                        <span class="value-icon">📡</span>
+                        <div class="value-content">
+                            <h4>Real-Time</h4>
+                            <p>Live activity stream. Instant visibility.</p>
+                        </div>
+                    </div>
+                    <div class="value-item gate" id="value-gate">
+                        <span class="value-icon">🛡️</span>
+                        <div class="value-content">
+                            <h4>Access Control</h4>
+                            <p>Fine-grained permissions. Security by design.</p>
+                        </div>
+                    </div>
+                    <div class="value-item flame" id="value-flame">
+                        <span class="value-icon">🔥</span>
+                        <div class="value-content">
+                            <h4>Adaptive Learning</h4>
+                            <p>Evolves with every task. Memory meets action.</p>
+                        </div>
+                    </div>
+                    <div class="value-item watcher" id="value-watcher">
+                        <span class="value-icon">👁️</span>
+                        <div class="value-content">
+                            <h4>Watcher</h4>
+                            <p>Passive intelligence. Observes, learns, waits.</p>
+                        </div>
+                    </div>
+                    <div class="value-item weaver" id="value-weaver">
+                        <span class="value-icon">🕸️</span>
+                        <div class="value-content">
+                            <h4>Architect</h4>
+                            <p>Designs systems from memory. Structural mastery.</p>
+                        </div>
+                    </div>
+                    <div class="value-item crown" id="value-crown">
+                        <span class="value-icon">👑</span>
+                        <div class="value-content">
+                            <h4>Mythic</h4>
+                            <p>Total awareness. Orchestrates everything.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="health-box">
+                    <h4>AGENT HEALTH</h4>
+                    <p id="health-text">Balanced state with moderate history, activity, and permissions. Ready for operations.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module" src="js/vec3.init.js"></script>
+</body>
+</html>
