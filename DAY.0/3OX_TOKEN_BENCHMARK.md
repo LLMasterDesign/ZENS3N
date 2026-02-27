@@ -97,10 +97,11 @@ OPENAI_API_KEY=sk-... python3 DAY.0/3OX_TOKEN_BENCHMARK_API.py
 
 | Variant | Total tokens | vs Prose |
 |---------|--------------|----------|
-| Prose | 311 | baseline |
-| Gensing minimal (ASCII + :: ∎) | 210 | **32.5% savings** |
-| Gensing full (Unicode) | 311 | 0% |
+| Prose | 299 | baseline |
+| Gensing minimal (ASCII + :: ∎) | 222 | **25.8% savings** |
+| **2-PASS** (instructions + gensing context) | 255 | **14.7% savings** |
+| Gensing full (Unicode) | 310 | -3.7% |
 
-**Runtime finding:** ASCII gensing with :: ∎ delimiters saves ~32% when priming the model and asking a test question. Full Unicode gensing matches prose (no savings).
+**2-PASS:** Pass 1 = prose instructions (teach gensing); Pass 2 = gensing context + question. Useful when priming the model first.
 
 :: ∎

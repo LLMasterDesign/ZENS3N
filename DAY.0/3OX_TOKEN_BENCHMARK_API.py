@@ -81,36 +81,36 @@ End conversational output with :: 𝜵
 TEST_USER = "What is the current system state? Reply in one sentence."
 
 
-def call_api(system: str, user: str, api_key: str) -> dict:
+# Pass 1: Prose instructions (teach the model gensing)
+INSTRUCTIONS_PROSE = """You are ZENS3N.BASE. Use gensing format in responses:
+- End data sections with :: ∎
+- End your reply with :: 𝜵
+- Be concise."""
+
+
+def call_api(messages: list, api_key: str, max_tokens: int = 150) -> dict:
     try:
         from openai import OpenAI
     except ImportError:
         import urllib.request
-        import urllib.error
 
         url = "https://api.openai.com/v1/chat/completions"
         body = json.dumps({
             "model": "gpt-4o-mini",
-            "messages": [
-                {"role": "system", "content": system},
-                {"role": "user", "content": user},
-            ],
-            "max_tokens": 100,
+            "messages": messages,
+            "max_tokens": max_tokens,
         }).encode()
         req = urllib.request.Request(url, data=body, method="POST")
         req.add_header("Content-Type", "application/json")
         req.add_header("Authorization", f"Bearer {api_key}")
-        with urllib.request.urlopen(req, timeout=30) as r:
+        with urllib.request.urlopen(req, timeout=60) as r:
             return json.loads(r.read().decode())
     else:
         client = OpenAI(api_key=api_key)
         r = client.chat.completions.create(
             model="gpt-4o-mini",
-            messages=[
-                {"role": "system", "content": system},
-                {"role": "user", "content": user},
-            ],
-            max_tokens=100,
+            messages=messages,
+            max_tokens=max_tokens,
         )
         return {
             "usage": {
@@ -136,37 +136,59 @@ def main():
 
     results = {}
 
-    # Prose run
-    print("[1] Prose priming...")
-    try:
-        r = call_api(PROSE_SYSTEM, TEST_USER, api_key)
+    def run(name: str, messages: list) -> int:
+        r = call_api(messages, api_key)
         u = r["usage"]
-        results["prose"] = u["total_tokens"]
-        print(f"    total_tokens: {u['total_tokens']}")
+        results[name] = u["total_tokens"]
+        return u["total_tokens"]
+
+    # [1] Prose only
+    print("[1] Prose (system + question)...")
+    try:
+        run("prose", [
+            {"role": "system", "content": PROSE_SYSTEM},
+            {"role": "user", "content": TEST_USER},
+        ])
+        print(f"    total_tokens: {results['prose']}")
     except Exception as e:
         print(f"    ERROR: {e}")
         return 1
 
-    # Gensing minimal (ASCII, :: ∎)
+    # [2] Gensing minimal only
     print()
-    print("[2] Gensing minimal (ASCII + :: ∎)...")
+    print("[2] Gensing minimal (system + question)...")
     try:
-        r = call_api(GENSING_MINIMAL, TEST_USER, api_key)
-        u = r["usage"]
-        results["gensing_minimal"] = u["total_tokens"]
-        print(f"    total_tokens: {u['total_tokens']}")
+        run("gensing_minimal", [
+            {"role": "system", "content": GENSING_MINIMAL},
+            {"role": "user", "content": TEST_USER},
+        ])
+        print(f"    total_tokens: {results['gensing_minimal']}")
     except Exception as e:
         print(f"    ERROR: {e}")
         return 1
 
-    # Gensing full (Unicode)
+    # [3] 2-PASS: Instructions (prose) then gensing context
     print()
-    print("[3] Gensing full (Unicode ⊢⇨⟿▷ρφτ)...")
+    print("[3] 2-PASS: Instructions (prose) + gensing context + question...")
     try:
-        r = call_api(GENSING_FULL, TEST_USER, api_key)
-        u = r["usage"]
-        results["gensing_full"] = u["total_tokens"]
-        print(f"    total_tokens: {u['total_tokens']}")
+        run("2pass", [
+            {"role": "system", "content": INSTRUCTIONS_PROSE},
+            {"role": "user", "content": GENSING_MINIMAL + "\n\n" + TEST_USER},
+        ])
+        print(f"    total_tokens: {results['2pass']}")
+    except Exception as e:
+        print(f"    ERROR: {e}")
+        return 1
+
+    # [4] Gensing full (Unicode)
+    print()
+    print("[4] Gensing full (Unicode)...")
+    try:
+        run("gensing_full", [
+            {"role": "system", "content": GENSING_FULL},
+            {"role": "user", "content": TEST_USER},
+        ])
+        print(f"    total_tokens: {results['gensing_full']}")
     except Exception as e:
         print(f"    ERROR: {e}")
         return 1
@@ -174,8 +196,10 @@ def main():
     # Compare
     p = results["prose"]
     gm = results["gensing_minimal"]
+    two = results["2pass"]
     gf = results["gensing_full"]
     sav_min = ((1 - gm / p) * 100) if p > 0 else 0
+    sav_2pass = ((1 - two / p) * 100) if p > 0 else 0
     sav_full = ((1 - gf / p) * 100) if p > 0 else 0
 
     print()
@@ -183,6 +207,7 @@ def main():
     print("RESULT")
     print(f"  Prose:           {p} tokens (baseline)")
     print(f"  Gensing minimal: {gm} tokens — {sav_min:.1f}% savings")
+    print(f"  2-PASS:          {two} tokens — {sav_2pass:.1f}% savings")
     print(f"  Gensing full:    {gf} tokens — {sav_full:.1f}% savings")
     print()
     print(":: ∎")
