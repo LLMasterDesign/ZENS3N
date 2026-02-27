@@ -5,13 +5,16 @@ use std::process::Command;
 use std::path::PathBuf;
 
 use brains_3ox_core::{
-    load_sparkfile, CubeContext,
+    load_sparkfile, resolve_face_path, CubeContext,
 };
 
 pub fn show_page3(cube: &CubeContext) -> std::io::Result<()> {
-    // Check for sparkfile on entry
-    let sparkfile_path = cube.cube_root.join(".3ox").join("sparkfile.md");
-    if !exists(&sparkfile_path).unwrap_or(false) {
+    // Check for sparkfile on entry — resolve from numbered dirs or flat
+    let cube_3ox = cube.cube_root.join(".3ox");
+    let sparkfile_resolved = resolve_face_path(&cube_3ox, "sparkfile.md")
+        .or_else(|| resolve_face_path(&cube.cube_root, "sparkfile.md"));
+    if sparkfile_resolved.is_none() {
+        let sparkfile_path = cube_3ox.join("sparkfile.md");
         println!("\n▛▞ Sparkfile Missing:");
         println!("   No sparkfile.md found at: {}", sparkfile_path.display());
         print!("   Would you like to set up this 3OX cube now? (y/N): ");

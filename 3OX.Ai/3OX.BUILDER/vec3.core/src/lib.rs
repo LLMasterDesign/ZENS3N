@@ -200,35 +200,101 @@ pub fn generate_session_id() -> String {
     Uuid::new_v4().to_string()[..8].to_string().to_uppercase()
 }
 
+// Face resolution: numbered directories (1)Spark..(6)Pulse first, then flat fallback.
+// This allows both the new structured layout and legacy flat cubes to work.
+pub fn resolve_face_path(cube_root: &Path, face_name: &str) -> Option<PathBuf> {
+    let candidates: Vec<PathBuf> = match face_name {
+        "sparkfile.md" => vec![
+            cube_root.join("(1)Spark").join("Zens3n.sparkfile.md"),
+            find_first_match(cube_root, "(1)Spark", "sparkfile.md"),
+            cube_root.join("sparkfile.md"),
+        ],
+        "brains.rs" | "brain.rs" => vec![
+            cube_root.join("(2)Brains").join("brains.rs"),
+            cube_root.join("(2)Brains").join("brain.rs"),
+            cube_root.join("brains.rs"),
+            cube_root.join("brain.rs"),
+        ],
+        "limits.toml" | "limits.json" => vec![
+            cube_root.join("(3)Rules").join("limits.toml"),
+            cube_root.join("(3)Rules").join("limits.json"),
+            cube_root.join("limits.toml"),
+            cube_root.join("limits.json"),
+        ],
+        "tools.yml" => vec![
+            cube_root.join("(4)Toolkit").join("Tools").join("tools.yml"),
+            cube_root.join("(4)Toolkit").join("tools.yml"),
+            cube_root.join("tools.yml"),
+        ],
+        "routes.json" => vec![
+            cube_root.join("(5)Links").join("routes.json"),
+            cube_root.join("routes.json"),
+        ],
+        "run.rb" => vec![
+            cube_root.join("run.rb"),
+        ],
+        "3ox.log" => vec![
+            cube_root.join("(6)Pulse").join("3ox.log"),
+            cube_root.join("3ox.log"),
+        ],
+        _ => vec![cube_root.join(face_name)],
+    };
+    candidates.into_iter().find(|p| p.exists())
+}
+
+fn find_first_match(cube_root: &Path, dir_name: &str, filename: &str) -> PathBuf {
+    let dir = cube_root.join(dir_name);
+    if dir.is_dir() {
+        if let Ok(entries) = fs::read_dir(&dir) {
+            for entry in entries.flatten() {
+                let name = entry.file_name();
+                if name.to_string_lossy().ends_with(filename) {
+                    return entry.path();
+                }
+            }
+        }
+    }
+    dir.join(filename)
+}
+
 // Cube context loading functions
 pub fn load_sparkfile(cube_root: &Path) -> Result<String, String> {
-    let path = cube_root.join("sparkfile.md");
+    let path = resolve_face_path(cube_root, "sparkfile.md")
+        .ok_or_else(|| "sparkfile.md not found in cube".to_string())?;
     fs::read_to_string(&path)
-        .map_err(|e| format!("Failed to load sparkfile.md: {}", e))
+        .map_err(|e| format!("Failed to load {}: {}", path.display(), e))
 }
 
 pub fn load_tools(cube_root: &Path) -> Result<ToolsConfig, String> {
-    let path = cube_root.join("tools.yml");
+    let path = resolve_face_path(cube_root, "tools.yml")
+        .ok_or_else(|| "tools.yml not found in cube".to_string())?;
     let content = fs::read_to_string(&path)
-        .map_err(|e| format!("Failed to load tools.yml: {}", e))?;
+        .map_err(|e| format!("Failed to load {}: {}", path.display(), e))?;
     serde_yaml::from_str(&content)
-        .map_err(|e| format!("Failed to parse tools.yml: {}", e))
+        .map_err(|e| format!("Failed to parse {}: {}", path.display(), e))
 }
 
 pub fn load_routes(cube_root: &Path) -> Result<RoutesConfig, String> {
-    let path = cube_root.join("routes.json");
+    let path = resolve_face_path(cube_root, "routes.json")
+        .ok_or_else(|| "routes.json not found in cube".to_string())?;
     let content = fs::read_to_string(&path)
-        .map_err(|e| format!("Failed to load routes.json: {}", e))?;
+        .map_err(|e| format!("Failed to load {}: {}", path.display(), e))?;
     serde_json::from_str(&content)
-        .map_err(|e| format!("Failed to parse routes.json: {}", e))
+        .map_err(|e| format!("Failed to parse {}: {}", path.display(), e))
 }
 
 pub fn load_limits(cube_root: &Path) -> Result<LimitsConfig, String> {
-    let path = cube_root.join("limits.toml");
+    let path = resolve_face_path(cube_root, "limits.toml")
+        .ok_or_else(|| "limits.toml not found in cube".to_string())?;
+    let ext = path.extension().and_then(|e| e.to_str()).unwrap_or("");
     let content = fs::read_to_string(&path)
-        .map_err(|e| format!("Failed to load limits.toml: {}", e))?;
-    toml::from_str(&content)
-        .map_err(|e| format!("Failed to parse limits.toml: {}", e))
+        .map_err(|e| format!("Failed to load {}: {}", path.display(), e))?;
+    match ext {
+        "json" => serde_json::from_str(&content)
+            .map_err(|e| format!("Failed to parse {}: {}", path.display(), e)),
+        _ => toml::from_str(&content)
+            .map_err(|e| format!("Failed to parse {}: {}", path.display(), e)),
+    }
 }
 
 pub fn load_face_map(cube_root: &Path) -> Result<Value, String> {
@@ -263,17 +329,19 @@ pub fn load_agent_id(cube_root: &Path) -> Result<String, String> {
 }
 
 pub fn validate_cube(cube_root: &Path) -> Result<(), String> {
-    let required_files = vec![
-        "tools.yml",
-        "routes.json",
-        "limits.toml",
-        "run.rb",
+    let required_faces = vec!["tools.yml", "routes.json", "limits.toml"];
+    for face in &required_faces {
+        if resolve_face_path(cube_root, face).is_none() {
+            return Err(format!("Required face missing: {}", face));
+        }
+    }
+
+    let required_vec3 = vec![
         "vec3.core/face.map.toml",
         "vec3.core/manifest.vec3.toml",
         "vec3.core/agent.id",
     ];
-
-    for file in required_files {
+    for file in &required_vec3 {
         let path = cube_root.join(file);
         if !path.exists() {
             return Err(format!("Required file missing: {}", file));
@@ -337,7 +405,8 @@ pub fn execute_tool(
         ));
     }
 
-    let run_rb_path = cube_root.join("run.rb");
+    let run_rb_path = resolve_face_path(cube_root, "run.rb")
+        .unwrap_or_else(|| cube_root.join("run.rb"));
 
     let output = Command::new("ruby")
         .arg(run_rb_path.to_str().unwrap())

@@ -10,7 +10,7 @@ use std::path::PathBuf;
 use std::thread::sleep;
 use std::time::Duration;
 
-use brains_3ox_core::{init_cube_context, CubeContext};
+use brains_3ox_core::{init_cube_context, resolve_face_path, CubeContext};
 
 struct TerminalGuard;
 
@@ -218,24 +218,28 @@ pub fn show_page2(cube_root: &PathBuf) -> std::io::Result<Option<CubeContext>> {
                 sleep(Duration::from_millis(60));
             }
             
-            // Check if file exists (files are in .3ox subdirectory)
-            // Focus: Start with just brains.rs to isolate the issue
-            let check_path = match name.as_str() {
-                "brains.rs" => cube_3ox.join("brains.rs"),
-                "run.rb" => cube_3ox.join("run.rb"),
-                "tools.yml" => cube_3ox.join("tools.yml"),
-                "routes.json" => cube_3ox.join("routes.json"),
-                "limits.toml" => cube_3ox.join("limits.toml"),
-                "3ox.log" => cube_3ox.join("3ox.log"),
-                "face.map.toml" => cube_3ox.join("vec3.core/face.map.toml"),
-                "manifest.vec3.toml" => cube_3ox.join("vec3.core/manifest.vec3.toml"),
-                "agent.id" => cube_3ox.join("vec3.core/agent.id"),
-                "sparkfile.md" => cube_3ox.join("sparkfile.md"),
-                _ => cube_3ox.join("unknown"),
+            // Resolve face path: numbered dirs first, then flat fallback
+            let (check_path, exists) = match name.as_str() {
+                "face.map.toml" => {
+                    let p = cube_3ox.join("vec3.core/face.map.toml");
+                    (p.clone(), p.exists())
+                }
+                "manifest.vec3.toml" => {
+                    let p = cube_3ox.join("vec3.core/manifest.vec3.toml");
+                    (p.clone(), p.exists())
+                }
+                "agent.id" => {
+                    let p = cube_3ox.join("vec3.core/agent.id");
+                    (p.clone(), p.exists())
+                }
+                face_name => {
+                    if let Some(resolved) = resolve_face_path(&cube_3ox, face_name) {
+                        (resolved, true)
+                    } else {
+                        (cube_3ox.join(face_name), false)
+                    }
+                }
             };
-            
-            // Check file existence
-            let exists = check_path.exists();
             
             // Debug: Always log for brains.rs to track the issue
             if name == "brains.rs" {
