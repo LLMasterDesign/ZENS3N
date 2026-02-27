@@ -80,11 +80,19 @@ git push origin v1.0.0
 ### 4. Create Distribution Archive
 
 ```bash
-# Create tar.gz
+# Build binaries
+make build
+
+# Copy to dist/
+make dist
+
+# Binaries: dist/vec3-boot, dist/3ox
+
+# Source archive
 tar -czf 3ox-builder-v1.0.0.tar.gz 3OX.BUILDER/
 
-# Or zip
-zip -r 3ox-builder-v1.0.0.zip 3OX.BUILDER/
+# Binary-only (Linux x86_64)
+tar -czf 3ox-binaries-v1.0.0.tar.gz dist/
 
 # Upload to GitHub release
 ```
@@ -129,7 +137,7 @@ make build
 
 ```bash
 # Direct
-./boot/target/release/vec3-boot
+./target/release/vec3-boot
 
 # Via Bun
 bun compile-run.bun
@@ -160,7 +168,7 @@ make run
 cargo build --release
 
 # Test run
-./boot/target/release/vec3-boot
+./target/release/vec3-boot
 
 # Test setup
 ruby 3OX.BUILD/setup-3ox.rb test-cube TEST Sentinel
@@ -175,7 +183,7 @@ ls -la test-cube/.3ox/
 
 ```bash
 # Check binary
-./boot/target/release/vec3-boot --help
+./target/release/vec3-boot --help
 
 # Check setup script
 ruby 3OX.BUILD/setup-3ox.rb
@@ -188,10 +196,10 @@ bun compile-run.bun
 
 **Binary not found:**
 - Ensure `cargo build --release` completed successfully
-- Check `boot/target/release/vec3-boot` exists
+- Check `target/release/vec3-boot` exists
 
 **Permission denied:**
-- `chmod +x boot/target/release/vec3-boot`
+- `chmod +x target/release/vec3-boot`
 - `chmod +x 3OX.BUILD/setup-3ox.rb`
 
 **Missing dependencies:**
