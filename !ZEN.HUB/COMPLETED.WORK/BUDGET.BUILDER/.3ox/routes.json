@@ -1,0 +1,28 @@
+{
+  "routes": {
+    "default": "!0UT.BUDGET",
+    "reports": "!0UT.BUDGET/reports",
+    "budgets": "!0UT.BUDGET/budgets",
+    "debt_analysis": "!0UT.BUDGET/debt_analysis",
+    "payoff_strategies": "!0UT.BUDGET/payoff_strategies",
+    "business_plans": "!0UT.BUDGET/business_plans",
+    "logs": ".3ox"
+  },
+  "enforcement": {
+    "budget_outputs_only": "!0UT.BUDGET",
+    "never_modify_source": "BUDGET.BUILDER source files",
+    "encrypt_financial_data": true,
+    "backup_before_operations": true
+  },
+  "output_formats": {
+    "reports": "json",
+    "budgets": "json",
+    "logs": "toml",
+    "backups": "encrypted_json"
+  }
+}
+
+
+
+
+

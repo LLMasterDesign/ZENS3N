@@ -1,0 +1,21 @@
+{
+  "routes": {
+    "default": "!0UT.CLEANER",
+    "reports": "!0UT.CLEANER/reports",
+    "receipts": "!0UT.CLEANER/receipts",
+    "backups": "!0UT.CLEANER/backups",
+    "logs": ".3ox",
+    "rollback_scripts": "!0UT.CLEANER/backups"
+  },
+  "enforcement": {
+    "cleaner_outputs_only": "!0UT.CLEANER",
+    "never_modify_source": "CURSOR.CLEANER source files",
+    "backup_before_aggressive": true
+  },
+  "output_formats": {
+    "reports": "markdown",
+    "logs": "toml",
+    "rollback": "powershell",
+    "manifests": "json"
+  }
+}

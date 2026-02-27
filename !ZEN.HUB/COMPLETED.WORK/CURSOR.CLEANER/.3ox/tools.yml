@@ -1,0 +1,154 @@
+# TOOLS.YML :: CURSOR.CLEANER Tool Registry
+# Version: v1.0.0 - Aggressive System Optimizer
+# Updated: 2025-10-22
+
+tools:
+  - name: FileValidator
+    function: validate_file(filepath)
+    returns: hash with :path, :hash, :size, :valid
+    description: Validate file existence and generate xxHash64 checksum
+    
+  - name: ProcessAnalyzer
+    function: analyze_processes()
+    returns: array of process objects with memory/CPU usage
+    description: Real-time process analysis for resource optimization
+    
+  - name: ServiceOptimizer
+    function: optimize_services(target_list)
+    returns: hash with :disabled, :enabled, :rollback_commands
+    description: Aggressive service optimization with rollback
+    
+  - name: DiskAnalyzer
+    function: analyze_disk_space()
+    returns: hash with :recoverable_space, :large_files, :duplicates
+    description: Comprehensive disk space analysis
+    
+  - name: TempCleaner
+    function: clean_temp_files(aggressive_mode)
+    returns: hash with :files_removed, :space_freed, :errors
+    description: Automated temp file cleanup
+    
+  - name: BloatRemover
+    function: remove_bloatware(app_list)
+    returns: hash with :removed_apps, :space_freed, :rollback_info
+    description: Remove Windows bloatware and unused apps
+    
+  - name: RegistryCleaner
+    function: clean_registry(backup_first)
+    returns: hash with :keys_cleaned, :backup_location, :rollback_script
+    description: Safe registry optimization with backup
+    
+  - name: StartupOptimizer
+    function: optimize_startup()
+    returns: hash with :disabled_programs, :boot_time_estimate, :rollback_commands
+    description: Boot optimization and startup program management
+    
+  - name: SystemTuner
+    function: tune_system_performance()
+    returns: hash with :tweaks_applied, :performance_gains, :rollback_commands
+    description: Advanced system performance optimization
+    
+  - name: BackupManager
+    function: create_backup(operation_type)
+    returns: hash with :backup_location, :restore_point, :rollback_script
+    description: Create system restore points and operation backups
+
+external_tools:
+  - name: disk-analyzer
+    files: [disk-analyzer.ps1]
+    usage: "powershell -ExecutionPolicy Bypass -File Toolkit/audit/disk-analyzer.ps1"
+    description: PowerShell disk space analysis
+    
+  - name: temp-hunter
+    files: [temp-hunter.ps1]
+    usage: "powershell -ExecutionPolicy Bypass -File Toolkit/audit/temp-hunter.ps1"
+    description: Aggressive temp file discovery
+    
+  - name: service-analyzer
+    files: [service-analyzer.rb]
+    usage: "ruby Toolkit/audit/service-analyzer.rb"
+    description: Service optimization analysis
+    
+  - name: bloat-detector
+    files: [bloat-detector.rb]
+    usage: "ruby Toolkit/audit/bloat-detector.rb"
+    description: System bloat identification
+    
+  - name: startup-audit
+    files: [startup-audit.ps1]
+    usage: "powershell -ExecutionPolicy Bypass -File Toolkit/audit/startup-audit.ps1"
+    description: Boot optimization analysis
+    
+  - name: process-monitor
+    files: [process-monitor.rb]
+    usage: "ruby Toolkit/audit/process-monitor.rb"
+    description: Real-time process resource monitoring
+    
+  - name: auto-clean-temp
+    files: [auto-clean-temp.ps1]
+    usage: "powershell -ExecutionPolicy Bypass -File Toolkit/cleanup/auto-clean-temp.ps1"
+    description: Automated temp file cleanup
+    
+  - name: deep-clean-system
+    files: [deep-clean-system.ps1]
+    usage: "powershell -ExecutionPolicy Bypass -File Toolkit/cleanup/deep-clean-system.ps1"
+    description: Aggressive system cleanup
+    
+  - name: dev-clean
+    files: [dev-clean.rb]
+    usage: "ruby Toolkit/cleanup/dev-clean.rb"
+    description: Developer artifact cleanup
+    
+  - name: bloat-remover
+    files: [bloat-remover.ps1]
+    usage: "powershell -ExecutionPolicy Bypass -File Toolkit/cleanup/bloat-remover.ps1"
+    description: Windows bloatware removal
+    
+  - name: duplicate-destroyer
+    files: [duplicate-destroyer.rb]
+    usage: "ruby Toolkit/cleanup/duplicate-destroyer.rb"
+    description: Intelligent duplicate file removal
+    
+  - name: service-optimizer
+    files: [service-optimizer.rb]
+    usage: "ruby Toolkit/optimize/service-optimizer.rb"
+    description: Service configuration optimization
+    
+  - name: startup-optimizer
+    files: [startup-optimizer.ps1]
+    usage: "powershell -ExecutionPolicy Bypass -File Toolkit/optimize/startup-optimizer.ps1"
+    description: Boot acceleration
+    
+  - name: performance-tuner
+    files: [performance-tuner.ps1]
+    usage: "powershell -ExecutionPolicy Bypass -File Toolkit/optimize/performance-tuner.ps1"
+    description: System performance tweaks
+    
+  - name: registry-cleaner
+    files: [registry-cleaner.rb]
+    usage: "ruby Toolkit/optimize/registry-cleaner.rb"
+    description: Safe registry optimization
+    
+  - name: system-optimizer
+    files: [system-optimizer.ps1]
+    usage: "powershell -ExecutionPolicy Bypass -File Toolkit/optimize/system-optimizer.ps1"
+    description: Advanced system optimization
+
+note: "All tools include rollback capabilities and safety checks"
+
+dependencies:
+  - xxhash (gem install xxhash)
+  - json (stdlib)
+  - fileutils (stdlib)
+  - time (stdlib)
+  - yaml (stdlib)
+  - digest (stdlib)
+  - openssl (stdlib)
+  - powershell (Windows)
+  - admin_privileges (required for system operations)
+
+
+
+
+
+

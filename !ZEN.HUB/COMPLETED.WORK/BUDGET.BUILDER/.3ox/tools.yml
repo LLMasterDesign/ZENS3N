@@ -1,0 +1,97 @@
+# TOOLS.YML :: BUDGET.BUILDER Tool Registry
+# Version: v1.0.0 - Personal Finance Management with Debt Focus
+# Updated: 2025-10-22
+
+tools:
+  - name: DebtAnalyzer
+    function: analyze_debt_situation()
+    returns: hash with debt breakdown, interest rates, payoff timelines
+    description: Comprehensive debt analysis with detailed scrutiny
+    
+  - name: BudgetCalculator
+    function: calculate_budget(income, expenses, categories)
+    returns: hash with budget recommendations and deficit analysis
+    description: Interactive budget calculator with missing categories
+    
+  - name: ExpenseTracker
+    function: track_expenses(period, categories)
+    returns: hash with spending patterns and budget compliance
+    description: Real-time expense tracking and categorization
+    
+  - name: PayoffStrategies
+    function: generate_payoff_strategies(debt_data)
+    returns: hash with multiple payoff methods and timelines
+    description: Generate debt snowball, avalanche, and consolidation strategies
+    
+  - name: BusinessTransition
+    function: plan_business_funding(personal_finance_status)
+    returns: hash with business funding roadmap and prerequisites
+    description: Plan transition from personal debt to business funding
+    
+  - name: FinancialReport
+    function: generate_comprehensive_report()
+    returns: hash with complete financial analysis and recommendations
+    description: Generate comprehensive financial reports and analysis
+    
+  - name: DataEncryption
+    function: encrypt_financial_data(data)
+    returns: encrypted data with timestamp and backup info
+    description: Encrypt sensitive financial data locally
+    
+  - name: BackupManager
+    function: create_financial_backup(operation_type)
+    returns: hash with backup location and restore information
+    description: Create encrypted backups before financial operations
+    
+  - name: ValidationEngine
+    function: validate_calculations(data)
+    returns: hash with validation results and error checking
+    description: Cross-check all financial calculations and recommendations
+
+external_tools:
+  - name: debt-analyzer
+    files: [debt-analyzer.rb]
+    usage: "ruby Toolkit/analysis/debt-analyzer.rb"
+    description: Detailed debt analysis and scrutiny
+    
+  - name: budget-calculator
+    files: [budget-calculator.rb]
+    usage: "ruby Toolkit/calculators/budget-calculator.rb --interactive"
+    description: Interactive budget calculator with missing categories
+    
+  - name: expense-tracker
+    files: [expense-tracker.rb]
+    usage: "ruby Toolkit/tracking/expense-tracker.rb monthly"
+    description: Expense tracking and categorization system
+    
+  - name: payoff-planner
+    files: [payoff-planner.rb]
+    usage: "ruby Toolkit/strategies/payoff-planner.rb avalanche"
+    description: Debt payoff strategy planner
+    
+  - name: business-planner
+    files: [business-planner.rb]
+    usage: "ruby Toolkit/business/business-planner.rb transition"
+    description: Business funding transition planner
+    
+  - name: financial-reporter
+    files: [financial-reporter.rb]
+    usage: "ruby Toolkit/reports/financial-reporter.rb comprehensive"
+    description: Comprehensive financial reporting system
+
+note: "All tools include data encryption and privacy protection"
+
+dependencies:
+  - xxhash (gem install xxhash)
+  - json (stdlib)
+  - fileutils (stdlib)
+  - time (stdlib)
+  - yaml (stdlib)
+  - digest (stdlib)
+  - openssl (stdlib)
+  - base64 (stdlib)
+
+
+
+
+
