@@ -231,6 +231,7 @@ pub fn resolve_face_path(cube_root: &Path, face_name: &str) -> Option<PathBuf> {
             cube_root.join("routes.json"),
         ],
         "run.rb" => vec![
+            cube_root.join(".vec3").join("rc").join("run").join("run.rb"),
             cube_root.join("run.rb"),
         ],
         "3ox.log" => vec![
