@@ -1,0 +1,34 @@
+{
+  "default": {
+    "chat_id": -1001234567890,
+    "allowed_chat_ids": [
+      -1001234567890
+    ],
+    "default_topic": null,
+    "allowed_topics": []
+  },
+  "agents": {
+    "metatron": {
+      "agent_name": "MetaTron",
+      "pico_glyph": "⚡",
+      "agent_type": "deity",
+      "chat_id": -1001234567890,
+      "allowed_chat_ids": [
+        -1001234567890
+      ],
+      "default_topic": null,
+      "allowed_topics": []
+    },
+    "zens3n": {
+      "agent_name": "ZENS3N",
+      "pico_glyph": "⎊",
+      "agent_type": "operator",
+      "chat_id": -1001234567890,
+      "allowed_chat_ids": [
+        -1001234567890
+      ],
+      "default_topic": null,
+      "allowed_topics": []
+    }
+  }
+}

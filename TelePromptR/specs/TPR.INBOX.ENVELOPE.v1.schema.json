@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "TPR.INBOX.ENVELOPE.v1.schema.json",
+  "title": "TelePromptR Inbox Envelope v1 (Teleprompter -> SpeakerMesh)",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "message_id": { "type": "string", "minLength": 1 },
+    "from_chat_id": { "type": ["integer", "string"] },
+    "from_thread_id": { "type": ["integer", "string", "null"] },
+    "chat_id": { "type": ["integer", "string"] },
+    "thread_id": { "type": ["integer", "string", "null"] },
+    "from_user": { "type": ["object", "null"] },
+    "text": { "type": "string", "minLength": 1 },
+    "original_text": { "type": ["string", "null"] },
+    "raw_message": { "type": ["object", "null"] },
+    "routed_to": { "type": ["string", "null"] },
+    "route_reason": {
+      "type": ["string", "null"],
+      "enum": ["mention", "subscription", "autopost", null]
+    },
+    "meta": { "type": ["object", "null"] },
+    "routed_at": { "type": ["string", "null"], "format": "date-time" },
+    "sirius_time": { "type": ["string", "null"] },
+    "normalized": { "type": ["boolean", "null"] }
+  },
+  "required": ["message_id", "text"],
+  "anyOf": [
+    { "required": ["from_chat_id"] },
+    { "required": ["chat_id"] }
+  ]
+}
+

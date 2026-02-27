@@ -1,0 +1,14 @@
+[identity]
+name = "TelePromptR"
+id = "STATION.ID"
+type = "3ox.station"
+version = "2.1.0"
+created = "⧗-26.180"
+
+[location]
+path = "/root/!CMD.VPS/TelePromptR/"
+station_folder = "3ox.station/"
+runtime = "/root/_TRON/systemd/station/teleprompter.service"
+
+[role]
+primary = "Telegram Gateway"

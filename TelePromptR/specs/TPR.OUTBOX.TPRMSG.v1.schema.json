@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "TPR.OUTBOX.TPRMSG.v1.schema.json",
+  "title": "TelePromptR Outbox Envelope v1 (SpeakerMesh -> Teleprompter, TPR.MSG JSON)",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "tpr": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "src": { "type": "string", "minLength": 1 },
+        "dst": { "type": ["string", "null"] },
+        "sev": { "type": ["string", "null"] },
+        "glyph": { "type": ["string", "null"] },
+        "pico": { "type": ["string", "null"] },
+        "dir": { "type": ["string", "null"] },
+        "msg": { "type": "string", "minLength": 1 }
+      },
+      "required": ["src", "msg"]
+    },
+    "route": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "chat_id": { "type": ["integer", "string"] },
+        "thread_id": { "type": ["integer", "string", "null"] },
+        "parse_mode": { "type": ["string", "null"] }
+      },
+      "required": ["chat_id"]
+    },
+    "meta": { "type": ["object", "null"] }
+  },
+  "required": ["tpr", "route"]
+}
+

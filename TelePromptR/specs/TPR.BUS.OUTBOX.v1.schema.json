@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "TPR.BUS.OUTBOX.v1.schema.json",
+  "title": "TelePromptR Bus Outbox Envelope v1 (Agent -> TelePromptRBridge -> Telegram)",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "agent_id": { "type": "string", "minLength": 1 },
+    "text": { "type": "string", "minLength": 1 },
+    "chat_id": { "type": ["integer", "string", "null"] },
+    "topic_thread_id": { "type": ["integer", "string", "null"] },
+    "timestamp": { "type": ["string", "null"], "format": "date-time" },
+    "message_id": { "type": ["string", "null"] },
+    "trace_id": { "type": ["string", "null"] }
+  },
+  "required": ["agent_id", "text"]
+}
+
