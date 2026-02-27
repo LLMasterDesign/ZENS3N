@@ -1,0 +1,117 @@
+[checkpoint]
+id = "CKPT.2026-02-14.001"
+created_at_utc = "2026-02-14T00:15:48Z"
+owner = "ZENS3N.BASE"
+purpose = "Stable restart anchor for lifecycle + proto + file pipeline governance"
+status = "active"
+
+# :: ∎
+
+[intent]
+primary_goal = "Process files through a governed agentic pipeline without losing files"
+principle = "single_authority_per_concern"
+notes = [
+  "Worker executes",
+  "Warden approves",
+  "Supervisor orchestrates via proto contracts",
+  "Pulse writes meta/merkle artifacts",
+  "Tape carries append-only events"
+]
+
+# :: ∎
+
+[truth.paths]
+meta_root = ".3ox/_meta"
+vec3_runtime_root = ".3ox/.vec3"
+tron_root = "_TRON/systemd"
+wrkdsk_root = ".3ox/.vec3/var/wrkdsk"
+services_index = "_TRON/systemd/proto/services/services.index.toml"
+
+# :: ∎
+
+[truth.proto]
+authority_model = "service_local_only"
+canonical_proto_dir = "_TRON/systemd/lifecycle/proto"
+registry_dir = "_TRON/systemd/proto/services"
+registry_rule = "index_metadata_only_no_proto_contract_files"
+
+proto_files = [
+  "_TRON/systemd/lifecycle/proto/whoami.watch.proto",
+  "_TRON/systemd/lifecycle/proto/wrkdsk.proto"
+]
+
+# :: ∎
+
+[[truth.services]]
+id = "lifecycle.whoami.watch"
+unit = "_TRON/systemd/lifecycle/whoami.watch.service"
+proto = "_TRON/systemd/lifecycle/proto/whoami.watch.proto"
+state = "active"
+
+[[truth.services]]
+id = "lifecycle.wrkdsk.scratchpad"
+unit = "none"
+proto = "_TRON/systemd/lifecycle/proto/wrkdsk.proto"
+state = "contract"
+
+# :: ∎
+
+[truth.write_policy]
+allowed_roots = [
+  "!WORKDESK",
+  "!ZENS3N.OPS/receipts",
+  ".3ox/_meta/receipts",
+  ".3ox/_meta/merkle.root",
+  ".3ox/.vec3/var/wrkdsk"
+]
+blocked_roots = [
+  ".3ox/.vec3/var/wrksdsk",
+  ".3ox/.vec3/var/state"
+]
+
+# :: ∎
+
+[truth.constraints]
+no_runtime_scripts_in_meta_cmd = true
+meta_cmd_rule = "_meta/cmd holds compatibility docs/shims only"
+no_proto_symlink_fallback = true
+receipt_writer_principle = "single_writer_receipt_emit"
+state_machine = ["TRACK", "PLAN", "DRY_RUN", "FIX", "EXECUTE", "SEAL"]
+
+# :: ∎
+
+[known_drift]
+whoami_may_be_stale = true
+changelog_may_be_stale = true
+stale_examples = [
+  "legacy wrksdsk references in old entries",
+  "legacy _meta/cmd script evidence entries"
+]
+reason = "historical entries were not fully normalized after architecture corrections"
+
+# :: ∎
+
+[next_chat_resume]
+entrypoint = "Read this file first, run startup sequence, then verify paths, then normalize stale metadata"
+startup_doc = ".3ox/(1)Spark/docs/CODEX.STARTUP.SEQUENCE.md"
+response_contract = ".3ox/(1)Spark/Zens3n.sparkfile.md"
+first_commands = [
+  "sed -n '1,260p' .3ox/_meta/SESSION.CHECKPOINT.toml",
+  "sed -n '1,220p' '.3ox/(1)Spark/codex/AGENTS.md'",
+  "sed -n '1,220p' '.3ox/(1)Spark/docs/CODEX.STARTUP.SEQUENCE.md'",
+  "ruby .3ox/.vec3/rc/startup.rb",
+  "sed -n '1,120p' _meta/_TRON.link",
+  "sed -n '1,260p' /root/!ZENS3N.CMD/_TRON/systemd/proto/services/services.index.toml",
+  "find /root/!ZENS3N.CMD/_TRON/systemd/lifecycle/proto -maxdepth 1 -type f -name '*.proto' | sort",
+  "find .3ox/_meta -type f -name '*.md' -o -name '*.toml' | sort"
+]
+first_fixes = [
+  "update WHOAMI.md from current truth",
+  "append normalized CHANGELOG entry describing canonical model",
+  "add lifecycle proto contracts for state.guard, receipt.emit, queue.dispatch"
+]
+
+# :: ∎
+
+[handoff]
+message = "System is now on single proto authority for lifecycle, with index-only registry and shorter proto names. Resume by running startup sequence (Spark doc), normalizing stale metadata, then expanding lifecycle contracts."

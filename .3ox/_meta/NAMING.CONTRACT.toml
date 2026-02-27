@@ -1,0 +1,29 @@
+# Naming contract for 3OX runtime artifacts
+
+[naming]
+style = "dot_words"
+hyphen_policy = "avoid_new_hyphen_names"
+notes = "Use dotted names for runtime contracts. Keep legacy names readable but do not create new ones."
+
+[extensions]
+service = "systemd unit contracts only"
+station = "station identity and boundary contract"
+agent = "agent identity/persona contract"
+task = "human-scoped requested work"
+job = "queued executable unit"
+watch = "long-running watcher/monitor executable"
+serve = "long-running server executable"
+whoami = "self-description snapshot artifact"
+cmd = "invokable command executable"
+meta = "metadata/control-plane docs"
+proto = "service proto contract"
+
+[staging]
+root = ".3ox/.vec3/var/wrkdsk/"
+batch_pattern = "TID.{id}/"
+policy = "non-canon files land here first and require promotion approval"
+
+[tools]
+registry = ".3ox/(4)Toolkit/Tools/tools.yml"
+scanner = ".3ox/.vec3/dev/ops/tool.scanner.rb"
+placer = ".3ox/.vec3/dev/ops/tool.place.rb"

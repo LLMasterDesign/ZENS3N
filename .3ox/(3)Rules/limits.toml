@@ -1,0 +1,51 @@
+# limits.toml :: Operational Limits (Mutable within Law Bounds)
+# Defines constraints that PHENO operations must respect
+# These are validated by core law during execution
+
+[execution_limits]
+max_operations_per_run = 10
+max_execution_time_ms = 30000
+max_memory_mb = 512
+max_concurrent_tools = 3
+
+[tool_limits]
+max_tool_calls_per_operation = 5
+max_tool_cost_per_operation = 15
+tool_timeout_ms = 5000
+
+[evidence_limits]
+max_evidence_sources = 50
+max_evidence_age_days = 30
+min_evidence_confidence = 0.3
+max_unknown_claims = 10
+
+[output_limits]
+max_output_size_kb = 1024
+max_artifacts_per_operation = 10
+max_receipt_age_days = 90
+
+[resource_limits]
+max_file_operations = 100
+max_network_calls = 20
+max_external_processes = 5
+
+[safety_limits]
+max_high_safety_tools = 2
+require_evidence_for_claims = false
+allow_external_network = true
+allow_file_system_write = true
+
+[persona_limits]
+max_persona_switches = 3
+persona_timeout_ms = 10000
+allow_persona_override = false
+
+[queue_limits]
+max_queue_size = 100
+queue_retention_days = 7
+max_retry_attempts = 3
+
+[logging_limits]
+max_log_entries_per_operation = 1000
+max_log_age_days = 30
+log_level = "info"

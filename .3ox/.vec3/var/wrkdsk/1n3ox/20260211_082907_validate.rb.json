@@ -1,0 +1,17 @@
+{
+  "id": "20260211_082907_validate.rb",
+  "kind": "1n3ox",
+  "project": "CENTRAL.CMD.Robust.Validator",
+  "intent": "ingest",
+  "goal": "zens3n.improve",
+  "next_action": "gensing",
+  "search_boost": true,
+  "src": "/root/!LAUNCHPAD/!1N.3OX ZENS3N/!CMD.CENTER/!CMD.HUB/VALIDATOR/validate.rb",
+  "dest": "/root/!LAUNCHPAD/!WORKDESK/CENTRAL.CMD.Robust.Validator.Forge/1Ntake/validate.rb",
+  "ts": "2026-02-11T08:29:07Z",
+  "base": "validate.rb",
+  "size": 0,
+  "imprint_score": 0.5,
+  "topic_confidence": 0.14285714285714285,
+  "dry_run": true
+}

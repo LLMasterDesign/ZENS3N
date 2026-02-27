@@ -1,0 +1,17 @@
+{
+  "id": "20260209_095939_data_3",
+  "kind": "1n3ox",
+  "project": "INBOX",
+  "intent": "ingest",
+  "goal": "zens3n.improve",
+  "next_action": "gensing",
+  "search_boost": true,
+  "src": "/root/!LAUNCHPAD/!1N.3OX ZENS3N/Z.3-LAB CHAMBER/archive/_cursor_backup/AppData_Roaming_Cursor/DawnGraphiteCache/data_3",
+  "dest": "/root/!LAUNCHPAD/!WORKDESK/INBOX.Forge/1Ntake/data_3",
+  "ts": "2026-02-09T09:59:39Z",
+  "base": "data_3",
+  "size": 0,
+  "imprint_score": 0.0,
+  "topic_confidence": 0.0,
+  "dry_run": true
+}

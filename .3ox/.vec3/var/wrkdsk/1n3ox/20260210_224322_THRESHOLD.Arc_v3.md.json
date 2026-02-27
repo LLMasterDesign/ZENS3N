@@ -1,0 +1,17 @@
+{
+  "id": "20260210_224322_THRESHOLD.Arc_v3.md",
+  "kind": "1n3ox",
+  "project": "INBOX",
+  "intent": "ingest",
+  "goal": "zens3n.improve",
+  "next_action": "gensing",
+  "search_boost": true,
+  "src": "/root/!LAUNCHPAD/!1N.3OX ZENS3N/Arc/THRESHOLD.Arc v3.md",
+  "dest": "/root/!LAUNCHPAD/!WORKDESK/INBOX.Forge/1Ntake/THRESHOLD.Arc v3.md",
+  "ts": "2026-02-10T22:43:22Z",
+  "base": "THRESHOLD.Arc v3.md",
+  "size": 0,
+  "imprint_score": 0.0,
+  "topic_confidence": 0.14285714285714285,
+  "dry_run": true
+}

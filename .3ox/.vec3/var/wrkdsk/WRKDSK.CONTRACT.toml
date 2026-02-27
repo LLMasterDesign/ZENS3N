@@ -1,0 +1,33 @@
+[contract]
+id = "VEC3.WRKDSK.SCRATCHPAD"
+version = "1.0.0"
+goal = "Long-horizon temporary scratchpad for non-canon files with auditable promotion"
+
+[root]
+path = ".3ox/.vec3/var/wrkdsk/"
+filesystem = "linux"
+mode = "append_first"
+
+[batch]
+pattern = "TID.{id}/"
+required_subdirs = ["inbox/", "work/", "outbox/", "receipts/"]
+metadata_file = ".batch.toml"
+
+[ledger]
+path = ".3ox/.vec3/var/wrkdsk/ledger.jsonl"
+format = "jsonl"
+minimum_events = ["wrkdsk.batch.open", "wrkdsk.promote", "wrkdsk.archive"]
+
+[promotion]
+requires = ["warden_approval", "user_approval"]
+default_target = "!WORKDESK/{project}/"
+
+[retention]
+policy = "quarantine_first"
+auto_delete = false
+proof_required = true
+
+[durability]
+hash_algorithm = "xxh364-128"
+audit_receipts = ".3ox/_meta/receipts/"
+whoami = ".3ox/_meta/WHOAMI.md"

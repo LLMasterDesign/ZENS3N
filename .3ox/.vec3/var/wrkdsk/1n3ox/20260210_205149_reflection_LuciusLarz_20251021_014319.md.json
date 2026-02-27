@@ -1,0 +1,17 @@
+{
+  "id": "20260210_205149_reflection_LuciusLarz_20251021_014319.md",
+  "kind": "1n3ox",
+  "project": "INBOX",
+  "intent": "ingest",
+  "goal": "zens3n.improve",
+  "next_action": "gensing",
+  "search_boost": true,
+  "src": "/root/!LAUNCHPAD/!1N.3OX ZENS3N/Z.3-VPS.k.SILO/zens3n-vps/raven.arc/!0UT.3OX RAVEN/reflections/reflection_LuciusLarz_20251021_014319.md",
+  "dest": "/root/!LAUNCHPAD/!WORKDESK/INBOX.Forge/1Ntake/reflection_LuciusLarz_20251021_014319.md",
+  "ts": "2026-02-10T20:51:49Z",
+  "base": "reflection_LuciusLarz_20251021_014319.md",
+  "size": 0,
+  "imprint_score": 0.0,
+  "topic_confidence": 0.14285714285714285,
+  "dry_run": true
+}

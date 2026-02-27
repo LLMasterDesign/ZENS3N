@@ -1,0 +1,47 @@
+# write_policy.toml :: Write surface and retention policy
+# Scope: ZENS3N.BASE
+
+[policy]
+mode = "restrictive"
+default_action = "deny"
+internal_hash_algorithm = "xxh364-128"
+
+[roots]
+workdesk = "!WORKDESK/"
+ops_tracking = "!ZENS3N.OPS/receipts/"
+pulse_contract = ".3ox/(6)Pulse/receipts"
+meta_receipts = ".3ox/_meta/receipts/"
+meta_merkle = ".3ox/_meta/merkle.root"
+staging = ".3ox/.vec3/var/wrkdsk/"
+intake = "!1N.3OX ZENS3N/"
+
+[allowed_writes]
+paths = [
+  "!WORKDESK/",
+  "!ZENS3N.OPS/receipts/",
+  ".3ox/_meta/receipts/",
+  ".3ox/_meta/merkle.root",
+  ".3ox/.vec3/var/wrkdsk/"
+]
+
+[blocked_writes]
+paths = [
+  ".3ox/.vec3/var/state/"
+]
+
+[flow]
+inbox = "!1N.3OX ZENS3N/"
+handoff = ".3ox/.vec3/dev/relay/"
+project_copy = "!WORKDESK/{project}/"
+archive_requires_approval = true
+delete_requires_approval = true
+
+[retention]
+wrkdsk_default_mode = "dryrun"
+wrkdsk_quarantine_root = "!WORKDESK/!FORGE/LifecycleWorkflow/drafts/rev/001/wrkdsk_retention/"
+prune_action = "quarantine_first"
+
+[staging]
+root = ".3ox/.vec3/var/wrkdsk/"
+batch_folder_pattern = "TID.{id}/"
+promotion_requires = ["warden_approval", "user_approval"]

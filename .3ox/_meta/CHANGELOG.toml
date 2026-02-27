@@ -1,0 +1,72 @@
+[meta]
+created_at = "2026-02-13T17:36:31.843Z"
+id = "ZENS3N.BASE._meta.changelog"
+updated_at = "2026-02-13T18:10:51.273Z"
+version = "1.0.0"
+[sections]
+identity = "Base identity and role"
+ops = "Operations tracking and management updates"
+policy = "Write/read policy changes"
+receipts = "Receipt contract and integrity updates"
+runtime = "Runtime and service bindings"
+workflow = "Lifecycle workflow and process changes"
+[[entries]]
+actor = "meta.cmd"
+event = "service.bootstrap"
+evidence = [".3ox/_meta/cmd/meta_cmd.rb", ".3ox/_meta/cmd/README.md"]
+id = "chg_1771004191_837"
+notes = ""
+section = "identity"
+status = "ok"
+summary = "_meta cmd service initialized for auto-proof docs"
+ts = "2026-02-13T17:36:31.843Z"
+[[entries]]
+actor = "lifecycle.workflow"
+event = "receipt.track"
+evidence = [".3ox/_meta/receipts/receipt_1771004203_5518.json", ".3ox/_meta/merkle.root"]
+id = "chg_1771004203_1463"
+notes = ""
+section = "workflow"
+status = "ok"
+summary = "TRACK inventory_count=6 scope=/root/!ZENS3N.CMD/!LAUNCHPAD/!WORKDESK/!FORGE/LifecycleWorkflow"
+ts = "2026-02-13T17:36:43.892Z"
+[[entries]]
+actor = "meta.cmd"
+event = "staging.tid_open"
+evidence = [".3ox/.vec3/var/wrksdsk/TID.TID.TEST.001"]
+id = "chg_1771005200_513"
+notes = ""
+section = "workflow"
+status = "ok"
+summary = "Opened wrksdsk batch TID.TID.TEST.001"
+ts = "2026-02-13T17:53:20.354Z"
+[[entries]]
+actor = "meta.cmd"
+event = "staging.tid_open"
+evidence = [".3ox/.vec3/var/wrksdsk/TID.TEST.001"]
+id = "chg_1771005251_1262"
+notes = ""
+section = "workflow"
+status = "ok"
+summary = "Opened wrksdsk batch TID.TEST.001"
+ts = "2026-02-13T17:54:11.020Z"
+[[entries]]
+actor = "meta.cmd"
+event = "naming.correction"
+evidence = [".3ox/(3)Rules/write_policy.toml", ".3ox/.vec3/var/wrkdsk/WRKDSK.CONTRACT.toml"]
+id = "chg_1771006202_8306"
+notes = ""
+section = "policy"
+status = "ok"
+summary = "Corrected staging typo: wrksdsk -> wrkdsk (wrksdsk remains compatibility alias)"
+ts = "2026-02-13T18:10:02.229Z"
+[[entries]]
+actor = "meta.cmd"
+event = "staging.tid_open"
+evidence = [".3ox/.vec3/var/wrkdsk/TID.TEST.002"]
+id = "chg_1771006235_6225"
+notes = ""
+section = "workflow"
+status = "ok"
+summary = "Opened wrkdsk batch TID.TEST.002"
+ts = "2026-02-13T18:10:35.427Z"

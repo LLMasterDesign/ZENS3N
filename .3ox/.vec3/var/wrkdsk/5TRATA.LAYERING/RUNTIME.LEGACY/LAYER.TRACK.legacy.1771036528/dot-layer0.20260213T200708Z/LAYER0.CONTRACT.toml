@@ -1,0 +1,29 @@
+[layer0]
+name = "5TRATA.Layer0"
+schema = "v1"
+updated_on = "2026-02-13"
+mode = "layout_lock"
+no_polling = true
+receipt_required = true
+
+[paths]
+wsl_tron = "/root/!ZENS3N.CMD/_TRON"
+v_tron = "/mnt/v/!CENTRAL.CMD/_TRON"
+relay_root = "/mnt/r/!CMD.RELAY"
+
+[receipt]
+service = "layer0.bridge"
+local_jsonl = "/root/!ZENS3N.CMD/_TRON/.layer0/receipts/layer0.receipts.jsonl"
+relay_jsonl = "/mnt/r/!CMD.RELAY/_meta/layer0/receipts/layer0.receipts.jsonl"
+state_file = "/root/!ZENS3N.CMD/_TRON/.layer0/state/last_sync.json"
+grpc_spool = "/mnt/r/!CMD.RELAY/_meta/layer0/grpc.events.jsonl"
+
+[sync]
+transport = "inotify+layout_lock"
+content_sync_enabled = false
+topology_watch = ["create", "delete", "move", "attrib"]
+
+[guarantees]
+delivery = "at-least-once"
+alignment_rule = "Layer 0 enforces root folder topology only"
+recovery_rule = "missing required folders are recreated on detection"

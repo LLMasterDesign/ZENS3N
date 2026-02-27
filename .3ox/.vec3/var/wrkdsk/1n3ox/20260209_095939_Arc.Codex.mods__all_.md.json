@@ -1,0 +1,17 @@
+{
+  "id": "20260209_095939_Arc.Codex.mods__all_.md",
+  "kind": "1n3ox",
+  "project": "INBOX",
+  "intent": "ingest",
+  "goal": "zens3n.improve",
+  "next_action": "gensing",
+  "search_boost": true,
+  "src": "/root/!LAUNCHPAD/!1N.3OX ZENS3N/Arc/Arc.Engine/Arc.Codex/Arc.Codex.mods (all).md",
+  "dest": "/root/!LAUNCHPAD/!WORKDESK/INBOX.Forge/1Ntake/Arc.Codex.mods (all).md",
+  "ts": "2026-02-09T09:59:39Z",
+  "base": "Arc.Codex.mods (all).md",
+  "size": 0,
+  "imprint_score": 0.0,
+  "topic_confidence": 0.0,
+  "dry_run": true
+}

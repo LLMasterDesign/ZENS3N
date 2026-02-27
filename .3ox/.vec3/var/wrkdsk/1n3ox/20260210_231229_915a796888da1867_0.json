@@ -1,0 +1,17 @@
+{
+  "id": "20260210_231229_915a796888da1867_0",
+  "kind": "1n3ox",
+  "project": "INBOX",
+  "intent": "ingest",
+  "goal": "zens3n.improve",
+  "next_action": "gensing",
+  "search_boost": true,
+  "src": "/root/!LAUNCHPAD/!1N.3OX ZENS3N/Z.3-LAB CHAMBER/archive/_cursor_backup/AppData_Roaming_Cursor/CachedData/9675251a06b1314d50ff34b0cbe5109b78f848c0/chrome/js/915a796888da1867_0",
+  "dest": "/root/!LAUNCHPAD/!WORKDESK/INBOX.Forge/1Ntake/915a796888da1867_0",
+  "ts": "2026-02-10T23:12:29Z",
+  "base": "915a796888da1867_0",
+  "size": 0,
+  "imprint_score": 0.0,
+  "topic_confidence": 0.0,
+  "dry_run": true
+}

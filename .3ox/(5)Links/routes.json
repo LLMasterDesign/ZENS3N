@@ -1,0 +1,56 @@
+{
+  "routes": [
+    {
+      "id": "pheno_operation",
+      "description": "Standard PHENO operation routing",
+      "contains": ["pheno", "operation", "execute"],
+      "tools": ["tool.file_operations", "tool.text_analysis"],
+      "priority": "high",
+      "evidence_required": false
+    },
+    {
+      "id": "evidence_analysis",
+      "description": "Evidence binding and analysis operations",
+      "keywords": ["evidence", "verify", "validate", "analyze"],
+      "tools": ["tool.evidence_binding", "tool.text_analysis"],
+      "priority": "high",
+      "evidence_required": true
+    },
+    {
+      "id": "system_operation",
+      "description": "System maintenance and configuration",
+      "contains": ["system", "config", "setup", "install"],
+      "tools": ["tool.file_operations"],
+      "priority": "medium",
+      "evidence_required": false
+    },
+    {
+      "id": "receipt_operation",
+      "description": "Receipt management and querying",
+      "keywords": ["receipt", "log", "audit", "history"],
+      "tools": ["tool.receipt_writer"],
+      "priority": "low",
+      "evidence_required": false
+    },
+    {
+      "id": "lex_operation",
+      "description": "LEX namespace operations",
+      "regex": "^LEX\\.{[a-zA-Z_][a-zA-Z0-9_]*}",
+      "tools": ["tool.lex_registry"],
+      "priority": "medium",
+      "evidence_required": false
+    }
+  ],
+  "default_route": {
+    "id": "fallback",
+    "description": "Fallback route for unmatched inputs",
+    "tools": ["tool.text_analysis"],
+    "priority": "low",
+    "evidence_required": false
+  },
+  "routing_metadata": {
+    "version": "1.0.0",
+    "last_updated": "2025-12-31T15:30:00Z",
+    "total_routes": 6
+  }
+}

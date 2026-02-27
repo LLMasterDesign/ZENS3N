@@ -1,0 +1,17 @@
+{
+  "id": "20260210_205146_Arc.Loader.byte.md",
+  "kind": "1n3ox",
+  "project": "INBOX",
+  "intent": "ingest",
+  "goal": "zens3n.improve",
+  "next_action": "gensing",
+  "search_boost": true,
+  "src": "/root/!LAUNCHPAD/!1N.3OX ZENS3N/Arc/Arc.Engine/Arc.Generator/Arc.Loader.byte.md",
+  "dest": "/root/!LAUNCHPAD/!WORKDESK/INBOX.Forge/1Ntake/Arc.Loader.byte.md",
+  "ts": "2026-02-10T20:51:46Z",
+  "base": "Arc.Loader.byte.md",
+  "size": 0,
+  "imprint_score": 0.0,
+  "topic_confidence": 0.0,
+  "dry_run": true
+}

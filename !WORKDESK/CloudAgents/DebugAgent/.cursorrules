@@ -1,0 +1,13 @@
+version: 1
+rules:
+  - id: load-3ox-sparkfile
+    where:
+      - "*"
+    use:
+      - file: ".3ox/sparkfile.md"
+        as: system
+        when: always
+
+
+
+
