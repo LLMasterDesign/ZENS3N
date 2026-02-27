@@ -89,4 +89,18 @@ python3 DAY.0/3OX_TOKEN_BENCHMARK.py
 - **98% claim** — applies to delimiter-only output, not full gensing flow
 - **Recommendation:** Use delimiters (:: ∎, :: 𝜵) everywhere; use ρφτ/⊢⇨⟿▷ sparingly in config
 
+### API runtime (priming + test question)
+
+```bash
+OPENAI_API_KEY=sk-... python3 DAY.0/3OX_TOKEN_BENCHMARK_API.py
+```
+
+| Variant | Total tokens | vs Prose |
+|---------|--------------|----------|
+| Prose | 311 | baseline |
+| Gensing minimal (ASCII + :: ∎) | 210 | **32.5% savings** |
+| Gensing full (Unicode) | 311 | 0% |
+
+**Runtime finding:** ASCII gensing with :: ∎ delimiters saves ~32% when priming the model and asking a test question. Full Unicode gensing matches prose (no savings).
+
 :: ∎
