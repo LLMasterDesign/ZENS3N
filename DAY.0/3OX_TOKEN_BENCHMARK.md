@@ -104,4 +104,13 @@ OPENAI_API_KEY=sk-... python3 DAY.0/3OX_TOKEN_BENCHMARK_API.py
 
 **2-PASS:** Pass 1 = prose instructions (teach gensing); Pass 2 = gensing context + question. Useful when priming the model first.
 
+**Tutor.Genesis core** (index + prism + run loader + pico):
+| Variant | Tokens | vs Prose |
+|---------|--------|----------|
+| Prose | 288 | baseline |
+| Gensing (Unicode) | 348 | -20.8% |
+| Gensing (ASCII + :: ∎) | 281 | **2.4% savings** |
+
+Index/prism/pheno/pico with ASCII and :: ∎ saves ~2%. Unicode adds tokens.
+
 :: ∎

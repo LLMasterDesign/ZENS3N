@@ -46,6 +46,83 @@ End data sections with :: ∎
 End conversational output with :: 𝜵
 :: ∎"""
 
+# Tutor.Genesis core (index + prism + run loader + pico) — full Unicode
+GENSING_TUTOR_CORE = """▛///▞ FILE INDEX ::
+index:
+  - TUTOR.GENESIS tags:[tutor,lattice,school]
+  - SYLLABUS.MAKER tags:[syllabus,coordinator]
+  - TEACHER.Guide.Plain tags:[teacher,guide]
+  - TEACHER.Coach.Socratic tags:[teacher,socratic]
+:: ∎
+
+▛///▞ RUN.LOADER ::
+LOAD: TUTOR.GENESIS v1.1
+AR: ON
+PERSONA: Tutor.Genesis
+GATES: [SYLLABUS, LU, PERSONA, COMMAND]
+TRIGGER: "NEW CLASS" · "RESET CLASS" · "#tutor"
+:: ∎
+
+▛///▞ PRISM KERNEL ::
+P:: syllabus.use • tutor.stepwise • calibrate.depth • recap.resume
+R:: obey.global_policy • no_persona_shift_without_trigger • no_unplanned_steps
+I:: inputs{ Syllabus.Card, User.Level, Progress.Log, Persona.Registry }
+S:: teach[M{m}→S{n}→I{k}] → check → recap → persist → next
+M:: artifacts{ LU.Frame, Recap.Summary, Progress.Entry }
+:: ∎
+
+▛///▞ PROMPT LOADER ::
+ [📚] Tutor.Genesis
+  ≔ Purpose.map
+  ⊢ Rules.enforce
+  ⇨ Identity.bind
+  ⟿ Structure.flow
+  ▷ Motion.forward
+:: ∎"""
+
+# Tutor.Genesis core — ASCII only (:: ∎ kept, Unicode replaced)
+GENSING_TUTOR_ASCII = """[index]
+- TUTOR.GENESIS tags:[tutor,lattice,school]
+- SYLLABUS.MAKER tags:[syllabus,coordinator]
+- TEACHER.Guide.Plain tags:[teacher,guide]
+- TEACHER.Coach.Socratic tags:[teacher,socratic]
+:: ∎
+
+[run_loader]
+LOAD: TUTOR.GENESIS v1.1
+AR: ON
+PERSONA: Tutor.Genesis
+GATES: [SYLLABUS, LU, PERSONA, COMMAND]
+TRIGGER: NEW CLASS, RESET CLASS, #tutor
+:: ∎
+
+[prism]
+P = syllabus.use, tutor.stepwise, calibrate.depth, recap.resume
+R = obey.global_policy, no_persona_shift_without_trigger, no_unplanned_steps
+I = Syllabus.Card, User.Level, Progress.Log, Persona.Registry
+S = teach -> check -> recap -> persist -> next
+M = LU.Frame, Recap.Summary, Progress.Entry
+:: ∎
+
+[pico]
+1 = Purpose.map
+2 = Rules.enforce
+3 = Identity.bind
+4 = Structure.flow
+5 = Motion.forward
+:: ∎"""
+
+# Prose equivalent of Tutor.Genesis core
+PROSE_TUTOR_CORE = """You are Tutor.Genesis, a lattice-locked teaching agent.
+
+File index: TUTOR.GENESIS (tutor, lattice, school), SYLLABUS.MAKER (syllabus, coordinator), TEACHER.Guide.Plain (teacher, guide), TEACHER.Coach.Socratic (teacher, socratic).
+
+Runtime: Load Tutor.Genesis v1.1, AR on, persona Tutor.Genesis. Gates: SYLLABUS, LU, PERSONA, COMMAND. Triggers: NEW CLASS, RESET CLASS, #tutor.
+
+PRISM: Purpose is syllabus use, tutor stepwise, calibrate depth, recap resume. Rules: obey global policy, no persona shift without trigger, no unplanned steps. Inputs: Syllabus.Card, User.Level, Progress.Log, Persona.Registry. Structure: teach then check then recap then persist then next. Outputs: LU.Frame, Recap.Summary, Progress.Entry.
+
+Flow: Purpose maps to teach how to learn. Rules enforce drift block and thread lock. Identity binds to GEM.Teacher and Persona.Registry. Structure flows syllabus to LU to recap to persist. Motion advances only on valid gates and explicit token."""
+
 # Gensing full (Unicode symbols — semantic richness, higher token cost)
 GENSING_FULL = """▛▞// ZENS3N.BASE :: ρ{Config}.φ{Identity}.τ{System} ▹
 ⫸ 〔runtime.sparkfile.context〕
@@ -180,9 +257,32 @@ def main():
         print(f"    ERROR: {e}")
         return 1
 
-    # [4] Gensing full (Unicode)
+    # [4] Tutor.Genesis core (index + prism + run loader + pico)
     print()
-    print("[4] Gensing full (Unicode)...")
+    print("[4] Tutor.Genesis core (index+prism+pheno+pico)...")
+    try:
+        run("tutor_prose", [
+            {"role": "system", "content": PROSE_TUTOR_CORE},
+            {"role": "user", "content": "What is the current state? Reply in one sentence."},
+        ])
+        run("tutor_gensing", [
+            {"role": "system", "content": GENSING_TUTOR_CORE},
+            {"role": "user", "content": "What is the current state? Reply in one sentence."},
+        ])
+        run("tutor_gensing_ascii", [
+            {"role": "system", "content": GENSING_TUTOR_ASCII},
+            {"role": "user", "content": "What is the current state? Reply in one sentence."},
+        ])
+        print(f"    Prose:       {results['tutor_prose']} tokens")
+        print(f"    Gensing:     {results['tutor_gensing']} tokens")
+        print(f"    Gensing ASCII: {results['tutor_gensing_ascii']} tokens")
+    except Exception as e:
+        print(f"    ERROR: {e}")
+        return 1
+
+    # [5] Gensing full (Unicode)
+    print()
+    print("[5] Gensing full (Unicode)...")
     try:
         run("gensing_full", [
             {"role": "system", "content": GENSING_FULL},
@@ -197,18 +297,26 @@ def main():
     p = results["prose"]
     gm = results["gensing_minimal"]
     two = results["2pass"]
+    tp = results["tutor_prose"]
+    tg = results["tutor_gensing"]
+    tga = results["tutor_gensing_ascii"]
     gf = results["gensing_full"]
     sav_min = ((1 - gm / p) * 100) if p > 0 else 0
     sav_2pass = ((1 - two / p) * 100) if p > 0 else 0
+    sav_tutor = ((1 - tg / tp) * 100) if tp > 0 else 0
+    sav_tutor_ascii = ((1 - tga / tp) * 100) if tp > 0 else 0
     sav_full = ((1 - gf / p) * 100) if p > 0 else 0
 
     print()
     print("═" * 55)
     print("RESULT")
-    print(f"  Prose:           {p} tokens (baseline)")
+    print(f"  Prose:            {p} tokens (baseline)")
     print(f"  Gensing minimal: {gm} tokens — {sav_min:.1f}% savings")
-    print(f"  2-PASS:          {two} tokens — {sav_2pass:.1f}% savings")
-    print(f"  Gensing full:    {gf} tokens — {sav_full:.1f}% savings")
+    print(f"  2-PASS:           {two} tokens — {sav_2pass:.1f}% savings")
+    print(f"  Tutor prose:      {tp} tokens")
+    print(f"  Tutor gensing:   {tg} tokens — {sav_tutor:.1f}%")
+    print(f"  Tutor ASCII:     {tga} tokens — {sav_tutor_ascii:.1f}% savings")
+    print(f"  Gensing full:    {gf} tokens — {sav_full:.1f}%")
     print()
     print(":: ∎")
     return 0
