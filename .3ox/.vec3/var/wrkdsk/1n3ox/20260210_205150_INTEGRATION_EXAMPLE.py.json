@@ -1,0 +1,17 @@
+{
+  "id": "20260210_205150_INTEGRATION_EXAMPLE.py",
+  "kind": "1n3ox",
+  "project": "INBOX",
+  "intent": "ingest",
+  "goal": "zens3n.improve",
+  "next_action": "gensing",
+  "search_boost": true,
+  "src": "/root/!LAUNCHPAD/!1N.3OX ZENS3N/Z.3-LAB CHAMBER/GLYPH.BIT/GlyphBit.Tools/Shared.Mind.Artifact/INTEGRATION_EXAMPLE.py",
+  "dest": "/root/!LAUNCHPAD/!WORKDESK/INBOX.Forge/1Ntake/INTEGRATION_EXAMPLE.py",
+  "ts": "2026-02-10T20:51:50Z",
+  "base": "INTEGRATION_EXAMPLE.py",
+  "size": 0,
+  "imprint_score": 0.0,
+  "topic_confidence": 0.0,
+  "dry_run": true
+}

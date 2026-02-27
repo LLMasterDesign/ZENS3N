@@ -1,0 +1,375 @@
+---
+meta:
+  id: VEC3.TOOL.REGISTRY
+  version: 2.0.0
+  updated_at: '2026-02-14T03:08:44.261Z'
+  sources:
+  - kind: ops
+    path: ".3ox/.vec3/dev/ops"
+  - kind: io
+    path: ".3ox/.vec3/dev/io"
+  - kind: cli
+    path: ".3ox/.vec3/rc/bin"
+  - kind: service
+    path: ".3ox/.vec3/rc/services"
+tools:
+  3ox.cli:
+    id: 3ox.cli
+    kind: cli
+    path: ".3ox/.vec3/rc/bin/3ox-cli.rb"
+    ext: rb
+    executable: true
+    summary: "▛//▞▞ ⟦⎊⟧ :: ⧗-26.034 // 3OX-CLI.RB ▞▞"
+    auto_discovered: true
+    hash: 0bd7a36aec60028c
+    discovered_at: '2026-02-14T03:08:44.242Z'
+  apply.canon.header:
+    id: apply.canon.header
+    kind: ops
+    path: ".3ox/.vec3/dev/ops/apply.canon.header.rb"
+    ext: rb
+    executable: true
+    summary: "▛//▞▞ ⟦⎊⟧ :: ⧗-26.034 // APPLY.CANON.HEADER.RB ▞▞"
+    auto_discovered: true
+    hash: bf0c780ec4c4b1c9
+    discovered_at: '2026-02-14T03:08:44.210Z'
+  arc_logic_core:
+    id: arc_logic_core
+    kind: io
+    path: ".3ox/.vec3/dev/io/arc/arc_logic_core.rb"
+    ext: rb
+    executable: false
+    summary: "▛//▞▞ ⟦⎊⟧ :: ⧗-26.034 // ARC_LOGIC_CORE.RB ▞▞"
+    auto_discovered: true
+    hash: e029d2d81242dc0d
+    discovered_at: '2026-02-14T03:08:44.211Z'
+  arc_router:
+    id: arc_router
+    kind: io
+    path: ".3ox/.vec3/dev/io/arc/arc_router.rb"
+    ext: rb
+    executable: false
+    summary: "▛//▞▞ ⟦⎊⟧ :: ⧗-26.034 // ARC_ROUTER.RB ▞▞"
+    auto_discovered: true
+    hash: 0ff82d83a963580f
+    discovered_at: '2026-02-14T03:08:44.211Z'
+  autonomous_messaging:
+    id: autonomous_messaging
+    kind: service
+    path: ".3ox/.vec3/rc/services/services/health_check/autonomous_messaging.rb"
+    ext: rb
+    executable: false
+    summary: "▛//▞▞ ⟦⎊⟧ :: ⧗-26.034 // AUTONOMOUS_MESSAGING.RB ▞▞"
+    auto_discovered: true
+    hash: f07d1b28a3391dca
+    discovered_at: '2026-02-14T03:08:44.255Z'
+  check_status:
+    id: check_status
+    kind: cli
+    path: ".3ox/.vec3/rc/bin/check_status.rb"
+    ext: rb
+    executable: true
+    summary: "▛//▞▞ ⟦⎊⟧ :: ⧗-26.034 // CHECK_STATUS.RB ▞▞"
+    auto_discovered: true
+    hash: 9b9766bf1898dbd3
+    discovered_at: '2026-02-14T03:08:44.245Z'
+  codex53.runner:
+    id: codex53.runner
+    kind: service
+    path: ".3ox/.vec3/rc/services/codex53.runner.rb"
+    ext: rb
+    executable: true
+    shebang: "#!/usr/bin/env ruby"
+    summary: 'codex53 runner: consumes .task.md files and runs codex exec in a dedicated
+      worktree.'
+    auto_discovered: true
+    hash: fcc676a20e53da0a
+    discovered_at: '2026-02-14T03:08:44.255Z'
+  cursor_cloud_api:
+    id: cursor_cloud_api
+    kind: io
+    path: ".3ox/.vec3/dev/io/cursor/cursor_cloud_api.rb"
+    ext: rb
+    executable: false
+    summary: "▛//▞▞ ⟦⎊⟧ :: ⧗-26.034 // CURSOR_CLOUD_API.RB ▞▞"
+    auto_discovered: true
+    hash: 5b59f8ff57885705
+    discovered_at: '2026-02-14T03:08:44.217Z'
+  inference:
+    id: inference
+    kind: io
+    path: ".3ox/.vec3/dev/io/inference/inference.ex"
+    ext: ex
+    executable: false
+    summary: "▛//▞▞ ⟦⎊⟧ :: ⧗-26.034 // INFERENCE.EX ▞▞"
+    auto_discovered: true
+    hash: af8cb66824a1eb12
+    discovered_at: '2026-02-14T03:08:44.220Z'
+  install:
+    id: install
+    kind: cli
+    path: ".3ox/.vec3/rc/bin/install.sh"
+    ext: sh
+    executable: true
+    summary: "▛//▞▞ ⟦⎊⟧ :: ⧗-26.034 // INSTALL.SH ▞▞"
+    auto_discovered: true
+    hash: 17e3d3895a3feed1
+    discovered_at: '2026-02-14T03:08:44.252Z'
+  lifecycle_plan_event:
+    id: lifecycle_plan_event
+    kind: cli
+    path: ".3ox/.vec3/rc/bin/lifecycle_plan_event.rb"
+    ext: rb
+    executable: true
+    shebang: "#!/usr/bin/env ruby"
+    summary: lifecycle_plan_event.rb
+    auto_discovered: true
+    hash: 01d58fb889376eb4
+    discovered_at: '2026-02-14T03:08:44.252Z'
+  location_index:
+    id: location_index
+    kind: service
+    path: ".3ox/.vec3/rc/services/services/location_map/location_index.rb"
+    ext: rb
+    executable: false
+    summary: "▛//▞▞ ⟦⎊⟧ :: ⧗-26.034 // LOCATION_INDEX.RB ▞▞"
+    auto_discovered: true
+    hash: 3c7ff7d49b260f8f
+    discovered_at: '2026-02-14T03:08:44.255Z'
+  lock.3ox:
+    id: lock.3ox
+    kind: cli
+    path: ".3ox/.vec3/rc/bin/lock.3ox.sh"
+    ext: sh
+    executable: true
+    summary: "▛//▞▞ ⟦⎊⟧ :: ⧗-26.034 // LOCK.3OX.SH ▞▞"
+    auto_discovered: true
+    hash: 1e0bc6c4126bbb56
+    discovered_at: '2026-02-14T03:08:44.253Z'
+  merge.scan.results:
+    id: merge.scan.results
+    kind: ops
+    path: ".3ox/.vec3/dev/ops/merge.scan.results.rb"
+    ext: rb
+    executable: true
+    summary: "▛//▞▞ ⟦⎊⟧ :: ⧗-26.034 // MERGE.SCAN.RESULTS.RB ▞▞"
+    auto_discovered: true
+    hash: bdf72662263819bd
+    discovered_at: '2026-02-14T03:08:44.210Z'
+  plan.event:
+    id: plan.event
+    kind: cli
+    path: ".3ox/.vec3/rc/bin/plan-event"
+    executable: true
+    shebang: "#!/usr/bin/env ruby"
+    summary: 'plan-event :: human plan controls (show/start/note/next/done/pause)'
+    auto_discovered: true
+    hash: fd4186968fd70096
+    discovered_at: '2026-02-14T03:08:44.253Z'
+  receipt_contract_reconcile:
+    id: receipt_contract_reconcile
+    kind: cli
+    path: ".3ox/.vec3/rc/bin/receipt_contract_reconcile.rb"
+    ext: rb
+    executable: false
+    shebang: "#!/usr/bin/env ruby"
+    summary: 'Reconcile receipt contract bindings:'
+    auto_discovered: true
+    hash: 2243f4da03194c94
+    discovered_at: '2026-02-14T03:08:44.253Z'
+  refactor.station:
+    id: refactor.station
+    kind: service
+    path: ".3ox/.vec3/rc/services/refactor.station.rc"
+    ext: rc
+    executable: true
+    summary: "▛//▞▞ ⟦⎊⟧ :: ⧗-26.034 // REFACTOR.STATION.RC ▞▞"
+    auto_discovered: true
+    hash: fdb285c52e0ad6f3
+    discovered_at: '2026-02-14T03:08:44.255Z'
+  scan.ruby.scripts:
+    id: scan.ruby.scripts
+    kind: ops
+    path: ".3ox/.vec3/dev/ops/scan.ruby.scripts.rb"
+    ext: rb
+    executable: true
+    summary: "▛//▞▞ ⟦⎊⟧ :: ⧗-26.034 // SCAN.RUBY.SCRIPTS.RB ▞▞"
+    auto_discovered: true
+    hash: 6f28dd95c767ef81
+    discovered_at: '2026-02-14T03:08:44.210Z'
+  status:
+    id: status
+    kind: service
+    path: ".3ox/.vec3/rc/services/status.rc"
+    ext: rc
+    executable: true
+    summary: "▛//▞▞ ⟦⎊⟧ :: ⧗-26.034 // STATUS.RC ▞▞"
+    auto_discovered: true
+    hash: 493885500cfa2ffc
+    discovered_at: '2026-02-14T03:08:44.257Z'
+  sync_meta_from_pulse:
+    id: sync_meta_from_pulse
+    kind: cli
+    path: ".3ox/.vec3/rc/bin/sync_meta_from_pulse.rb"
+    ext: rb
+    executable: true
+    shebang: "#!/usr/bin/env ruby"
+    summary: Deprecated shim; use receipt_contract_reconcile.rb.
+    auto_discovered: true
+    hash: 9282dc0b8437ecef
+    discovered_at: '2026-02-14T03:08:44.253Z'
+  system.status:
+    id: system.status
+    kind: cli
+    path: ".3ox/.vec3/rc/bin/system-status.rb"
+    ext: rb
+    executable: true
+    summary: "▛//▞▞ ⟦⎊⟧ :: ⧗-26.034 // SYSTEM-STATUS.RB ▞▞"
+    auto_discovered: true
+    hash: 0e333854ba678da6
+    discovered_at: '2026-02-14T03:08:44.254Z'
+  telegram.bridge:
+    id: telegram.bridge
+    kind: io
+    path: ".3ox/.vec3/dev/io/tg/telegram.bridge.ex"
+    ext: ex
+    executable: false
+    summary: "▛//▞▞ ⟦⎊⟧ :: ⧗-26.034 // TELEGRAM.BRIDGE.EX ▞▞"
+    auto_discovered: true
+    hash: 34a59d017bb4c6f2
+    discovered_at: '2026-02-14T03:08:44.230Z'
+  telegram_typing:
+    id: telegram_typing
+    kind: io
+    path: ".3ox/.vec3/dev/io/inference/telegram_typing.rb"
+    ext: rb
+    executable: false
+    summary: "▛//▞▞ ⟦⎊⟧ :: ⧗-26.034 // TELEGRAM_TYPING.RB ▞▞"
+    auto_discovered: true
+    hash: 4a4278e58f4b3d69
+    discovered_at: '2026-02-14T03:08:44.227Z'
+  test.tgsub.key:
+    id: test.tgsub.key
+    kind: ops
+    path: ".3ox/.vec3/dev/ops/test.tgsub.key.rb"
+    ext: rb
+    executable: false
+    summary: "▛//▞▞ ⟦⎊⟧ :: ⧗-26.034 // TEST.TGSUB.KEY.RB ▞▞"
+    auto_discovered: true
+    hash: 8837ddfd3cbed827
+    discovered_at: '2026-02-14T03:08:44.210Z'
+  tid.batch:
+    id: tid.batch
+    kind: ops
+    path: ".3ox/.vec3/dev/ops/meta/tid.batch.rb"
+    ext: rb
+    executable: true
+    shebang: "#!/usr/bin/env ruby"
+    summary: Create/inspect staging batch folders under .3ox/.vec3/var/wrkdsk/TID.<id>/
+    auto_discovered: true
+    hash: 44db76e5536e3290
+    discovered_at: '2026-02-14T03:08:44.210Z'
+  tool.place:
+    id: tool.place
+    kind: ops
+    path: ".3ox/.vec3/dev/ops/tool.place.rb"
+    ext: rb
+    executable: true
+    shebang: "#!/usr/bin/env ruby"
+    summary: 'tool.place.rb :: Place tool files/directories into canonical vec3 locations.'
+    auto_discovered: true
+    hash: 90453da88a579f64
+    discovered_at: '2026-02-14T03:08:44.210Z'
+  tool.scanner:
+    id: tool.scanner
+    kind: ops
+    path: ".3ox/.vec3/dev/ops/tool.scanner.rb"
+    ext: rb
+    executable: true
+    shebang: "#!/usr/bin/env ruby"
+    summary: 'tool.scanner.rb :: Discover vec3 runtime tools and build tools.yml registry.'
+    auto_discovered: true
+    hash: e880df043d3535e0
+    discovered_at: '2026-02-14T03:08:44.211Z'
+  toolkit.scanner:
+    id: toolkit.scanner
+    kind: service
+    path: ".3ox/.vec3/rc/services/toolkit.scanner.rc"
+    ext: rc
+    executable: true
+    summary: "▛//▞▞ ⟦⎊⟧ :: ⧗-26.034 // TOOLKIT.SCANNER.RC ▞▞"
+    auto_discovered: true
+    hash: 5bcf466b3f80a66a
+    discovered_at: '2026-02-14T03:08:44.257Z'
+  unlock.3ox:
+    id: unlock.3ox
+    kind: cli
+    path: ".3ox/.vec3/rc/bin/unlock.3ox.sh"
+    ext: sh
+    executable: true
+    summary: "▛//▞▞ ⟦⎊⟧ :: ⧗-26.034 // UNLOCK.3OX.SH ▞▞"
+    auto_discovered: true
+    hash: efc760523b4188c6
+    discovered_at: '2026-02-14T03:08:44.254Z'
+  update.3ox:
+    id: update.3ox
+    kind: cli
+    path: ".3ox/.vec3/rc/bin/update.3ox.sh"
+    ext: sh
+    executable: true
+    summary: "▛//▞▞ ⟦⎊⟧ :: ⧗-26.034 // UPDATE.3OX.SH ▞▞"
+    auto_discovered: true
+    hash: 39e38345f1e439bd
+    discovered_at: '2026-02-14T03:08:44.254Z'
+  vault.scanner:
+    id: vault.scanner
+    kind: service
+    path: ".3ox/.vec3/rc/services/vault.scanner.rc"
+    ext: rc
+    executable: true
+    summary: "▛//▞▞ ⟦⎊⟧ :: ⧗-26.034 // VAULT.SCANNER.RC ▞▞"
+    auto_discovered: true
+    hash: 53bf922eadb84f95
+    discovered_at: '2026-02-14T03:08:44.257Z'
+  what:
+    id: what
+    kind: service
+    path: ".3ox/.vec3/rc/services/what.rc"
+    ext: rc
+    executable: true
+    summary: "▛//▞▞ ⟦⎊⟧ :: ⧗-26.034 // WHAT.RC ▞▞"
+    auto_discovered: true
+    hash: 9a18b8f38e32d835
+    discovered_at: '2026-02-14T03:08:44.257Z'
+  whoami:
+    id: whoami
+    kind: ops
+    path: ".3ox/.vec3/dev/ops/meta/whoami.rb"
+    ext: rb
+    executable: true
+    shebang: "#!/usr/bin/env ruby"
+    summary: vec3 whoami command service
+    auto_discovered: true
+    hash: f5680e9f216fe252
+    discovered_at: '2026-02-14T03:08:44.210Z'
+  whoami.watch:
+    id: whoami.watch
+    kind: ops
+    path: ".3ox/.vec3/dev/ops/meta/whoami.watch.rb"
+    ext: rb
+    executable: true
+    shebang: "#!/usr/bin/env ruby"
+    summary: Live watcher for _meta proof artifacts (vec3 runtime).
+    auto_discovered: true
+    hash: b3ecababd4f18119
+    discovered_at: '2026-02-14T03:08:44.210Z'
+  xcursor.daemon:
+    id: xcursor.daemon
+    kind: service
+    path: ".3ox/.vec3/rc/services/services/xcursor/xcursor.daemon.rb"
+    ext: rb
+    executable: false
+    summary: "▛//▞▞ ⟦⎊⟧ :: ⧗-26.034 // XCURSOR.DAEMON.RB ▞▞"
+    auto_discovered: true
+    hash: 3e682474d9f3ee5d
+    discovered_at: '2026-02-14T03:08:44.256Z'

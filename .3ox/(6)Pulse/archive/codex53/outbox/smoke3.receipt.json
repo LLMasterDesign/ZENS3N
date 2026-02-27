@@ -1,0 +1,13 @@
+{
+  "service": "codex53",
+  "task_id": "smoke3",
+  "status": "error",
+  "started_at": "2026-02-09T10:36:18Z",
+  "finished_at": "2026-02-09T10:37:09Z",
+  "exit_code": 1,
+  "timed_out": false,
+  "worktree": "/root/!LAUNCHPAD/!WORKDESK/codex53-work",
+  "stdout_preview": null,
+  "stderr_preview": "read-only\nreasoning effort: none\nreasoning summaries: auto\nsession id: 019c41f9-8603-72e2-80b1-700d1877d6a1\n--------\nuser\nReturn exactly one line: codex53-smoke3-ok\n\nmcp startup: no servers\n2026-02-09T10:36:42.663494Z ERROR codex_api::endpoint::responses: error=network error: error sending request for url (https://api.openai.com/v1/responses)\nReconnecting... 1/5 (stream disconnected before completion: error sending request for url (https://api.openai.com/v1/responses))\n2026-02-09T10:36:47.305356Z ERROR codex_api::endpoint::responses: error=network error: error sending request for url (https://api.openai.com/v1/responses)\nReconnecting... 2/5 (stream disconnected before completion: error sending request for url (https://api.openai.com/v1/responses))\n2026-02-09T10:36:52.272442Z ERROR codex_api::endpoint::responses: error=network error: error sending request for url (https://api.openai.com/v1/responses)\nReconnecting... 3/5 (stream disconnected before completion: error sending request for url (https://api.openai.com/v1/responses))\n2026-02-09T10:36:57.137944Z ERROR codex_api::endpoint::responses: error=network error: error sending request for url (https://api.openai.com/v1/responses)\nReconnecting... 4/5 (stream disconnected before completion: error sending request for url (https://api.openai.com/v1/responses))\n2026-02-09T10:37:02.787097Z ERROR codex_api::endpoint::responses: error=network error: error sending request for url (https://api.openai.com/v1/responses)\nReconnecting... 5/5 (stream disconnected before completion: error sending request for url (https://api.openai.com/v1/responses))\n2026-02-09T10:37:09.202103Z ERROR codex_api::endpoint::responses: error=network error: error sending request for url (https://api.openai.com/v1/responses)\nERROR: stream disconnected before completion: error sending request for url (https://api.openai.com/v1/responses)\nWarning: no last agent message; wrote empty content to /root/!LAUNCHPAD/.3ox/Pulse/codex53/state/smoke3.last_message.txt\n",
+  "result_path": "/root/!LAUNCHPAD/.3ox/Pulse/codex53/outbox/smoke3.error.md"
+}

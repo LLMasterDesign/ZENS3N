@@ -1,0 +1,17 @@
+{
+  "id": "20260210_205341_scheduler.rb",
+  "kind": "1n3ox",
+  "project": "INBOX",
+  "intent": "ingest",
+  "goal": "zens3n.improve",
+  "next_action": "gensing",
+  "search_boost": true,
+  "src": "/root/!LAUNCHPAD/!1N.3OX ZENS3N/Z.3-VPS.k.SILO/zens3n-vps/raven.arc/lib/core/scheduler.rb",
+  "dest": "/root/!LAUNCHPAD/!WORKDESK/INBOX.Forge/1Ntake/scheduler.rb",
+  "ts": "2026-02-10T20:53:41Z",
+  "base": "scheduler.rb",
+  "size": 0,
+  "imprint_score": 0.0,
+  "topic_confidence": 0.14285714285714285,
+  "dry_run": true
+}

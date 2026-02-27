@@ -1,0 +1,17 @@
+{
+  "id": "20260211_012937_thought_binder.rb",
+  "kind": "1n3ox",
+  "project": "INBOX",
+  "intent": "ingest",
+  "goal": "zens3n.improve",
+  "next_action": "gensing",
+  "search_boost": true,
+  "src": "/root/!LAUNCHPAD/!1N.3OX ZENS3N/Z.3-VPS.k.SILO/zens3n-vps/raven.arc/lib/core/thought_binder.rb",
+  "dest": "/root/!LAUNCHPAD/!WORKDESK/INBOX.Forge/1Ntake/thought_binder.rb",
+  "ts": "2026-02-11T01:29:37Z",
+  "base": "thought_binder.rb",
+  "size": 0,
+  "imprint_score": 0.0,
+  "topic_confidence": 0.0,
+  "dry_run": true
+}

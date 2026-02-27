@@ -1,0 +1,17 @@
+{
+  "id": "20260210_205149_GETTING.STARTED.md",
+  "kind": "1n3ox",
+  "project": "INBOX",
+  "intent": "ingest",
+  "goal": "zens3n.improve",
+  "next_action": "gensing",
+  "search_boost": true,
+  "src": "/root/!LAUNCHPAD/!1N.3OX ZENS3N/Z.3-VPS.k.SILO/zens3n-vps/raven.arc/!rav3n.ops/Docs/GETTING.STARTED.md",
+  "dest": "/root/!LAUNCHPAD/!WORKDESK/INBOX.Forge/1Ntake/GETTING.STARTED.md",
+  "ts": "2026-02-10T20:51:49Z",
+  "base": "GETTING.STARTED.md",
+  "size": 0,
+  "imprint_score": 0.0,
+  "topic_confidence": 0.0,
+  "dry_run": true
+}

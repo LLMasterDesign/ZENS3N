@@ -1,0 +1,24 @@
+[registry]
+name = "5TRATA"
+version = "1.0"
+status = "active"
+updated_on = "2026-02-13"
+
+[layer0]
+name = "CMD"
+spec = "L0.CMD.SPECIFICATION.md"
+checklist = "L0.CMD.CHECKLIST.md"
+lock_script = "/root/!ZENS3N.CMD/_TRON/systemd/service/5trata/layer-0/layer0_lock.sh"
+state_file = "/root/!ZENS3N.CMD/_TRON/systemd/service/5trata/LAYER.TRACK/layer0/state/layer0.state.json"
+receipts_file = "/root/!ZENS3N.CMD/_TRON/systemd/service/5trata/LAYER.TRACK/layer0/receipts/layer0.receipts.jsonl"
+
+[roots]
+wsl_tron = "/root/!ZENS3N.CMD/_TRON"
+central_tron = "/mnt/v/!CENTRAL.CMD/_TRON"
+relay = "/mnt/r/!CMD.RELAY"
+
+[identifiers]
+cmd_relay_id = "/mnt/r/!CMD.RELAY/CMD.RELAY.ID"
+cmd_bridge_id = "/mnt/r/!CMD.RELAY/!CMD.BRIDGE/CMD.BRIDGE.ID"
+cmd_center_id = "/mnt/r/!CMD.RELAY/!CMD.CENTER/CMD.CENTER.ID"
+hub_id = "/mnt/r/!CMD.HUB/HUB.ID"

@@ -1,0 +1,17 @@
+{
+  "id": "20260211_090615_REJECTED.toml",
+  "kind": "1n3ox",
+  "project": "CENTRAL.CMD.Rejected.Files",
+  "intent": "ingest",
+  "goal": "zens3n.improve",
+  "next_action": "search",
+  "search_boost": true,
+  "src": "/root/!LAUNCHPAD/!1N.3OX ZENS3N/!CMD.CENTER/!CMD.HUB/REJECTED.toml",
+  "dest": "/root/!LAUNCHPAD/!WORKDESK/CENTRAL.CMD.Rejected.Files.Forge/1Ntake/REJECTED.toml",
+  "ts": "2026-02-11T09:06:15Z",
+  "base": "REJECTED.toml",
+  "size": 0,
+  "imprint_score": 0.8333333333333334,
+  "topic_confidence": 0.14285714285714285,
+  "dry_run": true
+}

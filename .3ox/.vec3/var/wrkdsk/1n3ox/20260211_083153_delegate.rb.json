@@ -1,0 +1,17 @@
+{
+  "id": "20260211_083153_delegate.rb",
+  "kind": "1n3ox",
+  "project": "CENTRAL.CMD.Delegation.Engine",
+  "intent": "ingest",
+  "goal": "zens3n.improve",
+  "next_action": "gensing",
+  "search_boost": true,
+  "src": "/root/!LAUNCHPAD/!1N.3OX ZENS3N/!CMD.CENTER/!CMD.HUB/VALIDATOR/delegate.rb",
+  "dest": "/root/!LAUNCHPAD/!WORKDESK/CENTRAL.CMD.Delegation.Engine.Forge/1Ntake/delegate.rb",
+  "ts": "2026-02-11T08:31:53Z",
+  "base": "delegate.rb",
+  "size": 0,
+  "imprint_score": 0.5,
+  "topic_confidence": 0.14285714285714285,
+  "dry_run": true
+}

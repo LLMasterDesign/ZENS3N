@@ -1,0 +1,17 @@
+{
+  "id": "20260210_205038_Arc.Hopfield.map.md",
+  "kind": "1n3ox",
+  "project": "INBOX",
+  "intent": "ingest",
+  "goal": "zens3n.improve",
+  "next_action": "gensing",
+  "search_boost": true,
+  "src": "/root/!LAUNCHPAD/!1N.3OX ZENS3N/Arc/Arc.Hopfield.map.md",
+  "dest": "/root/!LAUNCHPAD/!WORKDESK/INBOX.Forge/1Ntake/Arc.Hopfield.map.md",
+  "ts": "2026-02-10T20:50:38Z",
+  "base": "Arc.Hopfield.map.md",
+  "size": 0,
+  "imprint_score": 0.0,
+  "topic_confidence": 0.14285714285714285,
+  "dry_run": true
+}

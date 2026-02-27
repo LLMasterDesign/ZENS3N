@@ -1,0 +1,17 @@
+{
+  "id": "20260210_231234_telegram_keyboard.rb",
+  "kind": "1n3ox",
+  "project": "INBOX",
+  "intent": "ingest",
+  "goal": "zens3n.improve",
+  "next_action": "gensing",
+  "search_boost": true,
+  "src": "/root/!LAUNCHPAD/!1N.3OX ZENS3N/Z.3-VPS.k.SILO/zens3n-vps/raven.arc/lib/ui/telegram_keyboard.rb",
+  "dest": "/root/!LAUNCHPAD/!WORKDESK/INBOX.Forge/1Ntake/telegram_keyboard.rb",
+  "ts": "2026-02-10T23:12:34Z",
+  "base": "telegram_keyboard.rb",
+  "size": 0,
+  "imprint_score": 0.0,
+  "topic_confidence": 0.0,
+  "dry_run": true
+}

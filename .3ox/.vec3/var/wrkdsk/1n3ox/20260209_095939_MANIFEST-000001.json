@@ -1,0 +1,17 @@
+{
+  "id": "20260209_095939_MANIFEST-000001",
+  "kind": "1n3ox",
+  "project": "INBOX",
+  "intent": "ingest",
+  "goal": "zens3n.improve",
+  "next_action": "gensing",
+  "search_boost": true,
+  "src": "/root/!LAUNCHPAD/!1N.3OX ZENS3N/Z.3-LAB CHAMBER/archive/_cursor_backup/AppData_Roaming_Cursor/Local Storage/leveldb/MANIFEST-000001",
+  "dest": "/root/!LAUNCHPAD/!WORKDESK/INBOX.Forge/1Ntake/MANIFEST-000001",
+  "ts": "2026-02-09T09:59:39Z",
+  "base": "MANIFEST-000001",
+  "size": 0,
+  "imprint_score": 0.0,
+  "topic_confidence": 0.0,
+  "dry_run": true
+}

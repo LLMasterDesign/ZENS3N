@@ -1,0 +1,5 @@
+[receipts]
+canonical_store = ".3ox/_meta/receipts/"
+pulse_contract = ".3ox/(6)Pulse/receipts"
+ops_index = "!ZENS3N.OPS/receipts/lifecycle.receipts.jsonl"
+policy = "Pulse defines receipt contract; _meta owns receipt storage."

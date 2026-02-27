@@ -1,0 +1,17 @@
+{
+  "id": "20260210_205147_SURTR.Arc_v3_Temp.Build.md",
+  "kind": "1n3ox",
+  "project": "INBOX",
+  "intent": "ingest",
+  "goal": "zens3n.improve",
+  "next_action": "gensing",
+  "search_boost": true,
+  "src": "/root/!LAUNCHPAD/!1N.3OX ZENS3N/Arc/Arc.Engine/SURTR.Arc v3 Temp.Build.md",
+  "dest": "/root/!LAUNCHPAD/!WORKDESK/INBOX.Forge/1Ntake/SURTR.Arc v3 Temp.Build.md",
+  "ts": "2026-02-10T20:51:47Z",
+  "base": "SURTR.Arc v3 Temp.Build.md",
+  "size": 0,
+  "imprint_score": 0.0,
+  "topic_confidence": 0.14285714285714285,
+  "dry_run": true
+}

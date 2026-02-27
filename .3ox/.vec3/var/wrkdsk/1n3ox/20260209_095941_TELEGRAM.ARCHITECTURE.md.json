@@ -1,0 +1,17 @@
+{
+  "id": "20260209_095941_TELEGRAM.ARCHITECTURE.md",
+  "kind": "1n3ox",
+  "project": "INBOX",
+  "intent": "ingest",
+  "goal": "zens3n.improve",
+  "next_action": "gensing",
+  "search_boost": true,
+  "src": "/root/!LAUNCHPAD/!1N.3OX ZENS3N/Z.3-VPS.k.SILO/zens3n-vps/raven.arc/!rav3n.ops/Docs/specs/TELEGRAM.ARCHITECTURE.md",
+  "dest": "/root/!LAUNCHPAD/!WORKDESK/INBOX.Forge/1Ntake/TELEGRAM.ARCHITECTURE.md",
+  "ts": "2026-02-09T09:59:41Z",
+  "base": "TELEGRAM.ARCHITECTURE.md",
+  "size": 0,
+  "imprint_score": 0.0,
+  "topic_confidence": 0.0,
+  "dry_run": true
+}

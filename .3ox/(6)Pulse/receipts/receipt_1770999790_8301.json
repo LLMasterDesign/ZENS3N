@@ -1,0 +1,11 @@
+{
+  "receipt_id": "receipt_1770999790_8301",
+  "workflow_id": "FORGE.LIFECYCLE",
+  "verb": "RETENTION",
+  "timestamp": 1770999790,
+  "scope_root": "/root/!ZENS3N.CMD/!LAUNCHPAD/!WORKDESK",
+  "plan_file": "/root/!ZENS3N.CMD/!LAUNCHPAD/!WORKDESK/!FORGE/LifecycleWorkflow/drafts/rev/001/wrkdsk_retention/20260213_162235/retention.plan.json",
+  "duplicates_found": 2000,
+  "moved_to_quarantine": 0,
+  "mode": "dryrun"
+}

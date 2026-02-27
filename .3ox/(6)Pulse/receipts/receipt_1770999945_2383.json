@@ -1,0 +1,8 @@
+{
+  "receipt_id": "receipt_1770999945_2383",
+  "workflow_id": "wf_marker_test",
+  "verb": "TRACK",
+  "timestamp": 1770999945,
+  "inventory_count": 4,
+  "scope_root": "/root/!ZENS3N.CMD/!LAUNCHPAD/!WORKDESK/!FORGE/LifecycleWorkflow"
+}
