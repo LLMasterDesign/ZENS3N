@@ -1,1 +1,16 @@
-/root/!CMD.BRIDGE/.cursorrules
+# .cursorrules :: 3OX Cursor Agent Context
+# Load sparkfile as system identity; log events per AGENTS.md
+
+## System Context
+Read on spin-up:
+- `.3ox/(1)Spark/Zens3n.sparkfile.md` — system identity, PRISM kernel, response contract
+- `.3ox/_meta/SESSION.CHECKPOINT.toml` — truth paths, proto, write policy
+- `.3ox/(2)Brains/brains.rs` — persona config
+
+## Event Logging
+On each significant action (task start, task complete, drift fix, proto change, build, test, deploy), append one JSON per line to:
+`.3ox/.vec3/var/wrkdsk/agent.events.jsonl`
+
+Format: `{"ts":"ISO8601","event":"short.name","actor":"cursor.agent","summary":"..."}`
+
+:: ∎
