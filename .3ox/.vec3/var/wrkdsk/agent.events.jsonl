@@ -1,3 +1,4 @@
 {"ts":"2026-02-27T00:00:00Z","event":"rule.add","actor":"cursor.agent","summary":"Added Cursor Agent Event Logging section to AGENTS.md"}
 {"ts":"2026-02-28T04:44:25Z","event":"cursorrules.add","actor":"cursor.agent","summary":"Created root .cursorrules with sparkfile context and event logging"}
 {"ts":"2026-03-02T04:43:18Z","event":"teleprompter.sub_agents.add","actor":"cursor.agent","summary":"Added sub-agent routing: sub_agents.toml, /code command, topic/command resolution"}
+{"ts":"2026-03-02T06:44:16Z","event":"test.add","actor":"cursor.agent","summary":"Added test_sub_agents.rb for routing test without Telegram"}

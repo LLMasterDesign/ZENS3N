@@ -67,6 +67,11 @@ Teleprompter routes incoming Telegram messages to Dispatch agents via `.3ox/.vec
 
 Commands: `/ask` → think (LLM), `/code` → codex53. Plain messages use topic or default.
 
+**Test routing (no Telegram required):**
+```bash
+ruby .3ox/.vec3/var/test_sub_agents.rb
+```
+
 ### Codebase Overview
 
 **ZENS3N** monorepo with **3OX.BUILDER** (Rust workspace + Bun + Ruby) at `3OX.Ai/3OX.BUILDER/`.
