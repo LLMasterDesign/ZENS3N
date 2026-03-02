@@ -3,7 +3,7 @@
 
 use std::env;
 use std::path::{Path, PathBuf};
-use std::process::{Command, Stdio};
+use std::process::Command;
 use std::io::{self, Write};
 
 fn find_3ox_dir(start: &Path) -> Option<PathBuf> {

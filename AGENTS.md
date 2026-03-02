@@ -37,6 +37,41 @@ This repo IS a 3OX agent. The root `.3ox/` directory contains the full cube:
 - Pre-configured cloud agent with `.3ox/` and `.cursorrules`
 - `.cursorrules` loads sparkfile as system context
 
+### Cursor Agent Event Logging
+
+On each significant action (task start, task complete, drift fix, proto change, build, test, deploy), append one JSON object per line to:
+
+```
+.3ox/.vec3/var/wrkdsk/agent.events.jsonl
+```
+
+**Format (one JSON per line):**
+```json
+{"ts":"ISO8601","event":"short.name","actor":"cursor.agent","summary":"..."}
+```
+
+- `ts`: ISO8601 timestamp (e.g. `2026-02-27T12:00:00Z`)
+- `event`: short snake_case name (e.g. `task.start`, `drift.fix`, `build.complete`)
+- `actor`: `cursor.agent`
+- `summary`: one-line human-readable description
+
+This stream feeds future trace analysis and remains readable alongside `ledger.jsonl` in wrkdsk.
+
+### Teleprompter Sub-Agents
+
+Teleprompter routes incoming Telegram messages to Dispatch agents via `.3ox/.vec3/var/sub_agents.toml`:
+
+- **by_topic**: Forum topic name → agent (e.g. `"Code" = "codex53"`)
+- **by_command**: `/command` → agent (e.g. `ask = "think"`, `code = "codex53"`)
+- **default**: Fallback agent (default: `think`)
+
+Commands: `/ask` → think (LLM), `/code` → codex53. Plain messages use topic or default.
+
+**Test routing (no Telegram required):**
+```bash
+ruby .3ox/.vec3/var/test_sub_agents.rb
+```
+
 ### Codebase Overview
 
 **ZENS3N** monorepo with **3OX.BUILDER** (Rust workspace + Bun + Ruby) at `3OX.Ai/3OX.BUILDER/`.

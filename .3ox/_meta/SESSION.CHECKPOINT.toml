@@ -37,7 +37,10 @@ registry_rule = "index_metadata_only_no_proto_contract_files"
 
 proto_files = [
   "_TRON/systemd/lifecycle/proto/whoami.watch.proto",
-  "_TRON/systemd/lifecycle/proto/wrkdsk.proto"
+  "_TRON/systemd/lifecycle/proto/wrkdsk.proto",
+  "_TRON/systemd/lifecycle/proto/v1/state.guard.proto",
+  "_TRON/systemd/lifecycle/proto/v1/receipt.emit.proto",
+  "_TRON/systemd/lifecycle/proto/v1/queue.dispatch.proto"
 ]
 
 # :: ∎
@@ -52,6 +55,24 @@ state = "active"
 id = "lifecycle.wrkdsk.scratchpad"
 unit = "none"
 proto = "_TRON/systemd/lifecycle/proto/wrkdsk.proto"
+state = "contract"
+
+[[truth.services]]
+id = "lifecycle.state.guard"
+unit = "none"
+proto = "_TRON/systemd/lifecycle/proto/v1/state.guard.proto"
+state = "contract"
+
+[[truth.services]]
+id = "lifecycle.receipt.emit"
+unit = "none"
+proto = "_TRON/systemd/lifecycle/proto/v1/receipt.emit.proto"
+state = "contract"
+
+[[truth.services]]
+id = "lifecycle.queue.dispatch"
+unit = "none"
+proto = "_TRON/systemd/lifecycle/proto/v1/queue.dispatch.proto"
 state = "contract"
 
 # :: ∎
@@ -81,13 +102,13 @@ state_machine = ["TRACK", "PLAN", "DRY_RUN", "FIX", "EXECUTE", "SEAL"]
 # :: ∎
 
 [known_drift]
-whoami_may_be_stale = true
-changelog_may_be_stale = true
+whoami_may_be_stale = false
+changelog_may_be_stale = false
 stale_examples = [
-  "legacy wrksdsk references in old entries",
+  "legacy wrksdsk references in old entries (historical only)",
   "legacy _meta/cmd script evidence entries"
 ]
-reason = "historical entries were not fully normalized after architecture corrections"
+reason = "WHOAMI and CHANGELOG normalized 2026-02-27 per first_fixes"
 
 # :: ∎
 
@@ -110,8 +131,17 @@ first_fixes = [
   "append normalized CHANGELOG entry describing canonical model",
   "add lifecycle proto contracts for state.guard, receipt.emit, queue.dispatch"
 ]
+# first_fixes completed 2026-02-27
 
 # :: ∎
 
 [handoff]
 message = "System is now on single proto authority for lifecycle, with index-only registry and shorter proto names. Resume by running startup sequence (Spark doc), normalizing stale metadata, then expanding lifecycle contracts."
+
+# :: ∎
+
+[reminders]
+telepromptr_integration = "Search branch/TelePromptR for common-to-telegram: lib/providers/telegram.rb (Teleprompter), telegram_bus.rb, dev/io/tg/telegram.bridge.*, dev/io/inference/telegram_typing.rb. LAW: Teleprompter is the only component that speaks to Telegram."
+sub_agents = ".3ox/.vec3/var/sub_agents.toml — topic/command → Dispatch agent routing. by_topic (forum topic name), by_command (/ask, /code), default=think. Add /code for Codex53."
+glyph_codex = ".3ox/(1)Spark/Glyph_Codex.md — Raven operator dictionary for gensing syntax; aids token savings via :: ∎, ρφτ, ⊢⇨⟿▷"
+tutor_genesis = ".3ox/(1)Spark/Tutor.Genesis.md — Prime example of gensing as .genesis; lattice-locked tutor engine, schema, PiCO, gates, LU path"

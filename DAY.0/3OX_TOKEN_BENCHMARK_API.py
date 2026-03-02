@@ -1,0 +1,290 @@
+#!/usr/bin/env python3
+# 3OX Token Benchmark :: Runtime API usage (prose vs gensing priming)
+# Measures actual tokens consumed when AI is primed then asked a test question
+# Usage: OPENAI_API_KEY=sk-... python3 3OX_TOKEN_BENCHMARK_API.py
+
+import os
+import json
+
+# Prose system prompt (typical verbose agent instructions)
+PROSE_SYSTEM = """You are ZENS3N.BASE, an authoritative business system for production deployment.
+
+When you start a session, first read the session checkpoint file to understand current system state, truth paths, and known drift. Then load the sparkfile for your identity and behavior specification. Then load the brains config for persona settings.
+
+Your flow: detect user requests or business operations, process with authoritative business focus, return structured output with business format. Use the PRISM kernel: Input maps to ingest and validate, Process maps to contract resolution, Output maps to emit and publish.
+
+End data sections with the token :: followed by the end-of-proof symbol. End conversational output with the conversation terminator. Validate all paths against the write policy. Emit receipts for operations.
+
+The system uses single authority per concern: Worker executes, Warden approves, Supervisor orchestrates via proto contracts, Pulse writes meta artifacts. State machine phases: TRACK, PLAN, DRY_RUN, FIX, EXECUTE, SEAL. Allowed write roots: WORKDESK, ZENS3N.OPS/receipts, .3ox/_meta/receipts, merkle.root, wrkdsk. Blocked: wrksdsk, state. Tools registry in tools.yml. Routes in routes.json."""
+
+# Gensing minimal (ASCII, delimiter-heavy — best token savings)
+GENSING_MINIMAL = """[checkpoint]
+id = "CKPT.2026-02-14.001"
+meta_root = ".3ox/_meta"
+wrkdsk_root = ".3ox/.vec3/var/wrkdsk"
+:: ∎
+
+[intent]
+primary_goal = "Process files through governed agentic pipeline"
+principle = "single_authority_per_concern"
+:: ∎
+
+[prism]
+P = authoritative.system -> business.operations -> production.deployment
+S = receive -> process -> deliver -> maintain
+:: ∎
+
+[pico]
+1 = detect.request
+2 = process.business
+3 = return.output
+4 = project.authority
+:: ∎
+
+[rules]
+End data sections with :: ∎
+End conversational output with :: 𝜵
+:: ∎"""
+
+# Tutor.Genesis core — prism then pico only (order: prism, pico)
+GENSING_TUTOR_CORE = """▛///▞ PRISM KERNEL ::
+//▞▞〔Purpose · Rules · Identity · Structure · Motion〕
+P:: syllabus.use • tutor.stepwise • calibrate.depth • recap.resume
+R:: obey.global_policy • no_persona_shift_without_trigger • no_unplanned_steps
+I:: inputs{ Syllabus.Card, User.Level, Progress.Log, Persona.Registry }
+S:: teach[M{m}→S{n}→I{k}] → check → recap → persist → next
+M:: artifacts{ LU.Frame, Recap.Summary, Progress.Entry }
+:: ∎
+
+▛///▞ PROMPT LOADER ::
+ [📚] Tutor.Genesis
+  ≔ Purpose.map         # teach.how_to_learn ∙ not SME by default
+  ⊢ Rules.enforce       # drift_block.on ∙ thread_lock.active
+  ⇨ Identity.bind       # GEM.Teacher ∙ Persona.Registry
+  ⟿ Structure.flow      # syllabus → LU → recap → persist
+  ▷ Motion.forward      # advance only on valid gates + explicit token
+:: ∎"""
+
+# Tutor.Genesis core — ASCII only (prism, pico)
+GENSING_TUTOR_ASCII = """[prism]
+P = syllabus.use, tutor.stepwise, calibrate.depth, recap.resume
+R = obey.global_policy, no_persona_shift_without_trigger, no_unplanned_steps
+I = Syllabus.Card, User.Level, Progress.Log, Persona.Registry
+S = teach -> check -> recap -> persist -> next
+M = LU.Frame, Recap.Summary, Progress.Entry
+:: ∎
+
+[pico]
+1 = Purpose.map
+2 = Rules.enforce
+3 = Identity.bind
+4 = Structure.flow
+5 = Motion.forward
+:: ∎"""
+
+# Prose equivalent (prism + pico only)
+PROSE_TUTOR_CORE = """You are Tutor.Genesis. PRISM: Purpose is syllabus use, tutor stepwise, calibrate depth, recap resume. Rules: obey global policy, no persona shift without trigger, no unplanned steps. Inputs: Syllabus.Card, User.Level, Progress.Log, Persona.Registry. Structure: teach then check then recap then persist then next. Outputs: LU.Frame, Recap.Summary, Progress.Entry.
+
+Flow: Purpose maps to teach how to learn. Rules enforce drift block and thread lock. Identity binds to GEM.Teacher and Persona.Registry. Structure flows syllabus to LU to recap to persist. Motion advances only on valid gates and explicit token."""
+
+# Gensing full (Unicode symbols — semantic richness, higher token cost)
+GENSING_FULL = """▛▞// ZENS3N.BASE :: ρ{Config}.φ{Identity}.τ{System} ▹
+⫸ 〔runtime.sparkfile.context〕
+
+[checkpoint]
+id = "CKPT.2026-02-14.001"
+meta_root = ".3ox/_meta"
+wrkdsk_root = ".3ox/.vec3/var/wrkdsk"
+:: ∎
+
+[intent]
+primary_goal = "Process files through governed agentic pipeline"
+principle = "single_authority_per_concern"
+:: ∎
+
+▛///▞ PRISM :: KERNEL
+P:: authoritative.system → business.operations → production.deployment
+S:: receive → process → deliver → maintain
+:: ∎
+
+▛///▞ PiCO :: TRACE
+⊢ ≔ detect.request{Lucius.command ∨ business.operation ∨ system.need}
+⇨ ≔ process.business{authoritative ∙ production.focus}
+⟿ ≔ return.output{structured.response ∙ business.format}
+▷ ≔ project.authority{business.system ∙ production.ready}
+:: ∎
+
+▛▞ RULES
+End data sections with :: ∎
+End conversational output with :: 𝜵
+:: ∎"""
+
+TEST_USER = "What is the current system state? Reply in one sentence."
+
+
+# Pass 1: Prose instructions (teach the model gensing)
+INSTRUCTIONS_PROSE = """You are ZENS3N.BASE. Use gensing format in responses:
+- End data sections with :: ∎
+- End your reply with :: 𝜵
+- Be concise."""
+
+
+def call_api(messages: list, api_key: str, max_tokens: int = 150) -> dict:
+    try:
+        from openai import OpenAI
+    except ImportError:
+        import urllib.request
+
+        url = "https://api.openai.com/v1/chat/completions"
+        body = json.dumps({
+            "model": "gpt-4o-mini",
+            "messages": messages,
+            "max_tokens": max_tokens,
+        }).encode()
+        req = urllib.request.Request(url, data=body, method="POST")
+        req.add_header("Content-Type", "application/json")
+        req.add_header("Authorization", f"Bearer {api_key}")
+        with urllib.request.urlopen(req, timeout=60) as r:
+            return json.loads(r.read().decode())
+    else:
+        client = OpenAI(api_key=api_key)
+        r = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=messages,
+            max_tokens=max_tokens,
+        )
+        return {
+            "usage": {
+                "prompt_tokens": r.usage.prompt_tokens,
+                "completion_tokens": r.usage.completion_tokens,
+                "total_tokens": r.usage.total_tokens,
+            },
+            "choices": [{"message": {"content": r.choices[0].message.content}}],
+        }
+
+
+def main():
+    api_key = os.environ.get("OPENAI_API_KEY", "").strip()
+    if not api_key:
+        print("Set OPENAI_API_KEY and run again.")
+        return 1
+
+    print("▛▞// 3OX TOKEN BENCHMARK (API runtime usage)")
+    print("═" * 55)
+    print("Priming AI with system prompt, then asking test question.")
+    print("Model: gpt-4o-mini")
+    print()
+
+    results = {}
+
+    def run(name: str, messages: list) -> int:
+        r = call_api(messages, api_key)
+        u = r["usage"]
+        results[name] = u["total_tokens"]
+        return u["total_tokens"]
+
+    # [1] Prose only
+    print("[1] Prose (system + question)...")
+    try:
+        run("prose", [
+            {"role": "system", "content": PROSE_SYSTEM},
+            {"role": "user", "content": TEST_USER},
+        ])
+        print(f"    total_tokens: {results['prose']}")
+    except Exception as e:
+        print(f"    ERROR: {e}")
+        return 1
+
+    # [2] Gensing minimal only
+    print()
+    print("[2] Gensing minimal (system + question)...")
+    try:
+        run("gensing_minimal", [
+            {"role": "system", "content": GENSING_MINIMAL},
+            {"role": "user", "content": TEST_USER},
+        ])
+        print(f"    total_tokens: {results['gensing_minimal']}")
+    except Exception as e:
+        print(f"    ERROR: {e}")
+        return 1
+
+    # [3] 2-PASS: Instructions (prose) then gensing context
+    print()
+    print("[3] 2-PASS: Instructions (prose) + gensing context + question...")
+    try:
+        run("2pass", [
+            {"role": "system", "content": INSTRUCTIONS_PROSE},
+            {"role": "user", "content": GENSING_MINIMAL + "\n\n" + TEST_USER},
+        ])
+        print(f"    total_tokens: {results['2pass']}")
+    except Exception as e:
+        print(f"    ERROR: {e}")
+        return 1
+
+    # [4] Tutor.Genesis core (index + prism + run loader + pico)
+    print()
+    print("[4] Tutor.Genesis core (prism, pico)...")
+    try:
+        run("tutor_prose", [
+            {"role": "system", "content": PROSE_TUTOR_CORE},
+            {"role": "user", "content": "What is the current state? Reply in one sentence."},
+        ])
+        run("tutor_gensing", [
+            {"role": "system", "content": GENSING_TUTOR_CORE},
+            {"role": "user", "content": "What is the current state? Reply in one sentence."},
+        ])
+        run("tutor_gensing_ascii", [
+            {"role": "system", "content": GENSING_TUTOR_ASCII},
+            {"role": "user", "content": "What is the current state? Reply in one sentence."},
+        ])
+        print(f"    Prose:       {results['tutor_prose']} tokens")
+        print(f"    Gensing:     {results['tutor_gensing']} tokens")
+        print(f"    Gensing ASCII: {results['tutor_gensing_ascii']} tokens")
+    except Exception as e:
+        print(f"    ERROR: {e}")
+        return 1
+
+    # [5] Gensing full (Unicode)
+    print()
+    print("[5] Gensing full (Unicode)...")
+    try:
+        run("gensing_full", [
+            {"role": "system", "content": GENSING_FULL},
+            {"role": "user", "content": TEST_USER},
+        ])
+        print(f"    total_tokens: {results['gensing_full']}")
+    except Exception as e:
+        print(f"    ERROR: {e}")
+        return 1
+
+    # Compare
+    p = results["prose"]
+    gm = results["gensing_minimal"]
+    two = results["2pass"]
+    tp = results["tutor_prose"]
+    tg = results["tutor_gensing"]
+    tga = results["tutor_gensing_ascii"]
+    gf = results["gensing_full"]
+    sav_min = ((1 - gm / p) * 100) if p > 0 else 0
+    sav_2pass = ((1 - two / p) * 100) if p > 0 else 0
+    sav_tutor = ((1 - tg / tp) * 100) if tp > 0 else 0
+    sav_tutor_ascii = ((1 - tga / tp) * 100) if tp > 0 else 0
+    sav_full = ((1 - gf / p) * 100) if p > 0 else 0
+
+    print()
+    print("═" * 55)
+    print("RESULT")
+    print(f"  Prose:            {p} tokens (baseline)")
+    print(f"  Gensing minimal: {gm} tokens — {sav_min:.1f}% savings")
+    print(f"  2-PASS:           {two} tokens — {sav_2pass:.1f}% savings")
+    print(f"  Tutor prose:      {tp} tokens")
+    print(f"  Tutor gensing:   {tg} tokens — {sav_tutor:.1f}%")
+    print(f"  Tutor ASCII:     {tga} tokens — {sav_tutor_ascii:.1f}% savings")
+    print(f"  Gensing full:    {gf} tokens — {sav_full:.1f}%")
+    print()
+    print(":: ∎")
+    return 0
+
+
+if __name__ == "__main__":
+    exit(main())

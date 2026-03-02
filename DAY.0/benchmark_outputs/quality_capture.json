@@ -1,0 +1,14 @@
+{
+  "task": "List the 3 main system paths and their purpose. Be brief.",
+  "prose": {
+    "content": "The three main system paths are as follows:\n\n1. **meta_root** (`.3ox/_meta`): This path is dedicated to metadata storage and management, containing essential configuration and system information.\n\n2. **wrkdsk_root** (`.3ox/.vec3/var/wrkdsk`): This path serves as the working directory, where active processing, file manipulation, and temporary data storage occur.\n\n3. **data_root** (Assuming a placeholder since not provided): Generally, this path would house the primary data files and user-related content necessary for the system's functioning.\n\nThat concludes this section. Let me know if you need anything else. :: \ud835\udf35",
+    "prompt_tokens": 110,
+    "completion_tokens": 139
+  },
+  "gensing": {
+    "content": "1. **meta_root**: Location for meta-information storage and system configuration.  \n2. **wrkdsk_root**: Primary workspace directory for user data and operations.  \n3. **auxiliary_paths**: Optional paths for additional resources and extensions.  \n\n:: \u220e  \n:: \ud835\udf35",
+    "prompt_tokens": 111,
+    "completion_tokens": 62
+  },
+  "rubric": "Review: completeness, structure, clarity, usefulness. :: \u220e"
+}

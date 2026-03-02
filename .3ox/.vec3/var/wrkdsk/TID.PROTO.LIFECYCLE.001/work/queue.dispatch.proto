@@ -1,0 +1,35 @@
+# queue.dispatch.proto :: Task queue dispatch contract
+# Authority: SESSION.CHECKPOINT intent (Worker executes, Supervisor orchestrates)
+# Dispatches jobs to task queue with phase awareness
+
+[contract]
+id = "lifecycle.queue.dispatch"
+version = "1.0.0"
+authority = "service_local_only"
+state = "contract"
+
+[principle]
+name = "supervisor_orchestrates"
+rule = "dispatch_via_proto_contracts"
+dispatcher = "supervisor"
+
+[queue]
+root = ".3ox/.vec3/var/wrkdsk"
+batch_pattern = "TID.{id}/"
+phase_aware = true
+
+[phases]
+phases = ["TRACK", "PLAN", "DRY_RUN", "FIX", "EXECUTE", "SEAL"]
+phase_binding = "state.guard.proto"
+
+[limits]
+max_queue_size = 100
+retention_days = 7
+max_retry_attempts = 3
+
+[guard]
+rule = "phase_valid_for_dispatch"
+enforcer = "state.guard"
+evidence_required = true
+
+# :: ∎

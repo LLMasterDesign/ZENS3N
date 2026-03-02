@@ -1,0 +1,18 @@
+# sub_agents.toml :: Teleprompter sub-agent routing
+# Maps topic/command to Dispatch agent (think|codex53|...)
+# Authority: SESSION.CHECKPOINT telepromptr_integration
+
+[default]
+dispatch_agent = "think"
+
+[by_topic]
+# Forum topic name -> agent
+# "Code" = "codex53"
+# "General" = "think"
+
+[by_command]
+# /command -> agent (without leading slash)
+ask = "think"
+code = "codex53"
+
+# :: ∎
