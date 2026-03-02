@@ -142,5 +142,6 @@ message = "System is now on single proto authority for lifecycle, with index-onl
 
 [reminders]
 telepromptr_integration = "Search branch/TelePromptR for common-to-telegram: lib/providers/telegram.rb (Teleprompter), telegram_bus.rb, dev/io/tg/telegram.bridge.*, dev/io/inference/telegram_typing.rb. LAW: Teleprompter is the only component that speaks to Telegram."
+sub_agents = ".3ox/.vec3/var/sub_agents.toml — topic/command → Dispatch agent routing. by_topic (forum topic name), by_command (/ask, /code), default=think. Add /code for Codex53."
 glyph_codex = ".3ox/(1)Spark/Glyph_Codex.md — Raven operator dictionary for gensing syntax; aids token savings via :: ∎, ρφτ, ⊢⇨⟿▷"
 tutor_genesis = ".3ox/(1)Spark/Tutor.Genesis.md — Prime example of gensing as .genesis; lattice-locked tutor engine, schema, PiCO, gates, LU path"

@@ -203,7 +203,7 @@ module Vec3
             chat_id: chat_id,
             topic_thread_id: topic_thread_id,
             actor: "telegram:#{user}",
-            text: "🖥️ *CMD.BRIDGE Widget*\n\n/status - Full dashboard\n/list - Stations/services\n/start <name> - Start station\n/stop <name> - Stop station\n/sirius - Time\n/ask <q> - Ask LLM"
+            text: "🖥️ *CMD.BRIDGE Widget*\n\n/status - Full dashboard\n/list - Stations/services\n/start <name> - Start\n/stop <name> - Stop\n/sirius - Time\n/ask <q> - Ask LLM\n/code <prompt> - Codex53"
           )
         else
           # Start a station/service
@@ -268,13 +268,29 @@ module Vec3
             chat_id: chat_id,
             topic_thread_id: topic_thread_id,
             actor: "telegram:#{user}",
-            prompt: args
+            prompt: args,
+            command: 'ask'
+          )
+          emit_receipt_reply(chat_id: chat_id, topic_thread_id: topic_thread_id, receipt: receipt)
+        end
+
+      when 'code'
+        if args.empty?
+          emit_reply(chat_id: chat_id, topic_thread_id: topic_thread_id, actor: "telegram:#{user}", text: "Usage: /code <prompt>\nRuns Codex53 agent.")
+        else
+          emit_reply(chat_id: chat_id, topic_thread_id: topic_thread_id, actor: "telegram:#{user}", text: "⏳ Running Codex53...")
+          receipt = run_job(
+            chat_id: chat_id,
+            topic_thread_id: topic_thread_id,
+            actor: "telegram:#{user}",
+            prompt: args,
+            command: 'code'
           )
           emit_receipt_reply(chat_id: chat_id, topic_thread_id: topic_thread_id, receipt: receipt)
         end
       
       when 'help'
-        emit_reply(chat_id: chat_id, topic_thread_id: topic_thread_id, actor: "telegram:#{user}", text: "🖥️ *CMD.BRIDGE Widget*\n\n/status - Full status dashboard\n/list - List stations/services\n/start <name> - Start station/service\n/stop <name> - Stop station/service\n/sirius - Sirius time\n/chatid - Get chat ID for .3ox config\n/ask <q> - Ask LLM")
+        emit_reply(chat_id: chat_id, topic_thread_id: topic_thread_id, actor: "telegram:#{user}", text: "🖥️ *CMD.BRIDGE Widget*\n\n/status - Full dashboard\n/list - Stations/services\n/start <name> - Start\n/stop <name> - Stop\n/sirius - Time\n/chatid - Chat ID\n/ask <q> - Ask LLM\n/code <prompt> - Codex53 agent")
       
       else
         emit_reply(chat_id: chat_id, topic_thread_id: topic_thread_id, actor: "telegram:#{user}", text: "Unknown command: /#{command}\nTry /help")
@@ -293,13 +309,56 @@ module Vec3
     end
 
     # ═══════════════════════════════════════════════════════════════
+    # Sub-Agent Routing
+    # ═══════════════════════════════════════════════════════════════
+
+    def resolve_sub_agent(chat_id:, topic_thread_id:, command: nil)
+      config = load_sub_agents_config
+      default = config.dig('default', 'dispatch_agent') || 'think'
+
+      # Command override (e.g. /code -> codex53)
+      if command && config.dig('by_command', command)
+        return config['by_command'][command].to_s.strip
+      end
+
+      # Topic override (forum topic name -> agent)
+      if topic_thread_id
+        topic_name = get_topic_name(chat_id, topic_thread_id)
+        if topic_name && config.dig('by_topic', topic_name)
+          return config['by_topic'][topic_name].to_s.strip
+        end
+      end
+
+      default
+    end
+
+    def load_sub_agents_config
+      config_paths = [
+        File.expand_path('../../var/sub_agents.toml', __dir__),
+        File.join(@cmd_root, '.3ox', '.vec3', 'var', 'sub_agents.toml'),
+        File.join(@cmd_root, '.3ox', 'vec3', 'var', 'sub_agents.toml')
+      ]
+      config_paths.each do |path|
+        next unless File.exist?(path)
+        begin
+          require 'toml-rb'
+          return TomlRB.parse(File.read(path))
+        rescue => e
+          warn "⚠ Failed to parse sub_agents.toml: #{e.message}"
+        end
+      end
+      {}
+    end
+
+    # ═══════════════════════════════════════════════════════════════
     # Job Execution (local-first)
     # ═══════════════════════════════════════════════════════════════
 
-    def run_job(chat_id:, topic_thread_id:, actor:, prompt:)
+    def run_job(chat_id:, topic_thread_id:, actor:, prompt:, command: nil)
+      agent = resolve_sub_agent(chat_id: chat_id, topic_thread_id: topic_thread_id, command: command)
       envelope = {
         op: 'agent.invoke',
-        args: { agent: 'think', prompt: prompt.to_s },
+        args: { agent: agent, prompt: prompt.to_s },
         permissions: ['net.http'],
         timeout_ms: 120_000,
         route_id: nil,

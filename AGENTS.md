@@ -57,6 +57,16 @@ On each significant action (task start, task complete, drift fix, proto change, 
 
 This stream feeds future trace analysis and remains readable alongside `ledger.jsonl` in wrkdsk.
 
+### Teleprompter Sub-Agents
+
+Teleprompter routes incoming Telegram messages to Dispatch agents via `.3ox/.vec3/var/sub_agents.toml`:
+
+- **by_topic**: Forum topic name → agent (e.g. `"Code" = "codex53"`)
+- **by_command**: `/command` → agent (e.g. `ask = "think"`, `code = "codex53"`)
+- **default**: Fallback agent (default: `think`)
+
+Commands: `/ask` → think (LLM), `/code` → codex53. Plain messages use topic or default.
+
 ### Codebase Overview
 
 **ZENS3N** monorepo with **3OX.BUILDER** (Rust workspace + Bun + Ruby) at `3OX.Ai/3OX.BUILDER/`.
