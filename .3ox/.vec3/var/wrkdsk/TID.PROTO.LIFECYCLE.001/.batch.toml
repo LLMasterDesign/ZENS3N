@@ -1,0 +1,14 @@
+[batch]
+tid = "PROTO.LIFECYCLE.001"
+created_at = "2026-02-27T00:00:00Z"
+root = ".3ox/.vec3/var/wrkdsk/TID.PROTO.LIFECYCLE.001/"
+state = "sealed"
+phase = "SEAL"
+active_plan_id = ""
+window_start_utc = "2026-02-27T00:00:00Z"
+window_end_utc = "2026-02-27T00:00:00Z"
+source_roots = ["_TRON/systemd/lifecycle/proto/"]
+promotion_target = "_TRON/systemd/lifecycle/proto/v1/"
+promotion_complete = true
+
+# :: ∎

@@ -1,0 +1,14 @@
+{
+  "id": "receipt_proto_lock_1771037000",
+  "ts": "2026-02-27T00:00:00Z",
+  "verb": "SEAL",
+  "actor": "agent.drift_normalize",
+  "evidence": [
+    "_TRON/systemd/lifecycle/proto/v1/state.guard.proto",
+    "_TRON/systemd/lifecycle/proto/v1/receipt.emit.proto",
+    "_TRON/systemd/lifecycle/proto/v1/queue.dispatch.proto"
+  ],
+  "event": "wrkdsk.promote",
+  "summary": "Proto contracts promoted to v1, batch TID.PROTO.LIFECYCLE.001 sealed",
+  "promotion_target": "_TRON/systemd/lifecycle/proto/v1/"
+}

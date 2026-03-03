@@ -1,0 +1,29 @@
+# state.guard.proto :: Lifecycle state machine guard contract
+# Authority: SESSION.CHECKPOINT truth.constraints
+# Single authority per concern: guards transitions only
+
+[contract]
+id = "lifecycle.state.guard"
+version = "1.0.0"
+authority = "service_local_only"
+state = "contract"
+
+[state_machine]
+states = ["TRACK", "PLAN", "DRY_RUN", "FIX", "EXECUTE", "SEAL"]
+initial = "TRACK"
+terminal = "SEAL"
+
+[transitions]
+TRACK = ["PLAN"]
+PLAN = ["DRY_RUN", "FIX"]
+DRY_RUN = ["FIX", "EXECUTE"]
+FIX = ["DRY_RUN", "EXECUTE"]
+EXECUTE = ["SEAL"]
+SEAL = []
+
+[guard]
+rule = "transition_allowed_only"
+enforcer = "warden"
+evidence_required = true
+
+# :: ∎

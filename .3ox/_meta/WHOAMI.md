@@ -4,14 +4,15 @@ Single proof doc for current system behavior. Auto-generated from `_meta/CHANGEL
 
 ## Identity
 ```toml
-generated_at = "2026-02-13T18:10:51.381Z"
+# Aligned with SESSION.CHECKPOINT truth.paths (CKPT.2026-02-14.001)
+generated_at = "2026-02-27T00:00:00Z"
 base = "ZENS3N.BASE"
-meta_dir = ".3ox/_meta/"
-tron_path = "/root/!ZENS3N.CMD/_TRON"
-lifecycle_service = "/root/!ZENS3N.CMD/_TRON/systemd/lifecycle/whoami.watch.service"
-lifecycle_cmd = "/root/!ZENS3N.CMD/_TRON/systemd/lifecycle/cmd/meta/whoami.watch"
-lifecycle_service_present = true
-lifecycle_cmd_present = true
+meta_root = ".3ox/_meta"
+vec3_runtime_root = ".3ox/.vec3"
+tron_root = "_TRON/systemd"
+wrkdsk_root = ".3ox/.vec3/var/wrkdsk"
+services_index = "_TRON/systemd/proto/services/services.index.toml"
+canonical_model = "single_proto_authority"
 naming_contract = ".3ox/_meta/NAMING.CONTRACT.toml"
 changelog = ".3ox/_meta/CHANGELOG.toml"
 whoami = ".3ox/_meta/WHOAMI.md"
@@ -31,18 +32,20 @@ merkle_root = "sha256:7274d7388f4e084f56c55ce6efa4a76bd81bf9eb50fa230aa2df951593
 
 ## Write Policy
 ```toml
-allowed[] = "!WORKDESK/"
-allowed[] = "!ZENS3N.OPS/receipts/"
-allowed[] = ".3ox/_meta/receipts/"
+# Aligned with SESSION.CHECKPOINT truth.write_policy
+allowed[] = "!WORKDESK"
+allowed[] = "!ZENS3N.OPS/receipts"
+allowed[] = ".3ox/_meta/receipts"
 allowed[] = ".3ox/_meta/merkle.root"
-allowed[] = ".3ox/.vec3/var/wrkdsk/"
-blocked[] = ".3ox/.vec3/var/wrksdsk/"
-blocked[] = ".3ox/.vec3/var/state/"
+allowed[] = ".3ox/.vec3/var/wrkdsk"
+blocked[] = ".3ox/.vec3/var/wrksdsk"
+blocked[] = ".3ox/.vec3/var/state"
 ```
 :: ∎
 
 ## Change Feed
 ```toml
+# Note: Canonical staging root is wrkdsk. Legacy wrksdsk refs in older entries are historical (pre-correction).
 [[entry]]
 section = "identity"
 id = "chg_1771004191_837"

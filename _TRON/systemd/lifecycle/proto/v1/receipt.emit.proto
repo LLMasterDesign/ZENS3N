@@ -1,0 +1,30 @@
+# receipt.emit.proto :: Single-writer receipt emission contract
+# Authority: SESSION.CHECKPOINT truth.constraints receipt_writer_principle
+# Single writer per receipt stream
+
+[contract]
+id = "lifecycle.receipt.emit"
+version = "1.0.0"
+authority = "service_local_only"
+state = "contract"
+
+[principle]
+name = "single_writer_receipt_emit"
+rule = "one_actor_per_receipt_stream"
+writer = "pulse"
+
+[destinations]
+meta_receipts = ".3ox/_meta/receipts/"
+pulse_receipts = ".3ox/(6)Pulse/receipts"
+ops_tracking = "!ZENS3N.OPS/receipts/"
+
+[format]
+schema = "receipt_v1"
+required_fields = ["id", "ts", "verb", "actor", "evidence"]
+append_only = true
+
+[guard]
+rule = "single_writer_only"
+enforcer = "warden"
+
+# :: ∎

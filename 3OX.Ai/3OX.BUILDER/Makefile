@@ -19,7 +19,7 @@ install-cli: build-cli
 
 run: build
 	@echo "Running vec3-boot..."
-	./boot/target/release/vec3-boot
+	./target/release/vec3-boot
 
 setup:
 	@echo "Setting up 3OX cube..."
@@ -41,14 +41,23 @@ test:
 	@echo "Running tests..."
 	cargo test
 
+dist: build
+	@echo "Creating distribution..."
+	@mkdir -p dist
+	@cp target/release/vec3-boot dist/
+	@cp target/release/3ox dist/
+	@echo "Binaries: dist/vec3-boot, dist/3ox"
+	@echo "Package: tar -czf 3ox-binaries-$$(cat VERSION 2>/dev/null || echo v1.0.0).tar.gz dist/"
+
 help:
 	@echo "3OX.BUILDER Makefile Commands:"
 	@echo "  make build      - Build Rust workspace"
-	@echo "  make build-cli   - Build 3OX CLI binary"
+	@echo "  make build-cli  - Build 3OX CLI binary"
 	@echo "  make install-cli - Build and install 3OX CLI globally"
-	@echo "  make run         - Build and run vec3-boot"
-	@echo "  make setup       - Interactive 3OX cube setup"
-	@echo "  make clean       - Clean build artifacts"
-	@echo "  make install     - Install NPM/Bun dependencies"
-	@echo "  make test        - Run Rust tests"
+	@echo "  make run        - Build and run vec3-boot"
+	@echo "  make dist       - Build and copy binaries to dist/"
+	@echo "  make setup      - Interactive 3OX cube setup"
+	@echo "  make clean      - Clean build artifacts"
+	@echo "  make install   - Install NPM/Bun dependencies"
+	@echo "  make test      - Run Rust tests"
 
