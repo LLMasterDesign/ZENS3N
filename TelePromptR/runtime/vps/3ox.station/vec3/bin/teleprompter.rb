@@ -91,6 +91,13 @@ AUTOPILOT_TOPIC_KEY = ENV['TPR_AUTOPILOT_TOPIC_KEY'].to_s.strip # optional scope
 AUTOPILOT_MIN_HUMAN = int_env('TPR_AUTOPILOT_MIN_HUMAN', 12) # 1 post per 12+ human msgs (~8.3%)
 AUTOPILOT_IDLE_S = int_env('TPR_AUTOPILOT_IDLE_S', 120)
 AUTOPILOT_COOLDOWN_S = int_env('TPR_AUTOPILOT_COOLDOWN_S', 900)
+STREAMING_ENABLED = !truthy?(ENV['TPR_STREAM_DISABLED'])
+STREAMING_PLACEHOLDER = begin
+  raw = ENV['TPR_STREAM_PLACEHOLDER'].to_s.strip
+  raw.empty? ? '...thinking' : raw
+end
+STREAM_TOKEN_DELAY_MS = int_env('TPR_STREAM_TOKEN_DELAY_MS', 45)
+MAX_TELEGRAM_TEXT_CHARS = int_env('TPR_MAX_TEXT_CHARS', 4000)
 
 #═══════════════════════════════════════════════════════════════════════════════
 # STATE MANAGEMENT
@@ -263,10 +270,83 @@ rescue => e
 end
 
 def send_message(chat_id, text, parse_mode = nil, thread_id = nil)
-  params = { chat_id: chat_id, text: text }
+  params = { chat_id: chat_id, text: truncate_for_telegram(text) }
   params[:parse_mode] = parse_mode if parse_mode
   params[:message_thread_id] = thread_id if thread_id
   telegram_post('sendMessage', params)
+end
+
+def edit_message(chat_id, message_id, text, parse_mode = nil)
+  params = {
+    chat_id: chat_id,
+    message_id: message_id,
+    text: truncate_for_telegram(text)
+  }
+  params[:parse_mode] = parse_mode if parse_mode
+  telegram_post('editMessageText', params)
+end
+
+def stream_tokens(text)
+  text.to_s.split(/(\s+)/).reject(&:empty?)
+end
+
+def truncate_for_telegram(text)
+  raw = text.to_s
+  return raw if raw.length <= MAX_TELEGRAM_TEXT_CHARS
+
+  suffix = '...'
+  keep = [MAX_TELEGRAM_TEXT_CHARS - suffix.length, 0].max
+  "#{raw[0, keep]}#{suffix}"
+end
+
+def ensure_agent_identity(text, agent_name, glyph)
+  body = text.to_s.strip
+  return body if body.empty?
+
+  identity = agent_name.to_s.strip
+  return body if identity.empty?
+
+  shown_glyph = glyph.to_s.strip
+  shown_glyph = '🤖' if shown_glyph.empty?
+  prefix = "#{shown_glyph} #{identity}:"
+  return body if body.match?(/\A#{Regexp.escape(prefix)}\s*/i)
+  return body if body.match?(/\A(?:\S+\s+)?#{Regexp.escape(identity)}\s*:\s*/i)
+
+  "#{prefix} #{body}"
+end
+
+def stream_message(chat_id:, thread_id:, text:, parse_mode: nil, placeholder: STREAMING_PLACEHOLDER)
+  final_text = truncate_for_telegram(text)
+  return send_message(chat_id, final_text, parse_mode, thread_id) unless STREAMING_ENABLED
+
+  kickoff = send_message(chat_id, placeholder, nil, thread_id)
+  unless kickoff && kickoff['ok']
+    log("stream kickoff failed chat=#{chat_id} err=#{kickoff.inspect}", 'warn')
+    return send_message(chat_id, final_text, parse_mode, thread_id)
+  end
+
+  message_id = kickoff.dig('result', 'message_id')
+  unless message_id
+    log("stream kickoff missing message_id chat=#{chat_id}", 'warn')
+    return send_message(chat_id, final_text, parse_mode, thread_id)
+  end
+
+  progressive = +''
+  stream_tokens(final_text).each do |token|
+    progressive << token
+    edit_result = edit_message(chat_id, message_id, progressive, nil)
+    unless edit_result && edit_result['ok']
+      log("stream edit failed chat=#{chat_id} message_id=#{message_id} err=#{edit_result.inspect}", 'warn')
+      return send_message(chat_id, final_text, parse_mode, thread_id)
+    end
+    sleep(STREAM_TOKEN_DELAY_MS / 1000.0) if STREAM_TOKEN_DELAY_MS.positive?
+  end
+
+  final = edit_message(chat_id, message_id, final_text, parse_mode)
+  return final if final && final['ok']
+
+  log("stream final edit failed chat=#{chat_id} message_id=#{message_id} err=#{final.inspect}", 'warn')
+  edit_message(chat_id, message_id, final_text, nil)
 end
 
 #═══════════════════════════════════════════════════════════════════════════════
@@ -902,8 +982,15 @@ def process_outbox
       
       next unless chat_id && text
       
-      # Send the message
-      result = send_message(chat_id, text, parse_mode, thread_id)
+      text = ensure_agent_identity(text, agent_name, glyph)
+
+      # Send the message (placeholder + token streaming by default)
+      result = stream_message(
+        chat_id: chat_id,
+        thread_id: thread_id,
+        text: text,
+        parse_mode: parse_mode
+      )
       
       if result && result['ok']
         $health_stats[:outbox_sent] += 1

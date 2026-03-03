@@ -111,13 +111,13 @@ class TelePromptRBridge
         end
 
         agent_info = load_registrations[agent_id] || {}
-        prefix = if agent_info['agent_name']
-                   "#{agent_info['pico_glyph'] || 'AI'} #{agent_info['agent_name']}: "
-                 else
-                   ''
-                 end
+        agent_name = agent_info['agent_name'].to_s.strip
+        agent_name = agent_id if agent_name.empty?
+        glyph = agent_info['pico_glyph'].to_s.strip
+        glyph = 'AI' if glyph.empty?
+        message_text = with_identity_prefix(text, agent_name: agent_name, glyph: glyph)
 
-        response = send_message(route[:chat_id], "#{prefix}#{text}", topic_thread_id: route[:topic_thread_id])
+        response = send_message(route[:chat_id], message_text, topic_thread_id: route[:topic_thread_id])
 
         append_route_audit(
           outcome: 'published',
@@ -359,6 +359,17 @@ class TelePromptRBridge
   def count_json(dir)
     return 0 unless Dir.exist?(dir)
     Dir.glob(File.join(dir, '*.json')).size
+  end
+
+  def with_identity_prefix(text, agent_name:, glyph:)
+    body = text.to_s.strip
+    return body if body.empty?
+
+    prefix = "#{glyph} #{agent_name}:"
+    return body if body.match?(/\A#{Regexp.escape(prefix)}\s*/i)
+    return body if body.match?(/\A(?:\S+\s+)?#{Regexp.escape(agent_name)}\s*:\s*/i)
+
+    "#{prefix} #{body}"
   end
 end
 
