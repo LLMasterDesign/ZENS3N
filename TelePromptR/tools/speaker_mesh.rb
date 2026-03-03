@@ -21,6 +21,7 @@ class SpeakerMesh
 
   def initialize
     @repo_root = File.expand_path('..', __dir__)
+    @cmd_root = env('TPR_CMD_ROOT', '/root/!ZENS3N.CMD/.3ox')
     @var_dir = env('TPR_VAR_DIR', File.join(@repo_root, 'runtime', 'vps', '3ox.station', 'vec3', 'var'))
     @inbox_dir = env('TPR_INBOX_DIR', File.join(@var_dir, 'inbox'))
     @outbox_dir = env('TPR_OUTBOX_DIR', File.join(@var_dir, 'outbox'))
@@ -41,6 +42,7 @@ class SpeakerMesh
 
     @api_key = first_nonempty(ENV['TPR_MESH_API_KEY'], ENV['OPENROUTER_API_KEY'], ENV['OPENAI_API_KEY'])
     @api_base = env('TPR_MESH_API_BASE', default_api_base)
+    @brains_path = first_nonempty(ENV['TPR_BRAINS_PATH'], resolve_brains_path)
 
     FileUtils.mkdir_p(@inbox_dir)
     FileUtils.mkdir_p(@outbox_dir)
@@ -149,7 +151,10 @@ class SpeakerMesh
   end
 
   def compose_reply(agent_id:, text:, profile:, chat_id:, thread_id:, user_name:)
-    return fallback_reply(agent_id: agent_id, text: text, profile: profile, user_name: user_name) unless llm_enabled?
+    unless llm_enabled?
+      fallback = fallback_reply(agent_id: agent_id, text: text, profile: profile, user_name: user_name)
+      return wrap_agent_response(agent_id: agent_id, profile: profile, body: fallback)
+    end
 
     messages = build_messages(
       agent_id: agent_id,
@@ -163,12 +168,16 @@ class SpeakerMesh
     model = profile['model'] || @default_model
     response = call_openai_compatible(messages: messages, model: model, temperature: profile['temperature'])
     reply = extract_llm_text(response)
-    return fallback_reply(agent_id: agent_id, text: text, profile: profile, user_name: user_name) if reply.empty?
+    if reply.empty?
+      fallback = fallback_reply(agent_id: agent_id, text: text, profile: profile, user_name: user_name)
+      return wrap_agent_response(agent_id: agent_id, profile: profile, body: fallback)
+    end
 
-    reply
+    wrap_agent_response(agent_id: agent_id, profile: profile, body: reply)
   rescue StandardError => e
     log("llm error agent=#{agent_id} err=#{e.class}: #{e.message}", 'warn')
-    fallback_reply(agent_id: agent_id, text: text, profile: profile, user_name: user_name)
+    fallback = fallback_reply(agent_id: agent_id, text: text, profile: profile, user_name: user_name)
+    wrap_agent_response(agent_id: agent_id, profile: profile, body: fallback)
   end
 
   def build_messages(agent_id:, text:, profile:, chat_id:, thread_id:, user_name:)
@@ -181,6 +190,9 @@ class SpeakerMesh
         Avoid roleplay fluff. Prefer actionable next steps.
       PROMPT
     end
+
+    tone_anchor = brains_tone_anchor(agent_id: agent_id, profile: profile)
+    system_prompt = [system_prompt, tone_anchor].map(&:to_s).map(&:strip).reject(&:empty?).join("\n\n")
 
     messages = [{ 'role' => 'system', 'content' => system_prompt }]
 
@@ -248,27 +260,30 @@ class SpeakerMesh
   def fallback_reply(agent_id:, text:, profile:, user_name:)
     persona = profile['persona'].to_s.strip
     persona = 'operator' if persona.empty?
-    prefix = profile['glyph'].to_s
-    prefix = 'AI' if prefix.empty?
+    tone_hint = fallback_tone_hint
 
     if text.include?('?')
       question = "What is the single constraint I should optimize first?"
-      return "#{prefix} #{agent_id} (#{persona}): I can run in low-power mode without a dedicated key. I heard: \"#{truncate(text, 220)}\". #{question}"
+      return "#{tone_hint}I can run in low-power mode without a dedicated key. I heard: \"#{truncate(text, 220)}\". #{question}".strip
     end
 
-    "#{prefix} #{agent_id} (#{persona}): Received from #{user_name}. Next step: assign one owner, one deadline, and one output for \"#{truncate(text, 220)}\"."
+    "#{tone_hint}Received from #{user_name}. Persona: #{persona}. Next step: assign one owner, one deadline, and one output for \"#{truncate(text, 220)}\".".strip
   end
 
   def write_outbox(agent_id:, glyph:, chat_id:, thread_id:, text:)
+    profile = merged_profile(agent_id)
+    display_name = agent_display_name(agent_id, profile)
+    wrapped_text = wrap_agent_response(agent_id: agent_id, profile: profile, body: text)
+
     payload = {
       'tpr' => {
-        'src' => agent_id,
+        'src' => display_name,
         'dst' => 'homebase',
         'sev' => 'INFO',
         'glyph' => glyph.to_s.empty? ? 'AI' : glyph,
         'pico' => 'mesh',
         'dir' => '>',
-        'msg' => text
+        'msg' => wrapped_text
       },
       'route' => {
         'chat_id' => chat_id,
@@ -295,8 +310,9 @@ class SpeakerMesh
     defaults = hash_or_empty(cfg['default'])
     llm = hash_or_empty(cfg['llm'])
     agents = hash_or_empty(cfg['agents'])
-    agent_cfg = hash_or_empty(agents[agent_id])
+    agent_cfg = hash_or_empty(agent_config_for(agents, agent_id))
     agent_reg = hash_or_empty(agent_registry[agent_id])
+    brains = brains_persona
 
     enabled = if agent_cfg.key?('enabled')
                 truthy?(agent_cfg['enabled'])
@@ -308,14 +324,25 @@ class SpeakerMesh
 
     {
       'enabled' => enabled,
+      'agent_name' => first_nonempty(agent_cfg['agent_name'], agent_reg['agent_name'], defaults['agent_name'], agent_id),
       'persona' => first_nonempty(agent_cfg['persona'], defaults['persona'], 'operator'),
-      'glyph' => first_nonempty(agent_cfg['glyph'], agent_reg['glyph'], defaults['glyph'], 'AI'),
+      'glyph' => first_nonempty(agent_cfg['glyph'], agent_reg['glyph'], defaults['glyph'], brains['glyph'], 'AI'),
       'system_prompt' => first_nonempty(agent_cfg['system_prompt'], defaults['system_prompt']),
       'model' => first_nonempty(agent_cfg['model'], llm['model'], @default_model),
       'temperature' => float_or_default(agent_cfg['temperature'], llm['temperature'], @temperature),
       'max_reply_chars' => int_or_default(agent_cfg['max_reply_chars'], defaults['max_reply_chars'], @max_reply_chars),
-      'listen_only' => resolve_listen_only(agent_cfg, defaults, agent_reg)
+      'listen_only' => resolve_listen_only(agent_cfg, defaults, agent_reg),
+      'brains_persona' => brains
     }
+  end
+
+  def agent_config_for(agents, agent_id)
+    return {} unless agents.is_a?(Hash)
+    return agents[agent_id] if agents[agent_id].is_a?(Hash)
+
+    down = agent_id.to_s.downcase
+    pair = agents.find { |key, value| key.to_s.downcase == down && value.is_a?(Hash) }
+    pair ? pair[1] : {}
   end
 
   def resolve_listen_only(agent_cfg, defaults, agent_reg)
@@ -328,6 +355,55 @@ class SpeakerMesh
     else
       false
     end
+  end
+
+  def agent_display_name(agent_id, profile)
+    first_nonempty(profile['agent_name'], agent_id)
+  end
+
+  def identity_prefix(agent_id, profile)
+    glyph = first_nonempty(profile['glyph'], 'AI')
+    display_name = agent_display_name(agent_id, profile)
+    "#{glyph} #{display_name}:"
+  end
+
+  def wrap_agent_response(agent_id:, profile:, body:)
+    raw = body.to_s.strip
+    prefix = identity_prefix(agent_id, profile)
+    return "#{prefix} ...thinking" if raw.empty?
+
+    return raw if raw.match?(/\A#{Regexp.escape(prefix)}\s*/i)
+
+    display_name = Regexp.escape(agent_display_name(agent_id, profile))
+    return raw if raw.match?(/\A(?:\S+\s+)?#{display_name}\s*:\s*/i)
+
+    "#{prefix} #{raw}"
+  end
+
+  def brains_tone_anchor(agent_id:, profile:)
+    persona = brains_persona
+    return '' if persona.empty?
+
+    lines = ['Tone anchor from brains.rs (global persona):']
+    lines << "- name: #{persona['name']}" unless persona['name'].to_s.strip.empty?
+    lines << "- mode: #{persona['mode']}" unless persona['mode'].to_s.strip.empty?
+    lines << "- description: #{persona['description']}" unless persona['description'].to_s.strip.empty?
+    lines << "- system: #{persona['system']}" unless persona['system'].to_s.strip.empty?
+    lines << "Apply this as tone only. Keep role identity as #{agent_display_name(agent_id, profile)}."
+    lines.join("\n")
+  end
+
+  def fallback_tone_hint
+    persona = brains_persona
+    mode = persona['mode'].to_s.strip
+    description = persona['description'].to_s.strip
+
+    parts = []
+    parts << mode unless mode.empty?
+    parts << description unless description.empty?
+    return '' if parts.empty?
+
+    "[tone: #{parts.join(' | ')}] "
   end
 
   def same_context?(entry, chat_id, thread_id)
@@ -358,6 +434,75 @@ class SpeakerMesh
     rescue StandardError
       {}
     end
+  end
+
+  def brains_persona
+    @brains_persona ||= load_brains_persona
+  end
+
+  def load_brains_persona
+    return {} if @brains_path.to_s.strip.empty?
+    return {} unless File.exist?(@brains_path)
+
+    persona = {}
+    section = nil
+
+    File.readlines(@brains_path).each do |line|
+      stripped = line.to_s.strip
+      next if stripped.empty? || stripped.start_with?('#')
+
+      heading = stripped.match(/\A\[([^\]]+)\]\z/)
+      if heading
+        section = heading[1].to_s.strip
+        next
+      end
+
+      next unless section == 'persona'
+
+      parsed = stripped.match(/\A([A-Za-z0-9_.-]+)\s*=\s*(.+)\z/)
+      next unless parsed
+
+      key = parsed[1].to_s.strip
+      value = parse_brains_value(parsed[2])
+      next if key.empty? || value.to_s.strip.empty?
+
+      persona[key] = value
+    end
+
+    persona
+  rescue StandardError => e
+    log("brains parse failed path=#{@brains_path} err=#{e.class}: #{e.message}", 'warn')
+    {}
+  end
+
+  def parse_brains_value(raw)
+    value = raw.to_s.strip
+    value = value.split(/\s+#/, 2).first.to_s.strip
+    return '' if value.empty?
+
+    quoted = value.match(/\A"(.*)"\z/m) || value.match(/\A'(.*)'\z/m)
+    return quoted[1].to_s.gsub('\"', '"') if quoted
+    return true if value.casecmp('true').zero?
+    return false if value.casecmp('false').zero?
+
+    if value.match?(/\A-?\d+\z/)
+      return value.to_i
+    end
+
+    if value.match?(/\A-?\d+\.\d+\z/)
+      return value.to_f
+    end
+
+    value
+  end
+
+  def resolve_brains_path
+    candidates = []
+    candidates << File.join(@cmd_root, '(2)Brains', 'brains.rs') unless @cmd_root.to_s.strip.empty?
+    candidates << File.join(@repo_root, '.3ox', '(2)Brains', 'brains.rs')
+    candidates << File.join(File.expand_path('..', @repo_root), '.3ox', '(2)Brains', 'brains.rs')
+
+    candidates.find { |path| File.exist?(path) }.to_s
   end
 
   def append_memory(agent_id, role:, content:, chat_id:, thread_id:, user:)
