@@ -12,6 +12,32 @@ _Generated: 2026-03-03 22:35:03Z (UTC) on branch `3ox.agent/agent-queue-task-pro
 - Validated `.3ox` against spec source `origin/main:3OX.Ai/PLAN.md` and user-provided L3 set (`rc lib dev var bin mem proc`).
 - Syntax checks run for `.rs .rb .ex .yml/.yaml .json .toml` (Rust syntax-like errors isolated from formatting-only diffs).
 
+## Repair Delta (post-audit fixes on this branch)
+
+This section tracks fixes applied after the initial audit snapshot:
+
+- ✅ **TOML repair applied (2 files):**
+  - `3OX.Ai/3OX.BUILDER/3OX.BUILD/TEMPLATES/limits.toml`
+  - `!WORKDESK/CloudAgents/DebugAgent/.3ox/limits.toml`
+  - Result: repo-wide TOML parse failures reduced from **2 → 0**.
+
+- ✅ **Ruby scaffold repair applied (6 critical runtime files):**
+  - `.3ox/.vec3/dev/io/tg/telegram.bridge.rb`
+  - `.3ox/.vec3/lib/core/cursor.api.rb`
+  - `.3ox/.vec3/lib/core/rest.api.rb`
+  - `.3ox/.vec3/lib/core/cursor.bridge.rb`
+  - `.3ox/.vec3/lib/core/brains.cursor.rb`
+  - `.3ox/.vec3/lib/core/imprint.bridge.rb`
+  - Result: these files now pass `ruby -c`.
+
+- 📉 **Remaining Ruby syntax debt in `.3ox/.vec3`:**
+  - Before targeted fix: **47** failing `.rb` files.
+  - After targeted fix: **41** failing `.rb` files.
+
+- ℹ️ **TRON contract note:**
+  - No tracked file named `_TRON.CONTRACT.toml` or `TRON.CONTRACT.toml` exists in this git branch.
+  - Any referenced TRON contract TOML appears to be external/VPS-side rather than committed here.
+
 ## Branch Inventory Summary
 
 | Branch | Files | Folders | Symlinks | Active | Legacy | Broken |
@@ -2013,8 +2039,39 @@ FILE | verify.sh | active | Repository file artifact.
 ## Recommended Follow-up (prioritized)
 
 1. Normalize L2/L3 across all active branches (restore `.3ox` on VPS/BASE; add missing `.vec3/mem` and `.vec3/proc`).
-2. Fix parse-invalid Ruby scripts (47 files) that currently hard-fail with early syntax errors.
-3. Resolve invalid TOML templates and parse-invalid Elixir template artifact(s).
+2. Continue Ruby scaffold cleanup for remaining `.3ox/.vec3` syntax failures (currently 41 after this repair wave).
+3. Resolve remaining parse-invalid Elixir template artifact(s).
 4. Decide canonical face-file naming/placement and enforce via CI checks.
 5. Remove or repair broken symlinks; avoid absolute machine-bound symlink targets in git.
 6. Reduce absolute `/root/...` coupling by introducing env-resolved roots and contracts.
+
+## Remaining Repair Plan (actionable instructions)
+
+### A) Finish Ruby scaffold cleanup (remaining `.3ox/.vec3` failures)
+
+1. Identify failing files:
+   - `python3` loop running `ruby -c` on `.3ox/.vec3/**/*.rb`.
+2. For each failing file with malformed scaffold markers:
+   - remove malformed block between `#```elixir` and `module Z3N`.
+3. Re-check:
+   - `ruby -c <file>` for each repaired file.
+4. Stop when all scaffold-origin `syntax error, unexpected end` failures are cleared.
+
+### B) Resolve non-scaffold Ruby syntax failures
+
+Some files now fail with deeper errors (e.g., `module definition in method body`, unexpected constant contexts).  
+Treat these as code-level fixes, not header-strip fixes:
+
+1. Fix one file at a time.
+2. Run `ruby -c` immediately.
+3. Commit in small batches by subsystem (`rc/services`, `lib/processors`, etc.).
+
+### C) L2/L3 structural normalization (requires explicit file/dir additions)
+
+For `branch/VPS` and `branch/BASE`:
+1. Recreate `.3ox` with numbered faces `(1)..(6)`.
+2. Add canonical face files at expected locations.
+3. Add `.3ox/.vec3/mem` and `.3ox/.vec3/proc`.
+4. Validate with tree + boot checks.
+
+> Note: this step likely requires creating new files/directories and should be explicitly approved before actuation.
