@@ -118,7 +118,7 @@ Each device running 3OX has a `_TRON.CONTRACT.toml`:
 ```toml
 [device]
 name = "CMD.VPS"
-host = "5.78.109.54"
+host = "<REDACTED_HOST>"
 role = "runtime"           # runtime | build | mobile
 
 [paths]

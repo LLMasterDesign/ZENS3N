@@ -40,7 +40,7 @@ require 'json'
 require 'uri'
 require 'open3'
 
-VPS_HOST = ENV['VPS_HOST'] || '5.78.109.54'
+VPS_HOST = ENV['VPS_HOST'] || 'REDACTED_HOST'
 VPS_PORT = ENV['VPS_PORT'] || '4777'
 POLL_INTERVAL = (ENV['POLL_INTERVAL'] || '5').to_i
 CURSOR_CLI = ENV['CURSOR_CLI'] || 'cursor'

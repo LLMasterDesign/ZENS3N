@@ -260,7 +260,7 @@ OUTPUT: Updated site files, ready to deploy.
 
 ### D1 [ ] VPS Health Check
 ```
-VPS: root@5.78.109.54 (SSH key: ~/.ssh/id_zens3n_vps)
+VPS: root@<REDACTED_HOST> (SSH key: ~/.ssh/id_zens3n_vps)
 
 TASK: Full health check of CMD.VPS:
 - List all running services (systemctl list-units)
