@@ -37,15 +37,6 @@ SEAL = ':: ∎'
 ##/// Last Updated: 2026.01.05 | Trace.ID: cursor.api.v1.0
 ##/// Status: [ACTIVE] | Cat: SYSTEM | Auth: SYSTEM | Created: 2026.01.05
 #```elixir
-end
-  }
-    CTX: '⫸ 〔runtime.script.context〕'
-    PiCO: '//▞⋮⋮ [🔧] ≔ [cursor_api] [system] [ruby] ⊢ ⇨ ⟿ ▷ :: ∎',
-    PHENO: '▛▞// !/usr/bin/env ruby :: ρ{Input}.φ{Process}.τ{Output} ▹',
-    IMPRINT: '▛//▞▞ ⟦⎊⟧ ::  // CURSOR.API ▞▞',
-    SCHEMA: '///▙▖▙▖▞▞▙▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂ ::[0xA4]::',
-  SPEC = {
-module Z3N
 #
 # CURSOR.API.RB :: Cursor Cloud Agent API Client for CMD.BRIDGE
 # Provides programmatic access to Cursor's Cloud Agent API

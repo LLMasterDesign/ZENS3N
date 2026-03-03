@@ -37,15 +37,6 @@ SEAL = ':: ∎'
 ##/// Last Updated: 2026.01.05 | Trace.ID: rest.api.v1.0
 ##/// Status: [ACTIVE] | Cat: SYSTEM | Auth: SYSTEM | Created: 2026.01.05
 #```elixir
-end
-  }
-    CTX: '⫸ 〔runtime.script.context〕'
-    PiCO: '//▞⋮⋮ [🔧] ≔ [rest_api] [system] [ruby] ⊢ ⇨ ⟿ ▷ :: ∎',
-    PHENO: '▛▞// !/usr/bin/env ruby :: ρ{Input}.φ{Process}.τ{Output} ▹',
-    IMPRINT: '▛//▞▞ ⟦⎊⟧ ::  // REST.API ▞▞',
-    SCHEMA: '///▙▖▙▖▞▞▙▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂ ::[0xA4]::',
-  SPEC = {
-module Z3N
 #
 # REST.API.RB :: REST API Server for CMD.BRIDGE
 # WEBrick-based HTTP server providing control plane interface (Sinatra-free)

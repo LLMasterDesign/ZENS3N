@@ -37,15 +37,6 @@ SEAL = ':: ∎'
 ##/// Last Updated: 2026.01.06 | Trace.ID: imprint.bridge.v1.0
 ##/// Status: [ACTIVE] | Cat: SYSTEM | Auth: SYSTEM | Created: 2026.01.06
 #```elixir
-end
-  }
-    CTX: '⫸ 〔runtime.script.context〕'
-    PiCO: '//▞⋮⋮ [🌉] ≔ [imprint_bridge] [system] [ruby] ⊢ ⇨ ⟿ ▷ :: ∎',
-    PHENO: '▛▞// !/usr/bin/env ruby :: ρ{Input}.φ{Process}.τ{Output} ▹',
-    IMPRINT: '▛//▞▞ ⟦⎊⟧ ::  // IMPRINT.BRIDGE ▞▞',
-    SCHEMA: '///▙▖▙▖▞▞▙▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂ ::[0xA4]::',
-  SPEC = {
-module Z3N
 #
 # IMPRINT.BRIDGE.RB :: Ruby-to-Elixir Bridge for Imprint.ID Governance
 # Allows brains.exe workers to call Imprint.ID for validation and governance

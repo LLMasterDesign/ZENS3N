@@ -37,15 +37,6 @@ SEAL = ':: ∎'
 ##/// Last Updated: 2026.01.05 | Trace.ID: cursor.bridge.v1.0
 ##/// Status: [ACTIVE] | Cat: SYSTEM | Auth: SYSTEM | Created: 2026.01.05
 #```elixir
-end
-  }
-    CTX: '⫸ 〔runtime.script.context〕'
-    PiCO: '//▞⋮⋮ [🌉] ≔ [cursor_bridge] [system] [ruby] ⊢ ⇨ ⟿ ▷ :: ∎',
-    PHENO: '▛▞// !/usr/bin/env ruby :: ρ{Input}.φ{Process}.τ{Output} ▹',
-    IMPRINT: '▛//▞▞ ⟦⎊⟧ ::  // CURSOR.BRIDGE ▞▞',
-    SCHEMA: '///▙▖▙▖▞▞▙▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂ ::[0xA4]::',
-  SPEC = {
-module Z3N
 #
 # CURSOR.BRIDGE.RB :: Ruby-to-Elixir Bridge for Cursor Cloud Agent API
 # Bridges Ruby code to Elixir-based Cursor API client for external signals
