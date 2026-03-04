@@ -291,3 +291,4 @@
 {"ts":"2026-03-04T14:46:06Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate (default+explicit key probes) on both IP and hostname; refreshed report timestamp to 14:46:06Z"}
 {"ts":"2026-03-04T14:48:20Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate (default+explicit key probes) on both IP and hostname; refreshed report timestamp to 14:48:20Z"}
 {"ts":"2026-03-04T14:51:07Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate (default+explicit key probes) on both IP and hostname; refreshed report timestamp to 14:51:07Z"}
+{"ts":"2026-03-04T14:53:02Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate (default+explicit key probes plus agent-state check) on both IP and hostname; refreshed report timestamp to 14:53:02Z"}
