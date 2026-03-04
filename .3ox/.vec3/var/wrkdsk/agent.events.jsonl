@@ -263,3 +263,4 @@
 {"ts":"2026-03-04T13:39:20Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate on both IP and hostname with unchanged publickey/password denial; refreshed report timestamp to 13:39:20Z"}
 {"ts":"2026-03-04T13:41:07Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate on both IP and hostname with unchanged publickey/password denial; refreshed report timestamp to 13:41:07Z"}
 {"ts":"2026-03-04T13:42:56Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate on both IP and hostname with unchanged publickey/password denial; refreshed report timestamp to 13:42:56Z"}
+{"ts":"2026-03-04T13:46:58Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate (including default-agent probe showing no auth agent) on both IP and hostname; refreshed report timestamp to 13:46:58Z"}
