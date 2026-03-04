@@ -57,6 +57,7 @@ Health-check execution is **blocked** due to missing SSH private key in this run
     - `tape/tail` returns 177 receipts total (latest receipt is `unknown/system` at `2026-03-04T06:49:57.882090Z`).
     - `tape/head` currently returns 0 receipts for `n=1000` despite endpoint reachability.
     - latest `teleprompter`-tagged receipt in returned set is historical (`2026-02-04T04:00:50Z`).
+    - expanded `tape/tail?n=5000` still returns only 177 receipts (same ceiling) and still shows zero matches for `systemctl`, `speaker-mesh`, `df -h`, `free -h`, `uptime`, `journalctl`, `/root/!CMD.VPS`, `BudgetR`, `TelePromptR`.
   - Tape action census over current `tape/tail?n=200` window:
     - dominant historical actions are `agent_start`, `message_received`, `telegram_send`, `message_sent`.
     - task-related actions are sparse (`task_created=1`, `task_start=2`, `task_completed=2`) and all map to `list /root/_TRON`.
