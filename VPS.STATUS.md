@@ -6,7 +6,7 @@
 - Target: `root@5.78.109.54`
 - Requested key: `~/.ssh/id_zens3n_vps`
 - Run time (UTC): 2026-03-04
-- Last verification (UTC): 2026-03-04 10:17:28Z
+- Last verification (UTC): 2026-03-04 10:18:35Z
 - Operator: cursor.agent
 
 ## Plan Expectations (from `3OX.Ai/PLAN.md`)
@@ -85,7 +85,7 @@ Health-check execution is **blocked** due to missing SSH private key in this run
       - `{"action":"unknown","actor":"system","data":{},"ts":"2026-03-04T06:49:57.882090Z"}`
       - this strongly suggests `/tape/append` accepted an empty payload and wrote a record.
     - follow-up read confirms this `unknown/system` receipt remains the latest tape entry at verification time.
-    - latest `/health` response timestamp now reads `2026-03-04T10:17:28.765793Z` with services still `pulse=true`, `tape=true`, `warden=true`.
+    - latest `/health` response timestamp now reads `2026-03-04T10:18:35.909485Z` with services still `pulse=true`, `tape=true`, `warden=true`.
 - Direct access to internal API port remains blocked/reset (`:4777`), but HTTPS reverse-proxy routes selected endpoints.
   - explicit probes to `http://5.78.109.54:4777/cursor/pending` and `http://5.78.109.54:4777/health` both returned `curl: (56) Recv failure: Connection reset by peer`.
   - direct TLS attempt on `:4777` (`openssl s_client`) fails with immediate reset (`write:errno=104`); raw socket HTTP probe also ends with `Connection reset by peer`.
@@ -184,6 +184,7 @@ Health-check execution is **blocked** due to missing SSH private key in this run
   - one historical filename match (`Z.3-CHAMBER/.../!3ox.key`) is a deleted 3OX framework test-instruction artifact, not an SSH/private key.
   - branch-tree filename sweep across local/origin refs found no `id_zens3n_vps`/private-key filenames beyond the same historical `!3ox.key` artifact.
 - Common secret mount directories (`/run/secrets`, `/run/credentials`, `/var/run/secrets`) are absent/unavailable in this runtime.
+  - direct `ls` recheck still reports `/run/credentials` and `/var/run/secrets` missing.
 - GitHub workflow inspection (`.github/workflows/3ox-ci.yml`, `rubyonrails.yml`) shows CI/test jobs only; no VPS deploy job, SSH secret, or alternate key-provisioning mechanism is defined there.
 - GitHub Actions run history (`gh run list`) currently shows repeated successful `3OX CI` runs only, with no deployment workflow or secret-injection step that could supply `id_zens3n_vps` to this runtime.
   - latest 50 run metadata entries (`gh run list --limit 50 --json ...`) are all `workflowName="3OX CI"` on `main` `push` events; no deploy/VPS workflow names appear.
