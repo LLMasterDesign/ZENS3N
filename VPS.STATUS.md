@@ -6,7 +6,7 @@
 - Target: `root@5.78.109.54`
 - Requested key: `~/.ssh/id_zens3n_vps`
 - Run time (UTC): 2026-03-04
-- Last verification (UTC): 2026-03-04 09:09:44Z
+- Last verification (UTC): 2026-03-04 09:10:36Z
 - Operator: cursor.agent
 
 ## Plan Expectations (from `3OX.Ai/PLAN.md`)
@@ -158,6 +158,7 @@ Health-check execution is **blocked** due to missing SSH private key in this run
   - `AGENT.QUEUE.md` repeating the same required key path (`~/.ssh/id_zens3n_vps`) for `root@5.78.109.54`.
   - `.3ox/.vec3/rc/cursor_bridge.rb` host constant (`VPS_HOST='5.78.109.54'`).
   - no alternate identity-file path or credential source was discovered.
+- Repo-wide SSH/key reference scan reconfirmed there is no `IdentityFile` override or alternate credential source for this host beyond the same missing key path.
 - Common secret mount directories (`/run/secrets`, `/run/credentials`, `/var/run/secrets`) are absent/unavailable in this runtime.
 - GitHub workflow inspection (`.github/workflows/3ox-ci.yml`, `rubyonrails.yml`) shows CI/test jobs only; no VPS deploy job, SSH secret, or alternate key-provisioning mechanism is defined there.
 
