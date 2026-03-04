@@ -6,7 +6,7 @@
 - Target: `root@5.78.109.54`
 - Requested key: `~/.ssh/id_zens3n_vps`
 - Run time (UTC): 2026-03-04
-- Last verification (UTC): 2026-03-04 06:40:41Z
+- Last verification (UTC): 2026-03-04 06:42:19Z
 - Operator: cursor.agent
 
 ## Plan Expectations (from `3OX.Ai/PLAN.md`)
@@ -44,6 +44,11 @@ Health-check execution is **blocked** due to missing SSH private key in this run
     - matches found for `/root/_TRON` task activity and historical `Teleprompter` message routing.
     - no matches found for `speaker-mesh`, `systemctl`, `df -h`, `free -h`, `uptime`, `journalctl`, `/root/!CMD.VPS`, `BudgetR`, or `TelePromptR` directory checks.
 - Direct access to internal API port remains blocked/reset (`:4777`), but HTTPS reverse-proxy routes selected endpoints.
+- Port/protocol behavior check (application-layer):
+  - `https://5.78.109.54:443/health` returns healthy JSON.
+  - `http://5.78.109.54:80` serves nginx (404 at `/health`, 404 at `/`).
+  - `http://:3000/:4000/:4777/:8080/:9090` and `https://:3000/:4000/:4777/:8080/:9090` all timed out for `/health`.
+  - `http://:443` correctly returns nginx `400` ("plain HTTP request was sent to HTTPS port"), confirming TLS termination behavior.
 - Connectivity path is live:
   - raw TCP to `5.78.109.54:22` = `tcp_22_open`
   - raw TCP to `5.78.109.54:4777` = `tcp_4777_open`
