@@ -198,3 +198,4 @@
 {"ts":"2026-03-04T11:50:05Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate on both IP and hostname with unchanged publickey/password denial; refreshed report timestamp to 11:49:48Z"}
 {"ts":"2026-03-04T11:51:10Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate (key missing, ssh-agent unavailable) on IP+hostname; refreshed report timestamp to 11:50:52Z"}
 {"ts":"2026-03-04T11:52:32Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate (key missing, ssh-agent unavailable; tmp ssh sockets still present) on IP+hostname; refreshed report timestamp to 11:52:08Z"}
+{"ts":"2026-03-04T11:53:56Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate (key missing; gpg-agent socket has no identities) on IP+hostname; refreshed report timestamp to 11:53:41Z"}
