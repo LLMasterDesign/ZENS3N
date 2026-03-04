@@ -15,3 +15,4 @@
 {"ts":"2026-03-04T06:31:37Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Added cursor-hook and secret-injection diagnostics to VPS blocker report"}
 {"ts":"2026-03-04T06:32:43Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Refreshed VPS blocker report with user-config credential scan results"}
 {"ts":"2026-03-04T06:33:59Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Refreshed VPS blocker report with cursor metadata scan results"}
+{"ts":"2026-03-04T06:35:02Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Updated VPS blocker report with full /home/ubuntu reference scan"}
