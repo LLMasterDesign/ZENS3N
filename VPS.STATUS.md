@@ -6,7 +6,7 @@
 - Target: `root@5.78.109.54`
 - Requested key: `~/.ssh/id_zens3n_vps`
 - Run time (UTC): 2026-03-04
-- Last verification (UTC): 2026-03-04 08:28:42Z
+- Last verification (UTC): 2026-03-04 08:30:07Z
 - Operator: cursor.agent
 
 ## Plan Expectations (from `3OX.Ai/PLAN.md`)
@@ -103,6 +103,7 @@ Health-check execution is **blocked** due to missing SSH private key in this run
 - Local identity-file check returned `no_default_identity_files`.
 - Root-level SSH key check:
   - `/root/.ssh` contains no private key files (directory contains only `.` and `..`).
+  - direct non-sudo listing is permission-denied (expected), while `sudo ls -la /root/.ssh` confirms emptiness.
 - Publickey-only probe also fails:
   - `ssh -o BatchMode=yes -o PreferredAuthentications=publickey ...`
   - result: `Permission denied (publickey,password).`
