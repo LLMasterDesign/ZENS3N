@@ -6,7 +6,7 @@
 - Target: `root@5.78.109.54`
 - Requested key: `~/.ssh/id_zens3n_vps`
 - Run time (UTC): 2026-03-04
-- Last verification (UTC): 2026-03-04 08:22:33Z
+- Last verification (UTC): 2026-03-04 08:24:03Z
 - Operator: cursor.agent
 
 ## Plan Expectations (from `3OX.Ai/PLAN.md`)
@@ -131,6 +131,7 @@ Health-check execution is **blocked** due to missing SSH private key in this run
 - Runtime mount-point sweep (`/run`, `/var/run`, `/tmp`, `/mnt`, `/dev/shm`) found no `id_zens3n_vps` or PEM private-key blocks.
 - Key-like filename sweep across `/root`, `/home/ubuntu`, and `/etc/ssh` found only Go toolchain test fixtures (`*.pem` under `~/go/pkg/mod/...`), with no usable VPS credential files.
 - `/opt/cursor` content scan for key markers (`id_zens3n_vps`, private-key PEM headers) found only prior diagnostic text in artifacts, with no usable private key material.
+- Workspace script scan found no `sync-vps.sh` files, so there is no in-repo deploy helper available here to infer alternate credential paths.
 
 ### SSH probe command
 
