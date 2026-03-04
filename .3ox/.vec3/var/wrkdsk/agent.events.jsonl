@@ -85,3 +85,4 @@
 {"ts":"2026-03-04T08:33:03Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH gate with verbose auth trace showing server methods and no usable client keys"}
 {"ts":"2026-03-04T08:34:45Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH gate and added client key-algorithm support evidence to report"}
 {"ts":"2026-03-04T08:36:51Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH gate and documented computed ssh -G auth toggles in report"}
+{"ts":"2026-03-04T08:38:33Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH gate and added keyboard-interactive-not-offered auth evidence to report"}
