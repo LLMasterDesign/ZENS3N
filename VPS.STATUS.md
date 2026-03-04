@@ -6,7 +6,7 @@
 - Target: `root@5.78.109.54`
 - Requested key: `~/.ssh/id_zens3n_vps`
 - Run time (UTC): 2026-03-04
-- Last verification (UTC): 2026-03-04 12:42:46Z
+- Last verification (UTC): 2026-03-04 12:44:06Z
 - Operator: cursor.agent
 
 ## Plan Expectations (from `3OX.Ai/PLAN.md`)
@@ -94,7 +94,7 @@ Health-check execution is **blocked** due to missing SSH private key in this run
       - `{"action":"unknown","actor":"system","data":{},"ts":"2026-03-04T06:49:57.882090Z"}`
       - this strongly suggests `/tape/append` accepted an empty payload and wrote a record.
     - follow-up read confirms this `unknown/system` receipt remains the latest tape entry at verification time.
-    - latest `/health` response timestamp now reads `2026-03-04T12:42:46.694312Z` with services still `pulse=true`, `tape=true`, `warden=true`.
+    - latest `/health` response timestamp now reads `2026-03-04T12:44:06.653829Z` with services still `pulse=true`, `tape=true`, `warden=true`.
 - Direct access to internal API port remains blocked/reset (`:4777`), but HTTPS reverse-proxy routes selected endpoints.
   - explicit probes to `http://5.78.109.54:4777/cursor/pending` and `http://5.78.109.54:4777/health` both returned `curl: (56) Recv failure: Connection reset by peer`.
   - direct TLS attempt on `:4777` (`openssl s_client`) fails with immediate reset (`write:errno=104`); raw socket HTTP probe also ends with `Connection reset by peer`.
@@ -174,6 +174,7 @@ Health-check execution is **blocked** due to missing SSH private key in this run
   - explicit recheck confirms that terminals directory remains absent (`terminals_dir_missing`).
   - `/home/ubuntu/.cursor/projects/workspace/agent-tools/*.txt` exists and currently contains only diagnostic excerpts referencing prior `scratchpad` checks (no private-key material or credential payloads).
   - latest full marker sweep over current `agent-tools/*.txt` still returns only diagnostic/report echoes (including `id_zens3n_vps` mentions) with no embedded private-key payloads.
+  - latest runtime marker sweep across `/home/ubuntu/.cursor`, `/run`, `/tmp`, `/mnt`, `/dev/shm` still returns only diagnostic echo lines from `agent-tools/*.txt`; no `BEGIN OPENSSH PRIVATE KEY` or `BEGIN RSA PRIVATE KEY` payloads were found.
 - Home-profile reference scan:
   - no `id_zens3n_vps`/`5.78.109.54` references found anywhere under `/home/ubuntu`.
 - Home-directory SSH inventory scan:
