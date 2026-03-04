@@ -1,49 +1,29 @@
-# 0UT.3OX - Outgoing Bay Protocol
-**Version:** 1.0  
-**Nested under:** 1N.3OX system
+///▙▖▙▖▞▞▙▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂///
+▛//▞▞ ⟦⎊⟧ :: ⧗-26.064 // WORKBOOK :: 0UT.3OX Site Deploy Notes ▞▞
 
----
+# 1n3ox-temp — Site Deployment Notes
 
-## What is 0UT.3OX?
+This folder now hosts a deploy-ready static landing page for **1n3ox.ai**.
 
-**The outgoing bay for your bases.**
+## Primary File
 
-Work completes → Files go to `0UT.3OX/` → CMD.BRIDGE picks them up
+- `index.html` — complete single-page website content
+  - landing paragraph for what 3OX.Ai is
+  - architecture section for the 5-6-7-7-2 lattice
+  - Get Started onboarding flow
+  - GitHub links
+  - portfolio highlights
 
----
+## Deployment Target
 
-## Structure
+For GitHub Pages or similar static hosts, publish `1n3ox-temp/index.html` as the site root page.
 
-```
-[Any Base]/
-└── [Station or OPS]/
-    └── 0UT.3OX/
-        ├── receipts/
-        ├── logs/
-        └── completed_work/
-```
+## Notes
 
-**Example:**
-```
-SYNTH.BASE/!SYNTH.OPS/0UT.3OX/
-├── deployment_complete.yaml
-├── build_receipt.log
-└── output_files/
-```
-
----
-
-## How It Works
-
-1. Base completes work
-2. Outputs placed in `0UT.3OX/`
-3. CMD.listener detects
-4. Router moves to !BASE.OPERATIONS
-5. CMD.BRIDGE processes
-
----
-
-**Paired with 1N.3OX for complete flow**
+- Styling is inline for portability (single-file deploy).
+- Content source references:
+  - `3OX.Ai/PLAN.md`
+  - `PORTFOLIO.md`
 
 :: ∎
 

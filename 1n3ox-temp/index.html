@@ -1,0 +1,252 @@
+<!--
+///▙▖▙▖▞▞▙▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂///
+▛//▞▞ ⟦⎊⟧ :: ⧗-26.064 // WORKBOOK :: 1n3ox.ai Landing Page ▞▞
+-->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3OX.Ai | Model-Agnostic Agent Substrate</title>
+    <meta
+      name="description"
+      content="3OX.Ai is model-agnostic infrastructure for persistent AI agents with a fixed 5-6-7-7-2 architecture lattice."
+    />
+    <style>
+      :root {
+        --bg: #0b0f17;
+        --panel: #111a29;
+        --card: #132036;
+        --text: #e8efff;
+        --muted: #9eb0cf;
+        --line: #263754;
+        --accent: #6ee7ff;
+        --accent-2: #8b7dff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+        background: radial-gradient(circle at top, #16253f 0%, var(--bg) 55%);
+        color: var(--text);
+      }
+
+      .wrap {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 2rem 1rem 4rem;
+      }
+
+      .hero {
+        background: linear-gradient(160deg, #0e1728 20%, #172741 100%);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 2rem;
+        margin-bottom: 1rem;
+      }
+
+      .tag {
+        display: inline-block;
+        border: 1px solid #2f4d7a;
+        border-radius: 999px;
+        padding: 0.25rem 0.7rem;
+        font-size: 0.8rem;
+        color: var(--accent);
+        margin-bottom: 0.7rem;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin-top: 0;
+      }
+
+      h1 {
+        font-size: clamp(1.8rem, 5vw, 2.8rem);
+        margin-bottom: 0.6rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+        margin-bottom: 0.7rem;
+      }
+
+      p {
+        line-height: 1.65;
+      }
+
+      .muted {
+        color: var(--muted);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 0.8rem;
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--card);
+        padding: 1rem;
+      }
+
+      .section {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 1.4rem;
+        margin-top: 1rem;
+      }
+
+      code,
+      pre {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      }
+
+      pre {
+        background: #0a1222;
+        border: 1px solid #243758;
+        border-radius: 10px;
+        padding: 1rem;
+        overflow-x: auto;
+        color: #b7d3ff;
+      }
+
+      ol,
+      ul {
+        line-height: 1.65;
+      }
+
+      .links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+      }
+
+      .button {
+        text-decoration: none;
+        color: var(--text);
+        border: 1px solid #2c436b;
+        background: #172845;
+        padding: 0.55rem 0.9rem;
+        border-radius: 10px;
+        transition: transform 0.15s ease, border-color 0.15s ease;
+      }
+
+      .button:hover {
+        transform: translateY(-1px);
+        border-color: var(--accent-2);
+      }
+
+      .footer {
+        margin-top: 1.2rem;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <section class="hero">
+        <span class="tag">3OX.Ai · 1n3ox.ai</span>
+        <h1>Persistent AI agents, not disposable prompts.</h1>
+        <p>
+          3OX.Ai is model-agnostic infrastructure for running AI agents as durable systems: each agent lives in a
+          self-contained cube with fixed identity, routing, policy, and lifecycle contracts, so you can swap models,
+          move devices, and evolve capabilities without losing the substrate that keeps the agent coherent over time.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>Architecture: the 5-6-7-7-2 lattice</h2>
+        <p class="muted">
+          The shape stays fixed so teams always know where to look. Contents evolve; topology does not.
+        </p>
+        <div class="grid">
+          <article class="card">
+            <h3>5 · 5TRATA</h3>
+            <p>Containment chain: <code>CMD → Base → Station → Service → Agent</code>.</p>
+          </article>
+          <article class="card">
+            <h3>6 · Cube Faces</h3>
+            <p>
+              Every <code>.3ox/</code> has Spark, Brains, Rules, Toolkit, Links, Pulse for identity and execution.
+            </p>
+          </article>
+          <article class="card">
+            <h3>7 · vec3 Kernel</h3>
+            <p>
+              Runtime directories: <code>rc</code>, <code>lib</code>, <code>dev</code>, <code>var</code>,
+              <code>bin</code>, <code>mem</code>, <code>proc</code>.
+            </p>
+          </article>
+          <article class="card">
+            <h3>7 · Service Modules</h3>
+            <p>
+              Arc, Pulse, Queue, Supervisor, Tape, Warden, Worker coordinate agents across cubes and devices.
+            </p>
+          </article>
+          <article class="card">
+            <h3>2 · Anchors</h3>
+            <p><code>_meta</code> (identity/integrity) and <code>_TRON</code> (device runtime contracts).</p>
+          </article>
+        </div>
+        <pre>5TRATA → L2 .3ox faces → L3 .vec3 kernel → 3OX service mesh → anchors
+   5            6                7                 7               2</pre>
+      </section>
+
+      <section class="section">
+        <h2>Get Started</h2>
+        <ol>
+          <li>Create or clone an agent directory with a <code>.3ox/</code> cube layout.</li>
+          <li>
+            Run <code>ruby .3ox/Pulse/run.rb</code> to boot the chain:
+            <ul>
+              <li>Reads <code>sparkfile.md</code> (identity)</li>
+              <li>Reads <code>soul.md</code> when present (purpose)</li>
+              <li>Loads <code>brains.rs</code> (persona rules)</li>
+              <li>Checks <code>tools.yml</code> and <code>routes.json</code> (capabilities + routing)</li>
+              <li>Validates <code>limits.toml</code> (constraints)</li>
+              <li>Appends first entry to <code>3ox.log</code></li>
+            </ul>
+          </li>
+          <li>Optional deployment flow: sync to VPS, merge TelePromptR config, restart runtime services.</li>
+          <li>Optional Telegram onboarding: sign on teleprompter, create topic, and route messages by agent.</li>
+        </ol>
+      </section>
+
+      <section class="section">
+        <h2>What is running today</h2>
+        <ul>
+          <li><strong>Money.Bagz</strong> responds in Telegram.</li>
+          <li><strong>TelePromptR</strong> routes inbound messages to the correct agent/topic.</li>
+          <li><strong>speaker-mesh</strong> handles inference and streaming responses.</li>
+          <li><strong>3ox CLI + Vec3Boot</strong> provide build/boot tooling from the Rust workspace.</li>
+          <li><strong>Deployment pipeline</strong> syncs agent cubes from build to runtime.</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>Repositories</h2>
+        <div class="links">
+          <a class="button" href="https://github.com/LLMasterDesign/3OX.Ai" target="_blank" rel="noreferrer">
+            github.com/LLMasterDesign/3OX.Ai
+          </a>
+          <a class="button" href="https://github.com/LLMasterDesign/ZENS3N" target="_blank" rel="noreferrer">
+            github.com/LLMasterDesign/ZENS3N
+          </a>
+        </div>
+      </section>
+
+      <p class="footer">3OX.Ai · model-agnostic substrate for long-lived agent systems.</p>
+    </main>
+  </body>
+</html>
