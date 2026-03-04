@@ -161,3 +161,4 @@
 {"ts":"2026-03-04T10:42:10Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate (IP+hostname) with unchanged publickey/password denial; refreshed report timestamp to 10:41:43Z"}
 {"ts":"2026-03-04T10:43:53Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate on both IP and hostname with unchanged publickey/password denial; refreshed report timestamp to 10:43:35Z"}
 {"ts":"2026-03-04T10:45:40Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate on both IP and hostname with unchanged publickey/password denial; refreshed report timestamp to 10:45:27Z"}
+{"ts":"2026-03-04T10:47:25Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate and confirmed /run/user/1000 keyring paths are absent alongside other secret mounts; refreshed report timestamp to 10:46:44Z"}
