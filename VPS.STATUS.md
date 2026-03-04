@@ -6,7 +6,7 @@
 - Target: `root@5.78.109.54`
 - Requested key: `~/.ssh/id_zens3n_vps`
 - Run time (UTC): 2026-03-04
-- Last verification (UTC): 2026-03-04 10:20:13Z
+- Last verification (UTC): 2026-03-04 10:21:50Z
 - Operator: cursor.agent
 
 ## Plan Expectations (from `3OX.Ai/PLAN.md`)
@@ -53,7 +53,7 @@ Health-check execution is **blocked** due to missing SSH private key in this run
     - matches found for `/root/_TRON` task activity and historical `Teleprompter` message routing.
     - no matches found for `speaker-mesh`, `systemctl`, `df -h`, `free -h`, `uptime`, `journalctl`, `/root/!CMD.VPS`, `BudgetR`, or `TelePromptR` directory checks.
   - Endpoint window-size check (`n=1000`) confirms currently accessible telemetry volume:
-    - `pulse/recent` returns 8 events total (latest `/root/_TRON` task_available at `2026-03-03T06:51:52Z`).
+    - `pulse/recent` returns 8 events total (latest event `task_completed` at `2026-03-03T06:51:57.860791Z`).
     - `tape/tail` returns 177 receipts total (latest receipt is `unknown/system` at `2026-03-04T06:49:57.882090Z`).
     - `tape/head` currently returns 0 receipts for `n=1000` despite endpoint reachability.
     - latest `teleprompter`-tagged receipt in returned set is historical (`2026-02-04T04:00:50Z`).
@@ -89,7 +89,7 @@ Health-check execution is **blocked** due to missing SSH private key in this run
       - `{"action":"unknown","actor":"system","data":{},"ts":"2026-03-04T06:49:57.882090Z"}`
       - this strongly suggests `/tape/append` accepted an empty payload and wrote a record.
     - follow-up read confirms this `unknown/system` receipt remains the latest tape entry at verification time.
-    - latest `/health` response timestamp now reads `2026-03-04T10:20:13.608422Z` (hostname probe `10:20:13.568471Z`) with services still `pulse=true`, `tape=true`, `warden=true`.
+    - latest `/health` response timestamp now reads `2026-03-04T10:21:50.165190Z` with services still `pulse=true`, `tape=true`, `warden=true`.
 - Direct access to internal API port remains blocked/reset (`:4777`), but HTTPS reverse-proxy routes selected endpoints.
   - explicit probes to `http://5.78.109.54:4777/cursor/pending` and `http://5.78.109.54:4777/health` both returned `curl: (56) Recv failure: Connection reset by peer`.
   - direct TLS attempt on `:4777` (`openssl s_client`) fails with immediate reset (`write:errno=104`); raw socket HTTP probe also ends with `Connection reset by peer`.
@@ -120,6 +120,7 @@ Health-check execution is **blocked** due to missing SSH private key in this run
   - discovered socket `/tmp/ssh-jAzEKf69H4k5/agent.1295` reports `The agent has no identities.`
   - socket path still exists as local UNIX socket (`srw-------`) but remains unexported in current shell and contains no identities.
   - additional temp dir `/tmp/ssh-7DQiBIFljIuz` exists but contains no `agent.*` socket (stale/empty).
+  - `/tmp/ssh-*` sweep currently finds exactly those two agent dirs; no additional agent sockets are present.
   - SSH probe with `SSH_AUTH_SOCK=/tmp/ssh-jAzEKf69H4k5/agent.1295` still returns `Permission denied (publickey,password)`.
   - process-environment sweep across `/proc/*/environ` shows repeated `SSH_AUTH_SOCK=/tmp/ssh-jAzEKf69H4k5/agent.1295` but no `id_zens3n_vps` or `CLOUD_AGENT_INJECTED_SECRET_NAMES` entries.
   - latest resweep reconfirms this pattern: repeated `/tmp/ssh-jAzEKf69H4k5/agent.1295` markers in process environments, with no `id_zens3n_vps` markers anywhere.
