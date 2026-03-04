@@ -6,7 +6,7 @@
 - Target: `root@5.78.109.54`
 - Requested key: `~/.ssh/id_zens3n_vps`
 - Run time (UTC): 2026-03-04
-- Last verification (UTC): 2026-03-04 09:43:59Z
+- Last verification (UTC): 2026-03-04 09:45:35Z
 - Operator: cursor.agent
 
 ## Plan Expectations (from `3OX.Ai/PLAN.md`)
@@ -65,6 +65,7 @@ Health-check execution is **blocked** due to missing SSH private key in this run
     - reachable (`200`): `/health`, `/tape/tail`, `/tape/head`, `/pulse/recent`, `/agents/list`
     - not reachable through current front door (`404`): `/gate/stats`, `/tasks/*`, `/skills/*`, `/atlas/*`, `/scanner/*`, `/cursor/*`
     - expanded task-route probes also return `404`: `/tasks/{list,create}`, `/api/tasks/{list,create}`, `/vec3/tasks/{list,create}`, `/cursor/tasks/{list,create}`, `/v1/tasks/{list,create}`, `/api/v1/tasks/{list,create}`.
+    - additional route probes also return `404`: `GET /cursor/queue`, `GET /cursor/results`, `GET /tasks/list`, `GET /tasks/create`.
     - interpretation: public reverse proxy appears to expose only a subset of Vec3 API routes.
     - route-schema drift note: repo-local `api.ex` currently defines `/gate/*` and `/cursor/*` routes, while observed production front door responds on `/warden/*` and returns `404` for `/cursor/*`/`/tasks/*`; this indicates deployed API/routing differs from local code snapshot.
     - repo search finds no checked-in nginx reverse-proxy config exposing this route subset; local runtime code (`http_server.ex` + `api.ex` + `cursor_bridge.rb`) expects port `4777` and `/cursor/pending`/`/cursor/complete`, reinforcing that an external/front-door config or older deployment is filtering routes.
