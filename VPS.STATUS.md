@@ -6,7 +6,7 @@
 - Target: `root@5.78.109.54`
 - Requested key: `~/.ssh/id_zens3n_vps`
 - Run time (UTC): 2026-03-04
-- Last verification (UTC): 2026-03-04 08:24:03Z
+- Last verification (UTC): 2026-03-04 08:25:36Z
 - Operator: cursor.agent
 
 ## Plan Expectations (from `3OX.Ai/PLAN.md`)
@@ -93,6 +93,7 @@ Health-check execution is **blocked** due to missing SSH private key in this run
 - Local SSH config state:
   - `~/.ssh/config` not present (only system-wide `/etc/ssh/ssh_config` in effect).
   - `/etc/ssh/ssh_config` shows only default commented `IdentityFile` entries; no host-specific identity overrides were found.
+  - `/etc/ssh/ssh_config.d/` is present but empty; `/etc/ssh/sshd_config.d/` is absent in this runtime.
 - SSH agent environment state:
   - `SSH_AUTH_SOCK=unset` (`auth_sock_missing`).
   - `ssh-add -L` returns `Could not open a connection to your authentication agent.`.
