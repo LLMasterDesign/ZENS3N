@@ -6,3 +6,4 @@
 {"ts": "2026-03-04T06:11:18Z", "event": "drift.fix", "actor": "cursor.agent", "summary": "Fast-forwarded local main to origin/main after behind status"}
 {"ts":"2026-03-04T06:21:35Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated CMD.VPS SSH blocker; key still missing (follow-up 219)"}
 {"ts":"2026-03-04T06:23:23Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Rechecked SSH blocker plus bridge endpoints; no usable CMD.VPS auth path"}
+{"ts":"2026-03-04T06:24:00Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated missing CMD.VPS key via home/ssh scans and auth probes"}
