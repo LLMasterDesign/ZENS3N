@@ -97,3 +97,4 @@
 {"ts":"2026-03-04T08:52:34Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate and added preferred-auth=none evidence; refreshed report timestamp to 08:52:34Z"}
 {"ts":"2026-03-04T08:54:42Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate and confirmed terminals path absent; refreshed report timestamp to 08:54:42Z"}
 {"ts":"2026-03-04T08:55:37Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate, root/.ssh emptiness, and agent identity absence; refreshed report timestamp to 08:55:37Z"}
+{"ts":"2026-03-04T08:57:05Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate and cursor projects-path state; refreshed report timestamp to 08:57:05Z"}
