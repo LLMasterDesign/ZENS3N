@@ -6,7 +6,7 @@
 - Target: `root@5.78.109.54`
 - Requested key: `~/.ssh/id_zens3n_vps`
 - Run time (UTC): 2026-03-04
-- Last verification (UTC): 2026-03-04 09:01:40Z
+- Last verification (UTC): 2026-03-04 09:03:50Z
 - Operator: cursor.agent
 
 ## Plan Expectations (from `3OX.Ai/PLAN.md`)
@@ -47,7 +47,8 @@ Health-check execution is **blocked** due to missing SSH private key in this run
       `Contents of /root/_TRON:\n3OX.Ai\nrelease\n...`
   - Telemetry freshness check:
     - latest `pulse` event timestamp: `2026-03-03T06:51:57Z` (~23.8h old at verification time)
-    - latest `tape` receipt timestamp: `2026-03-03T06:51:57Z` (~23.8h old at verification time)
+    - latest `tape` receipt timestamp: `2026-03-04T06:49:57.882090Z` (from `tape/tail` last element; endpoint ordering is oldest→newest)
+    - ordering note: `pulse/recent` response is newest→oldest, while `tape/tail` response is oldest→newest.
   - Expanded keyword scan over `pulse/recent?n=200` and `tape/tail?n=200`:
     - matches found for `/root/_TRON` task activity and historical `Teleprompter` message routing.
     - no matches found for `speaker-mesh`, `systemctl`, `df -h`, `free -h`, `uptime`, `journalctl`, `/root/!CMD.VPS`, `BudgetR`, or `TelePromptR` directory checks.
