@@ -11,3 +11,4 @@
 {"ts":"2026-03-04T06:25:48Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated SSH blocker with ~/.ssh inventory; key still missing"}
 {"ts":"2026-03-04T06:27:38Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Updated VPS status report with expanded SSH/auth diagnostics while blocked"}
 {"ts":"2026-03-04T06:28:49Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Added SSH handshake and host-key diagnostics to VPS status report while key is missing"}
+{"ts":"2026-03-04T06:30:17Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Updated VPS status with ssh-agent and ssh-config diagnostics; key still missing"}
