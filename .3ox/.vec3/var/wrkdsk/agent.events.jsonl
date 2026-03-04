@@ -111,3 +111,4 @@
 {"ts":"2026-03-04T09:13:43Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate and confirmed cursor hook bundle has no embedded credentials; refreshed report timestamp to 09:13:43Z"}
 {"ts":"2026-03-04T09:15:04Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate and confirmed GH variable metadata is also inaccessible (403); refreshed report timestamp to 09:15:04Z"}
 {"ts":"2026-03-04T09:16:51Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate and confirmed latest 3OX CI run is build/test/cube-validation only with no deploy/key step; refreshed report timestamp to 09:16:51Z"}
+{"ts":"2026-03-04T09:19:54Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate and documented production route-schema drift (/warden vs local /gate+/cursor); refreshed report timestamp to 09:19:54Z"}
