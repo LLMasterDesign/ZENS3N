@@ -37,15 +37,6 @@ SEAL = ':: ∎'
 ##/// Last Updated: 2026.01.05 | Trace.ID: brains.cursor.v1.0
 ##/// Status: [ACTIVE] | Cat: SYSTEM | Auth: SYSTEM | Created: 2026.01.05
 #```elixir
-end
-  }
-    CTX: '⫸ 〔runtime.script.context〕'
-    PiCO: '//▞⋮⋮ [🔧] ≔ [brains_cursor] [system] [ruby] ⊢ ⇨ ⟿ ▷ :: ∎',
-    PHENO: '▛▞// !/usr/bin/env ruby :: ρ{Input}.φ{Process}.τ{Output} ▹',
-    IMPRINT: '▛//▞▞ ⟦⎊⟧ ::  // BRAINS.CURSOR ▞▞',
-    SCHEMA: '///▙▖▙▖▞▞▙▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂ ::[0xA4]::',
-  SPEC = {
-module Z3N
 #
 # BRAINS.CURSOR.RB :: Cursor Brains Worker for CMD.BRIDGE
 # Consumes jobs from Redis queue and executes via Cursor Cloud Agent API

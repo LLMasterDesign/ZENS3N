@@ -46,7 +46,7 @@ OUTPUT: Write findings to AUDIT.3OX.md in this repo root.
 FORMAT: Table per branch. Columns: File | Status | Issues | Action Needed
 ```
 
-### A2 [ ] Code Audit — ZENS3N Repo
+### A2 [x] Code Audit — ZENS3N Repo
 ```
 REPO: this repo (ZENS3N)
 BRANCHES: main, branch/TelePromptR, branch/VPS, branch/BASE

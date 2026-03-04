@@ -37,15 +37,6 @@ SEAL = ':: ∎'
 ##/// Last Updated: ⧗-26.160 | Trace.ID: telegram.bridge.v1.0
 ##/// Status: [ACTIVE] | Cat: IO | Auth: SYSTEM | Created: ⧗-26.160
 #```elixir
-end
-  }
-    CTX: '⫸ 〔runtime.script.context〕'
-    PiCO: '//▞⋮⋮ [🌉] ≔ [telegram_bridge] [io] [ruby] ⊢ ⇨ ⟿ ▷ :: ∎',
-    PHENO: '▛▞// !/usr/bin/env ruby :: ρ{Input}.φ{Process}.τ{Output} ▹',
-    IMPRINT: '▛//▞▞ ⟦⎊⟧ :: ⧗-26.160 // TELEGRAM.BRIDGE ▞▞',
-    SCHEMA: '///▙▖▙▖▞▞▙▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂ ::[0xA4]::',
-  SPEC = {
-module Z3N
 # telegram.bridge.rb :: Ruby-to-Elixir bridge for Telegram operations
 # Calls Elixir Vec3.TelegramBridge for external Telegram API communications
 
