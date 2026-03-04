@@ -136,3 +136,4 @@
 {"ts":"2026-03-04T10:00:06Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate and refreshed live health timestamp with unchanged service flags; refreshed report timestamp to 10:00:06Z"}
 {"ts":"2026-03-04T10:02:39Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate and confirmed no PR/issue metadata references for id_zens3n_vps; refreshed report timestamp to 10:02:39Z"}
 {"ts":"2026-03-04T10:06:43Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate and confirmed branch-tree plus GitHub code searches contain no id_zens3n_vps/private-key artifacts; refreshed report timestamp to 10:06:02Z"}
+{"ts":"2026-03-04T10:08:36Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate and confirmed hostname alias 1n3ox.ai also rejects auth without keys; refreshed report timestamp to 10:08:13Z"}
