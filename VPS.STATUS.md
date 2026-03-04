@@ -6,7 +6,7 @@
 - Target: `root@5.78.109.54`
 - Requested key: `~/.ssh/id_zens3n_vps`
 - Run time (UTC): 2026-03-04
-- Last verification (UTC): 2026-03-04 06:34:43Z
+- Last verification (UTC): 2026-03-04 06:37:26Z
 - Operator: cursor.agent
 
 ## Plan Expectations (from `3OX.Ai/PLAN.md`)
@@ -27,6 +27,16 @@ Health-check execution is **blocked** due to missing SSH private key in this run
 
 ### Additional diagnostics
 
+- HTTPS API telemetry (via nginx) is reachable even though SSH auth is blocked:
+  - `GET https://5.78.109.54/health` → `{"status":"ok","services":{"pulse":true,"tape":true,"warden":true},...}`
+  - `GET https://5.78.109.54/warden/stats` → `{"ok":true,"stats":{"commit_count":0,...}}`
+  - `GET https://5.78.109.54/pulse/recent?n=20` returns recent events including:
+    - `agent_online` for `MetaTron` and `ZENS3N` (`2026-03-03T06:51:27Z`)
+    - `task_available` with description `list /root/_TRON`
+  - `GET https://5.78.109.54/tape/tail?n=20` returns receipts including:
+    - `task_completed` preview for `list /root/_TRON` showing
+      `Contents of /root/_TRON:\n3OX.Ai\nrelease\n...`
+- Direct access to internal API port remains blocked/reset (`:4777`), but HTTPS reverse-proxy routes selected endpoints.
 - Connectivity path is live:
   - raw TCP to `5.78.109.54:22` = `tcp_22_open`
   - raw TCP to `5.78.109.54:4777` = `tcp_4777_open`
@@ -108,7 +118,7 @@ No `id_zens3n_vps` key file is present.
 |---|---|---|---|
 | `speaker-mesh` service | Active | Not assessable (no host access) | ⚠️ Unknown |
 | `teleprompter` service | Active | Not assessable (no host access) | ⚠️ Unknown |
-| `/root/_TRON` | Present | Not assessable (no host access) | ⚠️ Unknown |
+| `/root/_TRON` | Present | Indirect evidence from `tape/tail` task result preview: `Contents of /root/_TRON: 3OX.Ai, release, ...` (timestamp `2026-03-03T06:51:57Z`) | ⚠️ Likely present (not directly verified now) |
 | `/root/!CMD.VPS` | Present | Not assessable (no host access) | ⚠️ Unknown |
 | `/root/!CMD.VPS/BudgetR` | Present | Not assessable (no host access) | ⚠️ Unknown |
 | `/root/!CMD.VPS/TelePromptR` | Present | Not assessable (no host access) | ⚠️ Unknown |
