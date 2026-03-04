@@ -6,7 +6,7 @@
 - Target: `root@5.78.109.54`
 - Requested key: `~/.ssh/id_zens3n_vps`
 - Run time (UTC): 2026-03-04
-- Last verification (UTC): 2026-03-04 06:38:48Z
+- Last verification (UTC): 2026-03-04 06:40:41Z
 - Operator: cursor.agent
 
 ## Plan Expectations (from `3OX.Ai/PLAN.md`)
@@ -40,6 +40,9 @@ Health-check execution is **blocked** due to missing SSH private key in this run
   - Telemetry freshness check:
     - latest `pulse` event timestamp: `2026-03-03T06:51:57Z` (~23.8h old at verification time)
     - latest `tape` receipt timestamp: `2026-03-03T06:51:57Z` (~23.8h old at verification time)
+  - Expanded keyword scan over `pulse/recent?n=200` and `tape/tail?n=200`:
+    - matches found for `/root/_TRON` task activity and historical `Teleprompter` message routing.
+    - no matches found for `speaker-mesh`, `systemctl`, `df -h`, `free -h`, `uptime`, `journalctl`, `/root/!CMD.VPS`, `BudgetR`, or `TelePromptR` directory checks.
 - Direct access to internal API port remains blocked/reset (`:4777`), but HTTPS reverse-proxy routes selected endpoints.
 - Connectivity path is live:
   - raw TCP to `5.78.109.54:22` = `tcp_22_open`
@@ -120,8 +123,8 @@ No `id_zens3n_vps` key file is present.
 
 | Component | Planned | Observed | Result |
 |---|---|---|---|
-| `speaker-mesh` service | Active | Not assessable (no host access) | ⚠️ Unknown |
-| `teleprompter` service | Active | Not assessable (no host access) | ⚠️ Unknown |
+| `speaker-mesh` service | Active | No direct or indirect evidence found in accessible telemetry endpoints | ⚠️ Unknown |
+| `teleprompter` service | Active | Historical `Teleprompter` routing receipts present (latest found Feb 2026; not current-state proof) | ⚠️ Unknown (historical evidence only) |
 | `/root/_TRON` | Present | Indirect evidence from `tape/tail` task result preview: `Contents of /root/_TRON: 3OX.Ai, release, ...` (timestamp `2026-03-03T06:51:57Z`) | ⚠️ Likely present (not directly verified now) |
 | `/root/!CMD.VPS` | Present | Not assessable (no host access) | ⚠️ Unknown |
 | `/root/!CMD.VPS/BudgetR` | Present | Not assessable (no host access) | ⚠️ Unknown |
