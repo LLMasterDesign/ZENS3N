@@ -21,3 +21,4 @@
 {"ts":"2026-03-04T06:41:03Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Added expanded telemetry keyword scan evidence to VPS status report"}
 {"ts":"2026-03-04T06:42:43Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Added application-layer port/protocol matrix to VPS status report"}
 {"ts":"2026-03-04T06:44:20Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Added telemetry window-size census and latest teleprompter timestamp to VPS report"}
+{"ts":"2026-03-04T06:46:05Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Added Vec3 route-exposure matrix to VPS status diagnostics"}

@@ -6,7 +6,7 @@
 - Target: `root@5.78.109.54`
 - Requested key: `~/.ssh/id_zens3n_vps`
 - Run time (UTC): 2026-03-04
-- Last verification (UTC): 2026-03-04 06:43:52Z
+- Last verification (UTC): 2026-03-04 06:45:24Z
 - Operator: cursor.agent
 
 ## Plan Expectations (from `3OX.Ai/PLAN.md`)
@@ -47,6 +47,10 @@ Health-check execution is **blocked** due to missing SSH private key in this run
     - `pulse/recent` returns 8 events total (latest `/root/_TRON` task_available at `2026-03-03T06:51:52Z`).
     - `tape/tail` returns 176 receipts total (latest `/root/_TRON` task_completed at `2026-03-03T06:51:57Z`).
     - latest `teleprompter`-tagged receipt in returned set is historical (`2026-02-04T04:00:50Z`).
+  - API route exposure check against local Vec3 route catalog:
+    - reachable (`200`): `/health`, `/tape/tail`, `/tape/head`, `/pulse/recent`, `/agents/list`
+    - not reachable through current front door (`404`): `/gate/stats`, `/tasks/*`, `/skills/*`, `/atlas/*`, `/scanner/*`, `/cursor/*`
+    - interpretation: public reverse proxy appears to expose only a subset of Vec3 API routes.
 - Direct access to internal API port remains blocked/reset (`:4777`), but HTTPS reverse-proxy routes selected endpoints.
 - Port/protocol behavior check (application-layer):
   - `https://5.78.109.54:443/health` returns healthy JSON.
