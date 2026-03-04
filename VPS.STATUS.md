@@ -6,7 +6,7 @@
 - Target: `root@5.78.109.54`
 - Requested key: `~/.ssh/id_zens3n_vps`
 - Run time (UTC): 2026-03-04
-- Last verification (UTC): 2026-03-04 09:19:54Z
+- Last verification (UTC): 2026-03-04 09:21:39Z
 - Operator: cursor.agent
 
 ## Plan Expectations (from `3OX.Ai/PLAN.md`)
@@ -57,6 +57,10 @@ Health-check execution is **blocked** due to missing SSH private key in this run
     - `tape/tail` returns 177 receipts total (latest receipt is `unknown/system` at `2026-03-04T06:49:57.882090Z`).
     - `tape/head` currently returns 0 receipts for `n=1000` despite endpoint reachability.
     - latest `teleprompter`-tagged receipt in returned set is historical (`2026-02-04T04:00:50Z`).
+  - Tape action census over current `tape/tail?n=200` window:
+    - dominant historical actions are `agent_start`, `message_received`, `telegram_send`, `message_sent`.
+    - task-related actions are sparse (`task_created=1`, `task_start=2`, `task_completed=2`) and all map to `list /root/_TRON`.
+    - `cursor_command_queued` appears only as historical receipts (2 entries in Feb 2026), with no recent completion evidence in current window.
   - API route exposure check against local Vec3 route catalog:
     - reachable (`200`): `/health`, `/tape/tail`, `/tape/head`, `/pulse/recent`, `/agents/list`
     - not reachable through current front door (`404`): `/gate/stats`, `/tasks/*`, `/skills/*`, `/atlas/*`, `/scanner/*`, `/cursor/*`
