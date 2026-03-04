@@ -1,0 +1,412 @@
+{
+  "meta": {
+    "source": "M21-1, Part V, Subpart ii, Chapter 4, Section A - Effective Dates",
+    "article_id": "554400000180492",
+    "portal_id": "554400000001018",
+    "base_url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates",
+    "updated": "Jun 24, 2025",
+    "extracted": "2026-03-04T00:00:00Z",
+    "agent": "cursor.agent",
+    "purpose": "VSO agent bot knowledge base — effective dates topics"
+  },
+  "navigation": {
+    "previous_section": {
+      "title": "M21-1-Part-V-Subpart-ii-Chapter-3-Section-D-Evaluating-Disabilities",
+      "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-US/portal/554400000001018/content/554400000180489/M21-1-Part-V-Subpart-ii-Chapter-3-Section-D-Evaluating-Disabilities"
+    },
+    "next_section": {
+      "title": "M21-1-Part-V-Subpart-ii-Chapter-4-Section-B-Historical-Guidance-on-the-Assignment-of-Effective-Dates",
+      "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-US/portal/554400000001018/content/554400000180493/M21-1-Part-V-Subpart-ii-Chapter-4-Section-B-Historical-Guidance-on-the-Assignment-of-Effective-Dates"
+    }
+  },
+  "topics": [
+    {
+      "topic_number": 1,
+      "topic_name": "General Guidance on Assignment of Effective Dates",
+      "anchor": "#1",
+      "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#1",
+      "change_date": "January 13, 2025",
+      "sub_topics": [
+        {
+          "ref": "V.ii.4.A.1.a",
+          "anchor": "#1a",
+          "name": "Gathering Evidence for Effective Date Determinations",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#1a"
+        },
+        {
+          "ref": "V.ii.4.A.1.b",
+          "anchor": "#1b",
+          "name": "General Effective Date Rule",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#1b"
+        },
+        {
+          "ref": "V.ii.4.A.1.c",
+          "anchor": "#1c",
+          "name": "Definition: Date Entitlement Arose",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#1c"
+        },
+        {
+          "ref": "V.ii.4.A.1.d",
+          "anchor": "#1d",
+          "name": "Determining the Applicable Date of Claim for Effective Date Purposes",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#1d"
+        },
+        {
+          "ref": "V.ii.4.A.1.e",
+          "anchor": "#1e",
+          "name": "Determining Whether Date of Claim or Date Entitlement Arose Is Later",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#1e"
+        },
+        {
+          "ref": "V.ii.4.A.1.f",
+          "anchor": "#1f",
+          "name": "Effective Date of Entitlement versus Effective Date of Payment",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#1f"
+        },
+        {
+          "ref": "V.ii.4.A.1.g",
+          "anchor": "#1g",
+          "name": "Effective Date Associated with Sympathetic Reading or a Within-Scope Determination",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#1g"
+        },
+        {
+          "ref": "V.ii.4.A.1.h",
+          "anchor": "#1h",
+          "name": "Impact of Public Law (PL) 112-154, Section 506, on Fully Developed Claim (FDC) Effective Dates",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#1h"
+        },
+        {
+          "ref": "V.ii.4.A.1.i",
+          "anchor": "#1i",
+          "name": "Maximizing Benefits with Effective Date Determinations",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#1i"
+        }
+      ]
+    },
+    {
+      "topic_number": 2,
+      "topic_name": "Impact of Intent to File (ITF) on Effective Date",
+      "anchor": "#2",
+      "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#2",
+      "sub_topics": [
+        {
+          "ref": "V.ii.4.A.2.a",
+          "anchor": "#2a",
+          "name": "Applicability of ITF on Effective Date Assignment",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#2a"
+        },
+        {
+          "ref": "V.ii.4.A.2.b",
+          "anchor": "#2b",
+          "name": "Effective Date of Entitlement Following Receipt of an ITF",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#2b"
+        },
+        {
+          "ref": "V.ii.4.A.2.c",
+          "anchor": "#2c",
+          "name": "Examples of Selecting an Effective Date Following Receipt of an ITF",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#2c"
+        }
+      ]
+    },
+    {
+      "topic_number": 3,
+      "topic_name": "Effective Dates for Direct and Secondary Service Connection (SC)",
+      "anchor": "#3",
+      "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#3",
+      "sub_topics": [
+        {
+          "ref": "V.ii.4.A.3.a",
+          "anchor": "#3a",
+          "name": "Procedures for Handling Claims for Direct SC",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#3a"
+        },
+        {
+          "ref": "V.ii.4.A.3.b",
+          "anchor": "#3b",
+          "name": "Example 1 of the Effective Date for Direct SC",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#3b"
+        },
+        {
+          "ref": "V.ii.4.A.3.c",
+          "anchor": "#3c",
+          "name": "Example 2 of the Effective Date for Direct SC",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#3c"
+        },
+        {
+          "ref": "V.ii.4.A.3.d",
+          "anchor": "#3d",
+          "name": "Claims for Compensation Received Within One Year of Dishonorable Service",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#3d"
+        },
+        {
+          "ref": "V.ii.4.A.3.e",
+          "anchor": "#3e",
+          "name": "Effective Date for a Claim Received During a Period of Hospitalization",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#3e"
+        },
+        {
+          "ref": "V.ii.4.A.3.f",
+          "anchor": "#3f",
+          "name": "Effective Dates for Secondary SC",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#3f"
+        },
+        {
+          "ref": "V.ii.4.A.3.g",
+          "anchor": "#3g",
+          "name": "Correlation Between Effective Date for Primary and Secondary SC",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#3g"
+        }
+      ]
+    },
+    {
+      "topic_number": 4,
+      "topic_name": "Effective Dates for Presumptive SC",
+      "anchor": "#4",
+      "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#4",
+      "sub_topics": [
+        {
+          "ref": "V.ii.4.A.4.a",
+          "anchor": "#4a",
+          "name": "Effective Dates for Presumptive SC",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#4a"
+        },
+        {
+          "ref": "V.ii.4.A.4.b",
+          "anchor": "#4b",
+          "name": "Example 1 of Assigning Effective Dates for Presumptive SC",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#4b"
+        },
+        {
+          "ref": "V.ii.4.A.4.c",
+          "anchor": "#4c",
+          "name": "Example 2 of Assigning Effective Dates for Presumptive SC",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#4c"
+        }
+      ]
+    },
+    {
+      "topic_number": 5,
+      "topic_name": "Effective Dates for Claims for Increased Compensation",
+      "anchor": "#5",
+      "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#5",
+      "sub_topics": [
+        {
+          "ref": "V.ii.4.A.5.a",
+          "anchor": "#5a",
+          "name": "Regulatory Provisions Applicable to Claims for Increase",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#5a"
+        },
+        {
+          "ref": "V.ii.4.A.5.b",
+          "anchor": "#5b",
+          "name": "Application of 38 CFR 3.400(o)(2)",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#5b"
+        },
+        {
+          "ref": "V.ii.4.A.5.c",
+          "anchor": "#5c",
+          "name": "Effective Dates for Individual Unemployability (IU) Under 38 CFR 3.400(o)(2)",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#5c"
+        },
+        {
+          "ref": "V.ii.4.A.5.d",
+          "anchor": "#5d",
+          "name": "Example of IU Effective Date Impacted by 38 CFR 3.400(o)(2)",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#5d"
+        },
+        {
+          "ref": "V.ii.4.A.5.e",
+          "anchor": "#5e",
+          "name": "Handling Effective Dates for Complications or Residuals of an SC Disability",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#5e"
+        },
+        {
+          "ref": "V.ii.4.A.5.f",
+          "anchor": "#5f",
+          "name": "Claims for Increase Received with Requests for Reinstatement",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#5f"
+        },
+        {
+          "ref": "V.ii.4.A.5.g",
+          "anchor": "#5g",
+          "name": "Entitlement to Aid and Attendance (A&A) or Housebound Benefits for Retroactive Awards",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#5g"
+        }
+      ]
+    },
+    {
+      "topic_number": 6,
+      "topic_name": "Effective Dates Based on a Change of Law or Regulation",
+      "anchor": "#6",
+      "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#6",
+      "sub_topics": [
+        {
+          "ref": "V.ii.4.A.6.a",
+          "anchor": "#6a",
+          "name": "Impact of Guidance Changes",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#6a"
+        },
+        {
+          "ref": "V.ii.4.A.6.b",
+          "anchor": "#6b",
+          "name": "Definition of Liberalizing Law",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#6b"
+        },
+        {
+          "ref": "V.ii.4.A.6.c",
+          "anchor": "#6c",
+          "name": "Significance of Changes of Law",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#6c"
+        },
+        {
+          "ref": "V.ii.4.A.6.d",
+          "anchor": "#6d",
+          "name": "Awarding Retroactive Benefits Based on a Law Change",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#6d"
+        },
+        {
+          "ref": "V.ii.4.A.6.e",
+          "anchor": "#6e",
+          "name": "Liberalizing Issue",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#6e"
+        },
+        {
+          "ref": "V.ii.4.A.6.f",
+          "anchor": "#6f",
+          "name": "VA Issue",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#6f"
+        },
+        {
+          "ref": "V.ii.4.A.6.g",
+          "anchor": "#6g",
+          "name": "Statutory Eligibility Requirements for Retroactive Awards Under 38 CFR 3.114",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#6g"
+        },
+        {
+          "ref": "V.ii.4.A.6.h",
+          "anchor": "#6h",
+          "name": "Regulatory Eligibility Requirements for Retroactive Awards Under 38 CFR 3.114",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#6h"
+        },
+        {
+          "ref": "V.ii.4.A.6.i",
+          "anchor": "#6i",
+          "name": "Entitlement Factors Inapplicable for Consideration Under 38 CFR 3.114 for Pension and Parents' DIC",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#6i"
+        },
+        {
+          "ref": "V.ii.4.A.6.j",
+          "anchor": "#6j",
+          "name": "Example 1 of Age 65 Liberalizing Legislation in a Pension Claim",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#6j"
+        },
+        {
+          "ref": "V.ii.4.A.6.k",
+          "anchor": "#6k",
+          "name": "Example 2 of Age 65 Liberalizing Legislation in a Pension Claim",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#6k"
+        },
+        {
+          "ref": "V.ii.4.A.6.l",
+          "anchor": "#6l",
+          "name": "Awarding or Increasing Benefits Retroactively Under 38 CFR 3.114",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#6l"
+        },
+        {
+          "ref": "V.ii.4.A.6.m",
+          "anchor": "#6m",
+          "name": "Determining Which Statutory or Regulatory Version Is More Favorable",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#6m"
+        },
+        {
+          "ref": "V.ii.4.A.6.n",
+          "anchor": "#6n",
+          "name": "Provision of Due Process for Reducing or Discontinuing Awards Under 38 CFR 3.114(b)",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#6n"
+        },
+        {
+          "ref": "V.ii.4.A.6.o",
+          "anchor": "#6o",
+          "name": "Example of Staged Rating Impacted by 38 CFR 3.114",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#6o"
+        },
+        {
+          "ref": "V.ii.4.A.6.p",
+          "anchor": "#6p",
+          "name": "Applicability of Revised Rating Schedule Criteria",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#6p"
+        }
+      ]
+    },
+    {
+      "topic_number": 7,
+      "topic_name": "Effective Dates Based on Judicial Precedents or General Counsel Opinions",
+      "anchor": "#7",
+      "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#7",
+      "sub_topics": [
+        {
+          "ref": "V.ii.4.A.7.a",
+          "anchor": "#7a",
+          "name": "Effective Dates Based on Judicial Precedents",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#7a"
+        },
+        {
+          "ref": "V.ii.4.A.7.b",
+          "anchor": "#7b",
+          "name": "Pending Claim",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#7b"
+        },
+        {
+          "ref": "V.ii.4.A.7.c",
+          "anchor": "#7c",
+          "name": "Prior Decision Not Final",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#7c"
+        },
+        {
+          "ref": "V.ii.4.A.7.d",
+          "anchor": "#7d",
+          "name": "Liberalizing Regulation",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#7d"
+        },
+        {
+          "ref": "V.ii.4.A.7.e",
+          "anchor": "#7e",
+          "name": "No Regulatory Change",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#7e"
+        },
+        {
+          "ref": "V.ii.4.A.7.f",
+          "anchor": "#7f",
+          "name": "Effective Dates Based on General Counsel Opinions",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#7f"
+        }
+      ]
+    },
+    {
+      "topic_number": 8,
+      "topic_name": "Claims for Earlier Effective Dates",
+      "anchor": "#8",
+      "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#8",
+      "sub_topics": [
+        {
+          "ref": "V.ii.4.A.8.a",
+          "anchor": "#8a",
+          "name": "Requests for an Earlier Effective Date",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#8a"
+        },
+        {
+          "ref": "V.ii.4.A.8.b",
+          "anchor": "#8b",
+          "name": "Processing Freestanding Requests for an Earlier Effective Date",
+          "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180492/M21-1-Part-V-Subpart-ii-Chapter-4-Section-A-Effective-Dates#8b"
+        }
+      ]
+    }
+  ],
+  "related_section": {
+    "title": "M21-1, Part V, Subpart ii, Chapter 4, Section B - Historical Guidance on the Assignment of Effective Dates",
+    "updated": "May 27, 2025",
+    "url": "https://www.knowva.ebenefits.va.gov/system/templates/selfservice/va_ssnew/help/customer/locale/en-us/portal/554400000001018/content/554400000180493/M21-1-Part-V-Subpart-ii-Chapter-4-Section-B-Historical-Guidance-on-the-Assignment-of-Effective-Dates"
+  }
+}
