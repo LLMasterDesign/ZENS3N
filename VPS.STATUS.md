@@ -6,7 +6,7 @@
 - Target: `root@5.78.109.54`
 - Requested key: `~/.ssh/id_zens3n_vps`
 - Run time (UTC): 2026-03-04
-- Last verification (UTC): 2026-03-04 08:52:34Z
+- Last verification (UTC): 2026-03-04 08:54:42Z
 - Operator: cursor.agent
 
 ## Plan Expectations (from `3OX.Ai/PLAN.md`)
@@ -129,6 +129,7 @@ Health-check execution is **blocked** due to missing SSH private key in this run
 - Cursor workspace metadata scan:
   - `/workspace/.cursor` path does not exist in this runtime.
   - no `id_zens3n_vps`/`5.78.109.54` references found under `/home/ubuntu/.cursor`.
+  - terminal capture path `/home/ubuntu/.cursor/projects/workspace/terminals` does not exist in this runtime, so no terminal transcript recovery path is available for key discovery.
 - Home-profile reference scan:
   - no `id_zens3n_vps`/`5.78.109.54` references found anywhere under `/home/ubuntu`.
 - Home-directory SSH inventory scan:
