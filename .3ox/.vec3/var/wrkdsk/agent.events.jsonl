@@ -148,3 +148,4 @@
 {"ts":"2026-03-04T10:22:40Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate and confirmed /tmp ssh-agent sweep has only one empty socket plus one stale dir; refreshed report timestamp to 10:21:50Z"}
 {"ts":"2026-03-04T10:23:54Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate and confirmed 1n3ox.ai resolves to 5.78.109.54 with identical 404 cursor/task front-door behavior; refreshed report timestamp to 10:23:29Z"}
 {"ts":"2026-03-04T10:25:04Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate on both 5.78.109.54 and 1n3ox.ai while terminals path remains absent; refreshed report timestamp to 10:24:49Z"}
+{"ts":"2026-03-04T10:26:43Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate and reconfirmed 1n3ox.ai/cursor/pending returns nginx 404 HTML; refreshed report timestamp to 10:26:23Z"}

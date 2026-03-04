@@ -6,7 +6,7 @@
 - Target: `root@5.78.109.54`
 - Requested key: `~/.ssh/id_zens3n_vps`
 - Run time (UTC): 2026-03-04
-- Last verification (UTC): 2026-03-04 10:24:49Z
+- Last verification (UTC): 2026-03-04 10:26:23Z
 - Operator: cursor.agent
 
 ## Plan Expectations (from `3OX.Ai/PLAN.md`)
@@ -77,6 +77,7 @@ Health-check execution is **blocked** due to missing SSH private key in this run
       - `GET https://1n3ox.ai/cursor/pending` → `404`
       - `GET https://1n3ox.ai/cursor/status` → `404`
       - `GET https://1n3ox.ai/tasks/list` → `404`
+      - `cursor/pending` response body is nginx 404 HTML (`nginx/1.24.0`), confirming front-door rejection rather than app JSON.
   - Dashboard frontend endpoint inventory (`app.js?v=72`) currently references only:
     - read endpoints: `/health`, `/warden/stats`, `/tape/head`, `/agents/list`
     - write endpoints: `/warden/commit`, `/tape/append`, `/pulse/emit`
@@ -90,7 +91,7 @@ Health-check execution is **blocked** due to missing SSH private key in this run
       - `{"action":"unknown","actor":"system","data":{},"ts":"2026-03-04T06:49:57.882090Z"}`
       - this strongly suggests `/tape/append` accepted an empty payload and wrote a record.
     - follow-up read confirms this `unknown/system` receipt remains the latest tape entry at verification time.
-    - latest `/health` response timestamp now reads `2026-03-04T10:24:49.285641Z` with services still `pulse=true`, `tape=true`, `warden=true`.
+    - latest `/health` response timestamp now reads `2026-03-04T10:26:23.344494Z` with services still `pulse=true`, `tape=true`, `warden=true`.
 - Direct access to internal API port remains blocked/reset (`:4777`), but HTTPS reverse-proxy routes selected endpoints.
   - explicit probes to `http://5.78.109.54:4777/cursor/pending` and `http://5.78.109.54:4777/health` both returned `curl: (56) Recv failure: Connection reset by peer`.
   - direct TLS attempt on `:4777` (`openssl s_client`) fails with immediate reset (`write:errno=104`); raw socket HTTP probe also ends with `Connection reset by peer`.
