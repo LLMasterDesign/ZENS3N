@@ -82,3 +82,4 @@
 {"ts":"2026-03-04T08:28:42Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate and refreshed report timestamp to 08:28:42Z"}
 {"ts":"2026-03-04T08:30:07Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH gate and refreshed root .ssh permission/emptiness evidence at 08:30:07Z"}
 {"ts":"2026-03-04T08:31:43Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate and refreshed report timestamp to 08:31:43Z"}
+{"ts":"2026-03-04T08:33:03Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH gate with verbose auth trace showing server methods and no usable client keys"}

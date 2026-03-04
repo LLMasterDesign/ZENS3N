@@ -6,7 +6,7 @@
 - Target: `root@5.78.109.54`
 - Requested key: `~/.ssh/id_zens3n_vps`
 - Run time (UTC): 2026-03-04
-- Last verification (UTC): 2026-03-04 08:31:43Z
+- Last verification (UTC): 2026-03-04 08:33:03Z
 - Operator: cursor.agent
 
 ## Plan Expectations (from `3OX.Ai/PLAN.md`)
@@ -94,6 +94,7 @@ Health-check execution is **blocked** due to missing SSH private key in this run
   - `~/.ssh/config` not present (only system-wide `/etc/ssh/ssh_config` in effect).
   - `/etc/ssh/ssh_config` shows only default commented `IdentityFile` entries; no host-specific identity overrides were found.
   - `/etc/ssh/ssh_config.d/` is present but empty; `/etc/ssh/sshd_config.d/` is absent in this runtime.
+  - verbose probe confirms `/etc/ssh/ssh_config` include matched no drop-in files.
 - SSH agent environment state:
   - `SSH_AUTH_SOCK=unset` (`auth_sock_missing`).
   - `ssh-add -L` returns `Could not open a connection to your authentication agent.`.
@@ -107,6 +108,7 @@ Health-check execution is **blocked** due to missing SSH private key in this run
 - Publickey-only probe also fails:
   - `ssh -o BatchMode=yes -o PreferredAuthentications=publickey ...`
   - result: `Permission denied (publickey,password).`
+  - verbose auth trace confirms server advertises `Authentications that can continue: publickey,password`, while client has no usable local keys and sends no successful auth packet.
 - Alternate-user probe also fails:
   - `ssh -o BatchMode=yes -o PreferredAuthentications=publickey ubuntu@5.78.109.54 ...`
   - result: `ubuntu@5.78.109.54: Permission denied (publickey,password).`
