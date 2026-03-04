@@ -6,7 +6,7 @@
 - Target: `root@5.78.109.54`
 - Requested key: `~/.ssh/id_zens3n_vps`
 - Run time (UTC): 2026-03-04
-- Last verification (UTC): 2026-03-04 06:42:19Z
+- Last verification (UTC): 2026-03-04 06:43:52Z
 - Operator: cursor.agent
 
 ## Plan Expectations (from `3OX.Ai/PLAN.md`)
@@ -43,6 +43,10 @@ Health-check execution is **blocked** due to missing SSH private key in this run
   - Expanded keyword scan over `pulse/recent?n=200` and `tape/tail?n=200`:
     - matches found for `/root/_TRON` task activity and historical `Teleprompter` message routing.
     - no matches found for `speaker-mesh`, `systemctl`, `df -h`, `free -h`, `uptime`, `journalctl`, `/root/!CMD.VPS`, `BudgetR`, or `TelePromptR` directory checks.
+  - Endpoint window-size check (`n=1000`) confirms currently accessible telemetry volume:
+    - `pulse/recent` returns 8 events total (latest `/root/_TRON` task_available at `2026-03-03T06:51:52Z`).
+    - `tape/tail` returns 176 receipts total (latest `/root/_TRON` task_completed at `2026-03-03T06:51:57Z`).
+    - latest `teleprompter`-tagged receipt in returned set is historical (`2026-02-04T04:00:50Z`).
 - Direct access to internal API port remains blocked/reset (`:4777`), but HTTPS reverse-proxy routes selected endpoints.
 - Port/protocol behavior check (application-layer):
   - `https://5.78.109.54:443/health` returns healthy JSON.
