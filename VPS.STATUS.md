@@ -6,7 +6,7 @@
 - Target: `root@5.78.109.54`
 - Requested key: `~/.ssh/id_zens3n_vps`
 - Run time (UTC): 2026-03-04
-- Last verification (UTC): 2026-03-04 06:26:48Z
+- Last verification (UTC): 2026-03-04 06:31:58Z
 - Operator: cursor.agent
 
 ## Plan Expectations (from `3OX.Ai/PLAN.md`)
@@ -30,6 +30,10 @@ Health-check execution is **blocked** due to missing SSH private key in this run
 - Connectivity path is live:
   - raw TCP to `5.78.109.54:22` = `tcp_22_open`
   - raw TCP to `5.78.109.54:4777` = `tcp_4777_open`
+- SSH handshake is confirmed end-to-end to host SSH daemon:
+  - remote banner: `OpenSSH_9.6p1 Ubuntu-3ubuntu13.14`
+  - server host key algo/fingerprint: `ssh-ed25519 SHA256:sDHeSjet9kRozUmZKiEzyJjVPSymJpcKUj9s/Nd+sZ4`
+  - host key matches local `known_hosts`
 - SSH client resolved default identity paths for this host (`ssh -G root@5.78.109.54`):
   - `~/.ssh/id_rsa`, `~/.ssh/id_ecdsa`, `~/.ssh/id_ecdsa_sk`, `~/.ssh/id_ed25519`, `~/.ssh/id_ed25519_sk`, `~/.ssh/id_xmss`, `~/.ssh/id_dsa`
 - Local identity-file check returned `no_default_identity_files`.
