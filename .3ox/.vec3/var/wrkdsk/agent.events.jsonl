@@ -68,3 +68,4 @@
 {"ts":"2026-03-04T07:54:21Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH gate and added ssh-agent/env evidence to report at 07:54:21Z"}
 {"ts":"2026-03-04T07:56:19Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH gate with home-directory and privileged-path credential inventory; refreshed report to 07:56:19Z"}
 {"ts":"2026-03-04T07:57:46Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH gate including password-preferred auth probe; refreshed report to 07:57:46Z"}
+{"ts":"2026-03-04T08:00:35Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH gate with runtime mount-point key sweep; refreshed report to 08:00:35Z"}
