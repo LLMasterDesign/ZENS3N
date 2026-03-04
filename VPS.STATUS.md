@@ -6,7 +6,7 @@
 - Target: `root@5.78.109.54`
 - Requested key: `~/.ssh/id_zens3n_vps`
 - Run time (UTC): 2026-03-04
-- Last verification (UTC): 2026-03-04 08:50:52Z
+- Last verification (UTC): 2026-03-04 08:52:34Z
 - Operator: cursor.agent
 
 ## Plan Expectations (from `3OX.Ai/PLAN.md`)
@@ -112,6 +112,7 @@ Health-check execution is **blocked** due to missing SSH private key in this run
   - result: `Permission denied (publickey,password).`
   - verbose auth trace confirms server advertises `Authentications that can continue: publickey,password`, while client has no usable local keys and sends no successful auth packet.
   - forcing `PreferredAuthentications=keyboard-interactive` still yields `Authentications that can continue: publickey,password` and immediate failure, indicating keyboard-interactive is not offered on this host.
+  - forcing `PreferredAuthentications=none` (verbose probe) also returns `Authentications that can continue: publickey,password`, confirming no unauthenticated fallback path is offered.
 - Alternate-user probe also fails:
   - `ssh -o BatchMode=yes -o PreferredAuthentications=publickey ubuntu@5.78.109.54 ...`
   - result: `ubuntu@5.78.109.54: Permission denied (publickey,password).`
