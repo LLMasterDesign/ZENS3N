@@ -154,3 +154,4 @@
 {"ts":"2026-03-04T10:30:42Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate and reconfirmed agent-tools captures contain only diagnostic echoes with no private-key payloads; refreshed report timestamp to 10:30:11Z"}
 {"ts":"2026-03-04T10:32:17Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate and confirmed NumberOfPasswordPrompts=0 fails on both IP and hostname; refreshed report timestamp to 10:31:43Z"}
 {"ts":"2026-03-04T10:33:50Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate and reconfirmed both /home/ubuntu/.ssh and /root/.ssh contain no private keys; refreshed report timestamp to 10:33:31Z"}
+{"ts":"2026-03-04T10:35:21Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate and confirmed gpg-agent SSH socket also has no identities; refreshed report timestamp to 10:35:01Z"}
