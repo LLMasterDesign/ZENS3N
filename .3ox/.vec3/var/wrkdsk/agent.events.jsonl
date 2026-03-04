@@ -12,3 +12,4 @@
 {"ts":"2026-03-04T06:27:38Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Updated VPS status report with expanded SSH/auth diagnostics while blocked"}
 {"ts":"2026-03-04T06:28:49Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Added SSH handshake and host-key diagnostics to VPS status report while key is missing"}
 {"ts":"2026-03-04T06:30:17Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Updated VPS status with ssh-agent and ssh-config diagnostics; key still missing"}
+{"ts":"2026-03-04T06:31:37Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Added cursor-hook and secret-injection diagnostics to VPS blocker report"}
