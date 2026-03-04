@@ -76,3 +76,4 @@
 {"ts":"2026-03-04T08:15:07Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH gate with /proc environ sweep; agent socket present but no key/secret vars"}
 {"ts":"2026-03-04T08:17:08Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH gate and documented key-like filename sweep showing only toolchain test fixtures"}
 {"ts":"2026-03-04T08:18:58Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH gate and added ssh-config/shell-history absence evidence to report"}
+{"ts":"2026-03-04T08:22:33Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH gate and documented /opt/cursor key-marker scan with no usable credentials"}
