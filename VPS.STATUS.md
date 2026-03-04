@@ -6,7 +6,7 @@
 - Target: `root@5.78.109.54`
 - Requested key: `~/.ssh/id_zens3n_vps`
 - Run time (UTC): 2026-03-04
-- Last verification (UTC): 2026-03-04 08:34:45Z
+- Last verification (UTC): 2026-03-04 08:36:51Z
 - Operator: cursor.agent
 
 ## Plan Expectations (from `3OX.Ai/PLAN.md`)
@@ -91,6 +91,7 @@ Health-check execution is **blocked** due to missing SSH private key in this run
 - SSH client resolved default identity paths for this host (`ssh -G root@5.78.109.54`):
   - `~/.ssh/id_rsa`, `~/.ssh/id_ecdsa`, `~/.ssh/id_ecdsa_sk`, `~/.ssh/id_ed25519`, `~/.ssh/id_ed25519_sk`, `~/.ssh/id_xmss`, `~/.ssh/id_dsa`
   - `ssh -Q key` confirms client supports modern key algorithms (`ssh-ed25519`, `ecdsa-sha2-*`, `ssh-rsa`), so current failure is missing credentials rather than key-algorithm support.
+  - computed auth toggles remain defaults: `identitiesonly no`, `pubkeyauthentication true`, `passwordauthentication yes`.
 - Local SSH config state:
   - `~/.ssh/config` not present (only system-wide `/etc/ssh/ssh_config` in effect).
   - `/etc/ssh/ssh_config` shows only default commented `IdentityFile` entries; no host-specific identity overrides were found.
