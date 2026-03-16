@@ -1,0 +1,6 @@
+[resume]
+anchor = "vso.agent.deployed"
+
+[paths]
+vps = "/root/!CMD.VPS/VSOAgent"
+tpr = "/root/!CMD.VPS/TelePromptR"
