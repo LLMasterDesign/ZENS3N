@@ -19,4 +19,4 @@ else
 fi
 
 echo "Synced to $VPS:$REMOTE_PATH"
-echo "On VPS run: cd '$REMOTE_PATH' && ruby .3ox/\(6\)Pulse/run.rb teleprompt"
+echo "On VPS run: cd '$REMOTE_PATH' && ruby .3ox/.vec3/rc/run.rb teleprompt"

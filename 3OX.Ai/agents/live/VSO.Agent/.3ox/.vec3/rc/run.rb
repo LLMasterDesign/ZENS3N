@@ -1,12 +1,12 @@
 #!/usr/bin/env ruby
-# RUN.RB :: VSO.AGENT L2 Runtime
+# RUN.RB :: VSO.AGENT L2 Runtime (.vec3/rc/)
 # Supports: test, teleprompt (TPR config generation)
 
 require 'json'
 require 'yaml'
 require 'fileutils'
 
-DOT3OX = File.expand_path(File.join(File.dirname(__FILE__), '..'))
+DOT3OX = File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
 
 def dot3ox_path(*parts)
   File.join(DOT3OX, *parts)
@@ -62,7 +62,7 @@ end
 
 def run_teleprompt(vps_path)
   agent_name = 'VSO.AGENT'
-  topic_name = 'VSO'  # Telegram forum topic name
+  topic_name = 'VSO'
   config = {
     agent: agent_name,
     topic: topic_name,

@@ -20,7 +20,7 @@
    ```bash
    ssh -i ~/.ssh/id_zens3n_vps root@5.78.109.54
    cd '/root/!CMD.VPS/VSOAgent'
-   ruby .3ox/\(6\)Pulse/run.rb teleprompt
+   ruby .3ox/.vec3/rc/run.rb teleprompt
    ```
 
 3. **Register with TelePromptR** (in Telegram bot)
