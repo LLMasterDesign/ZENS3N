@@ -1,0 +1,16 @@
+# TELEPROMPTER.ID
+# Service identity validation card
+
+[identity]
+name = "TelePromptR"
+type = "3ox.service"
+version = "2.1.0"
+created = "⧗-26.180"
+
+[purpose]
+description = "Telegram wire for agent communication"
+role = "Message bus - receives agent outbox, posts to Telegram, routes @mentions"
+
+[location]
+staging = "CMD.VPS/TelePromptR/"
+vps = "root@5.78.109.54:/root/!CMD.VPS/TelePromptR/"

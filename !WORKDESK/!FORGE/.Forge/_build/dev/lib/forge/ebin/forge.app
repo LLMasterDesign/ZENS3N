@@ -1,0 +1,9 @@
+{application,forge,
+             [{optional_applications,[]},
+              {applications,[kernel,stdlib,elixir,logger,jason]},
+              {description,"forge"},
+              {modules,['Elixir.Forge','Elixir.Forge.BuildAnalyzer',
+                        'Elixir.Forge.CLI','Elixir.ForgeApp']},
+              {registered,[]},
+              {vsn,"0.1.0"},
+              {mod,{'Elixir.ForgeApp',[]}}]}.

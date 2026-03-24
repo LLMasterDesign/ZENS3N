@@ -1,0 +1,9 @@
+{application,queue,
+             [{config_mtime,1769775159},
+              {optional_applications,[]},
+              {applications,[kernel,stdlib,elixir,logger,jason]},
+              {description,"queue"},
+              {modules,['Elixir.Queue','Elixir.QueueApp']},
+              {registered,[]},
+              {vsn,"0.1.0"},
+              {mod,{'Elixir.QueueApp',[]}}]}.

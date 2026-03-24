@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package tpr.msg.v1;
+
+import "google/protobuf/struct.proto";
+
+// NOTE: Telegram chat IDs can be negative (supergroups) and may exceed 32-bit.
+// We use int64 to cover typical Bot API usage.
+
+message InboxEnvelope {
+  string message_id = 1;
+  int64 from_chat_id = 2;
+  int64 from_thread_id = 3; // 0 when absent
+  google.protobuf.Struct from_user = 4;
+  string text = 5;
+  string original_text = 6;
+  google.protobuf.Struct raw_message = 7;
+  string routed_to = 8;
+  string route_reason = 9; // mention|subscription|autopost
+  google.protobuf.Struct meta = 10;
+  string routed_at = 11; // RFC3339
+  string sirius_time = 12;
+  bool normalized = 13;
+}
+
+message TprMsg {
+  string src = 1;
+  string dst = 2;
+  string sev = 3;
+  string glyph = 4;
+  string pico = 5;
+  string dir = 6;
+  string msg = 7;
+}
+
+message Route {
+  int64 chat_id = 1;
+  int64 thread_id = 2; // 0 when absent
+  string parse_mode = 3; // Markdown|HTML|...
+}
+
+message OutboxEnvelope {
+  TprMsg tpr = 1;
+  Route route = 2;
+  google.protobuf.Struct meta = 3;
+}
+
+message BusOutboxEnvelope {
+  string agent_id = 1;
+  string text = 2;
+  int64 chat_id = 3; // 0 when omitted and resolved via route policy
+  int64 topic_thread_id = 4; // 0 when omitted and resolved via topic mapping
+  string timestamp = 5; // RFC3339
+  string message_id = 6;
+  string trace_id = 7;
+}
+

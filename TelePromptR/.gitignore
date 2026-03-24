@@ -1,0 +1,4 @@
+_forge/.env
+_forge/runtime/
+*.log
+runtime/vps/3ox.station/vec3/var/
