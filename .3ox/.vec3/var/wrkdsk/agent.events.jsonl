@@ -298,3 +298,7 @@
 {"ts":"2026-03-04T15:02:18Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH key gate (home/root ssh dir inventory + default/explicit probes) on both IP and hostname; refreshed report timestamp to 15:02:18Z"}
 {"ts":"2026-03-04T15:03:52Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH gate with conditional full-suite executor (key_blocked) on both IP and hostname; refreshed report timestamp to 15:03:52Z"}
 {"ts":"2026-03-04T15:06:36Z","event":"task.checkpoint","actor":"cursor.agent","summary":"Revalidated blocked SSH gate with conditional full-suite executor (key_blocked) on both IP and hostname; refreshed report timestamp to 15:06:36Z"}
+{"ts":"2026-06-11T12:36:01Z","event":"task.start","actor":"cursor.agent","summary":"Begin dev environment setup for ZENS3N/3OX.BUILDER monorepo"}
+{"ts":"2026-06-11T12:43:25Z","event":"build.complete","actor":"cursor.agent","summary":"cargo build --release OK after rustup update stable->1.96 (deps need edition2024)"}
+{"ts":"2026-06-11T12:43:25Z","event":"test.complete","actor":"cursor.agent","summary":"cargo test + cargo clippy OK; ruby test_sub_agents.rb 5/5 pass"}
+{"ts":"2026-06-11T12:43:25Z","event":"run.complete","actor":"cursor.agent","summary":"setup-3ox.rb scaffolded cube; 3ox show/list + vec3-boot validated 6/6 faces"}
