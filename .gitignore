@@ -129,3 +129,10 @@ ZENS3N.BASE/
 # VPS configs (sensitive, keep local only)
 !ZENS3N.VPS/config/
 !ZENS3N.VPS/runtime/
+
+# Session working files pulled from corbato-en0 (not repo content; YC app + .secrets plan stay off GitHub)
+Zensen Market Analysis.md
+N13.PALANTIR.counter.position.md
+12.YC.APP.FINAL.md
+proof-band.kdl
+federated-baking-gem.md
