@@ -9,6 +9,7 @@ Open the committed [Atlas launch board](../../../../Websites/_Atlas/launch-board
 - `SOURCE.md` — the one true source folder, serving command, assets, and deployment ownership.
 - `PROVIDER-DECISION.md` — the approved/deferred provider boundary and activation triggers.
 - `deploy/update-launch-board.mjs` — the evidence-gated command for updating task state.
+- `PUBLIC-DOMAIN-REVIEW.md` — the current public-domain receipt and cutover boundary.
 - `SECTIONS.md` — semantic map. Each section has an ID, purpose, files, dependencies, and acceptance test.
 - `SEO.md` — search-engine launch requirements.
 - `AEO.md` — answer-engine/AI readability requirements.
