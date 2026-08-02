@@ -11,7 +11,7 @@
     {"id": "baseline-1", "chapter": "01", "state": "complete", "label": "Canonical source, entry file, and rollback artifact identified."},
     {"id": "baseline-2", "chapter": "01", "state": "complete", "label": "Baseline SLOs, owner, environments, and approval gates recorded."},
     {"id": "vps-1", "chapter": "02", "state": "complete", "label": "Local 7120, Tailscale /zensen, /healthz, and exact hash verified."},
-    {"id": "vps-2", "chapter": "02", "state": "in_progress", "label": "HTML, routes, assets, responsive rules, and accessibility pass; rendered visual review remains open."},
+    {"id": "vps-2", "chapter": "02", "state": "complete", "label": "HTML, routes, assets, responsive behavior, mobile menu, and rendered visual review pass."},
     {"id": "release-1", "chapter": "03", "state": "complete", "label": "README, .gitignore, release pack, and secret scan prepared."},
     {"id": "release-2", "chapter": "03", "state": "complete", "label": "Draft PR #21 is open in LLMasterDesign/ZENS3N for review and merge."},
     {"id": "scale-1", "chapter": "04", "state": "pending", "label": "Run a repeatable load model against an approved test target."},
