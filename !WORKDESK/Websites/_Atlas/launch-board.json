@@ -12,28 +12,125 @@
   "atlas_receipt_commit": "509e72909e7b30b6f206c5f082f1916790c3a31d",
   "provider_decision": {
     "receipt": "../../Projects/Atlas/sites/zensen/PROVIDER-DECISION.md",
-    "staging": {"active": "tailscale-local", "candidate": "railway", "state": "not-activated"},
-    "production": {"candidate": "hetzner-cloud", "state": "not-approved"},
-    "monetization": {"candidate": "stripe-payment-links", "state": "offer-not-defined"},
-    "data": {"candidate": "supabase", "state": "not-needed-for-static-site"}
+    "staging": {
+      "active": "tailscale-local",
+      "candidate": "railway",
+      "state": "not-activated"
+    },
+    "production": {
+      "candidate": "hetzner-cloud",
+      "state": "not-approved"
+    },
+    "monetization": {
+      "candidate": "stripe-payment-links",
+      "state": "offer-not-defined"
+    },
+    "data": {
+      "candidate": "supabase",
+      "state": "not-needed-for-static-site"
+    }
   },
   "updater": {
     "command": "node !WORKDESK/Projects/Atlas/sites/zensen/deploy/update-launch-board.mjs",
     "evidence_required_for_complete": true,
-    "approval_required_for": ["scale-2", "live-2"]
+    "approval_required_for": [
+      "scale-2",
+      "live-2"
+    ]
   },
   "tasks": [
-    {"id": "baseline-1", "chapter": "01", "state": "complete", "label": "Canonical source, entry file, and rollback artifact identified."},
-    {"id": "baseline-2", "chapter": "01", "state": "complete", "label": "Baseline SLOs, owner, environments, and approval gates recorded."},
-    {"id": "vps-1", "chapter": "02", "state": "complete", "label": "Local 7120, Tailscale /zensen, /healthz, and exact hash verified."},
-    {"id": "vps-2", "chapter": "02", "state": "complete", "label": "HTML, routes, assets, responsive behavior, mobile menu, and rendered visual review pass."},
-    {"id": "release-1", "chapter": "03", "state": "complete", "label": "README, .gitignore, release pack, and secret scan prepared."},
-    {"id": "release-2", "chapter": "03", "state": "complete", "label": "PR #21 merged into main at 1a953527; deployment remains approval-gated."},
-    {"id": "scale-1", "chapter": "04", "state": "complete", "label": "Bounded repeatable load harness passes local and Tailscale preproduction targets."},
-    {"id": "scale-2", "chapter": "04", "state": "pending", "label": "Run the armed 10k ramp/soak only with ARMED=yes, APPROVED_TARGET=yes, and an approval receipt; evidence remains open."},
-    {"id": "battle-1", "chapter": "05", "state": "pending", "label": "Local atomic deploy/rollback/restart rehearsal passes; soak, spike, dependency-failure, and real deploy tests remain open."},
-    {"id": "battle-2", "chapter": "05", "state": "pending", "label": "Verify restore, alert delivery, incident runbook, and rollback timing."},
-    {"id": "live-1", "chapter": "06", "state": "pending", "label": "Static 404 and Nginx security-hardening pack prepared; monitoring, rate limits, and cost watch remain open."},
-    {"id": "live-2", "chapter": "06", "state": "pending", "label": "Approval-gated public cutover verifier is prepared; merge, domain, SEO, SLO sign-off, and approved URL remain open."}
+    {
+      "id": "baseline-1",
+      "chapter": "01",
+      "state": "complete",
+      "label": "Canonical source, entry file, and rollback artifact identified.",
+      "evidence": "!WORKDESK/Projects/Atlas/sites/zensen/LAUNCH-BASELINE.md",
+      "last_verified": "2026-08-02",
+      "evidence_note": "Baseline receipt records canonical source, SLOs, owner, environments, and rollback artifact."
+    },
+    {
+      "id": "baseline-2",
+      "chapter": "01",
+      "state": "complete",
+      "label": "Baseline SLOs, owner, environments, and approval gates recorded.",
+      "evidence": "!WORKDESK/Projects/Atlas/sites/zensen/LAUNCH-BASELINE.md",
+      "last_verified": "2026-08-02",
+      "evidence_note": "Baseline acceptance criteria and approval gates are recorded."
+    },
+    {
+      "id": "vps-1",
+      "chapter": "02",
+      "state": "complete",
+      "label": "Local 7120, Tailscale /zensen, /healthz, and exact hash verified.",
+      "evidence": "!WORKDESK/Projects/Atlas/sites/zensen/LAUNCH-BASELINE.md",
+      "last_verified": "2026-08-02",
+      "evidence_note": "Local 7120, Tailscale ingress, health endpoint, and exact hash are recorded."
+    },
+    {
+      "id": "vps-2",
+      "chapter": "02",
+      "state": "complete",
+      "label": "HTML, routes, assets, responsive behavior, mobile menu, and rendered visual review pass.",
+      "evidence": "!WORKDESK/Projects/Atlas/sites/zensen/VISUAL-REVIEW.md",
+      "last_verified": "2026-08-02",
+      "evidence_note": "Route, asset, responsive, accessibility, and rendered review receipts are recorded."
+    },
+    {
+      "id": "release-1",
+      "chapter": "03",
+      "state": "complete",
+      "label": "README, .gitignore, release pack, and secret scan prepared.",
+      "evidence": "!WORKDESK/Projects/Atlas/sites/zensen/GITHUB-RELEASE.md",
+      "last_verified": "2026-08-02",
+      "evidence_note": "Release pack and secret-scan preparation receipt."
+    },
+    {
+      "id": "release-2",
+      "chapter": "03",
+      "state": "complete",
+      "label": "PR #21 merged into main at 1a953527; deployment remains approval-gated.",
+      "evidence": "!WORKDESK/Projects/Atlas/sites/zensen/GITHUB-RELEASE.md",
+      "last_verified": "2026-08-02",
+      "evidence_note": "GitHub merge receipt is recorded in the release ledger."
+    },
+    {
+      "id": "scale-1",
+      "chapter": "04",
+      "state": "complete",
+      "label": "Bounded repeatable load harness passes local and Tailscale preproduction targets.",
+      "evidence": "!WORKDESK/Projects/Atlas/sites/zensen/LOAD-REHEARSAL.md",
+      "last_verified": "2026-08-02",
+      "evidence_note": "Bounded local and Tailscale rehearsal receipt; not a 10k capacity claim."
+    },
+    {
+      "id": "scale-2",
+      "chapter": "04",
+      "state": "pending",
+      "label": "Run the armed 10k ramp/soak only with ARMED=yes, APPROVED_TARGET=yes, and an approval receipt; evidence remains open."
+    },
+    {
+      "id": "battle-1",
+      "chapter": "05",
+      "state": "pending",
+      "label": "Local atomic deploy/rollback/restart rehearsal passes; soak, spike, dependency-failure, and real deploy tests remain open."
+    },
+    {
+      "id": "battle-2",
+      "chapter": "05",
+      "state": "pending",
+      "label": "Verify restore, alert delivery, incident runbook, and rollback timing."
+    },
+    {
+      "id": "live-1",
+      "chapter": "06",
+      "state": "pending",
+      "label": "Static 404 and Nginx security-hardening pack prepared; monitoring, rate limits, and cost watch remain open."
+    },
+    {
+      "id": "live-2",
+      "chapter": "06",
+      "state": "pending",
+      "label": "Approval-gated public cutover verifier is prepared; merge, domain, SEO, SLO sign-off, and approved URL remain open."
+    }
   ]
 }
