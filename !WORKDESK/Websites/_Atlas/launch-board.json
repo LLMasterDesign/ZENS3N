@@ -139,7 +139,10 @@
       "id": "live-2",
       "chapter": "06",
       "state": "pending",
-      "label": "Approval-gated public cutover verifier is prepared; merge, domain, SEO, SLO sign-off, and approved URL remain open."
+      "label": "Approval-gated public cutover verifier is prepared; merge, domain, SEO, SLO sign-off, and approved URL remain open.",
+      "partial_evidence": "!WORKDESK/Projects/Atlas/sites/zensen/PUBLIC-DOMAIN-REVIEW.md",
+      "last_verified": "2026-08-02",
+      "evidence_note": "Public domain still serves the Squarespace Coming Soon surface with noindex; no cutover mutation was made."
     }
   ]
 }
