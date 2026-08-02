@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+
+  <title>ZENSEN Market Valuation Spec</title>
+  <link rel="stylesheet" href="zen-fonts.css" >
+
+  <style>
+    :root {
+      --black: #020304;
+      --panel: #080a0d;
+      --panel-high: #0d1014;
+      --white: #f4f7f8;
+      --muted: #929ca6;
+      --dim: #7d8791;
+      --line: rgba(255, 255, 255, 0.12);
+      --line-strong: rgba(255, 255, 255, 0.25);
+
+      /* type ladder — TELEM.TYPE.SCALE.ROM · 10px floor · do not invent sizes */
+      --t-10: 0.625rem;
+      --t-11: 0.6875rem;
+      --t-12: 0.75rem;
+      --t-13: 0.8125rem;
+      --t-14: 0.875rem;
+
+      --radiance:
+        linear-gradient(
+          90deg,
+          #5eeaff 0%,
+          #818cff 22%,
+          #e875ff 46%,
+          #ff8e68 72%,
+          #f7efa7 100%
+        );
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: var(--black);
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--white);
+      background:
+        radial-gradient(
+          circle at 50% -15%,
+          rgba(255, 255, 255, 0.08),
+          transparent 35%
+        ),
+        var(--black);
+      font-family: "DM Mono", "DS Mono", monospace;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    .number,
+    .value,
+    .range,
+    .equation,
+    .stage-number {
+      font-family: "Oxanium", sans-serif;
+    }
+
+    .sheet {
+      position: relative;
+      width: min(1440px, calc(100vw - 32px));
+      min-height: min(920px, calc(100vh - 32px));
+      margin: 16px auto;
+      padding: 20px;
+
+      display: grid;
+      grid-template-columns: 1.3fr 0.85fr;
+      grid-template-rows: auto auto 1fr auto;
+      grid-template-areas:
+        "header header"
+        "valuation valuation"
+        "progression finance"
+        "footer footer";
+      gap: 14px;
+
+      border: 1px solid var(--line-strong);
+      border-radius: 20px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.035),
+          transparent 35%
+        ),
+        rgba(4, 5, 7, 0.97);
+
+      box-shadow:
+        0 32px 100px rgba(0, 0, 0, 0.65),
+        inset 0 1px 0 rgba(255, 255, 255, 0.07);
+    }
+
+    .sheet::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 3px;
+      border-radius: 20px 20px 0 0;
+      background: var(--radiance);
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.025),
+          transparent 50%
+        ),
+        var(--panel);
+    }
+
+    .header {
+      grid-area: header;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 30px;
+      align-items: center;
+      padding: 22px 26px;
+    }
+
+    .brand-line {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 0.68rem;
+      letter-spacing: 0.19em;
+      text-transform: uppercase;
+    }
+
+    .brand-line::before {
+      content: "";
+      width: 36px;
+      height: 2px;
+      background: var(--radiance);
+    }
+
+    h1 {
+      font-size: clamp(2.3rem, 5.4vw, 5.4rem);
+      line-height: 0.9;
+      font-weight: 700;
+      letter-spacing: -0.065em;
+    }
+
+    .subtitle {
+      margin-top: 11px;
+      color: var(--muted);
+      font-size: 0.72rem;
+      line-height: 1.6;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .header-mark {
+      min-width: 235px;
+      padding-left: 26px;
+      border-left: 1px solid var(--line);
+      text-align: right;
+    }
+
+    .header-mark .label {
+      color: var(--muted);
+      font-size: 0.63rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .header-mark .number {
+      margin-top: 4px;
+      font-size: clamp(2.1rem, 4.3vw, 4rem);
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: -0.055em;
+    }
+
+    .header-mark .range-note {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 0.67rem;
+      letter-spacing: 0.08em;
+    }
+
+    .valuation-strip {
+      grid-area: valuation;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      overflow: hidden;
+    }
+
+    .valuation-stat {
+      position: relative;
+      padding: 17px 20px;
+      border-right: 1px solid var(--line);
+    }
+
+    .valuation-stat:last-child {
+      border-right: 0;
+    }
+
+    .valuation-stat.featured::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 2px;
+      background: var(--radiance);
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: var(--t-12);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .value {
+      margin-top: 7px;
+      font-size: clamp(1.25rem, 2.2vw, 2.15rem);
+      line-height: 1;
+      font-weight: 650;
+      letter-spacing: -0.04em;
+    }
+
+    .stat-note {
+      margin-top: 7px;
+      color: var(--dim);
+      font-size: var(--t-12);
+      line-height: 1.45;
+    }
+
+    .progression {
+      grid-area: progression;
+      padding: 20px;
+    }
+
+    .finance {
+      grid-area: finance;
+      padding: 20px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: baseline;
+      margin-bottom: 15px;
+    }
+
+    .section-head h2 {
+      font-size: 0.92rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .section-head span {
+      color: var(--muted);
+      font-size: var(--t-11);
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+
+    .stage-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .stage {
+      display: grid;
+      grid-template-columns: 42px 1fr auto;
+      gap: 12px;
+      align-items: center;
+      min-height: 57px;
+      padding: 9px 13px;
+
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--panel-high);
+    }
+
+    .stage-number {
+      color: var(--dim);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+    }
+
+    .stage-title {
+      font-family: "Oxanium", sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.035em;
+    }
+
+    .stage-condition {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: var(--t-11);
+      line-height: 1.4;
+    }
+
+    .range {
+      font-size: clamp(0.95rem, 1.6vw, 1.4rem);
+      font-weight: 650;
+      letter-spacing: -0.035em;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .working-point {
+      margin-top: 4px;
+      color: var(--muted);
+      font-family: "DM Mono", monospace;
+      font-size: var(--t-11);
+      font-weight: 400;
+      letter-spacing: 0.03em;
+    }
+
+    .finance-stack {
+      display: grid;
+      gap: 9px;
+    }
+
+    .math-card {
+      padding: 13px 15px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--panel-high);
+    }
+
+    .math-label {
+      color: var(--muted);
+      font-size: var(--t-11);
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .equation {
+      margin-top: 7px;
+      font-size: clamp(0.9rem, 1.5vw, 1.22rem);
+      line-height: 1.45;
+      letter-spacing: -0.025em;
+    }
+
+    .equation strong {
+      font-weight: 700;
+    }
+
+    .revenue-table {
+      width: 100%;
+      margin-top: 9px;
+      border-collapse: collapse;
+    }
+
+    .revenue-table th,
+    .revenue-table td {
+      padding: 7px 5px;
+      border-bottom: 1px solid var(--line);
+      font-size: var(--t-11);
+      text-align: left;
+    }
+
+    .revenue-table th {
+      color: var(--muted);
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .revenue-table td:last-child,
+    .revenue-table th:last-child {
+      text-align: right;
+    }
+
+    .revenue-table td:last-child {
+      color: var(--white);
+      font-family: "Oxanium", sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    .formula {
+      margin-top: 10px;
+      padding: 12px 14px;
+      border: 1px solid var(--line-strong);
+      border-radius: 10px;
+      background:
+        linear-gradient(
+          100deg,
+          rgba(94, 234, 255, 0.05),
+          rgba(232, 117, 255, 0.04),
+          rgba(255, 142, 104, 0.04)
+        ),
+        #050608;
+    }
+
+    .formula-label {
+      color: var(--muted);
+      font-size: var(--t-11);
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .formula-line {
+      margin-top: 7px;
+      font-family: "Oxanium", sans-serif;
+      font-size: 0.82rem;
+      line-height: 1.55;
+    }
+
+    .footer {
+      grid-area: footer;
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 20px;
+      align-items: center;
+      min-height: 50px;
+      padding: 11px 17px;
+
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #030405;
+    }
+
+    .band-nav {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      padding-right: 20px;
+      border-right: 1px solid var(--line);
+    }
+
+    .band-nav a {
+      position: relative;
+      padding: 6px 13px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      color: var(--muted);
+      font-family: "Oxanium", sans-serif;
+      font-size: var(--t-12);
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: color 120ms ease, border-color 120ms ease;
+    }
+
+    .band-nav a:hover {
+      color: var(--white);
+      border-color: var(--line-strong);
+    }
+
+    .band-nav a:focus-visible {
+      outline: 2px solid #5eeaff;
+      outline-offset: 2px;
+    }
+
+    .band-nav a[aria-current="page"] {
+      color: var(--white);
+      border-color: var(--line-strong);
+      background: var(--panel-high);
+    }
+
+    .band-nav a[aria-current="page"]::after {
+      content: "";
+      position: absolute;
+      inset: auto 9px 3px;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--radiance);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .band-nav a { transition: none; }
+    }
+
+    .footer-copy {
+      color: var(--muted);
+      font-size: var(--t-11);
+      line-height: 1.55;
+      letter-spacing: 0.06em;
+    }
+
+    .footer-brand {
+      text-align: right;
+    }
+
+    .footer-brand strong {
+      display: block;
+      font-family: "Oxanium", sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.13em;
+    }
+
+    .footer-brand span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: var(--t-11);
+      letter-spacing: 0.07em;
+    }
+
+    @media (max-width: 900px) {
+      .sheet {
+        width: min(100% - 18px, 1440px);
+        margin: 9px auto;
+        padding: 12px;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "header"
+          "valuation"
+          "progression"
+          "finance"
+          "footer";
+      }
+
+      .header {
+        grid-template-columns: 1fr;
+      }
+
+      .header-mark {
+        padding: 16px 0 0;
+        border-top: 1px solid var(--line);
+        border-left: 0;
+        text-align: left;
+      }
+
+      .valuation-strip {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .valuation-stat:nth-child(2) {
+        border-right: 0;
+      }
+
+      .valuation-stat:nth-child(-n + 2) {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .footer {
+        grid-template-columns: 1fr;
+      }
+
+      .band-nav {
+        order: -1;
+        flex-wrap: wrap;
+        padding: 0 0 12px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .footer-brand {
+        text-align: left;
+      }
+    }
+
+    @media print {
+      @page {
+        size: landscape;
+        margin: 0.25in;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        background: var(--black);
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      .sheet {
+        width: 100%;
+        min-height: 7.85in;
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="sheet">
+
+    <header class="header panel">
+      <div>
+        <div class="brand-line">
+          ZENSEN Systems · Market Valuation Spec
+        </div>
+
+        <h1>ÆGen{τ}</h1>
+
+        <p class="subtitle">
+          Evidence-conditioned valuation · staged market growth · July 2026
+        </p>
+      </div>
+
+      <div class="header-mark">
+        <div class="label">Current working valuation</div>
+        <div class="number">$11M</div>
+        <div class="range-note">Estimated range · $9M–$14M pre-money</div>
+      </div>
+    </header>
+
+    <section class="valuation-strip panel">
+
+      <article class="valuation-stat">
+        <div class="stat-label">Current State</div>
+        <div class="value">$9M–$14M</div>
+        <div class="stat-note">Working point · $11M</div>
+      </article>
+
+      <article class="valuation-stat featured">
+        <div class="stat-label">Proof Complete</div>
+        <div class="value">$15M–$25M</div>
+        <div class="stat-note">Working point · $20M</div>
+      </article>
+
+      <article class="valuation-stat">
+        <div class="stat-label">Early Traction</div>
+        <div class="value">$35M–$70M</div>
+        <div class="stat-note">Working point · $40M</div>
+      </article>
+
+      <article class="valuation-stat">
+        <div class="stat-label">Category Breakout</div>
+        <div class="value">$500M–$1.5B</div>
+        <div class="stat-note">Platform-scale range</div>
+      </article>
+
+    </section>
+
+    <section class="progression panel">
+      <div class="section-head">
+        <h2>Valuation Progression</h2>
+        <span>Evidence gates</span>
+      </div>
+
+      <div class="stage-list">
+
+        <article class="stage">
+          <div class="stage-number">01</div>
+
+          <div>
+            <div class="stage-title">Current Development</div>
+            <div class="stage-condition">
+              Architecture, intellectual property and working implementation
+            </div>
+          </div>
+
+          <div class="range">
+            $9M–$14M
+            <div class="working-point">$11M point</div>
+          </div>
+        </article>
+
+        <article class="stage">
+          <div class="stage-number">02</div>
+
+          <div>
+            <div class="stage-title">Closed-Loop Proof</div>
+            <div class="stage-condition">
+              Repeatable demonstration, recovery and verified output
+            </div>
+          </div>
+
+          <div class="range">
+            $15M–$25M
+            <div class="working-point">$20M point</div>
+          </div>
+        </article>
+
+        <article class="stage">
+          <div class="stage-number">03</div>
+
+          <div>
+            <div class="stage-title">Public Proof</div>
+            <div class="stage-condition">
+              Public evidence, external witnesses and launch visibility
+            </div>
+          </div>
+
+          <div class="range">
+            $18M–$30M
+            <div class="working-point">$24M point</div>
+          </div>
+        </article>
+
+        <article class="stage">
+          <div class="stage-number">04</div>
+
+          <div>
+            <div class="stage-title">Paid Adoption</div>
+            <div class="stage-condition">
+              Paid pilots, initial sales and repeat customer activity
+            </div>
+          </div>
+
+          <div class="range">
+            $35M–$70M
+            <div class="working-point">$40M point</div>
+          </div>
+        </article>
+
+        <article class="stage">
+          <div class="stage-number">05</div>
+
+          <div>
+            <div class="stage-title">Platform Traction</div>
+            <div class="stage-condition">
+              Recurring revenue, retention and growing market activity
+            </div>
+          </div>
+
+          <div class="range">
+            $60M–$120M
+            <div class="working-point">$90M point</div>
+          </div>
+        </article>
+
+        <article class="stage">
+          <div class="stage-number">06</div>
+
+          <div>
+            <div class="stage-title">Market Expansion</div>
+            <div class="stage-condition">
+              Marketplace growth, licensing and broader distribution
+            </div>
+          </div>
+
+          <div class="range">
+            $100M–$250M
+            <div class="working-point">$150M point</div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="finance panel">
+      <div class="section-head">
+        <h2>Capital Math</h2>
+        <span>Illustrative financing</span>
+      </div>
+
+      <div class="finance-stack">
+
+        <article class="math-card">
+          <div class="math-label">$500K current round</div>
+          <div class="equation">
+            $11M + $500K = <strong>$11.5M</strong><br >
+            $500K ÷ $11.5M = <strong>4.35%</strong>
+          </div>
+        </article>
+
+        <article class="math-card">
+          <div class="math-label">$2M proof round</div>
+          <div class="equation">
+            $20M + $2M = <strong>$22M</strong><br >
+            $2M ÷ $22M = <strong>9.1%</strong>
+          </div>
+        </article>
+
+        <article class="math-card">
+          <div class="math-label">$4M traction round</div>
+          <div class="equation">
+            $40M + $4M = <strong>$44M</strong><br >
+            $4M ÷ $44M = <strong>9.1%</strong>
+          </div>
+        </article>
+
+      </div>
+
+      <table class="revenue-table">
+        <thead>
+          <tr>
+            <th>ARR</th>
+            <th>Multiple</th>
+            <th>Estimated Value</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>$1M</td>
+            <td>10×–15×</td>
+            <td>$10M–$15M</td>
+          </tr>
+
+          <tr>
+            <td>$5M</td>
+            <td>10×–20×</td>
+            <td>$50M–$100M</td>
+          </tr>
+
+          <tr>
+            <td>$10M</td>
+            <td>12×–25×</td>
+            <td>$120M–$250M</td>
+          </tr>
+
+          <tr>
+            <td>$25M</td>
+            <td>12×–26×</td>
+            <td>$300M–$650M</td>
+          </tr>
+
+          <tr>
+            <td>$50M</td>
+            <td>12×–30×</td>
+            <td>$600M–$1.5B</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="formula">
+        <div class="formula-label">Core valuation equation</div>
+
+        <div class="formula-line">
+          Company Value = Revenue × Market Multiple
+          <br >
+          $50M × 20 = $1B
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-copy">
+        Planning estimate based on technical progress, demonstrated proof,
+        commercial adoption, recurring revenue and market positioning.
+        Formal transaction value remains subject to investor diligence.
+      </div>
+
+      <nav class="band-nav" aria-label="Proof band">
+        <a href="Valuation.html" aria-current="page">Valuation</a>
+        <a href="Market.html">Market</a>
+        <a href="Product.html">Product</a>
+      </nav>
+
+      <div class="footer-brand">
+        <strong>ORION</strong>
+        <span>ÆON // ÆGIS // ÆGen</span>
+      </div>
+    </footer>
+
+  </main>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "atlas": "ZENSEN launch board",
+  "contract_version": "1.0",
+  "updated": "2026-08-02",
+  "status": "draft-pr-open",
+  "status_label": "DRAFT PR OPEN",
+  "source_of_truth": "../../Projects/Atlas/sites/zensen/LAUNCH-BASELINE.md",
+  "repository_target": "LLMasterDesign/ZENS3N",
+  "pull_request": "https://github.com/LLMasterDesign/ZENS3N/pull/21",
+  "tasks": [
+    {"id": "baseline-1", "chapter": "01", "state": "complete", "label": "Canonical source, entry file, and rollback artifact identified."},
+    {"id": "baseline-2", "chapter": "01", "state": "complete", "label": "Baseline SLOs, owner, environments, and approval gates recorded."},
+    {"id": "vps-1", "chapter": "02", "state": "complete", "label": "Local 7120, Tailscale /zensen, /healthz, and exact hash verified."},
+    {"id": "vps-2", "chapter": "02", "state": "complete", "label": "HTML, routes, assets, responsive behavior, mobile menu, and rendered visual review pass."},
+    {"id": "release-1", "chapter": "03", "state": "complete", "label": "README, .gitignore, release pack, and secret scan prepared."},
+    {"id": "release-2", "chapter": "03", "state": "complete", "label": "Draft PR #21 is open in LLMasterDesign/ZENS3N for review and merge."},
+    {"id": "scale-1", "chapter": "04", "state": "complete", "label": "Bounded repeatable load harness passes local and Tailscale preproduction targets."},
+    {"id": "scale-2", "chapter": "04", "state": "pending", "label": "Run the armed 10k ramp/soak only with ARMED=yes, APPROVED_TARGET=yes, and an approval receipt; evidence remains open."},
+    {"id": "battle-1", "chapter": "05", "state": "pending", "label": "Local atomic deploy/rollback/restart rehearsal passes; soak, spike, dependency-failure, and real deploy tests remain open."},
+    {"id": "battle-2", "chapter": "05", "state": "pending", "label": "Verify restore, alert delivery, incident runbook, and rollback timing."},
+    {"id": "live-1", "chapter": "06", "state": "pending", "label": "Static 404 and Nginx security-hardening pack prepared; monitoring, rate limits, and cost watch remain open."},
+    {"id": "live-2", "chapter": "06", "state": "pending", "label": "Capture launch evidence, sign off SLOs, and publish the approved URL."}
+  ]
+}
