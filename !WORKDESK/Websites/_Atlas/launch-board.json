@@ -33,6 +33,7 @@
   "updater": {
     "command": "node !WORKDESK/Projects/Atlas/sites/zensen/deploy/update-launch-board.mjs",
     "evidence_required_for_complete": true,
+    "partial_evidence_supported": true,
     "approval_required_for": [
       "scale-2",
       "live-2"
@@ -112,7 +113,10 @@
       "id": "battle-1",
       "chapter": "05",
       "state": "pending",
-      "label": "Local atomic deploy/rollback/restart rehearsal passes; soak, spike, dependency-failure, and real deploy tests remain open."
+      "label": "Local atomic deploy/rollback/restart rehearsal passes; soak, spike, dependency-failure, and real deploy tests remain open.",
+      "partial_evidence": "!WORKDESK/Projects/Atlas/sites/zensen/DEPLOYMENT-REHEARSAL.md",
+      "last_verified": "2026-08-02",
+      "evidence_note": "Atomic local deploy, rollback, and restart rehearsal passes; soak, spike, dependency-failure, and real deploy evidence remain open."
     },
     {
       "id": "battle-2",
@@ -124,7 +128,10 @@
       "id": "live-1",
       "chapter": "06",
       "state": "pending",
-      "label": "Static 404 and Nginx security-hardening pack prepared; monitoring, rate limits, and cost watch remain open."
+      "label": "Static 404 and Nginx security-hardening pack prepared; monitoring, rate limits, and cost watch remain open.",
+      "partial_evidence": "!WORKDESK/Projects/Atlas/sites/zensen/SECURITY-REVIEW.md",
+      "last_verified": "2026-08-02",
+      "evidence_note": "Static bundle security review passes; live monitoring, rate limits, alerting, and cost controls remain open."
     },
     {
       "id": "live-2",

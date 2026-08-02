@@ -74,10 +74,22 @@ if (options.state === 'complete') {
   }
   if (fs.statSync(evidencePath).size === 0) usage(`Evidence file is empty: ${options.evidence}`);
   task.evidence = path.relative(repoRoot, evidencePath).split(path.sep).join('/');
+  delete task.partial_evidence;
   if (options.approval_ref) task.approval_ref = options.approval_ref;
 } else {
-  delete task.evidence;
   delete task.approval_ref;
+  if (options.evidence) {
+    const evidenceCandidates = [
+      path.resolve(repoRoot, options.evidence),
+      path.resolve(process.cwd(), options.evidence),
+    ];
+    const evidencePath = evidenceCandidates.find((candidate) => fs.existsSync(candidate));
+    if (!evidencePath || !fs.statSync(evidencePath).isFile()) {
+      usage(`Evidence file not found: ${options.evidence}`);
+    }
+    if (fs.statSync(evidencePath).size === 0) usage(`Evidence file is empty: ${options.evidence}`);
+    task.partial_evidence = path.relative(repoRoot, evidencePath).split(path.sep).join('/');
+  }
 }
 
 task.state = options.state;

@@ -4,7 +4,7 @@ This pack is the execution companion to [LAUNCH-BASELINE.md](../LAUNCH-BASELINE.
 
 ## Atlas launch-board updates
 
-Update the committed Atlas board only with a receipt. Completion requires an existing, non-empty evidence file; the 10k and public-cutover tasks additionally require an explicit approval reference.
+Update the committed Atlas board only with a receipt. Completion requires an existing, non-empty evidence file; a pending task may carry `partial_evidence` for work already proven. The 10k and public-cutover tasks additionally require an explicit approval reference before completion.
 
 ```sh
 node deploy/update-launch-board.mjs \
