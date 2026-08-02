@@ -42,15 +42,23 @@ The workspace references `slate-rt.billfish-sirius.ts.net` as a public HTTPS edg
 ## Current release receipt
 
 - Entry file: `Websites/zensensystems/index.html`
-- SHA-256: `02bd2faf3dfe4a9fbfe157971329f73bdce1e11d73da38314084ed63479d513b`
-- Size: `58,149` bytes
+- SHA-256: `16f519789d48a7bb103ee25be44228cba06e1df0958ac8724bd6635e6cacfaa0`
+- Size: `58,144` bytes
 - Known-good rollback file: `_versions/index.v1.0.hero-locked.⧗-26.366.html`
 - Rollback SHA-256: `b4de78a56ade73fbdc3206f175b7fbe614e46760c6054527b2aaea382b0b65ae`
 - Release branch: `agent/zensen-systems-site`
 - Release commit: `45be2c1dbacba337d5ba29c950eaae7cce1b5de1`
 - Draft PR: `https://github.com/LLMasterDesign/ZENS3N/pull/21`
 
-The local origin and Tailscale ingress both returned HTTP 200 and `58,149` bytes during this baseline capture. Their response body hash matched the canonical entry hash above.
+The local origin and Tailscale ingress both returned HTTP 200 and `58,144` bytes during this baseline capture. Their response body hash matched the canonical entry hash above.
+
+## Product-surface review receipt
+
+- HTML validation: passed for `index.html` and all three `spec/*.html` documents.
+- Responsive contract: viewport metadata, mobile media rules, reduced-motion rules, and keyboard focus styles are present on the product surfaces.
+- Accessibility structure: every product page has one `h1`; the only image is explicitly decorative with `alt=""`; the menu button has `type="button"` and an accessible label.
+- Internal routes/assets: all relative links and asset references resolve from the canonical source.
+- Limitation: no browser runtime is installed on this host, so rendered visual/pixel review remains open.
 
 ## Bounded Tailscale rehearsal receipt
 

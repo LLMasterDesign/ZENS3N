@@ -8,9 +8,9 @@ Status: **identified and verified on en0**
 - Remote root: `/home/abzu/!LAUNCHPAD`
 - Canonical source folder: `/home/abzu/!LAUNCHPAD/ZENSEN.CMD/!WORKDESK/Websites/zensensystems`
 - Static entry file: `index.html`
-- Current entry SHA-256: `02bd2faf3dfe4a9fbfe157971329f73bdce1e11d73da38314084ed63479d513b`
-- Current entry size: `58,149` bytes
-- Last observed modification: `2026-08-01 21:59:31 -0500`
+- Current entry SHA-256: `16f519789d48a7bb103ee25be44228cba06e1df0958ac8724bd6635e6cacfaa0`
+- Current entry size: `58,144` bytes
+- Last observed modification: `2026-08-02 01:39:19 -0500`
 
 ## Assets
 
@@ -34,7 +34,7 @@ Status: **identified and verified on en0**
 - Tailscale Serve route: `/zensen` → `http://127.0.0.1:7120`
 - Current URL: `https://corbato-en0.billfish-sirius.ts.net/zensen/`
 - Tailscale status: Funnel endpoint responds and the current serve process is serving the canonical source after the source-folder path correction
-- Route verification: **verified** — local origin on port `7120` and the Tailscale `/zensen/` route return the canonical file hash `02bd2faf3dfe4a9fbfe157971329f73bdce1e11d73da38314084ed63479d513b`
+- Route verification: **verified** — local origin on port `7120` and the Tailscale `/zensen/` route return the canonical file hash `16f519789d48a7bb103ee25be44228cba06e1df0958ac8724bd6635e6cacfaa0`
 
 ## Build and version state
 

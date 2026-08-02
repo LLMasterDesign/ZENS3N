@@ -3,6 +3,7 @@
 ## 2026-08-02
 
 - Made the committed ZENSEN Loom self-contained for the scoped monorepo release; its Atlas links now resolve to the included launch board instead of omitted workspace-only files.
+- Passed HTML validation for the company page and three product specs; added an explicit menu-button type and recorded responsive/accessibility evidence. The current entry receipt is SHA-256 `16f519789d48a7bb103ee25be44228cba06e1df0958ac8724bd6635e6cacfaa0`.
 
 ## 2026-08-02
 
