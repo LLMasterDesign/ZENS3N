@@ -2,6 +2,20 @@
 
 This pack is the execution companion to [LAUNCH-BASELINE.md](../LAUNCH-BASELINE.md). The current phase is local/Tailscale preproduction; no VPS or paid provider is required. The later VPS steps are approval-gated and do not assume a host, domain, provider, or credentials.
 
+## Atlas launch-board updates
+
+Update the committed Atlas board only with a receipt. Completion requires an existing, non-empty evidence file; the 10k and public-cutover tasks additionally require an explicit approval reference.
+
+```sh
+node deploy/update-launch-board.mjs \
+  --task scale-1 \
+  --state complete \
+  --evidence LOAD-REHEARSAL.md \
+  --note "Bounded local and Tailscale rehearsal receipts passed."
+```
+
+Use `--dry-run` to inspect the JSON before writing. Use `--state pending` to reopen a task when its evidence is no longer valid.
+
 ## Phase A — local/Tailscale preproduction
 
 The canonical source is served from the local host on `127.0.0.1:7120` and exposed for rehearsal at `https://corbato-en0.billfish-sirius.ts.net/zensen/`. Verify the entry hash, `/healthz`, critical assets, spec routes, mobile behavior, and no-secret boundary before creating a GitHub release.

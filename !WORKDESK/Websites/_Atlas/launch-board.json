@@ -17,6 +17,11 @@
     "monetization": {"candidate": "stripe-payment-links", "state": "offer-not-defined"},
     "data": {"candidate": "supabase", "state": "not-needed-for-static-site"}
   },
+  "updater": {
+    "command": "node !WORKDESK/Projects/Atlas/sites/zensen/deploy/update-launch-board.mjs",
+    "evidence_required_for_complete": true,
+    "approval_required_for": ["scale-2", "live-2"]
+  },
   "tasks": [
     {"id": "baseline-1", "chapter": "01", "state": "complete", "label": "Canonical source, entry file, and rollback artifact identified."},
     {"id": "baseline-2", "chapter": "01", "state": "complete", "label": "Baseline SLOs, owner, environments, and approval gates recorded."},
