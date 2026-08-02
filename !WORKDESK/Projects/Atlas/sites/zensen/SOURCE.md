@@ -40,6 +40,7 @@ Status: **identified and verified on en0**
 
 - Build command: none detected; this is currently a static HTML/CSS site.
 - Git repository: canonical site is tracked in `LLMasterDesign/ZENS3N` under `!WORKDESK/Websites/zensensystems`; merged source receipt is `1a953527eee812c0cd73021c33e85634e5337c0f`.
+- Atlas receipt reconciliation is merged at `509e72909e7b30b6f206c5f082f1916790c3a31d` via PR #22.
 - Current known-good saved version: `_versions/index.v1.0.hero-locked.⧗-26.366.html`
 - Saved-version SHA-256: `b4de78a56ade73fbdc3206f175b7fbe614e46760c6054527b2aaea382b0b65ae`
 

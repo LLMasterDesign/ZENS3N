@@ -3,6 +3,7 @@
 ## 2026-08-02
 
 - PR #21 was merged into `LLMasterDesign/ZENS3N` `main` at `1a953527eee812c0cd73021c33e85634e5337c0f`; Atlas and the release baseline now reflect the merged source.
+- Atlas receipt PR #22 was merged at `509e72909e7b30b6f206c5f082f1916790c3a31d`; the board and release docs are now reconciled on `main`.
 
 ## 2026-08-02
 
