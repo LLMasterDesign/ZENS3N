@@ -6,6 +6,7 @@
 - Added `deploy/update-launch-board.mjs`, an evidence-gated Atlas updater that requires approval references for the 10k and public-cutover tasks.
 - Extended the updater to record partial evidence on pending tasks without promoting their state.
 - Added a k6 preflight wrapper that refuses the 10k run before contacting a target unless all approval variables and the runner are present.
+- PR #24 merged at `aff448b0ec931b0697675e3196f1756775f6dbff`; the provider decision and evidence-gated board updater are now published on `main`.
 - PR #21 was merged into `LLMasterDesign/ZENS3N` `main` at `1a953527eee812c0cd73021c33e85634e5337c0f`; Atlas and the release baseline now reflect the merged source.
 - Atlas receipt PR #22 was merged at `509e72909e7b30b6f206c5f082f1916790c3a31d`; the board and release docs are now reconciled on `main`.
 

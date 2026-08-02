@@ -30,6 +30,8 @@
       "state": "not-needed-for-static-site"
     }
   },
+  "provider_decision_pr": "https://github.com/LLMasterDesign/ZENS3N/pull/24",
+  "provider_decision_merge": "aff448b0ec931b0697675e3196f1756775f6dbff",
   "updater": {
     "command": "node !WORKDESK/Projects/Atlas/sites/zensen/deploy/update-launch-board.mjs",
     "evidence_required_for_complete": true,
