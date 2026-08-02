@@ -11,6 +11,7 @@
 - Added the themed `404.html` and baseline Nginx security headers; monitoring, rate limits, cost watch, and public cutover remain open.
 - Recorded `SECURITY-REVIEW.md`: the bundle is secret-clean and static-only; live Nginx/TLS/monitoring and authorized edge review remain target-gated.
 - Extended `verify-release.sh` to require a real unknown-route `404` and optionally enforce the Nginx security headers with `ZENSEN_REQUIRE_SECURITY_HEADERS=yes`.
+- Added the approval-gated `PUBLIC-CUTOVER.md` and `verify-public-cutover.sh`; public noindex removal, domain/TLS, SEO assets, and SLO sign-off remain unexecuted.
 
 ## 2026-08-02
 

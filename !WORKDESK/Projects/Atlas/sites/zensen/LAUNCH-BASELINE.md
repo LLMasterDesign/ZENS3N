@@ -100,6 +100,7 @@ The board remains `PLANNING` until the unchecked gates have receipts. Checking a
 - Local deployment rehearsal: `DEPLOYMENT-REHEARSAL.md` and `deploy/rehearse-local.sh`
 - Security/404 hardening: `404.html` and `deploy/nginx/zensen.conf`
 - Static security review: `SECURITY-REVIEW.md`
+- Public cutover gate: `PUBLIC-CUTOVER.md` and `deploy/verify-public-cutover.sh`
 - Rendered visual receipt: `VISUAL-REVIEW.md`
 - GitHub release gate: `GITHUB-RELEASE.md`
 - Live Atlas board: `Websites/_Atlas/launch-board.json`
