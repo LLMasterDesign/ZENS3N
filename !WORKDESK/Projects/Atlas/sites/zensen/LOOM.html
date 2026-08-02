@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LOOM — launch checklist</title>
+  <style>
+    :root { color-scheme: dark; --bg:#090b0e; --panel:#11161b; --line:#2a343d; --text:#edf3f5; --muted:#9eabb3; --good:#9be15d; --warn:#ffc857; --bad:#ff756d; --accent:#66d9ef; }
+    * { box-sizing:border-box; } body { margin:0; background:var(--bg); color:var(--text); font:15px/1.5 system-ui,sans-serif; }
+    main { max-width:1100px; margin:auto; padding:32px 20px 70px; } h1,h2,h3 { line-height:1.15; } h1 { margin-bottom:6px; } h2 { margin-top:0; } p { color:var(--muted); } a { color:var(--accent); }
+    .top { display:flex; justify-content:space-between; gap:20px; align-items:start; border-bottom:1px solid var(--line); padding-bottom:22px; }
+    .site { border:1px solid var(--line); border-radius:12px; padding:14px 16px; min-width:230px; background:var(--panel); } .site strong { display:block; font-size:18px; } .site code { color:var(--muted); font-size:12px; }
+    .toolbar { display:flex; flex-wrap:wrap; gap:10px; margin:22px 0; } button { border:1px solid var(--line); border-radius:8px; padding:9px 12px; background:var(--panel); color:var(--text); cursor:pointer; } button:hover { border-color:var(--accent); }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:14px; } section { border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:18px; } section[data-state="ready"] { border-color:#466a38; } section[data-state="blocked"] { border-color:#704743; }
+    .label { display:inline-block; border-radius:99px; padding:2px 8px; font-size:11px; text-transform:uppercase; letter-spacing:.08em; background:#26313a; color:var(--muted); } .ready .label { color:var(--good); background:#1d3420; } .blocked .label { color:var(--bad); background:#3b2020; }
+    ul { list-style:none; padding:0; margin:14px 0 0; } li { display:flex; gap:9px; align-items:start; margin:10px 0; } input { accent-color:var(--good); margin-top:4px; } li span { flex:1; } li small { display:block; color:var(--muted); margin-top:2px; }
+    .wide { margin-top:14px; } .legend { display:flex; gap:14px; flex-wrap:wrap; color:var(--muted); font-size:13px; } .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:5px; background:var(--warn); } .dot.good { background:var(--good); } .dot.bad { background:var(--bad); }
+    footer { color:var(--muted); font-size:13px; margin-top:26px; } @media(max-width:650px){ .top{display:block}.site{margin-top:18px} }
+  </style>
+</head>
+<body>
+<main>
+  <div class="top" data-atlas-part="header" data-atlas-version="1.0" aria-label="ATLAS universal header"><div><div class="label">LOOM / local canonical map</div><h1>Launch checklist</h1><p>A plain-English map of what is ready, what is missing, and where to work next. Current evidence: mapped, AEO identity complete, staging ingress verified. Checkboxes are saved in this browser.</p></div><div class="site"><strong>ZENSEN</strong><code>/zensen/ · canonical: !WORKDESK/Websites/zensensystems</code></div></div>
+  <div class="toolbar"><button id="all">Show all</button><button id="open">Show unfinished</button><button id="reset">Reset checks</button><button onclick="window.print()">Print</button></div>
+  <div class="legend"><span><i class="dot good"></i>ready when all checks pass</span><span><i class="dot"></i>needs a decision or test</span><span><i class="dot bad"></i>currently blocks launch</span></div>
+  <div class="grid" id="cards">
+    <section data-state="ready"><span class="label">ready</span><h2>1. Source & ownership</h2><p>Know exactly which folder is the real site. Every future change starts here.</p><ul>
+      <li><input type="checkbox"><span>Write down the canonical source folder.<small>See <a href="SOURCE.md">SOURCE.md</a>.</small></span></li>
+      <li><input type="checkbox"><span>Keep one production source of truth, not copied HTML files.</span></li>
+      <li><input type="checkbox"><span>Record the build/serve command and required assets.</span></li>
+    </ul></section>
+    <section data-state="blocked"><span class="label">staging verified</span><h2>2. Public deployment</h2><p>Local `7120` and the Tailscale `/zensen/` ingress now return the canonical entry hash. Production VPS, public DNS, and managed-domain cutover remain open.</p><ul>
+      <li><input type="checkbox"><span>Choose managed static hosting or Sites before buying a VPS.</span></li>
+      <li><input type="checkbox"><span>Deploy a saved, versioned build.</span></li>
+      <li><input type="checkbox"><span>Confirm HTTPS, redirects, 404 handling, and rollback.</span></li>
+      <li><input type="checkbox"><span>Connect the real domain and verify DNS.</span></li>
+    </ul></section>
+    <section data-state="blocked"><span class="label">SEO</span><h2>3. Search readiness</h2><p>Make the page understandable to search engines before asking them to rank it.</p><ul>
+      <li><input type="checkbox"><span>Give each page one accurate title and meta description.<small>See <a href="SEO.md">SEO.md</a>.</small></span></li>
+      <li><input type="checkbox"><span>Add canonical URL, robots.txt, and sitemap.xml.</span></li>
+      <li><input type="checkbox"><span>Remove noindex when the public launch is intentional.</span></li>
+      <li><input type="checkbox"><span>Test mobile layout, links, speed, and structured data.</span></li>
+    </ul></section>
+    <section data-state="blocked"><span class="label">AEO</span><h2>4. AI answer readiness</h2><p>Give AI systems clean facts, definitions, and source signals they can safely reuse.</p><ul>
+      <li><input type="checkbox"><span>Write a one-sentence answer for what ZENSEN is.</span></li>
+      <li><input type="checkbox"><span>Use semantic headings, labeled sections, and visible text.<small>See <a href="AEO.md">AEO.md</a>.</small></span></li>
+      <li><input type="checkbox"><span>Add an Organization/WebSite JSON-LD block only for facts shown on-page.</span></li>
+      <li><input type="checkbox"><span>Publish an author/about/contact source of truth.</span></li>
+    </ul></section>
+    <section data-state="blocked"><span class="label">security</span><h2>5. 2FA & access</h2><p>Protect admin actions separately from public viewing. Do not put secrets in HTML.</p><ul>
+      <li><input type="checkbox"><span>Decide what needs authentication: admin, dashboard, or all pages.<small>See <a href="SECURITY-2FA.md">SECURITY-2FA.md</a>.</small></span></li>
+      <li><input type="checkbox"><span>Use an identity provider with passkeys/TOTP and recovery codes.</span></li>
+      <li><input type="checkbox"><span>Keep sessions, secrets, and authorization server-side.</span></li>
+      <li><input type="checkbox"><span>Test lockout, recovery, logout, and unauthorized access.</span></li>
+    </ul></section>
+    <section data-state="blocked"><span class="label">maintainability</span><h2>6. Semantic map</h2><p>Each page section gets a stable name, purpose, owner, and file boundary.</p><ul>
+      <li><input type="checkbox"><span>List sections and their stable IDs in <a href="SECTIONS.md">SECTIONS.md</a>.</span></li>
+      <li><input type="checkbox"><span>Give every section one job and one acceptance test.</span></li>
+      <li><input type="checkbox"><span>Change one section at a time and run the smoke checklist.</span></li>
+      <li><input type="checkbox"><span>Keep a changelog before publishing.</span></li>
+    </ul></section>
+  </div>
+  <section class="wide"><span class="label">operating rule</span><h2>Do not break the whole page</h2><p>Before editing, identify the section ID. Edit only that section or its named asset. After editing, check navigation, mobile layout, console errors, forms, SEO metadata, and the deployment preview. If a change crosses sections, document the dependency first.</p><p><a href="README.md">Open the docs map →</a> · <a href="../../ATLAS-CONTRACT.md">Read the ATLAS contract →</a> · <a href="../../checklists/site-build.md">Open the site checklist →</a></p></section>
+  <footer data-atlas-part="footer" data-atlas-version="1.0">Last reviewed: 2026-08-01 · Deployment status: staging verified · <a href="LAUNCH-BASELINE.md">Open launch baseline</a> · Universal footer: <a href="../../parts/footer.html">ATLAS footer@1.0</a> · This is a local planning tool, not a security system.</footer>
+</main>
+<script>
+  const key='loom:zensen'; const boxes=[...document.querySelectorAll('input[type=checkbox]')];
+  const saved=JSON.parse(localStorage.getItem(key)||'[]'); boxes.forEach((b,i)=>b.checked=!!saved[i]);
+  function save(){localStorage.setItem(key,JSON.stringify(boxes.map(b=>b.checked)));}
+  boxes.forEach(b=>b.addEventListener('change',save));
+  document.querySelector('#all').onclick=()=>document.querySelectorAll('section').forEach(s=>s.hidden=false);
+  document.querySelector('#open').onclick=()=>document.querySelectorAll('#cards section').forEach(s=>s.hidden=[...s.querySelectorAll('input')].every(b=>b.checked));
+  document.querySelector('#reset').onclick=()=>{boxes.forEach(b=>b.checked=false);save();};
+</script>
+</body></html>

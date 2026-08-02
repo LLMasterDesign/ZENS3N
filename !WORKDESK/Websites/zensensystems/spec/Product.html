@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>ÆGen{τ} — Product</title>
+  <link rel="stylesheet" href="zen-fonts.css" />
+
+  <style>
+    :root {
+      --black: #020304;
+      --panel: #080a0d;
+      --panel-high: #0d1014;
+      --white: #f4f7f8;
+      --muted: #929ca6;
+      --dim: #7d8791;
+      --line: rgba(255, 255, 255, 0.12);
+      --line-strong: rgba(255, 255, 255, 0.25);
+
+      /* type ladder — TELEM.TYPE.SCALE.ROM · 10px floor · do not invent sizes */
+      --t-10: 0.625rem;
+      --t-11: 0.6875rem;
+      --t-12: 0.75rem;
+      --t-13: 0.8125rem;
+      --t-14: 0.875rem;
+
+      --radiance:
+        linear-gradient(
+          90deg,
+          #5eeaff 0%,
+          #818cff 22%,
+          #e875ff 46%,
+          #ff8e68 72%,
+          #f7efa7 100%
+        );
+    }
+
+    * { box-sizing: border-box; }
+
+    html { background: var(--black); }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--white);
+      background:
+        radial-gradient(
+          circle at 50% -15%,
+          rgba(255, 255, 255, 0.08),
+          transparent 35%
+        ),
+        var(--black);
+      font-family: "DM Mono", "DS Mono", monospace;
+    }
+
+    h1, h2, h3, p { margin: 0; }
+
+    h1, h2, h3, .number, .value, .range,
+    .stage-title, .actor-name, .price-val,
+    .ladder-level, .metric-val, .tech-item {
+      font-family: "Oxanium", sans-serif;
+    }
+
+    .sheet {
+      position: relative;
+      width: min(1440px, calc(100vw - 32px));
+      margin: 16px auto;
+      padding: 20px;
+
+      display: grid;
+      grid-template-columns: 1.3fr 0.85fr;
+      grid-template-rows: auto auto 1fr auto;
+      grid-template-areas:
+        "header header"
+        "defs defs"
+        "runtime business"
+        "footer footer";
+      gap: 14px;
+
+      border: 1px solid var(--line-strong);
+      border-radius: 20px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.035),
+          transparent 35%
+        ),
+        rgba(4, 5, 7, 0.97);
+
+      box-shadow:
+        0 32px 100px rgba(0, 0, 0, 0.65),
+        inset 0 1px 0 rgba(255, 255, 255, 0.07);
+    }
+
+    .sheet::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 3px;
+      border-radius: 20px 20px 0 0;
+      background: var(--radiance);
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.025),
+          transparent 50%
+        ),
+        var(--panel);
+    }
+
+    /* ── HEADER ── */
+
+    .header {
+      grid-area: header;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 30px;
+      align-items: center;
+      padding: 22px 26px;
+    }
+
+    .brand-line {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 0.68rem;
+      letter-spacing: 0.19em;
+      text-transform: uppercase;
+    }
+
+    .brand-line::before {
+      content: "";
+      width: 36px;
+      height: 2px;
+      background: var(--radiance);
+    }
+
+    h1 {
+      font-size: clamp(2.3rem, 5.4vw, 5.4rem);
+      line-height: 0.9;
+      font-weight: 700;
+      letter-spacing: -0.065em;
+    }
+
+    .subtitle {
+      margin-top: 11px;
+      color: var(--muted);
+      font-size: 0.72rem;
+      line-height: 1.6;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .header-mark {
+      min-width: 200px;
+      padding-left: 26px;
+      border-left: 1px solid var(--line);
+      text-align: right;
+    }
+
+    .header-mark .label {
+      color: var(--muted);
+      font-size: 0.63rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .header-mark .number {
+      margin-top: 4px;
+      font-family: "Oxanium", sans-serif;
+      font-size: clamp(1.1rem, 2.4vw, 1.6rem);
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    /* ── DEFINITION STRIP ── */
+
+    .def-strip {
+      grid-area: defs;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      overflow: hidden;
+    }
+
+    .def-card {
+      position: relative;
+      padding: 15px 18px;
+      border-right: 1px solid var(--line);
+    }
+
+    .def-card:last-child {
+      border-right: 0;
+    }
+
+    .def-label {
+      color: var(--muted);
+      font-size: var(--t-11);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+
+    .def-text {
+      font-size: var(--t-12);
+      line-height: 1.6;
+      color: var(--white);
+    }
+
+    .def-text.quote {
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    /* ── RUNTIME PANEL ── */
+
+    .runtime-panel {
+      grid-area: runtime;
+      padding: 20px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: baseline;
+      margin-bottom: 15px;
+    }
+
+    .section-head h2 {
+      font-size: 0.92rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .section-head span {
+      color: var(--muted);
+      font-size: var(--t-11);
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+
+    .corbato-diagram {
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      border: 1px solid var(--line-strong);
+      border-radius: 10px;
+      background:
+        linear-gradient(
+          100deg,
+          rgba(94, 234, 255, 0.05),
+          rgba(232, 117, 255, 0.04),
+          rgba(255, 142, 104, 0.04)
+        ),
+        #050608;
+    }
+
+    .corbato-flow {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      font-size: var(--t-11);
+      line-height: 1.8;
+    }
+
+    .flow-node {
+      padding: 3px 9px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: var(--white);
+      font-size: var(--t-11);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    .flow-arrow {
+      color: var(--dim);
+      font-size: 0.65rem;
+    }
+
+    .corbato-thesis {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: var(--t-11);
+      line-height: 1.5;
+      font-style: italic;
+    }
+
+    .agent-loop {
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--panel-high);
+    }
+
+    .loop-label {
+      color: var(--muted);
+      font-size: var(--t-10);
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .loop-steps {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+
+    .loop-step {
+      padding: 3px 9px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      font-family: "Oxanium", sans-serif;
+      font-size: var(--t-11);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    .loop-thesis {
+      color: var(--dim);
+      font-size: var(--t-10);
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    .actor-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .actor {
+      padding: 9px 11px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel-high);
+    }
+
+    .actor-name {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      margin-bottom: 3px;
+    }
+
+    .actor-role {
+      color: var(--dim);
+      font-size: var(--t-10);
+      line-height: 1.45;
+    }
+
+    .lifecycle {
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--panel-high);
+    }
+
+    .lifecycle-label {
+      color: var(--muted);
+      font-size: var(--t-10);
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .lifecycle-flow {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .lifecycle-stage {
+      padding: 4px 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      font-family: "Oxanium", sans-serif;
+      font-size: var(--t-11);
+      font-weight: 600;
+    }
+
+    .lifecycle-note {
+      color: var(--dim);
+      font-size: var(--t-10);
+      display: block;
+      font-weight: 400;
+      margin-top: 1px;
+    }
+
+    /* ── BUSINESS PANEL ── */
+
+    .business-panel {
+      grid-area: business;
+      padding: 20px;
+    }
+
+    .business-stack {
+      display: grid;
+      gap: 9px;
+    }
+
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .pricing-table th,
+    .pricing-table td {
+      padding: 7px 5px;
+      border-bottom: 1px solid var(--line);
+      font-size: var(--t-11);
+      text-align: left;
+    }
+
+    .pricing-table th {
+      color: var(--muted);
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .price-val {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .pricing-note {
+      color: var(--dim);
+      font-size: var(--t-10);
+    }
+
+    .ladder-card {
+      padding: 13px 15px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--panel-high);
+    }
+
+    .ladder-label {
+      color: var(--muted);
+      font-size: var(--t-10);
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .ladder-list {
+      display: grid;
+      gap: 5px;
+    }
+
+    .ladder-item {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 8px;
+      align-items: baseline;
+    }
+
+    .ladder-level {
+      font-size: var(--t-12);
+      font-weight: 600;
+      color: var(--dim);
+    }
+
+    .ladder-desc {
+      font-size: var(--t-11);
+      line-height: 1.5;
+    }
+
+    .ladder-detail {
+      color: var(--dim);
+      font-size: var(--t-10);
+    }
+
+    .metrics-card {
+      padding: 14px 16px;
+      border: 1px solid var(--line-strong);
+      border-radius: 10px;
+      background:
+        linear-gradient(
+          100deg,
+          rgba(94, 234, 255, 0.05),
+          rgba(232, 117, 255, 0.04),
+          rgba(255, 142, 104, 0.04)
+        ),
+        #050608;
+    }
+
+    .metrics-label {
+      color: var(--muted);
+      font-size: var(--t-10);
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .metric {
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel-high);
+    }
+
+    .metric-name {
+      color: var(--dim);
+      font-size: var(--t-10);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .metric-val {
+      font-size: 0.82rem;
+      font-weight: 650;
+      letter-spacing: -0.03em;
+    }
+
+    .tech-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--panel-high);
+    }
+
+    .tech-label {
+      width: 100%;
+      margin-bottom: 4px;
+      color: var(--muted);
+      font-size: var(--t-10);
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .tech-item {
+      padding: 4px 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      font-size: var(--t-11);
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+
+    /* ── FOOTER ── */
+
+    .footer {
+      grid-area: footer;
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 20px;
+      align-items: center;
+      min-height: 50px;
+      padding: 11px 17px;
+
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #030405;
+    }
+
+    .band-nav {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      padding-right: 20px;
+      border-right: 1px solid var(--line);
+    }
+
+    .band-nav a {
+      position: relative;
+      padding: 6px 13px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      color: var(--muted);
+      font-family: "Oxanium", sans-serif;
+      font-size: var(--t-12);
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: color 120ms ease, border-color 120ms ease;
+    }
+
+    .band-nav a:hover {
+      color: var(--white);
+      border-color: var(--line-strong);
+    }
+
+    .band-nav a:focus-visible {
+      outline: 2px solid #5eeaff;
+      outline-offset: 2px;
+    }
+
+    .band-nav a[aria-current="page"] {
+      color: var(--white);
+      border-color: var(--line-strong);
+      background: var(--panel-high);
+    }
+
+    .band-nav a[aria-current="page"]::after {
+      content: "";
+      position: absolute;
+      inset: auto 9px 3px;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--radiance);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .band-nav a { transition: none; }
+    }
+
+    .footer-copy {
+      color: var(--muted);
+      font-size: var(--t-11);
+      line-height: 1.55;
+      letter-spacing: 0.06em;
+    }
+
+    .footer-brand {
+      text-align: right;
+    }
+
+    .footer-brand strong {
+      display: block;
+      font-family: "Oxanium", sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.13em;
+    }
+
+    .footer-brand span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: var(--t-11);
+      letter-spacing: 0.07em;
+    }
+
+    /* ── RESPONSIVE ── */
+
+    @media (max-width: 900px) {
+      .sheet {
+        width: min(100% - 18px, 1440px);
+        margin: 9px auto;
+        padding: 12px;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "header"
+          "defs"
+          "runtime"
+          "business"
+          "footer";
+      }
+
+      .header {
+        grid-template-columns: 1fr;
+      }
+
+      .header-mark {
+        padding: 16px 0 0;
+        border-top: 1px solid var(--line);
+        border-left: 0;
+        text-align: left;
+      }
+
+      .def-strip {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .def-card:nth-child(2) {
+        border-right: 0;
+      }
+
+      .def-card:nth-child(-n + 2) {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .actor-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .metrics-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer {
+        grid-template-columns: 1fr;
+      }
+
+      .band-nav {
+        order: -1;
+        flex-wrap: wrap;
+        padding: 0 0 12px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .footer-brand {
+        text-align: left;
+      }
+    }
+
+    @media print {
+      @page {
+        size: landscape;
+        margin: 0.25in;
+      }
+
+      html, body {
+        width: 100%;
+        height: 100%;
+        background: var(--black);
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      .sheet {
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="sheet">
+
+    <header class="header panel">
+      <div>
+        <div class="brand-line">
+          ZENSEN Systems · Product Spec
+        </div>
+
+        <h1>ÆGen{τ}</h1>
+
+        <p class="subtitle">
+          Safe runtime governance for always-on AI agency
+        </p>
+      </div>
+
+      <div class="header-mark">
+        <div class="label">Public Day 1</div>
+        <div class="number">August 8, 2026</div>
+      </div>
+    </header>
+
+    <section class="def-strip panel">
+
+      <article class="def-card">
+        <div class="def-label">Canonical</div>
+        <div class="def-text">
+          Governed runtime · persistent identity · scoped memory · supervised processes · receipts · recovery · durable execution
+        </div>
+      </article>
+
+      <article class="def-card">
+        <div class="def-label">MVP</div>
+        <div class="def-text">
+          Receipt-bearing runtime that changes implementation while preserving identity and authority
+        </div>
+      </article>
+
+      <article class="def-card">
+        <div class="def-label">Market</div>
+        <div class="def-text quote">
+          "When you need an agent that just works."
+        </div>
+      </article>
+
+      <article class="def-card">
+        <div class="def-label">Category</div>
+        <div class="def-text quote">
+          "Front-line architecture for governed AI systems."
+        </div>
+      </article>
+
+    </section>
+
+    <section class="runtime-panel panel">
+      <div class="section-head">
+        <h2>The Runtime</h2>
+        <span>Architecture</span>
+      </div>
+
+      <div class="corbato-diagram">
+        <div class="corbato-flow">
+          <span class="flow-node">Many users</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-node">Sovereign agent computer</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-node">Scoped identity + memory + authority</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-node">Persistent agents</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-node">Supervised work</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-node">Signed receipts</span>
+        </div>
+        <div class="corbato-thesis">
+          Corbató thesis — the agent computer is a time-sharing system: many users, one machine, scoped authority, supervised execution.
+        </div>
+      </div>
+
+      <div class="agent-loop">
+        <div class="loop-label">Agent loop</div>
+        <div class="loop-steps">
+          <span class="loop-step">Define</span>
+          <span class="flow-arrow">→</span>
+          <span class="loop-step">Compile</span>
+          <span class="flow-arrow">→</span>
+          <span class="loop-step">Authorize</span>
+          <span class="flow-arrow">→</span>
+          <span class="loop-step">Execute</span>
+          <span class="flow-arrow">→</span>
+          <span class="loop-step">Receipt</span>
+        </div>
+        <div class="loop-thesis">
+          Model proposes, runtime authorizes, receipts remember.
+        </div>
+      </div>
+
+      <div class="actor-grid">
+        <div class="actor">
+          <div class="actor-name">ENDER</div>
+          <div class="actor-role">Warden + final authority</div>
+        </div>
+        <div class="actor">
+          <div class="actor-name">FORGE</div>
+          <div class="actor-role">Contract builder</div>
+        </div>
+        <div class="actor">
+          <div class="actor-name">OBSIDIA</div>
+          <div class="actor-role">Scribe + spec keeper</div>
+        </div>
+        <div class="actor">
+          <div class="actor-name">RAVEN</div>
+          <div class="actor-role">Witness + governor</div>
+        </div>
+        <div class="actor">
+          <div class="actor-name">zendex</div>
+          <div class="actor-role">ONNX semantic routing · .zdx indexes · .gensL events</div>
+        </div>
+        <div class="actor">
+          <div class="actor-name">ORION</div>
+          <div class="actor-role">OTP supervision + continuity</div>
+        </div>
+        <div class="actor">
+          <div class="actor-name">WARDEN</div>
+          <div class="actor-role">Rust deterministic enforcement</div>
+        </div>
+        <div class="actor">
+          <div class="actor-name">LEDG3R</div>
+          <div class="actor-role">Append-only receipts</div>
+        </div>
+      </div>
+
+      <div class="lifecycle">
+        <div class="lifecycle-label">Agent lifecycle</div>
+        <div class="lifecycle-flow">
+          <span class="lifecycle-stage">
+            COLD
+            <span class="lifecycle-note">sparkfile</span>
+          </span>
+          <span class="flow-arrow">→</span>
+          <span class="lifecycle-stage">
+            HOT
+            <span class="lifecycle-note">compile + verify</span>
+          </span>
+          <span class="flow-arrow">→</span>
+          <span class="lifecycle-stage">
+            ACTIVE
+            <span class="lifecycle-note">live runtime</span>
+          </span>
+          <span class="flow-arrow">→</span>
+          <span class="lifecycle-stage">
+            retain / replace / rollback
+            <span class="lifecycle-note">governance</span>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <section class="business-panel panel">
+      <div class="section-head">
+        <h2>The Business</h2>
+        <span>Revenue model</span>
+      </div>
+
+      <div class="business-stack">
+
+        <div>
+          <table class="pricing-table">
+            <thead>
+              <tr>
+                <th>Tier</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Ontological module</td>
+                <td><span class="price-val">$99–$499</span> <span class="pricing-note">one-time</span></td>
+              </tr>
+              <tr>
+                <td>ÆGen compiler license</td>
+                <td><span class="price-val">$499–$999</span> <span class="pricing-note">one-time</span></td>
+              </tr>
+              <tr>
+                <td>Professional node</td>
+                <td><span class="price-val">$100/mo</span></td>
+              </tr>
+              <tr>
+                <td>Team deployment</td>
+                <td><span class="price-val">$6,000+/yr</span></td>
+              </tr>
+              <tr>
+                <td>Classroom deployment</td>
+                <td><span class="price-val">$20,000+/yr</span></td>
+              </tr>
+              <tr>
+                <td>Enterprise deployment</td>
+                <td><span class="price-val">$100,000+/yr</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="ladder-card">
+          <div class="ladder-label">Proof ladder</div>
+          <div class="ladder-list">
+            <div class="ladder-item">
+              <div class="ladder-level">L1</div>
+              <div>
+                <div class="ladder-desc">Existence</div>
+                <div class="ladder-detail">Mechanism exists — one successful closed loop</div>
+              </div>
+            </div>
+            <div class="ladder-item">
+              <div class="ladder-level">L2</div>
+              <div>
+                <div class="ladder-desc">Platform</div>
+                <div class="ladder-detail">Corbató works — isolated users, concurrent, receipts</div>
+              </div>
+            </div>
+            <div class="ladder-item">
+              <div class="ladder-level">L3</div>
+              <div>
+                <div class="ladder-desc">Product</div>
+                <div class="ladder-detail">Users activate without founder — repeatable value</div>
+              </div>
+            </div>
+            <div class="ladder-item">
+              <div class="ladder-level">L4</div>
+              <div>
+                <div class="ladder-desc">Market</div>
+                <div class="ladder-detail">Paid, retained, expanded, renewed</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="metrics-card">
+          <div class="metrics-label">Day 1 Commitments</div>
+          <div class="metrics-grid">
+            <div class="metric">
+              <div class="metric-name">Concurrent users</div>
+              <div class="metric-val">≥ 3</div>
+            </div>
+            <div class="metric">
+              <div class="metric-name">Closed loop runs</div>
+              <div class="metric-val">≥ 100</div>
+            </div>
+            <div class="metric">
+              <div class="metric-name">Unauthorized effects</div>
+              <div class="metric-val">0</div>
+            </div>
+            <div class="metric">
+              <div class="metric-name">Receipt coverage</div>
+              <div class="metric-val">100%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tech-strip">
+          <div class="tech-label">Stack</div>
+          <span class="tech-item">Elixir/OTP</span>
+          <span class="tech-item">Rust</span>
+          <span class="tech-item">Rhai</span>
+          <span class="tech-item">ONNX</span>
+          <span class="tech-item">Svelte</span>
+          <span class="tech-item">Local + Cloud Models</span>
+        </div>
+
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-copy">
+        ÆGen{τ} is a governed runtime for persistent AI agency.
+        Model-independent. Receipt-bearing. Local-first.
+        Day 1 commitments are targets for August 8, 2026 public launch.
+      </div>
+
+      <nav class="band-nav" aria-label="Proof band">
+        <a href="Valuation.html">Valuation</a>
+        <a href="Market.html">Market</a>
+        <a href="Product.html" aria-current="page">Product</a>
+      </nav>
+
+      <div class="footer-brand">
+        <strong>ORION</strong>
+        <span>ÆON // ÆGIS // ÆGen</span>
+      </div>
+    </footer>
+
+  </main>
+</body>
+</html>

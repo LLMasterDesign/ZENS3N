@@ -1,0 +1,23 @@
+{
+  "atlas": "ZENSEN launch board",
+  "contract_version": "1.0",
+  "updated": "2026-08-02",
+  "status": "publishing",
+  "status_label": "PUBLISHING",
+  "source_of_truth": "../../Projects/Atlas/sites/zensen/LAUNCH-BASELINE.md",
+  "repository_target": "LLMasterDesign/ZENS3N",
+  "tasks": [
+    {"id": "baseline-1", "chapter": "01", "state": "complete", "label": "Canonical source, entry file, and rollback artifact identified."},
+    {"id": "baseline-2", "chapter": "01", "state": "complete", "label": "Baseline SLOs, owner, environments, and approval gates recorded."},
+    {"id": "vps-1", "chapter": "02", "state": "complete", "label": "Local 7120, Tailscale /zensen, /healthz, and exact hash verified."},
+    {"id": "vps-2", "chapter": "02", "state": "in_progress", "label": "Product routes/assets/anchors pass; mobile and visual review remain open."},
+    {"id": "release-1", "chapter": "03", "state": "complete", "label": "README, .gitignore, release pack, and secret scan prepared."},
+    {"id": "release-2", "chapter": "03", "state": "in_progress", "label": "Push the verified source to LLMasterDesign/ZENS3N and open a draft PR."},
+    {"id": "scale-1", "chapter": "04", "state": "pending", "label": "Run a repeatable load model against an approved test target."},
+    {"id": "scale-2", "chapter": "04", "state": "pending", "label": "Prove 10,000 concurrent sessions with ramp and soak evidence."},
+    {"id": "battle-1", "chapter": "05", "state": "pending", "label": "Run soak, spike, dependency-failure, deploy, and restart tests."},
+    {"id": "battle-2", "chapter": "05", "state": "pending", "label": "Verify restore, alert delivery, incident runbook, and rollback timing."},
+    {"id": "live-1", "chapter": "06", "state": "pending", "label": "Enable monitoring, security checks, rate limits, and cost watch."},
+    {"id": "live-2", "chapter": "06", "state": "pending", "label": "Capture launch evidence, sign off SLOs, and publish the approved URL."}
+  ]
+}
