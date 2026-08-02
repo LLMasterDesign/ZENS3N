@@ -39,7 +39,7 @@ Status: **identified and verified on en0**
 ## Build and version state
 
 - Build command: none detected; this is currently a static HTML/CSS site.
-- Git repository: none detected at the canonical source folder.
+- Git repository: canonical site is tracked in `LLMasterDesign/ZENS3N` under `!WORKDESK/Websites/zensensystems`; merged source receipt is `1a953527eee812c0cd73021c33e85634e5337c0f`.
 - Current known-good saved version: `_versions/index.v1.0.hero-locked.⧗-26.366.html`
 - Saved-version SHA-256: `b4de78a56ade73fbdc3206f175b7fbe614e46760c6054527b2aaea382b0b65ae`
 
