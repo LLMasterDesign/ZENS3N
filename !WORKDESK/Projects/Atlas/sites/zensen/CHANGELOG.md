@@ -7,6 +7,7 @@
 - Completed rendered review at 1440px and 390px, including the mobile menu and all three spec pages; recorded the receipt in `VISUAL-REVIEW.md`.
 - Added the safety-bounded repeatable load harness and recorded 500 local plus 100 Tailscale successful requests in `LOAD-REHEARSAL.md`; the armed 10k scenario remains a separate gate.
 - Hardened the armed 10k scenario with explicit `APPROVED_TARGET=yes` and `APPROVAL_REF` requirements in addition to `ARMED=yes`; no capacity claim was made.
+- Added a loopback deployment rehearsal covering immutable archive, atomic switch, rollback, and restart; real VPS and battle-test evidence remain open.
 
 ## 2026-08-02
 
