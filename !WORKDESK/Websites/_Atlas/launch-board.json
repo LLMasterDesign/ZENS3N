@@ -124,7 +124,10 @@
       "id": "battle-2",
       "chapter": "05",
       "state": "pending",
-      "label": "Verify restore, alert delivery, incident runbook, and rollback timing."
+      "label": "Verify restore, alert delivery, incident runbook, and rollback timing.",
+      "partial_evidence": "!WORKDESK/Projects/Atlas/sites/zensen/RECOVERY-REHEARSAL.md",
+      "last_verified": "2026-08-02",
+      "evidence_note": "Local archive restore, exact hash, and healthz pass; production backup, alert delivery, incident paging, and real-target recovery remain open."
     },
     {
       "id": "live-1",
