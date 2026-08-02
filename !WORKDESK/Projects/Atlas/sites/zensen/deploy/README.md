@@ -16,6 +16,8 @@ node deploy/update-launch-board.mjs \
 
 Use `--dry-run` to inspect the JSON before writing. Use `--state pending` to reopen a task when its evidence is no longer valid.
 
+The armed 10k scenario must be launched through `load/run-10k-approved.sh`. Its preflight checks the target, arming flag, approval flag, approval reference, and k6 availability before invoking the 50-minute ramp/soak script.
+
 ## Phase A — local/Tailscale preproduction
 
 The canonical source is served from the local host on `127.0.0.1:7120` and exposed for rehearsal at `https://corbato-en0.billfish-sirius.ts.net/zensen/`. Verify the entry hash, `/healthz`, critical assets, spec routes, mobile behavior, and no-secret boundary before creating a GitHub release.
