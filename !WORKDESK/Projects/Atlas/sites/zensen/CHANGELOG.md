@@ -10,6 +10,7 @@
 - PR #21 was merged into `LLMasterDesign/ZENS3N` `main` at `1a953527eee812c0cd73021c33e85634e5337c0f`; Atlas and the release baseline now reflect the merged source.
 - Recorded the public-domain review: `zensensystems.com` still serves the Squarespace Coming Soon/noindex surface, so no public cutover was made.
 - Added a local recovery rehearsal receipt: immutable archive restore, exact entry hash, and `healthz` pass in 12 ms; production backup, alerting, and incident paging remain open.
+- PR #27 merged at `290b0e21a0d792bc5f8312419df9e4c9fa912bd2`; the recovery receipt is now published on `main` while its uncovered operational boundaries remain pending.
 - Atlas receipt PR #22 was merged at `509e72909e7b30b6f206c5f082f1916790c3a31d`; the board and release docs are now reconciled on `main`.
 
 ## 2026-08-02
