@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-08-02
+
+- Installed and authenticated the GitHub CLI for `LLMasterDesign`.
+- Published the scoped ZENSEN Systems site, Atlas launch board, and release evidence to branch `agent/zensen-systems-site` at commit `45be2c1`.
+- Opened draft PR [#21](https://github.com/LLMasterDesign/ZENS3N/pull/21); merge and deployment remain approval-gated.
+
 ## 2026-08-01
 
 - Recorded a bounded rehearsal receipt: local `7120` handled 500/500 requests at concurrency 25 and Tailscale `/zensen/` handled 100/100 at concurrency 10; this is not a 10k capacity claim.

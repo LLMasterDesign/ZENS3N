@@ -30,7 +30,7 @@ These targets apply to the public company page and its critical local assets fir
 | Local verification | `http://127.0.0.1:7120/` | HTTP 200; entry hash verified |
 | Staging ingress | `https://corbato-en0.billfish-sirius.ts.net/zensen/` | HTTP 200; entry hash verified |
 | Production VPS | Not provisioned; approval-gated | Future gate |
-| GitHub repository | Not created/pushed; approval-gated | Open gate |
+| GitHub repository | `LLMasterDesign/ZENS3N`, draft PR #21 open | Review/merge gate |
 | Public domain | Existing coming-soon surface | Future gate |
 
 No duplicate ZENSEN source may be introduced. The quarantined `Websites/zensensystems.com` folder is not an active surface.
@@ -46,6 +46,9 @@ The workspace references `slate-rt.billfish-sirius.ts.net` as a public HTTPS edg
 - Size: `58,149` bytes
 - Known-good rollback file: `_versions/index.v1.0.hero-locked.⧗-26.366.html`
 - Rollback SHA-256: `b4de78a56ade73fbdc3206f175b7fbe614e46760c6054527b2aaea382b0b65ae`
+- Release branch: `agent/zensen-systems-site`
+- Release commit: `45be2c1dbacba337d5ba29c950eaae7cce1b5de1`
+- Draft PR: `https://github.com/LLMasterDesign/ZENS3N/pull/21`
 
 The local origin and Tailscale ingress both returned HTTP 200 and `58,149` bytes during this baseline capture. Their response body hash matched the canonical entry hash above.
 
@@ -69,7 +72,8 @@ The probe used `curl` only because `k6`, `wrk`, `ab`, and `hey` are not installe
 - [x] Shared `/healthz` contract verified on local and staging ingress.
 - [x] Candidate edge checked without mutating remote state.
 - [x] No paid deployment initiated before approval.
-- [ ] GitHub repository created, secret-scanned, and pushed after approval.
+- [x] GitHub repository selected, secret-scanned, and draft PR pushed after approval.
+- [ ] Draft PR reviewed and merged.
 - [ ] Production target provisioned and hardened after approval.
 - [ ] DNS/TLS and public-domain cutover verified after approval.
 - [ ] 10k concurrency ramp and soak evidence captured.
@@ -89,4 +93,4 @@ The board remains `PLANNING` until the unchecked gates have receipts. Checking a
 
 ## Next action
 
-Finish the local/Tailscale rehearsal and GitHub release checklist. Only after explicit approval should we create the GitHub remote or provision paid production infrastructure.
+Review and merge draft PR #21. Only after merge and explicit deployment approval should we provision paid production infrastructure or change the public-domain state.

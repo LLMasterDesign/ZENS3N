@@ -1,12 +1,12 @@
 # GitHub release gate
 
-Status: **publishing · draft PR pending**
+Status: **draft PR open · review and merge required**
 
-This is the release gate between the verified local/Tailscale surface and any future deployment. The intended GitHub repository root is the canonical site folder:
+This is the release gate between the verified local/Tailscale surface and any future deployment. ZENSEN is being released as a scoped change inside the existing monorepo:
 
-`ZENSEN.CMD/!WORKDESK/Websites/zensensystems`
+`LLMasterDesign/ZENS3N`
 
-Do not push the parent `!WORKDESK`, the Atlas control plane, credentials, logs, or unrelated surfaces into the site repository.
+The site lives at `!WORKDESK/Websites/zensensystems`; the Atlas board and evidence pack are intentionally included at their matching `!WORKDESK` paths. Do not add credentials, logs, or unrelated surfaces.
 
 ## Before approval
 
@@ -19,25 +19,23 @@ Do not push the parent `!WORKDESK`, the Atlas control plane, credentials, logs, 
 - [x] Owner explicitly approved the first push to `LLMasterDesign/ZENS3N`.
 - [x] `gh auth status` passes for `LLMasterDesign`.
 
-## First approved push
+## Published branch
 
-Run these only after approval, from the canonical site folder:
+The approved branch has been pushed and the draft PR is open:
 
-```bash
-git init -b main
-git add README.md .gitignore index.html healthz zen-fonts.css spec.css brand fonts spec
-git diff --cached --check
-git status --short
-git commit -m "Release ZENSEN Systems company page"
-git remote add origin <approved-github-repository-url>
-git push -u origin main
+```text
+Repository: https://github.com/LLMasterDesign/ZENS3N
+Branch: agent/zensen-systems-site
+Commit: 45be2c1dbacba337d5ba29c950eaae7cce1b5de1
+Draft PR: https://github.com/LLMasterDesign/ZENS3N/pull/21
 ```
 
-Before `git add`, scan the staged set for secrets and confirm the exact entry hash. Do not add `.env`, private keys, SSH material, logs, test captures, or unrelated Atlas files.
+The staged set was whitespace-checked, secret-shaped paths were scanned, internal links/assets were checked, and the exact entry hash was confirmed before the push.
 
 ## After push
 
-- Record the repository URL, commit SHA, and tag in `LAUNCH-BASELINE.md`.
+- Review and merge PR #21 only after the scoped files are accepted.
+- Record the merge SHA and tag in `LAUNCH-BASELINE.md` after merge.
 - Re-run local/Tailscale hash and health verification from the pushed commit.
 - Decide whether GitHub Pages, another static host, or an approved VPS is the next deployment target.
 - Keep `noindex, nofollow` until the public domain cutover is deliberate.
