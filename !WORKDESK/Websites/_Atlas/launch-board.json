@@ -34,6 +34,13 @@
   "provider_decision_merge": "aff448b0ec931b0697675e3196f1756775f6dbff",
   "recovery_receipt_pr": "https://github.com/LLMasterDesign/ZENS3N/pull/27",
   "recovery_receipt_merge": "290b0e21a0d792bc5f8312419df9e4c9fa912bd2",
+  "load_boundary": {
+    "receipt": "!WORKDESK/Projects/Atlas/sites/zensen/LOAD-STRESS-CEILING.md",
+    "status": "performance-target-exceeded-at-bounded-ceiling",
+    "local_p99_ms": 2055.23,
+    "tailscale_p99_ms": 2092.65,
+    "baseline_p99_target_ms": 1500
+  },
   "updater": {
     "command": "node !WORKDESK/Projects/Atlas/sites/zensen/deploy/update-launch-board.mjs",
     "evidence_required_for_complete": true,
@@ -105,7 +112,8 @@
       "label": "Bounded repeatable load harness passes local and Tailscale preproduction targets.",
       "evidence": "!WORKDESK/Projects/Atlas/sites/zensen/LOAD-REHEARSAL.md",
       "last_verified": "2026-08-02",
-      "evidence_note": "Bounded local and Tailscale rehearsal receipt; not a 10k capacity claim."
+      "evidence_note": "Bounded local and Tailscale correctness receipt; stress ceiling exceeded the initial p99 target, and this is not a 10k capacity claim.",
+      "performance_boundary": "!WORKDESK/Projects/Atlas/sites/zensen/LOAD-STRESS-CEILING.md"
     },
     {
       "id": "scale-2",
