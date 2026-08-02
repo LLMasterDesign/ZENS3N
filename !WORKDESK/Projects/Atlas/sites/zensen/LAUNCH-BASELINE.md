@@ -47,7 +47,7 @@ The workspace references `slate-rt.billfish-sirius.ts.net` as a public HTTPS edg
 - Known-good rollback file: `_versions/index.v1.0.hero-locked.⧗-26.366.html`
 - Rollback SHA-256: `b4de78a56ade73fbdc3206f175b7fbe614e46760c6054527b2aaea382b0b65ae`
 - Release branch: `agent/zensen-systems-site`
-- Release commit: `45be2c1dbacba337d5ba29c950eaae7cce1b5de1`
+- Release commit: `f2450256d6fe81802df85a524e50e99373627c80`
 - Draft PR: `https://github.com/LLMasterDesign/ZENS3N/pull/21`
 
 The local origin and Tailscale ingress both returned HTTP 200 and `58,144` bytes during this baseline capture. Their response body hash matched the canonical entry hash above.
