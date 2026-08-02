@@ -10,6 +10,13 @@
   "merged_commit": "1a953527eee812c0cd73021c33e85634e5337c0f",
   "atlas_receipt_pr": "https://github.com/LLMasterDesign/ZENS3N/pull/22",
   "atlas_receipt_commit": "509e72909e7b30b6f206c5f082f1916790c3a31d",
+  "provider_decision": {
+    "receipt": "../../Projects/Atlas/sites/zensen/PROVIDER-DECISION.md",
+    "staging": {"active": "tailscale-local", "candidate": "railway", "state": "not-activated"},
+    "production": {"candidate": "hetzner-cloud", "state": "not-approved"},
+    "monetization": {"candidate": "stripe-payment-links", "state": "offer-not-defined"},
+    "data": {"candidate": "supabase", "state": "not-needed-for-static-site"}
+  },
   "tasks": [
     {"id": "baseline-1", "chapter": "01", "state": "complete", "label": "Canonical source, entry file, and rollback artifact identified."},
     {"id": "baseline-2", "chapter": "01", "state": "complete", "label": "Baseline SLOs, owner, environments, and approval gates recorded."},

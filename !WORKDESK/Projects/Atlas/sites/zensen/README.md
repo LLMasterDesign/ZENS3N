@@ -7,6 +7,7 @@ Open the committed [Atlas launch board](../../../../Websites/_Atlas/launch-board
 - `LOOM.html` — local canonical map and visual checklist for this surface.
 - `../../../../Websites/_Atlas/launch-board.json` — committed Atlas source of truth for this release.
 - `SOURCE.md` — the one true source folder, serving command, assets, and deployment ownership.
+- `PROVIDER-DECISION.md` — the approved/deferred provider boundary and activation triggers.
 - `SECTIONS.md` — semantic map. Each section has an ID, purpose, files, dependencies, and acceptance test.
 - `SEO.md` — search-engine launch requirements.
 - `AEO.md` — answer-engine/AI readability requirements.
