@@ -1,11 +1,11 @@
 # Site docs control system
 
-Open [`ATLAS.html`](../../ATLAS.html) to see the ecosystem map, then open [`LOOM.html`](LOOM.html) for the ZENSEN launch checklist. Checkbox state is local to that browser.
+Open the committed [Atlas launch board](../../../../Websites/_Atlas/launch-board.json) to see machine-readable readiness, then open [`LOOM.html`](LOOM.html) for the ZENSEN launch checklist. Checkbox state is local to that browser.
 
 ## Folder map
 
 - `LOOM.html` — local canonical map and visual checklist for this surface.
-- `../../` — global ATLAS control plane, universal parts, tasks, and checklists.
+- `../../../../Websites/_Atlas/launch-board.json` — committed Atlas source of truth for this release.
 - `SOURCE.md` — the one true source folder, serving command, assets, and deployment ownership.
 - `SECTIONS.md` — semantic map. Each section has an ID, purpose, files, dependencies, and acceptance test.
 - `SEO.md` — search-engine launch requirements.

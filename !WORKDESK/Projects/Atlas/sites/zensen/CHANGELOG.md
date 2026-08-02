@@ -2,6 +2,10 @@
 
 ## 2026-08-02
 
+- Made the committed ZENSEN Loom self-contained for the scoped monorepo release; its Atlas links now resolve to the included launch board instead of omitted workspace-only files.
+
+## 2026-08-02
+
 - Installed and authenticated the GitHub CLI for `LLMasterDesign`.
 - Published the scoped ZENSEN Systems site, Atlas launch board, and release evidence to branch `agent/zensen-systems-site` at commit `45be2c1`.
 - Opened draft PR [#21](https://github.com/LLMasterDesign/ZENS3N/pull/21); merge and deployment remain approval-gated.
