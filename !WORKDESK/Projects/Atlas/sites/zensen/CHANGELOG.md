@@ -6,6 +6,7 @@
 - Passed HTML validation for the company page and three product specs; added an explicit menu-button type and recorded responsive/accessibility evidence. Release commit `f2450256d6fe81802df85a524e50e99373627c80`; current entry receipt is SHA-256 `16f519789d48a7bb103ee25be44228cba06e1df0958ac8724bd6635e6cacfaa0`.
 - Completed rendered review at 1440px and 390px, including the mobile menu and all three spec pages; recorded the receipt in `VISUAL-REVIEW.md`.
 - Added the safety-bounded repeatable load harness and recorded 500 local plus 100 Tailscale successful requests in `LOAD-REHEARSAL.md`; the armed 10k scenario remains a separate gate.
+- Hardened the armed 10k scenario with explicit `APPROVED_TARGET=yes` and `APPROVAL_REF` requirements in addition to `ARMED=yes`; no capacity claim was made.
 
 ## 2026-08-02
 

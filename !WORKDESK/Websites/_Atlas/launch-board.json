@@ -15,7 +15,7 @@
     {"id": "release-1", "chapter": "03", "state": "complete", "label": "README, .gitignore, release pack, and secret scan prepared."},
     {"id": "release-2", "chapter": "03", "state": "complete", "label": "Draft PR #21 is open in LLMasterDesign/ZENS3N for review and merge."},
     {"id": "scale-1", "chapter": "04", "state": "complete", "label": "Bounded repeatable load harness passes local and Tailscale preproduction targets."},
-    {"id": "scale-2", "chapter": "04", "state": "pending", "label": "Prove 10,000 concurrent sessions with ramp and soak evidence."},
+    {"id": "scale-2", "chapter": "04", "state": "pending", "label": "Run the armed 10k ramp/soak only with ARMED=yes, APPROVED_TARGET=yes, and an approval receipt; evidence remains open."},
     {"id": "battle-1", "chapter": "05", "state": "pending", "label": "Run soak, spike, dependency-failure, deploy, and restart tests."},
     {"id": "battle-2", "chapter": "05", "state": "pending", "label": "Verify restore, alert delivery, incident runbook, and rollback timing."},
     {"id": "live-1", "chapter": "06", "state": "pending", "label": "Enable monitoring, security checks, rate limits, and cost watch."},

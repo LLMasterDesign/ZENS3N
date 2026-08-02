@@ -80,7 +80,9 @@ The 10k test is intentionally armed. Run it only against an owned staging or pro
 ```bash
 export TARGET='https://your-domain.example/index.html'
 export ARMED=yes
+export APPROVED_TARGET=yes
+export APPROVAL_REF='record-the-approved-test-window-here'
 k6 run deploy/load/10k.js
 ```
 
-Do not claim 10,000-user readiness until ramp, soak, spike, error-rate, latency, recovery, and rollback evidence are attached to the baseline.
+The run requires both explicit gates (`ARMED=yes` and `APPROVED_TARGET=yes`) plus an `APPROVAL_REF` receipt. Do not claim 10,000-user readiness until ramp, soak, spike, error-rate, latency, recovery, and rollback evidence are attached to the baseline.

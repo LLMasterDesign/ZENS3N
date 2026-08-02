@@ -4,6 +4,14 @@ import { check, sleep } from 'k6';
 const target = __ENV.TARGET;
 if (!target) throw new Error('Set TARGET to an owned ZENSEN URL before running the test.');
 if (__ENV.ARMED !== 'yes') throw new Error('Capacity test is safety-armed. Set ARMED=yes during the approved test window.');
+if (__ENV.APPROVED_TARGET !== 'yes') throw new Error('Set APPROVED_TARGET=yes only after the target and test window are approved.');
+if (!__ENV.APPROVAL_REF) throw new Error('Set APPROVAL_REF to the launch decision, ticket, or incident record for this run.');
+try {
+  const targetUrl = new URL(target);
+  if (!['http:', 'https:'].includes(targetUrl.protocol)) throw new Error('unsupported protocol');
+} catch (error) {
+  throw new Error(`TARGET must be a valid HTTP(S) URL: ${error.message}`);
+}
 
 export const options = {
   stages: [
