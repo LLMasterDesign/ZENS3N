@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -20,11 +20,11 @@
 </head>
 <body>
 <main>
-  <div class="top" data-atlas-part="header" data-atlas-version="1.0" aria-label="ATLAS universal header"><div><div class="label">LOOM / local canonical map</div><h1>Launch checklist</h1><p>A plain-English map of what is ready, what is missing, and where to work next. Current evidence: mapped, AEO identity complete, staging ingress verified. Checkboxes are saved in this browser.</p></div><div class="site"><strong>ZENSEN</strong><code>/zensen/ · canonical: !WORKDESK/Websites/zensensystems</code></div></div>
-  <div class="toolbar"><button id="all">Show all</button><button id="open">Show unfinished</button><button id="reset">Reset checks</button><button onclick="window.print()">Print</button></div>
+  <div class="top" data-atlas-part="header" data-atlas-version="1.0"><div><div class="label">LOOM / local canonical map</div><h1>Launch checklist</h1><p>A plain-English map of what is ready, what is missing, and where to work next. Current evidence: mapped, AEO identity complete, staging ingress verified. Checkboxes are saved in this browser.</p></div><div class="site"><strong>ZENSEN</strong><code>/zensen/ · canonical: !WORKDESK/Websites/zensensystems</code></div></div>
+  <div class="toolbar"><button type="button" id="all">Show all</button><button type="button" id="open">Show unfinished</button><button type="button" id="reset">Reset checks</button><button type="button" onclick="window.print()">Print</button></div>
   <div class="legend"><span><i class="dot good"></i>ready when all checks pass</span><span><i class="dot"></i>needs a decision or test</span><span><i class="dot bad"></i>currently blocks launch</span></div>
   <div class="grid" id="cards">
-    <section data-state="ready"><span class="label">ready</span><h2>1. Source & ownership</h2><p>Know exactly which folder is the real site. Every future change starts here.</p><ul>
+    <section data-state="ready"><span class="label">ready</span><h2>1. Source &amp; ownership</h2><p>Know exactly which folder is the real site. Every future change starts here.</p><ul>
       <li><input type="checkbox"><span>Write down the canonical source folder.<small>See <a href="SOURCE.md">SOURCE.md</a>.</small></span></li>
       <li><input type="checkbox"><span>Keep one production source of truth, not copied HTML files.</span></li>
       <li><input type="checkbox"><span>Record the build/serve command and required assets.</span></li>
@@ -47,7 +47,7 @@
       <li><input type="checkbox"><span>Add an Organization/WebSite JSON-LD block only for facts shown on-page.</span></li>
       <li><input type="checkbox"><span>Publish an author/about/contact source of truth.</span></li>
     </ul></section>
-    <section data-state="blocked"><span class="label">security</span><h2>5. 2FA & access</h2><p>Protect admin actions separately from public viewing. Do not put secrets in HTML.</p><ul>
+    <section data-state="blocked"><span class="label">security</span><h2>5. 2FA &amp; access</h2><p>Protect admin actions separately from public viewing. Do not put secrets in HTML.</p><ul>
       <li><input type="checkbox"><span>Decide what needs authentication: admin, dashboard, or all pages.<small>See <a href="SECURITY-2FA.md">SECURITY-2FA.md</a>.</small></span></li>
       <li><input type="checkbox"><span>Use an identity provider with passkeys/TOTP and recovery codes.</span></li>
       <li><input type="checkbox"><span>Keep sessions, secrets, and authorization server-side.</span></li>
@@ -61,7 +61,7 @@
     </ul></section>
   </div>
   <section class="wide"><span class="label">operating rule</span><h2>Do not break the whole page</h2><p>Before editing, identify the section ID. Edit only that section or its named asset. After editing, check navigation, mobile layout, console errors, forms, SEO metadata, and the deployment preview. If a change crosses sections, document the dependency first.</p><p><a href="README.md">Open the docs map →</a> · <a href="../../../../Websites/_Atlas/launch-board.json">Open the Atlas launch board →</a></p></section>
-  <footer data-atlas-part="footer" data-atlas-version="1.0">Last reviewed: 2026-08-02 · Deployment status: staging verified · <a href="LAUNCH-BASELINE.md">Open launch baseline</a> · <a href="../../../../Websites/_Atlas/launch-board.json">Atlas board</a> · This is a local planning tool, not a security system.</footer>
+  <footer data-atlas-part="footer" data-atlas-version="1.0">Last reviewed: 2026-08-02 · Deployment status: staging verified · <a href="LAUNCH-BASELINE.md">Open launch baseline</a> · <a href="PROVIDER-DECISION.md">Provider decision</a> · <a href="../../../../Websites/_Atlas/launch-board.json">Atlas board</a> · This is a local planning tool, not a security system.</footer>
 </main>
 <script>
   const key='loom:zensen'; const boxes=[...document.querySelectorAll('input[type=checkbox]')];
