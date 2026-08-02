@@ -19,7 +19,7 @@ archive="$(mktemp --suffix=.tar.gz zensen-release.XXXXXX)"
 trap 'rm -f -- "$archive"' EXIT
 
 tar -czf "$archive" -C "$source_dir" \
-  index.html healthz spec.css zen-fonts.css brand fonts spec
+  index.html 404.html healthz spec.css zen-fonts.css brand fonts spec
 
 qroot="$(printf '%q' "$remote_root")"
 qrelease="$(printf '%q' "$release_id")"

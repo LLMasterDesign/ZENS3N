@@ -28,6 +28,7 @@ Use [GITHUB-RELEASE.md](../GITHUB-RELEASE.md) to prepare and inspect the reposit
 - `current` is an atomic symlink switch; old releases remain available for rollback.
 - The public page is static HTML/CSS/assets, with no secrets or application runtime on the public surface.
 - `/healthz` returns `200 ok` and is used by monitoring and load checks.
+- Unknown paths resolve through the themed `404.html` response; the Nginx recipe emits `nosniff`, frame, referrer, and permissions-policy headers.
 
 ## VPS foundation gate
 

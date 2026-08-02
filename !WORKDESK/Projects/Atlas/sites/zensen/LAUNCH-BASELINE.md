@@ -98,6 +98,8 @@ The board remains `PLANNING` until the unchecked gates have receipts. Checking a
 - Armed 10k load test: `deploy/load/10k.js`
 - Bounded load rehearsal: `LOAD-REHEARSAL.md` and `deploy/load/bounded-smoke.mjs`
 - Local deployment rehearsal: `DEPLOYMENT-REHEARSAL.md` and `deploy/rehearse-local.sh`
+- Security/404 hardening: `404.html` and `deploy/nginx/zensen.conf`
+- Static security review: `SECURITY-REVIEW.md`
 - Rendered visual receipt: `VISUAL-REVIEW.md`
 - GitHub release gate: `GITHUB-RELEASE.md`
 - Live Atlas board: `Websites/_Atlas/launch-board.json`

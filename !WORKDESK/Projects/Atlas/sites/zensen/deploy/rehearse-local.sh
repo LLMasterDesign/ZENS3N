@@ -23,7 +23,7 @@ cleanup() {
 trap cleanup EXIT
 
 mkdir -p "$tmp_root/releases/baseline-$release_id" "$tmp_root/releases/candidate-$release_id"
-tar -czf "$tmp_root/release.tar.gz" -C "$source_dir" index.html healthz spec.css zen-fonts.css brand fonts spec
+tar -czf "$tmp_root/release.tar.gz" -C "$source_dir" index.html 404.html healthz spec.css zen-fonts.css brand fonts spec
 tar -xzf "$tmp_root/release.tar.gz" -C "$tmp_root/releases/baseline-$release_id"
 tar -xzf "$tmp_root/release.tar.gz" -C "$tmp_root/releases/candidate-$release_id"
 printf 'candidate\n' > "$tmp_root/releases/candidate-$release_id/.atlas-rehearsal-marker"

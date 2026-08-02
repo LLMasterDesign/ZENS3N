@@ -8,6 +8,8 @@
 - Added the safety-bounded repeatable load harness and recorded 500 local plus 100 Tailscale successful requests in `LOAD-REHEARSAL.md`; the armed 10k scenario remains a separate gate.
 - Hardened the armed 10k scenario with explicit `APPROVED_TARGET=yes` and `APPROVAL_REF` requirements in addition to `ARMED=yes`; no capacity claim was made.
 - Added a loopback deployment rehearsal covering immutable archive, atomic switch, rollback, and restart; real VPS and battle-test evidence remain open.
+- Added the themed `404.html` and baseline Nginx security headers; monitoring, rate limits, cost watch, and public cutover remain open.
+- Recorded `SECURITY-REVIEW.md`: the bundle is secret-clean and static-only; live Nginx/TLS/monitoring and authorized edge review remain target-gated.
 
 ## 2026-08-02
 
