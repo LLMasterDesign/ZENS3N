@@ -10,6 +10,7 @@
 - Added a loopback deployment rehearsal covering immutable archive, atomic switch, rollback, and restart; real VPS and battle-test evidence remain open.
 - Added the themed `404.html` and baseline Nginx security headers; monitoring, rate limits, cost watch, and public cutover remain open.
 - Recorded `SECURITY-REVIEW.md`: the bundle is secret-clean and static-only; live Nginx/TLS/monitoring and authorized edge review remain target-gated.
+- Extended `verify-release.sh` to require a real unknown-route `404` and optionally enforce the Nginx security headers with `ZENSEN_REQUIRE_SECURITY_HEADERS=yes`.
 
 ## 2026-08-02
 

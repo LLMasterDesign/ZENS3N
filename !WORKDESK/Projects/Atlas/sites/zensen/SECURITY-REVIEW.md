@@ -12,6 +12,7 @@ This is a preproduction review of the static bundle and deployment recipe. It is
 - [x] `404.html` is themed, carries `noindex, nofollow`, and is included in the release archive.
 - [x] Nginx recipe declares `nosniff`, `DENY` framing, strict-origin referrer policy, and disabled camera/microphone/geolocation permissions.
 - [x] `/healthz` is no-store and the 10k scenario requires explicit target approval plus an approval receipt.
+- [x] `verify-release.sh` checks the unknown-route `404` and can require all four configured security headers on the approved Nginx target.
 
 ## Still open
 

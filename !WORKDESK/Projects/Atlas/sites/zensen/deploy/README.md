@@ -13,7 +13,7 @@ export ZENSEN_EXPECTED_HASH='<canonical-index-sha256>'
 bash deploy/verify-release.sh
 ```
 
-This proves the current source and ingress path. It does not prove production capacity.
+The verifier checks the entry hash, `/healthz`, and a real unknown-route `404`. On the approved Nginx target, add `export ZENSEN_REQUIRE_SECURITY_HEADERS=yes` to require the configured browser-security headers. This proves the current source and ingress path; it does not prove production capacity.
 
 ## Phase B — GitHub release
 
