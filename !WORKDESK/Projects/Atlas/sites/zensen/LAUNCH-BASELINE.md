@@ -50,6 +50,8 @@ The workspace references `slate-rt.billfish-sirius.ts.net` as a public HTTPS edg
 - Release commit: `f2450256d6fe81802df85a524e50e99373627c80`
 - Merge commit: `1a953527eee812c0cd73021c33e85634e5337c0f`
 - PR: `https://github.com/LLMasterDesign/ZENS3N/pull/21`
+- Atlas receipt PR: `https://github.com/LLMasterDesign/ZENS3N/pull/22`
+- Atlas receipt merge: `509e72909e7b30b6f206c5f082f1916790c3a31d`
 
 The local origin and Tailscale ingress both returned HTTP 200 and `58,144` bytes during this baseline capture. Their response body hash matched the canonical entry hash above.
 

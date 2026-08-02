@@ -29,6 +29,8 @@ Branch: agent/zensen-systems-site
 Head commit: cb59658a9e11e3198315b2b55f02dd2c0641d81e
 Merge commit: 1a953527eee812c0cd73021c33e85634e5337c0f
 PR: https://github.com/LLMasterDesign/ZENS3N/pull/21
+Atlas receipt PR: https://github.com/LLMasterDesign/ZENS3N/pull/22
+Atlas receipt merge: 509e72909e7b30b6f206c5f082f1916790c3a31d
 ```
 
 The staged set was whitespace-checked, secret-shaped paths were scanned, internal links/assets were checked, and the exact entry hash was confirmed before the push.
