@@ -1,6 +1,6 @@
 # GitHub release gate
 
-Status: **draft PR open · review and merge required**
+Status: **merged to main · deployment gate open**
 
 This is the release gate between the verified local/Tailscale surface and any future deployment. ZENSEN is being released as a scoped change inside the existing monorepo:
 
@@ -19,23 +19,23 @@ The site lives at `!WORKDESK/Websites/zensensystems`; the Atlas board and eviden
 - [x] Owner explicitly approved the first push to `LLMasterDesign/ZENS3N`.
 - [x] `gh auth status` passes for `LLMasterDesign`.
 
-## Published branch
+## Merged release
 
-The approved branch has been pushed and the draft PR is open:
+The approved branch was merged into `main`:
 
 ```text
 Repository: https://github.com/LLMasterDesign/ZENS3N
 Branch: agent/zensen-systems-site
-Commit: f2450256d6fe81802df85a524e50e99373627c80
-Draft PR: https://github.com/LLMasterDesign/ZENS3N/pull/21
+Head commit: cb59658a9e11e3198315b2b55f02dd2c0641d81e
+Merge commit: 1a953527eee812c0cd73021c33e85634e5337c0f
+PR: https://github.com/LLMasterDesign/ZENS3N/pull/21
 ```
 
 The staged set was whitespace-checked, secret-shaped paths were scanned, internal links/assets were checked, and the exact entry hash was confirmed before the push.
 
-## After push
+## After merge
 
-- Review and merge PR #21 only after the scoped files are accepted.
-- Record the merge SHA and tag in `LAUNCH-BASELINE.md` after merge.
+- Merge SHA is recorded in `LAUNCH-BASELINE.md` and `_Atlas/launch-board.json`.
 - Re-run local/Tailscale hash and health verification from the pushed commit.
 - Decide whether GitHub Pages, another static host, or an approved VPS is the next deployment target.
 - Keep `noindex, nofollow` until the public domain cutover is deliberate.

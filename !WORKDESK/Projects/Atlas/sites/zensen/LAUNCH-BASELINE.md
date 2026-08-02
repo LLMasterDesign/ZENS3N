@@ -1,6 +1,6 @@
 # ZENSEN launch baseline
 
-Status: **Tailscale preproduction verified · GitHub and production gates open**
+Status: **Tailscale preproduction verified · GitHub merged · production gates open**
 Captured: 2026-08-01
 Owner: **ZENSEN Systems / WrkDsk**
 
@@ -30,7 +30,7 @@ These targets apply to the public company page and its critical local assets fir
 | Local verification | `http://127.0.0.1:7120/` | HTTP 200; entry hash verified |
 | Staging ingress | `https://corbato-en0.billfish-sirius.ts.net/zensen/` | HTTP 200; entry hash verified |
 | Production VPS | Not provisioned; approval-gated | Future gate |
-| GitHub repository | `LLMasterDesign/ZENS3N`, draft PR #21 open | Review/merge gate |
+| GitHub repository | `LLMasterDesign/ZENS3N`, PR #21 merged to `main` | Deployment gate |
 | Public domain | Existing coming-soon surface | Future gate |
 
 No duplicate ZENSEN source may be introduced. The quarantined `Websites/zensensystems.com` folder is not an active surface.
@@ -48,7 +48,8 @@ The workspace references `slate-rt.billfish-sirius.ts.net` as a public HTTPS edg
 - Rollback SHA-256: `b4de78a56ade73fbdc3206f175b7fbe614e46760c6054527b2aaea382b0b65ae`
 - Release branch: `agent/zensen-systems-site`
 - Release commit: `f2450256d6fe81802df85a524e50e99373627c80`
-- Draft PR: `https://github.com/LLMasterDesign/ZENS3N/pull/21`
+- Merge commit: `1a953527eee812c0cd73021c33e85634e5337c0f`
+- PR: `https://github.com/LLMasterDesign/ZENS3N/pull/21`
 
 The local origin and Tailscale ingress both returned HTTP 200 and `58,144` bytes during this baseline capture. Their response body hash matched the canonical entry hash above.
 
@@ -58,7 +59,7 @@ The local origin and Tailscale ingress both returned HTTP 200 and `58,144` bytes
 - Responsive contract: viewport metadata, mobile media rules, reduced-motion rules, and keyboard focus styles are present on the product surfaces.
 - Accessibility structure: every product page has one `h1`; the only image is explicitly decorative with `alt=""`; the menu button has `type="button"` and an accessible label.
 - Internal routes/assets: all relative links and asset references resolve from the canonical source.
-- Limitation: no browser runtime is installed on this host, so rendered visual/pixel review remains open.
+- Rendered visual review: captured with isolated headless Chromium at desktop/mobile widths and recorded in `VISUAL-REVIEW.md`.
 
 ## Bounded Tailscale rehearsal receipt
 
@@ -80,14 +81,13 @@ The probe used `curl` only because `k6`, `wrk`, `ab`, and `hey` are not installe
 - [x] Shared `/healthz` contract verified on local and staging ingress.
 - [x] Candidate edge checked without mutating remote state.
 - [x] No paid deployment initiated before approval.
-- [x] GitHub repository selected, secret-scanned, and draft PR pushed after approval.
-- [ ] Draft PR reviewed and merged.
+- [x] GitHub repository selected, secret-scanned, pushed, reviewed, and merged to `main`.
 - [ ] Production target provisioned and hardened after approval.
 - [ ] DNS/TLS and public-domain cutover verified after approval.
 - [ ] 10k concurrency ramp and soak evidence captured.
 - [ ] Restore, rollback, and incident drills timed.
 
-The board remains `PLANNING` until the unchecked gates have receipts. Checking a box in the Loom records local operator progress; it does not replace the evidence listed here.
+The board remains `GITHUB MERGED` until the unchecked deployment and capacity gates have receipts. Checking a box in the Loom records local operator progress; it does not replace the evidence listed here.
 
 ## Execution pack
 
@@ -107,4 +107,4 @@ The board remains `PLANNING` until the unchecked gates have receipts. Checking a
 
 ## Next action
 
-Review and merge draft PR #21. Only after merge and explicit deployment approval should we provision paid production infrastructure or change the public-domain state.
+Select and approve the production target. Only after explicit deployment approval should we provision infrastructure or change the public-domain state.
