@@ -12,6 +12,20 @@ Reference: [Stripe Payment Links API](https://docs.stripe.com/api/payment-link).
 
 `Websites/zensensystems/spec/Product.html` currently describes one-time ranges of `$99–$499` and `$499–$999`. Those ranges are market/product direction, not a publishable offer. Atlas must not create a live checkout link from a range or guess the SKU.
 
+## Candidate for owner review — not an active offer
+
+The first bounded test candidate is derived from the existing product table; it is a proposal, not a decision or payment instruction:
+
+| Field | Candidate | Confirmation still required |
+| --- | --- | --- |
+| Working name | **ZENSEN Ontological Module — Founding Pilot** | Owner may accept or rename it. |
+| Price | **$99 USD, one-time** | Owner must approve the exact amount and currency. |
+| Promise | One bounded ontological module for one governed-agent experiment, with setup notes and the receipt contract needed to run it. | Exact artifact, scope, and acceptance criteria must be written. |
+| Delivery | Founder/manual delivery after a successful test payment. | File format, delivery timeline, and fulfillment owner are not yet defined. |
+| Support | `hello@zensensystems.com` | Owner must confirm support coverage and response expectation. |
+
+This candidate uses the published pricing table's lower bound to minimize the first validation commitment. It does not establish that the module is packaged, downloadable, refundable, taxable, or ready for sale.
+
 ## Offer contract required before test checkout
 
 - [ ] Exact offer name and one-sentence promise.
