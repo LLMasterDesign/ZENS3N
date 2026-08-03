@@ -29,7 +29,7 @@ Status: **identified and verified on en0**
 
 ## Serve and route
 
-- Serve command: `cd /home/abzu/!LAUNCHPAD/ZENSEN.CMD/!WORKDESK/Websites/zensensystems && python3 -m http.server 7120 --bind 0.0.0.0`
+- Serve command: `cd /home/abzu/!LAUNCHPAD/ZENSEN.CMD/!WORKDESK/Websites/zensensystems && python3 ../../Projects/Atlas/sites/zensen/deploy/serve-local.py --directory . --host 0.0.0.0 --port 7120`
 - Local origin: `http://127.0.0.1:7120`
 - Tailscale Serve route: `/zensen` → `http://127.0.0.1:7120`
 - Current URL: `https://corbato-en0.billfish-sirius.ts.net/zensen/`

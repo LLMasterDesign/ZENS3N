@@ -55,10 +55,12 @@
     }
   },
   "load_boundary": {
-    "receipt": "!WORKDESK/Projects/Atlas/sites/zensen/LOAD-STRESS-CEILING.md",
-    "status": "performance-target-exceeded-at-bounded-ceiling",
-    "local_p99_ms": 2055.23,
-    "tailscale_p99_ms": 2092.65,
+    "receipt": "!WORKDESK/Projects/Atlas/sites/zensen/SERVING-PERFORMANCE-REVIEW.md",
+    "historical_receipt": "!WORKDESK/Projects/Atlas/sites/zensen/LOAD-STRESS-CEILING.md",
+    "serving_path": "!WORKDESK/Projects/Atlas/sites/zensen/deploy/serve-local.py",
+    "status": "threaded-tailscale-target-met-local-target-exceeded",
+    "local_p99_ms": 1888.26,
+    "tailscale_p99_ms": 109.33,
     "baseline_p99_target_ms": 1500
   },
   "load_boundary_pr": "https://github.com/LLMasterDesign/ZENS3N/pull/29",

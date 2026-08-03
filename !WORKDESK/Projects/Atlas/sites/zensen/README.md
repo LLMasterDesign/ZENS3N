@@ -11,6 +11,7 @@ Open the committed [Atlas launch board](../../../../Websites/_Atlas/launch-board
 - `RAILWAY-STAGING-READINESS.md` — hosted-staging checklist and approval-gated receipt fields.
 - `STRIPE-OFFER-READINESS.md` — first-offer contract and test-mode checkout boundary.
 - `BATTLE-REHEARSAL.md` — bounded local soak, spike, failure, rollback, and restart receipt.
+- `SERVING-PERFORMANCE-REVIEW.md` — threaded serving-path comparison and current p99 boundary.
 - `deploy/update-launch-board.mjs` — the evidence-gated command for updating task state.
 - `PUBLIC-DOMAIN-REVIEW.md` — the current public-domain receipt and cutover boundary.
 - `RECOVERY-REHEARSAL.md` — the local restore receipt and operational coverage boundary.
