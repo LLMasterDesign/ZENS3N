@@ -2,6 +2,8 @@
 
 ## 2026-08-03
 
+- Added machine-tracked `railway-staging` and `stripe-test-offer` provider tracks with readiness receipts; activation remains approval-gated.
+- Extended `deploy/update-launch-board.mjs` to update provider tracks only with evidence, and to require an approval reference plus URL for activation states.
 - Recorded the provider decision boundary: Tailscale remains active staging; Railway and Hetzner are deferred candidates, Stripe is the preferred first monetization path, and no external service was activated.
 - Added `deploy/update-launch-board.mjs`, an evidence-gated Atlas updater that requires approval references for the 10k and public-cutover tasks.
 - Extended the updater to record partial evidence on pending tasks without promoting their state.

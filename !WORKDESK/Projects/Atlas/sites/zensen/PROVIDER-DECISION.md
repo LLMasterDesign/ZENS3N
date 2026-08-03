@@ -1,6 +1,6 @@
 # ZENSEN provider decision receipt
 
-Captured: **2026-08-02**  
+Captured: **2026-08-03**
 Status: **No external provider activated**  
 Owner: **ZENSEN Systems / WrkDsk**
 
@@ -39,5 +39,23 @@ Choose one of these bounded moves:
 4. Define the first paid ZENSEN offer and create a Stripe test-mode payment flow.
 
 Until one is approved, Atlas correctly reports the deployment and monetization gates as open.
+
+## Machine-tracked readiness
+
+The board now keeps two provider tracks separate from the launch tasks:
+
+- `railway-staging` — hosted public staging candidate; state is `ready-for-approval`.
+- `stripe-test-offer` — first test-mode paid offer; state remains `offer-not-defined`.
+
+Their receipts are [Railway staging readiness](RAILWAY-STAGING-READINESS.md) and [Stripe offer readiness](STRIPE-OFFER-READINESS.md). The updater requires a receipt for every state change and requires both an approval reference and URL before an activation state can be recorded:
+
+```bash
+node deploy/update-launch-board.mjs \
+  --provider-track railway-staging \
+  --provider-state ready-for-approval \
+  --evidence RAILWAY-STAGING-READINESS.md
+```
+
+No provider is active because no activation receipt exists.
 
 References: [launch baseline](LAUNCH-BASELINE.md), [public cutover gate](PUBLIC-CUTOVER.md), [release runbook](deploy/README.md).
