@@ -27,6 +27,10 @@ Reference: [Railway static hosting guide](https://docs.railway.com/guides/static
 - [ ] Bounded smoke and latency receipts are attached; the 10k gate remains separate.
 - [ ] Cost/usage watch and rollback procedure are recorded.
 
+## Monorepo deployment boundary
+
+The repository contains more than the website, but Railway is not asked to publish the repository root. Leave the Railway root directory at `/` so the repository-root `railway.toml` is discovered; its start command serves only `!WORKDESK/Websites/zensensystems`. A generated `*.up.railway.app` URL remains staging. Do not add a custom domain or change DNS until the owner approves that specific move.
+
 ## Receipt fields
 
 Keep these blank until the owner approves activation; do not invent a URL or deployment receipt.
