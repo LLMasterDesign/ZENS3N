@@ -20,7 +20,18 @@ Then verify:
 
 ## Railway
 
-Connect this branch to a Railway service and leave the service root at `/`. Railway injects `$PORT`; `railway.toml` starts `server.py` and checks `/healthz`. Generate a Railway domain for staging before adding any custom domain.
+Hosted staging is active at [`https://zens3n-production.up.railway.app`](https://zens3n-production.up.railway.app). The service is connected to `LLMasterDesign/ZENS3N` / `website/zensensystems`, with Railway Root Directory unset/default (`/`). Railway injects `$PORT`; `railway.toml` starts `server.py` and checks `/healthz`.
+
+Verified staging contract:
+
+- `/` — HTTP 200
+- `/healthz` — HTTP 200
+- `/spec/Market.html` and `/spec/Product.html` — HTTP 200
+- unknown route — HTTP 404
+- entry SHA-256 — `16f519789d48a7bb103ee25be44228cba06e1df0958ac8724bd6635e6cacfaa0`
+
+This is a hosted staging surface, not production capacity evidence. Custom DNS,
+VPS deployment, and the 10,000-user gate remain approval-gated.
 
 ## Contents
 
