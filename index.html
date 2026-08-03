@@ -997,6 +997,18 @@
     /* suite roster — plain, unsold */
     .roster { display: grid; gap: 7px; margin-top: 2px; }
 
+    .roster-label {
+      margin-top: 16px;
+      color: var(--lime);
+      font-family: var(--display);
+      font-size: var(--t-10);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .roster-label:first-of-type { margin-top: 2px; }
+
     .roster div {
       display: grid;
       grid-template-columns: 8.5em 1fr;
@@ -1009,6 +1021,57 @@
     .roster div:last-child { border-bottom: 0; padding-bottom: 0; }
     .roster b { font-family: var(--display); font-weight: 600; letter-spacing: 0.04em; }
     .roster span { color: var(--dim); }
+
+    .site-roster {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 7px;
+      margin-top: 7px;
+    }
+
+    .site-roster a {
+      display: grid;
+      gap: 4px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.018);
+      color: var(--white);
+      text-decoration: none;
+      transition: border-color 150ms ease, background 150ms ease, filter 150ms ease;
+    }
+
+    .site-roster a:hover {
+      border-color: var(--brand-soft);
+      background: rgba(238, 122, 12, 0.08);
+      filter: brightness(1.12);
+    }
+
+    .site-roster a:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 2px;
+    }
+
+    .site-roster b {
+      overflow-wrap: anywhere;
+      font-family: var(--display);
+      font-size: var(--t-11);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    .site-roster span {
+      color: var(--dim);
+      font-family: var(--mono);
+      font-size: var(--t-10);
+      letter-spacing: 0.03em;
+    }
+
+    .site-lane .card { border-color: rgba(238, 122, 12, 0.32); }
+
+    @media (max-width: 480px) {
+      .site-roster { grid-template-columns: 1fr; }
+    }
 
     /* ══ FOOTER ══ */
 
@@ -1230,7 +1293,8 @@
     <a href="#warden">WARDEN</a>
     <a href="#ledg3r">LEDG3R</a>
     <a href="#aegen">ÆGen{τ}</a>
-    <a href="#suite">Zensen Suite</a>
+    <a href="#suite">ZENSEN SYSTEM SUITE</a>
+    <a href="#site-zensensystems">Site Nodes</a>
     <hr >
     <a href="spec/Product.html">Product</a>
     <a href="spec/Market.html">Market</a>
@@ -1348,6 +1412,7 @@
           </p>
           <div class="links">
             <a href="https://corbato-en0.billfish-sirius.ts.net/3ox">3ox.ai</a>
+            <a href="#suite">ZENSEN SYSTEM SUITE</a>
           </div>
           <div class="qed">:: <b>∎</b></div>
         </article>
@@ -1433,15 +1498,22 @@
         </article>
       </section>
 
-      <!-- the suite -->
+      <!-- ZENSEN SYSTEM SUITE — the Railway main-view hub -->
       <section id="suite" class="lane">
         <article class="card">
           <svg class="cube" viewBox="0 0 24 24" aria-hidden="true"><path class="f-top" d="M12 3 20 7.5 12 12 4 7.5Z"/><path class="f-left" d="M4 7.5 12 12 12 21 4 16.5Z"/><path class="f-right" d="M20 7.5 12 12 12 21 20 16.5Z"/></svg>
           <div class="card-head">
-            <h2><span class="hb">▛▞⋮⋮</span> Zensen Suite</h2>
-            <div class="lane-tag">The Nodes</div>
+            <h2><span class="hb">▛▞⋮⋮</span> ZENSEN SYSTEM SUITE</h2>
+            <div class="lane-tag">The Hub</div>
           </div>
-          <span class="status quiet">Each in its own lane</span>
+          <div class="rail"><i>〔</i> 6060 <b>·</b> suite edge <b>·</b> linked sites <i>〕</i></div>
+          <span class="status">Hub <b>·</b> Railway staging</span>
+          <p>
+            The Railway main view for the ZENSEN suite. Internal nodes and
+            mapped site surfaces resolve here first, then return to this hub
+            without claiming that card-only domains are live.
+          </p>
+          <div class="roster-label">Internal Nodes</div>
           <div class="roster">
             <div><b>CMD</b><span>—</span></div>
             <div><b>Zendex</b><span>Index</span></div>
@@ -1452,6 +1524,158 @@
             <div><b>Ender-En0</b><span>—</span></div>
             <div><b>TelePromptR</b><span>—</span></div>
           </div>
+          <div class="roster-label">ZENSEN Site Nodes</div>
+          <div class="site-roster" aria-label="ZENSEN site nodes">
+            <a href="#site-zensensystems"><b>zensensystems.com</b><span>6060 · canonical</span></a>
+            <a href="#site-zensen-live"><b>zensen.live</b><span>6061 · card only</span></a>
+            <a href="#site-zensen-solutions"><b>zensen.solutions</b><span>6062 · card only</span></a>
+            <a href="#site-zensen-systems"><b>zensen.systems</b><span>6063 · card only</span></a>
+            <a href="#site-zensen-store"><b>zensen.store</b><span>6064 · card only</span></a>
+            <a href="#site-zensen-enterprises"><b>zensenenterprises.com</b><span>6066 · card only</span></a>
+          </div>
+          <div class="roster-label">3OX Site Nodes :: Separate Band</div>
+          <div class="site-roster" aria-label="3OX site nodes">
+            <a href="#site-3ox-ai"><b>3ox.ai</b><span>6050 · separate band</span></a>
+            <a href="#site-1n3ox-ai"><b>1n3ox.ai</b><span>6051 · separate band</span></a>
+            <a href="#site-3ox-store"><b>3ox.store</b><span>6052 · separate band</span></a>
+          </div>
+          <div class="qed">:: <b>∎</b></div>
+        </article>
+      </section>
+
+      <!-- ZENSEN site nodes — every mapped site returns to the suite hub -->
+      <section id="site-zensensystems" class="lane site-lane">
+        <article class="card">
+          <svg class="cube" viewBox="0 0 24 24" aria-hidden="true"><path class="f-top" d="M12 3 20 7.5 12 12 4 7.5Z"/><path class="f-left" d="M4 7.5 12 12 12 21 4 16.5Z"/><path class="f-right" d="M20 7.5 12 12 12 21 20 16.5Z"/></svg>
+          <div class="card-head">
+            <h2><span class="hb">▛▞⋮⋮</span> zensensystems.com</h2>
+            <div class="lane-tag">Canonical Site</div>
+          </div>
+          <div class="rail"><i>〔</i> 6060 <b>·</b> canonical <b>·</b> suite edge <i>〕</i></div>
+          <span class="status">Active <b>·</b> hosted staging</span>
+          <p>The canonical ZENSEN Systems site and the Railway suite entry surface.</p>
+          <div class="links"><a href="#suite">ZENSEN SYSTEM SUITE</a></div>
+          <div class="qed">:: <b>∎</b></div>
+        </article>
+      </section>
+
+      <section id="site-zensen-live" class="lane site-lane">
+        <article class="card">
+          <svg class="cube" viewBox="0 0 24 24" aria-hidden="true"><path class="f-top" d="M12 3 20 7.5 12 12 4 7.5Z"/><path class="f-left" d="M4 7.5 12 12 12 21 4 16.5Z"/><path class="f-right" d="M20 7.5 12 12 12 21 20 16.5Z"/></svg>
+          <div class="card-head">
+            <h2><span class="hb">▛▞⋮⋮</span> zensen.live</h2>
+            <div class="lane-tag">Site Node</div>
+          </div>
+          <div class="rail"><i>〔</i> 6061 <b>·</b> ZENSEN band <b>·</b> card route <i>〕</i></div>
+          <span class="status quiet">Card only <b>·</b> DNS pending</span>
+          <p>A mapped ZENSEN live surface held in the suite until publication is approved.</p>
+          <div class="links"><a href="#suite">ZENSEN SYSTEM SUITE</a></div>
+          <div class="qed">:: <b>∎</b></div>
+        </article>
+      </section>
+
+      <section id="site-zensen-solutions" class="lane site-lane">
+        <article class="card">
+          <svg class="cube" viewBox="0 0 24 24" aria-hidden="true"><path class="f-top" d="M12 3 20 7.5 12 12 4 7.5Z"/><path class="f-left" d="M4 7.5 12 12 12 21 4 16.5Z"/><path class="f-right" d="M20 7.5 12 12 12 21 20 16.5Z"/></svg>
+          <div class="card-head">
+            <h2><span class="hb">▛▞⋮⋮</span> zensen.solutions</h2>
+            <div class="lane-tag">Site Node</div>
+          </div>
+          <div class="rail"><i>〔</i> 6062 <b>·</b> ZENSEN band <b>·</b> card route <i>〕</i></div>
+          <span class="status quiet">Card only <b>·</b> DNS pending</span>
+          <p>A mapped ZENSEN solutions surface held in the suite until publication is approved.</p>
+          <div class="links"><a href="#suite">ZENSEN SYSTEM SUITE</a></div>
+          <div class="qed">:: <b>∎</b></div>
+        </article>
+      </section>
+
+      <section id="site-zensen-systems" class="lane site-lane">
+        <article class="card">
+          <svg class="cube" viewBox="0 0 24 24" aria-hidden="true"><path class="f-top" d="M12 3 20 7.5 12 12 4 7.5Z"/><path class="f-left" d="M4 7.5 12 12 12 21 4 16.5Z"/><path class="f-right" d="M20 7.5 12 12 12 21 20 16.5Z"/></svg>
+          <div class="card-head">
+            <h2><span class="hb">▛▞⋮⋮</span> zensen.systems</h2>
+            <div class="lane-tag">Site Node</div>
+          </div>
+          <div class="rail"><i>〔</i> 6063 <b>·</b> ZENSEN band <b>·</b> card route <i>〕</i></div>
+          <span class="status quiet">Card only <b>·</b> DNS pending</span>
+          <p>A mapped ZENSEN systems surface held in the suite until publication is approved.</p>
+          <div class="links"><a href="#suite">ZENSEN SYSTEM SUITE</a></div>
+          <div class="qed">:: <b>∎</b></div>
+        </article>
+      </section>
+
+      <section id="site-zensen-store" class="lane site-lane">
+        <article class="card">
+          <svg class="cube" viewBox="0 0 24 24" aria-hidden="true"><path class="f-top" d="M12 3 20 7.5 12 12 4 7.5Z"/><path class="f-left" d="M4 7.5 12 12 12 21 4 16.5Z"/><path class="f-right" d="M20 7.5 12 12 12 21 20 16.5Z"/></svg>
+          <div class="card-head">
+            <h2><span class="hb">▛▞⋮⋮</span> zensen.store</h2>
+            <div class="lane-tag">Site Node</div>
+          </div>
+          <div class="rail"><i>〔</i> 6064 <b>·</b> ZENSEN band <b>·</b> card route <i>〕</i></div>
+          <span class="status quiet">Card only <b>·</b> DNS pending</span>
+          <p>A mapped ZENSEN store surface held in the suite until publication is approved.</p>
+          <div class="links"><a href="#suite">ZENSEN SYSTEM SUITE</a></div>
+          <div class="qed">:: <b>∎</b></div>
+        </article>
+      </section>
+
+      <section id="site-zensen-enterprises" class="lane site-lane">
+        <article class="card">
+          <svg class="cube" viewBox="0 0 24 24" aria-hidden="true"><path class="f-top" d="M12 3 20 7.5 12 12 4 7.5Z"/><path class="f-left" d="M4 7.5 12 12 12 21 4 16.5Z"/><path class="f-right" d="M20 7.5 12 12 12 21 20 16.5Z"/></svg>
+          <div class="card-head">
+            <h2><span class="hb">▛▞⋮⋮</span> zensenenterprises.com</h2>
+            <div class="lane-tag">Site Node</div>
+          </div>
+          <div class="rail"><i>〔</i> 6066 <b>·</b> ZENSEN band <b>·</b> card route <i>〕</i></div>
+          <span class="status quiet">Card only <b>·</b> DNS pending</span>
+          <p>A mapped ZENSEN enterprises surface held in the suite until publication is approved.</p>
+          <div class="links"><a href="#suite">ZENSEN SYSTEM SUITE</a></div>
+          <div class="qed">:: <b>∎</b></div>
+        </article>
+      </section>
+
+      <!-- 3OX site nodes — separate 6050–6059 band, still suite-linked -->
+      <section id="site-3ox-ai" class="lane site-lane">
+        <article class="card">
+          <svg class="cube" viewBox="0 0 24 24" aria-hidden="true"><path class="f-top" d="M12 3 20 7.5 12 12 4 7.5Z"/><path class="f-left" d="M4 7.5 12 12 12 21 4 16.5Z"/><path class="f-right" d="M20 7.5 12 12 12 21 20 16.5Z"/></svg>
+          <div class="card-head">
+            <h2><span class="hb">▛▞⋮⋮</span> 3ox.ai</h2>
+            <div class="lane-tag">3OX Site Node</div>
+          </div>
+          <div class="rail"><i>〔</i> 6050 <b>·</b> separate band <b>·</b> suite link <i>〕</i></div>
+          <span class="status quiet">Mapped <b>·</b> route pending</span>
+          <p>The active 3OX agent surface remains separately routed and returns to the suite hub.</p>
+          <div class="links"><a href="#suite">ZENSEN SYSTEM SUITE</a></div>
+          <div class="qed">:: <b>∎</b></div>
+        </article>
+      </section>
+
+      <section id="site-1n3ox-ai" class="lane site-lane">
+        <article class="card">
+          <svg class="cube" viewBox="0 0 24 24" aria-hidden="true"><path class="f-top" d="M12 3 20 7.5 12 12 4 7.5Z"/><path class="f-left" d="M4 7.5 12 12 12 21 4 16.5Z"/><path class="f-right" d="M20 7.5 12 12 12 21 20 16.5Z"/></svg>
+          <div class="card-head">
+            <h2><span class="hb">▛▞⋮⋮</span> 1n3ox.ai</h2>
+            <div class="lane-tag">3OX Site Node</div>
+          </div>
+          <div class="rail"><i>〔</i> 6051 <b>·</b> separate band <b>·</b> suite link <i>〕</i></div>
+          <span class="status quiet">Mapped <b>·</b> route pending</span>
+          <p>The 1N3OX inbox surface remains separately routed and returns to the suite hub.</p>
+          <div class="links"><a href="#suite">ZENSEN SYSTEM SUITE</a></div>
+          <div class="qed">:: <b>∎</b></div>
+        </article>
+      </section>
+
+      <section id="site-3ox-store" class="lane site-lane">
+        <article class="card">
+          <svg class="cube" viewBox="0 0 24 24" aria-hidden="true"><path class="f-top" d="M12 3 20 7.5 12 12 4 7.5Z"/><path class="f-left" d="M4 7.5 12 12 12 21 4 16.5Z"/><path class="f-right" d="M20 7.5 12 12 12 21 20 16.5Z"/></svg>
+          <div class="card-head">
+            <h2><span class="hb">▛▞⋮⋮</span> 3ox.store</h2>
+            <div class="lane-tag">3OX Site Node</div>
+          </div>
+          <div class="rail"><i>〔</i> 6052 <b>·</b> separate band <b>·</b> suite link <i>〕</i></div>
+          <span class="status quiet">Mapped <b>·</b> route pending</span>
+          <p>The 3OX store surface remains separately routed and returns to the suite hub.</p>
+          <div class="links"><a href="#suite">ZENSEN SYSTEM SUITE</a></div>
           <div class="qed">:: <b>∎</b></div>
         </article>
       </section>
@@ -1477,7 +1701,16 @@
           <a href="#warden">WARDEN</a>
           <a href="#ledg3r">LEDG3R</a>
           <a href="#aegen">ÆGen{τ}</a>
-          <a href="#suite">Zensen Suite</a>
+          <a href="#suite">ZENSEN SYSTEM SUITE</a>
+          <a href="#site-zensensystems">zensensystems.com</a>
+          <a href="#site-zensen-live">zensen.live</a>
+          <a href="#site-zensen-solutions">zensen.solutions</a>
+          <a href="#site-zensen-systems">zensen.systems</a>
+          <a href="#site-zensen-store">zensen.store</a>
+          <a href="#site-zensen-enterprises">zensenenterprises.com</a>
+          <a href="#site-3ox-ai">3ox.ai</a>
+          <a href="#site-1n3ox-ai">1n3ox.ai</a>
+          <a href="#site-3ox-store">3ox.store</a>
         </div>
       </div>
       <div class="foot-brand">

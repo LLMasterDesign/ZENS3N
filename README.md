@@ -33,6 +33,19 @@ Verified staging contract:
 This is a hosted staging surface, not production capacity evidence. Custom DNS,
 VPS deployment, and the 10,000-user gate remain approval-gated.
 
+## Railway Main View :: Suite Node Contract
+
+The Railway entry view is the `ZENSEN SYSTEM SUITE` hub at `#suite`. It lists
+the internal suite nodes, the six ZENSEN site nodes on `6060`, `6061`, `6062`,
+`6063`, `6064`, and `6066`, and the
+three separately routed 3OX site nodes on `6050–6052`. Every site node links
+back to `#suite`; card-only domains remain publication-pending until DNS is
+approved.
+
+The source implementation is `index.html`. The hosted readiness receipt in
+Atlas records the last deployed hash; this source change must be deployed and
+re-verified before the hosted surface is said to contain the new node map.
+
 ## Contents
 
 - `index.html` — company page
