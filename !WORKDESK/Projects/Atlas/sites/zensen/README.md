@@ -8,6 +8,7 @@ Open the committed [Atlas launch board](../../../../Websites/_Atlas/launch-board
 - `../../../../Websites/_Atlas/launch-board.json` — committed Atlas source of truth for this release.
 - `SOURCE.md` — the one true source folder, serving command, assets, and deployment ownership.
 - `PROVIDER-DECISION.md` — the approved/deferred provider boundary and activation triggers.
+- `DOMAIN-ROUTING-PLAN.md` — one canonical site, proposed roles for the owned domains, and the safe cutover order.
 - `RAILWAY-STAGING-READINESS.md` — hosted-staging checklist and approval-gated receipt fields.
 - `STRIPE-OFFER-READINESS.md` — first-offer contract and test-mode checkout boundary.
 - `BATTLE-REHEARSAL.md` — bounded local soak, spike, failure, rollback, and restart receipt.

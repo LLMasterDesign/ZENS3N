@@ -58,4 +58,4 @@ node deploy/update-launch-board.mjs \
 
 No provider is active because no activation receipt exists.
 
-References: [launch baseline](LAUNCH-BASELINE.md), [public cutover gate](PUBLIC-CUTOVER.md), [release runbook](deploy/README.md).
+References: [launch baseline](LAUNCH-BASELINE.md), [domain routing plan](DOMAIN-ROUTING-PLAN.md), [public cutover gate](PUBLIC-CUTOVER.md), [release runbook](deploy/README.md).
