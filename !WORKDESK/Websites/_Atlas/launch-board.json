@@ -153,9 +153,9 @@
       "chapter": "05",
       "state": "pending",
       "label": "Local atomic deploy/rollback/restart rehearsal passes; soak, spike, dependency-failure, and real deploy tests remain open.",
-      "partial_evidence": "!WORKDESK/Projects/Atlas/sites/zensen/DEPLOYMENT-REHEARSAL.md",
-      "last_verified": "2026-08-02",
-      "evidence_note": "Atomic local deploy, rollback, and restart rehearsal passes; soak, spike, dependency-failure, and real deploy evidence remain open."
+      "partial_evidence": "!WORKDESK/Projects/Atlas/sites/zensen/BATTLE-REHEARSAL.md",
+      "last_verified": "2026-08-03",
+      "evidence_note": "Bounded soak/spike, bad-release rejection, rollback, process-failure observation, and restart recovery pass; real deployment and operational alert evidence remain open."
     },
     {
       "id": "battle-2",

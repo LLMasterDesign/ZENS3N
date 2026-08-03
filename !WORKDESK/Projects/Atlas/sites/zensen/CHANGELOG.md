@@ -2,6 +2,7 @@
 
 ## 2026-08-03
 
+- Ran the isolated local battle rehearsal: bounded soak/spike, bad-release rejection, rollback, process-failure observation, and restart recovery passed; real deployment and operational alert evidence remain open.
 - Added machine-tracked `railway-staging` and `stripe-test-offer` provider tracks with readiness receipts; activation remains approval-gated.
 - Extended `deploy/update-launch-board.mjs` to update provider tracks only with evidence, and to require an approval reference plus URL for activation states.
 - Recorded the provider decision boundary: Tailscale remains active staging; Railway and Hetzner are deferred candidates, Stripe is the preferred first monetization path, and no external service was activated.

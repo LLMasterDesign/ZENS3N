@@ -2,7 +2,7 @@
 
 Captured: **2026-08-02**
 
-This is partial Battle Chapter 05 evidence using a temporary local root. It exercises the same immutable release archive, `current` symlink switch, rollback, and server restart mechanics used by the later VPS publisher. It does not test a real VPS, Nginx, DNS/TLS, dependency failure, soak, spike, alerting, or 10k capacity.
+This is partial Battle Chapter 05 evidence using a temporary local root. It exercises the same immutable release archive, `current` symlink switch, rollback, and server restart mechanics used by the later VPS publisher. The expanded [battle rehearsal](BATTLE-REHEARSAL.md) separately covers bounded soak, spike, bad-release rejection, and process-failure observation. Neither receipt tests a real VPS, Nginx, DNS/TLS, production alerts, or 10k capacity.
 
 ## Reproduce
 
@@ -19,5 +19,6 @@ The rehearsal is isolated under a `mktemp` directory, serves only on loopback po
 - [x] Candidate release switches atomically through `current`.
 - [x] Rollback restores the expected entry hash and health response.
 - [x] Restart after rollback restores the expected entry hash and health response.
+- [x] Expanded local battle rehearsal covers bounded soak/spike and failure recovery in `BATTLE-REHEARSAL.md`.
 - [ ] VPS/Nginx/DNS/TLS deployment verified.
 - [ ] Soak, spike, dependency-failure, alert, and restore drills verified.
