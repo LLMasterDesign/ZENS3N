@@ -1,6 +1,22 @@
 # ZENSEN Systems
 
-Canonical static company page for ZENSEN Systems.
+Canonical static company page and executable suite manifest for ZENSEN Systems.
+
+## Suite manifest
+
+[`suite-manifest.json`](suite-manifest.json) is the authoritative 21-node graph.
+It records service ownership, batch, role, port, state, source boundary, and
+the Railway private-network reference. Atlas records the manifest hash and node
+count; it does not maintain a second copy of the graph.
+
+Validate the manifest and all three rehearsal surfaces:
+
+```bash
+node deploy/verify-suite-manifest.mjs \
+  --local http://127.0.0.1:7120 \
+  --tailscale http://corbato-en0.billfish-sirius.ts.net:6060 \
+  --railway https://zens3n-production.up.railway.app
+```
 
 ## Local rehearsal
 
@@ -54,5 +70,7 @@ re-verified before the hosted surface is said to contain the new node map.
 - `healthz` — static health contract
 - `server.py` — isolated static server; deployment config paths return 404
 - `railway.toml` — Railway start and health-check contract
+- `satellites/3ox.studio/` — first source-backed 3OX satellite service
+- `deploy/verify-suite-manifest.mjs` — manifest, gate, and surface verifier
 
 The entry SHA-256 for this branch is `16f519789d48a7bb103ee25be44228cba06e1df0958ac8724bd6635e6cacfaa0`. This is a staging branch, not evidence of 10,000-user capacity or public cutover.
