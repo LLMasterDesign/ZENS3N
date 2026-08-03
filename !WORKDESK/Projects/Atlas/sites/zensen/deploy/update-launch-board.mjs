@@ -108,6 +108,20 @@ function resolveEvidence(evidence) {
   return path.relative(repoRoot, evidencePath).split(path.sep).join('/');
 }
 
+function refreshSummary(currentBoard) {
+  const tasks = currentBoard.tasks || [];
+  const providerTracks = Object.values(currentBoard.provider_tracks || {});
+  currentBoard.counts = {
+    tasks_total: tasks.length,
+    tasks_complete: tasks.filter((candidate) => candidate.state === 'complete').length,
+    tasks_pending: tasks.filter((candidate) => candidate.state === 'pending').length,
+    tasks_with_partial_evidence: tasks.filter((candidate) => Boolean(candidate.partial_evidence)).length,
+    provider_tracks_total: providerTracks.length,
+    provider_tracks_active: providerTracks.filter((candidate) => ['active', 'test-active', 'live-active'].includes(candidate.state)).length,
+    provider_tracks_pending_approval: providerTracks.filter((candidate) => candidate.state === 'ready-for-approval').length,
+  };
+}
+
 if (options.provider_track) {
   const track = board.provider_tracks?.[options.provider_track];
   if (!track) usage(`Provider track not found: ${options.provider_track}`);
@@ -119,6 +133,7 @@ if (options.provider_track) {
   else delete track.approval_ref;
   if (options.note) track.evidence_note = options.note;
   board.updated = track.last_verified;
+  refreshSummary(board);
 
   const output = `${JSON.stringify(board, null, 2)}\n`;
   if (options.dryRun) {
@@ -149,6 +164,7 @@ task.state = options.state;
 task.last_verified = new Date().toISOString().slice(0, 10);
 if (options.note) task.evidence_note = options.note;
 board.updated = task.last_verified;
+refreshSummary(board);
 
 const output = `${JSON.stringify(board, null, 2)}\n`;
 if (options.dryRun) {

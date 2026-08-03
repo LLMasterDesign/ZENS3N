@@ -184,5 +184,14 @@
       "last_verified": "2026-08-02",
       "evidence_note": "Public domain still serves the Squarespace Coming Soon surface with noindex; no cutover mutation was made."
     }
-  ]
+  ],
+  "counts": {
+    "tasks_total": 12,
+    "tasks_complete": 7,
+    "tasks_pending": 5,
+    "tasks_with_partial_evidence": 4,
+    "provider_tracks_total": 2,
+    "provider_tracks_active": 0,
+    "provider_tracks_pending_approval": 1
+  }
 }

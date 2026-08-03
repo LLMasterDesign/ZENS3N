@@ -2,6 +2,7 @@
 
 ## 2026-08-03
 
+- Extended the Atlas updater to recompute task/provider summary counts on every state update, preventing the launch board from carrying stale totals.
 - Ran the isolated local battle rehearsal: bounded soak/spike, bad-release rejection, rollback, process-failure observation, and restart recovery passed; real deployment and operational alert evidence remain open.
 - Added machine-tracked `railway-staging` and `stripe-test-offer` provider tracks with readiness receipts; activation remains approval-gated.
 - Extended `deploy/update-launch-board.mjs` to update provider tracks only with evidence, and to require an approval reference plus URL for activation states.
