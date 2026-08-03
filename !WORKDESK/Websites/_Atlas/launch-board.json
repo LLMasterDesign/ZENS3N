@@ -173,9 +173,9 @@
       "chapter": "06",
       "state": "pending",
       "label": "Static 404 and Nginx security-hardening pack prepared; monitoring, rate limits, and cost watch remain open.",
-      "partial_evidence": "!WORKDESK/Projects/Atlas/sites/zensen/SECURITY-REVIEW.md",
-      "last_verified": "2026-08-02",
-      "evidence_note": "Static bundle security review passes; live monitoring, rate limits, alerting, and cost controls remain open."
+      "partial_evidence": "!WORKDESK/Projects/Atlas/sites/zensen/STAGING-MONITOR-REHEARSAL.md",
+      "last_verified": "2026-08-03",
+      "evidence_note": "30 local and 30 Tailscale canary samples passed hash, health, and 404 checks; production monitoring, alerts, rate limits, and cost watch remain open."
     },
     {
       "id": "live-2",
