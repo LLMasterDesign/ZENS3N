@@ -69,7 +69,11 @@ def main() -> None:
         parser.error(f"static entry missing: {root / 'index.html'}")
     handler = partial(SiteHandler, directory=str(root))
     server = ReusableServer((args.host, args.port), handler)
-    print(f"serving {root} on http://{args.host}:{args.port}", flush=True)
+    print(
+        f"ZENSEN Systems :: Railway container :: serving {root} "
+        f"on http://{args.host}:{args.port} :: PORT={args.port}",
+        flush=True,
+    )
     try:
         server.serve_forever()
     except KeyboardInterrupt:
