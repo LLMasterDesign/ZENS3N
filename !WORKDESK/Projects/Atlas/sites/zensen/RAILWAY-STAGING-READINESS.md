@@ -16,6 +16,7 @@ Reference: [Railway static hosting guide](https://docs.railway.com/guides/static
 
 - [x] Canonical source is `!WORKDESK/Websites/zensensystems`.
 - [x] GitHub repository is `LLMasterDesign/ZENS3N`.
+- [x] Repository-root `railway.toml` defines the canonical static source, Railway `$PORT` binding, `/healthz` check, and restart policy.
 - [x] Tailscale source hash and `/healthz` contract are recorded.
 - [x] The public domain remains `noindex`/Coming Soon; hosted staging must not be called production.
 - [ ] Owner approves creating or using a Railway project.
@@ -36,6 +37,7 @@ Keep these blank until the owner approves activation; do not invent a URL or dep
 | Hosted staging URL | Not assigned |
 | GitHub commit tested | `1a953527eee812c0cd73021c33e85634e5337c0f` (current approved site merge) |
 | Entry SHA-256 | `16f519789d48a7bb103ee25be44228cba06e1df0958ac8724bd6635e6cacfaa0` |
+| Railway start contract | `railway.toml` → threaded `serve-local.py` → `!WORKDESK/Websites/zensensystems` |
 | `/healthz` result | Not run against Railway |
 | Unknown-route `404` result | Not run against Railway |
 | Approval reference | Not supplied |

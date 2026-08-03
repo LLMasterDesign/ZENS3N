@@ -2,6 +2,7 @@
 
 ## 2026-08-03
 
+- Added a repository-root `railway.toml` that binds the canonical static source to Railway's injected `$PORT`, uses `/healthz` as the deployment health check, and keeps activation approval-gated.
 - Added a machine-readable provider shortlist to the Atlas board and surfaced its decision summary in Loom: Railway and Stripe are the only preferred-now paths; Hetzner, Supabase, Hostinger, FanBasis, Superset, and ZeroEntropy remain deferred, while `gbrain` remains unverified.
 - Wired the ZENSEN Loom to render live Atlas task counts, provider tracks, and the current performance boundary from `launch-board.json`.
 - Added the safety-bounded staging monitor rehearsal and recorded hash, health, and 404 canary checks as partial Live Chapter 06 evidence.
