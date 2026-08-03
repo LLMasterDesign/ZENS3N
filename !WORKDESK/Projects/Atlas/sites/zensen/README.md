@@ -11,6 +11,7 @@ Open the committed [Atlas launch board](../../../../Websites/_Atlas/launch-board
 - `deploy/update-launch-board.mjs` — the evidence-gated command for updating task state.
 - `PUBLIC-DOMAIN-REVIEW.md` — the current public-domain receipt and cutover boundary.
 - `RECOVERY-REHEARSAL.md` — the local restore receipt and operational coverage boundary.
+- `LOAD-STRESS-CEILING.md` — the bounded performance boundary and warning receipt.
 - `SECTIONS.md` — semantic map. Each section has an ID, purpose, files, dependencies, and acceptance test.
 - `SEO.md` — search-engine launch requirements.
 - `AEO.md` — answer-engine/AI readability requirements.

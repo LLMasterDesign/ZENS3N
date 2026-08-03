@@ -11,6 +11,7 @@
 - Recorded the public-domain review: `zensensystems.com` still serves the Squarespace Coming Soon/noindex surface, so no public cutover was made.
 - Added a local recovery rehearsal receipt: immutable archive restore, exact entry hash, and `healthz` pass in 12 ms; production backup, alerting, and incident paging remain open.
 - PR #27 merged at `290b0e21a0d792bc5f8312419df9e4c9fa912bd2`; the recovery receipt is now published on `main` while its uncovered operational boundaries remain pending.
+- Recorded a bounded stress ceiling: all requests passed locally/Tailscale, but p99 exceeded the initial 1,500 ms target at the capped rehearsal load; no 10k claim was made.
 - Atlas receipt PR #22 was merged at `509e72909e7b30b6f206c5f082f1916790c3a31d`; the board and release docs are now reconciled on `main`.
 
 ## 2026-08-02
