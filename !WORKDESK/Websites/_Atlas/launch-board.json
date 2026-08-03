@@ -32,6 +32,62 @@
   },
   "provider_decision_pr": "https://github.com/LLMasterDesign/ZENS3N/pull/24",
   "provider_decision_merge": "aff448b0ec931b0697675e3196f1756775f6dbff",
+  "provider_options": {
+    "railway": {
+      "purpose": "Hosted public staging",
+      "decision": "preferred-now",
+      "state": "ready-for-approval",
+      "receipt": "!WORKDESK/Projects/Atlas/sites/zensen/RAILWAY-STAGING-READINESS.md"
+    },
+    "stripe-payment-links": {
+      "purpose": "First test-mode paid offer",
+      "decision": "preferred-now",
+      "state": "offer-not-defined",
+      "receipt": "!WORKDESK/Projects/Atlas/sites/zensen/STRIPE-OFFER-READINESS.md"
+    },
+    "hetzner-cloud": {
+      "purpose": "Production VPS",
+      "decision": "defer",
+      "state": "not-approved",
+      "receipt": "!WORKDESK/Projects/Atlas/sites/zensen/PROVIDER-DECISION.md"
+    },
+    "supabase": {
+      "purpose": "Accounts, leads, forms, or database-backed product data",
+      "decision": "defer",
+      "state": "not-needed-for-static-site",
+      "receipt": "!WORKDESK/Projects/Atlas/sites/zensen/PROVIDER-DECISION.md"
+    },
+    "hostinger": {
+      "purpose": "Alternative self-managed VPS",
+      "decision": "defer",
+      "state": "alternate-host-not-needed",
+      "receipt": "!WORKDESK/Projects/Atlas/sites/zensen/PROVIDER-DECISION.md"
+    },
+    "fanbasis": {
+      "purpose": "High-ticket digital sales and fulfillment",
+      "decision": "defer",
+      "state": "offer-model-not-defined",
+      "receipt": "!WORKDESK/Projects/Atlas/sites/zensen/PROVIDER-DECISION.md"
+    },
+    "superset.sh": {
+      "purpose": "Development workspace",
+      "decision": "defer",
+      "state": "not-runtime-infrastructure",
+      "receipt": "!WORKDESK/Projects/Atlas/sites/zensen/PROVIDER-DECISION.md"
+    },
+    "zeroentropy": {
+      "purpose": "Retrieval, embeddings, or semantic search",
+      "decision": "defer",
+      "state": "retrieval-feature-not-defined",
+      "receipt": "!WORKDESK/Projects/Atlas/sites/zensen/PROVIDER-DECISION.md"
+    },
+    "gbrain": {
+      "purpose": "Unspecified AI product",
+      "decision": "unverified",
+      "state": "exact-product-url-needed",
+      "receipt": "!WORKDESK/Projects/Atlas/sites/zensen/PROVIDER-DECISION.md"
+    }
+  },
   "recovery_receipt_pr": "https://github.com/LLMasterDesign/ZENS3N/pull/27",
   "recovery_receipt_merge": "290b0e21a0d792bc5f8312419df9e4c9fa912bd2",
   "provider_tracks": {

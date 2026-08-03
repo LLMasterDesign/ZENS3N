@@ -22,7 +22,7 @@
 <body>
 <main>
   <div class="top" data-atlas-part="header" data-atlas-version="1.0"><div><div class="label">LOOM / local canonical map</div><h1>Launch checklist</h1><p>A plain-English map of what is ready, what is missing, and where to work next. Current evidence: mapped, AEO identity complete, staging ingress verified. Checkboxes are saved in this browser.</p></div><div class="site"><strong>ZENSEN</strong><code>/zensen/ · canonical: !WORKDESK/Websites/zensensystems</code></div></div>
-  <section class="board-summary" id="board-summary" data-state="loading" aria-live="polite"><span class="label">machine receipt</span><h2>Atlas live board</h2><p id="board-state">Loading the committed launch board…</p><div class="stats"><div class="stat"><strong id="board-complete">—</strong><span>tasks complete</span></div><div class="stat"><strong id="board-pending">—</strong><span>tasks pending</span></div><div class="stat"><strong id="board-partial">—</strong><span>partial receipts</span></div><div class="stat"><strong id="board-providers">—</strong><span>providers active</span></div></div><p class="board-detail" id="board-providers-detail">Provider tracks: loading…</p><p class="board-detail" id="board-performance">Performance boundary: loading…</p><p class="board-detail"><a href="../../../../Websites/_Atlas/launch-board.json">Open the machine-readable launch board →</a></p></section>
+  <section class="board-summary" id="board-summary" data-state="loading" aria-live="polite"><span class="label">machine receipt</span><h2>Atlas live board</h2><p id="board-state">Loading the committed launch board…</p><div class="stats"><div class="stat"><strong id="board-complete">—</strong><span>tasks complete</span></div><div class="stat"><strong id="board-pending">—</strong><span>tasks pending</span></div><div class="stat"><strong id="board-partial">—</strong><span>partial receipts</span></div><div class="stat"><strong id="board-providers">—</strong><span>providers active</span></div></div><p class="board-detail" id="board-providers-detail">Provider tracks: loading…</p><p class="board-detail" id="board-options">Decision shortlist: loading…</p><p class="board-detail" id="board-performance">Performance boundary: loading…</p><p class="board-detail"><a href="../../../../Websites/_Atlas/launch-board.json">Open the machine-readable launch board →</a></p></section>
   <div class="toolbar"><button type="button" id="all">Show all</button><button type="button" id="open">Show unfinished</button><button type="button" id="reset">Reset checks</button><button type="button" onclick="window.print()">Print</button></div>
   <div class="legend"><span><i class="dot good"></i>ready when all checks pass</span><span><i class="dot"></i>needs a decision or test</span><span><i class="dot bad"></i>currently blocks launch</span></div>
   <div class="grid" id="cards">
@@ -88,6 +88,7 @@
   const boardPartial=document.querySelector('#board-partial');
   const boardProviders=document.querySelector('#board-providers');
   const boardProvidersDetail=document.querySelector('#board-providers-detail');
+  const boardOptions=document.querySelector('#board-options');
   const boardPerformance=document.querySelector('#board-performance');
   function setText(element,value){ element.textContent=String(value ?? '—'); }
   function loadBoard(){
@@ -97,12 +98,14 @@
     }).then(board=>{
       const counts=board.counts || {};
       const tracks=Object.entries(board.provider_tracks || {});
+      const options=Object.entries(board.provider_options || {});
       setText(boardState,`${board.status_label || board.status || 'Board loaded'} · updated ${board.updated || 'unknown'}`);
       setText(boardComplete,counts.tasks_complete ?? (board.tasks || []).filter(task=>task.state==='complete').length);
       setText(boardPending,counts.tasks_pending ?? (board.tasks || []).filter(task=>task.state==='pending').length);
       setText(boardPartial,counts.tasks_with_partial_evidence ?? (board.tasks || []).filter(task=>task.partial_evidence).length);
       setText(boardProviders,counts.provider_tracks_active ?? tracks.filter(([,track])=>['active','test-active','live-active'].includes(track.state)).length);
       setText(boardProvidersDetail,`Provider tracks: ${tracks.map(([id,track])=>`${id}=${track.state}`).join(' · ') || 'none'}`);
+      setText(boardOptions,`Decision shortlist: ${options.filter(([,option])=>option.decision==='preferred-now').map(([id,option])=>`${id}=${option.state}`).join(' · ') || 'none preferred'} · deferred ${options.filter(([,option])=>option.decision==='defer').length} · unverified ${options.filter(([,option])=>option.decision==='unverified').length}`);
       setText(boardPerformance,`Performance boundary: ${board.load_boundary?.status || 'not recorded'} · local p99 ${board.load_boundary?.local_p99_ms ?? '—'} ms · Tailscale p99 ${board.load_boundary?.tailscale_p99_ms ?? '—'} ms`);
       boardSummary.dataset.state='ready';
     }).catch(error=>{

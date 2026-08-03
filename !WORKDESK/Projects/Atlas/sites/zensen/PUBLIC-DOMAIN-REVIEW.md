@@ -1,6 +1,6 @@
 # Public-domain review receipt
 
-Captured: **2026-08-02**  
+Captured: **2026-08-03**
 URL checked: `https://zensensystems.com/`  
 Decision: **Do not cut over**
 
@@ -11,6 +11,7 @@ Decision: **Do not cut over**
 - Page title: `Coming Soon`
 - Robots directive: `noindex`
 - Response body SHA-256: `32d8bd8c3a23f11c507d83a549a680ab530be5826620e71df427daff216033cc`
+- Recheck: `2026-08-03` returned the same status, title, `noindex`, and body hash.
 
 This is the existing public-domain surface, not the canonical ZENSEN source in `!WORKDESK/Websites/zensensystems`. No DNS, Squarespace, or public-domain files were changed. The canonical source remains Tailscale staging and continues to declare `noindex, nofollow` until an approved cutover is ready.
 
