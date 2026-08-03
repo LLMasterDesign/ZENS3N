@@ -2,6 +2,7 @@
 
 ## 2026-08-03
 
+- Rechecked `https://zensensystems.com/`: Squarespace Coming Soon, `noindex`, HTTP 200, and body hash `32d8bd8c3a23f11c507d83a549a680ab530be5826620e71df427daff216033cc` remain unchanged; no public cutover was made.
 - Added an owner-review Stripe offer candidate derived from the published product ladder: `ZENSEN Ontological Module — Founding Pilot`, proposed at `$99 USD` one-time; fulfillment, refund, tax, and destination remain undefined and no checkout was created.
 - Added a repository-root `railway.toml` that binds the canonical static source to Railway's injected `$PORT`, uses `/healthz` as the deployment health check, and keeps activation approval-gated.
 - Added a machine-readable provider shortlist to the Atlas board and surfaced its decision summary in Loom: Railway and Stripe are the only preferred-now paths; Hetzner, Supabase, Hostinger, FanBasis, Superset, and ZeroEntropy remain deferred, while `gbrain` remains unverified.
