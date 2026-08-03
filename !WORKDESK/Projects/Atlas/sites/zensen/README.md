@@ -4,7 +4,7 @@ Open the committed [Atlas launch board](../../../../Websites/_Atlas/launch-board
 
 ## Folder map
 
-- `LOOM.html` — local canonical map and visual checklist for this surface.
+- `LOOM.html` — local canonical map, visual checklist, and live Atlas board summary.
 - `../../../../Websites/_Atlas/launch-board.json` — committed Atlas source of truth for this release.
 - `SOURCE.md` — the one true source folder, serving command, assets, and deployment ownership.
 - `PROVIDER-DECISION.md` — the approved/deferred provider boundary and activation triggers.

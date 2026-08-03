@@ -2,6 +2,7 @@
 
 ## 2026-08-03
 
+- Wired the ZENSEN Loom to render live Atlas task counts, provider tracks, and the current performance boundary from `launch-board.json`.
 - Added the safety-bounded staging monitor rehearsal and recorded hash, health, and 404 canary checks as partial Live Chapter 06 evidence.
 - Replaced the single-threaded local rehearsal server with a tracked threaded HTTP/1.1 server; the latest Tailscale bounded p99 is 109.33 ms, while local p99 remains a documented 1,888.26 ms warning.
 - Extended the Atlas updater to recompute task/provider summary counts on every state update, preventing the launch board from carrying stale totals.
