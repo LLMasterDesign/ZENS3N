@@ -20,7 +20,7 @@ The armed 10k scenario must be launched through `load/run-10k-approved.sh`. Its 
 
 ## Phase A — local/Tailscale preproduction
 
-The canonical source is served from the local host on `127.0.0.1:7120` and exposed for rehearsal at `https://corbato-en0.billfish-sirius.ts.net/zensen/`. Verify the entry hash, `/healthz`, critical assets, spec routes, mobile behavior, and no-secret boundary before creating a GitHub release.
+The canonical source is served from the local host on `127.0.0.1:7120` with `deploy/serve-local.py` (threaded standard-library HTTP for bounded rehearsal) and exposed for rehearsal at `https://corbato-en0.billfish-sirius.ts.net/zensen/`. Verify the entry hash, `/healthz`, critical assets, spec routes, mobile behavior, and no-secret boundary before creating a GitHub release.
 
 ```bash
 export ZENSEN_URL='https://corbato-en0.billfish-sirius.ts.net/zensen/index.html'

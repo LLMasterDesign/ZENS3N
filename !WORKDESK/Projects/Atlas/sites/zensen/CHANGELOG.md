@@ -1,7 +1,14 @@
 # Changelog
 
-## 2026-08-02
+## 2026-08-03
 
+- Wired the ZENSEN Loom to render live Atlas task counts, provider tracks, and the current performance boundary from `launch-board.json`.
+- Added the safety-bounded staging monitor rehearsal and recorded hash, health, and 404 canary checks as partial Live Chapter 06 evidence.
+- Replaced the single-threaded local rehearsal server with a tracked threaded HTTP/1.1 server; the latest Tailscale bounded p99 is 109.33 ms, while local p99 remains a documented 1,888.26 ms warning.
+- Extended the Atlas updater to recompute task/provider summary counts on every state update, preventing the launch board from carrying stale totals.
+- Ran the isolated local battle rehearsal: bounded soak/spike, bad-release rejection, rollback, process-failure observation, and restart recovery passed; real deployment and operational alert evidence remain open.
+- Added machine-tracked `railway-staging` and `stripe-test-offer` provider tracks with readiness receipts; activation remains approval-gated.
+- Extended `deploy/update-launch-board.mjs` to update provider tracks only with evidence, and to require an approval reference plus URL for activation states.
 - Recorded the provider decision boundary: Tailscale remains active staging; Railway and Hetzner are deferred candidates, Stripe is the preferred first monetization path, and no external service was activated.
 - Added `deploy/update-launch-board.mjs`, an evidence-gated Atlas updater that requires approval references for the 10k and public-cutover tasks.
 - Extended the updater to record partial evidence on pending tasks without promoting their state.
@@ -12,6 +19,7 @@
 - Added a local recovery rehearsal receipt: immutable archive restore, exact entry hash, and `healthz` pass in 12 ms; production backup, alerting, and incident paging remain open.
 - PR #27 merged at `290b0e21a0d792bc5f8312419df9e4c9fa912bd2`; the recovery receipt is now published on `main` while its uncovered operational boundaries remain pending.
 - Recorded a bounded stress ceiling: all requests passed locally/Tailscale, but p99 exceeded the initial 1,500 ms target at the capped rehearsal load; no 10k claim was made.
+- PR #29 merged at `565c867931ff5c30366059440f3564f3a453fed1`; the bounded performance warning is now published on `main`.
 - Atlas receipt PR #22 was merged at `509e72909e7b30b6f206c5f082f1916790c3a31d`; the board and release docs are now reconciled on `main`.
 
 ## 2026-08-02

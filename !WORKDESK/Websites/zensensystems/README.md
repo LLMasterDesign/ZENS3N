@@ -7,8 +7,11 @@ Canonical static company page for ZENSEN Systems.
 From this folder:
 
 ```bash
-python3 -m http.server 7120 --bind 0.0.0.0
+python3 ../../Projects/Atlas/sites/zensen/deploy/serve-local.py \
+  --directory . --host 0.0.0.0 --port 7120
 ```
+
+The Atlas server uses a threaded standard-library HTTP server for realistic bounded concurrency during local/Tailscale rehearsal. It is still a preproduction server; production uses the approval-gated Nginx pack.
 
 Then verify:
 

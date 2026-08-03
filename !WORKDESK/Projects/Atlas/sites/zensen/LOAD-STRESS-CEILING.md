@@ -3,6 +3,10 @@
 Captured: **2026-08-02**  
 Purpose: **Find the safe preproduction boundary without claiming 10k capacity**
 
+## Latest serving-path receipt — 2026-08-03
+
+The current local/Tailscale process uses the threaded [`deploy/serve-local.py`](deploy/serve-local.py) rehearsal server. The latest bounded run is recorded in [SERVING-PERFORMANCE-REVIEW.md](SERVING-PERFORMANCE-REVIEW.md): Tailscale p99 is `109.33 ms` at 200 requests / 20 workers; local p99 is `1,888.26 ms` at 1,000 requests / 50 workers. Correctness passed on both, but local performance remains a warning.
+
 ## Receipts
 
 | Target | Requests | Concurrency | 2xx | Mean | p95 | p99 | Max | Result |

@@ -12,6 +12,7 @@
     .site { border:1px solid var(--line); border-radius:12px; padding:14px 16px; min-width:230px; background:var(--panel); } .site strong { display:block; font-size:18px; } .site code { color:var(--muted); font-size:12px; }
     .toolbar { display:flex; flex-wrap:wrap; gap:10px; margin:22px 0; } button { border:1px solid var(--line); border-radius:8px; padding:9px 12px; background:var(--panel); color:var(--text); cursor:pointer; } button:hover { border-color:var(--accent); }
     .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:14px; } section { border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:18px; } section[data-state="ready"] { border-color:#466a38; } section[data-state="blocked"] { border-color:#704743; }
+    .board-summary { margin:22px 0 14px; border:1px solid #38586a; border-radius:12px; background:linear-gradient(135deg,#101c24,#11161b); padding:18px; } .board-summary h2 { margin:7px 0 4px; } .board-summary p { margin:5px 0; } .board-summary[data-state="error"] { border-color:#704743; } .stats { display:grid; grid-template-columns:repeat(4,minmax(90px,1fr)); gap:10px; margin:16px 0; } .stat { border:1px solid var(--line); border-radius:9px; padding:10px; background:#0b1116; } .stat strong { display:block; font-size:24px; color:var(--good); } .stat span { color:var(--muted); font-size:12px; } .board-detail { color:var(--muted); font-size:13px; } @media(max-width:650px){ .stats{grid-template-columns:repeat(2,1fr)} }
     .label { display:inline-block; border-radius:99px; padding:2px 8px; font-size:11px; text-transform:uppercase; letter-spacing:.08em; background:#26313a; color:var(--muted); } .ready .label { color:var(--good); background:#1d3420; } .blocked .label { color:var(--bad); background:#3b2020; }
     ul { list-style:none; padding:0; margin:14px 0 0; } li { display:flex; gap:9px; align-items:start; margin:10px 0; } input { accent-color:var(--good); margin-top:4px; } li span { flex:1; } li small { display:block; color:var(--muted); margin-top:2px; }
     .wide { margin-top:14px; } .legend { display:flex; gap:14px; flex-wrap:wrap; color:var(--muted); font-size:13px; } .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:5px; background:var(--warn); } .dot.good { background:var(--good); } .dot.bad { background:var(--bad); }
@@ -21,6 +22,7 @@
 <body>
 <main>
   <div class="top" data-atlas-part="header" data-atlas-version="1.0"><div><div class="label">LOOM / local canonical map</div><h1>Launch checklist</h1><p>A plain-English map of what is ready, what is missing, and where to work next. Current evidence: mapped, AEO identity complete, staging ingress verified. Checkboxes are saved in this browser.</p></div><div class="site"><strong>ZENSEN</strong><code>/zensen/ · canonical: !WORKDESK/Websites/zensensystems</code></div></div>
+  <section class="board-summary" id="board-summary" data-state="loading" aria-live="polite"><span class="label">machine receipt</span><h2>Atlas live board</h2><p id="board-state">Loading the committed launch board…</p><div class="stats"><div class="stat"><strong id="board-complete">—</strong><span>tasks complete</span></div><div class="stat"><strong id="board-pending">—</strong><span>tasks pending</span></div><div class="stat"><strong id="board-partial">—</strong><span>partial receipts</span></div><div class="stat"><strong id="board-providers">—</strong><span>providers active</span></div></div><p class="board-detail" id="board-providers-detail">Provider tracks: loading…</p><p class="board-detail" id="board-performance">Performance boundary: loading…</p><p class="board-detail"><a href="../../../../Websites/_Atlas/launch-board.json">Open the machine-readable launch board →</a></p></section>
   <div class="toolbar"><button type="button" id="all">Show all</button><button type="button" id="open">Show unfinished</button><button type="button" id="reset">Reset checks</button><button type="button" onclick="window.print()">Print</button></div>
   <div class="legend"><span><i class="dot good"></i>ready when all checks pass</span><span><i class="dot"></i>needs a decision or test</span><span><i class="dot bad"></i>currently blocks launch</span></div>
   <div class="grid" id="cards">
@@ -59,9 +61,15 @@
       <li><input type="checkbox"><span>Change one section at a time and run the smoke checklist.</span></li>
       <li><input type="checkbox"><span>Keep a changelog before publishing.</span></li>
     </ul></section>
+    <section data-state="blocked"><span class="label">provider gates</span><h2>7. Hosted staging & first offer</h2><p>Atlas tracks provider readiness separately from launch completion. No provider is active until a real receipt and approval reference exist.</p><ul>
+      <li><input type="checkbox"><span>Approve Railway as a hosted staging candidate and record its HTTPS URL.<small>See <a href="RAILWAY-STAGING-READINESS.md">Railway readiness</a>.</small></span></li>
+      <li><input type="checkbox"><span>Verify hash, <code>/healthz</code>, 404, and bounded smoke on hosted staging.</span></li>
+      <li><input type="checkbox"><span>Define one exact paid ZENSEN offer before creating a Stripe test link.<small>See <a href="STRIPE-OFFER-READINESS.md">Stripe offer readiness</a>.</small></span></li>
+      <li><input type="checkbox"><span>Keep Supabase, Hetzner, Hostinger, FanBasis, and retrieval tooling deferred until their requirement exists.</span></li>
+    </ul></section>
   </div>
   <section class="wide"><span class="label">operating rule</span><h2>Do not break the whole page</h2><p>Before editing, identify the section ID. Edit only that section or its named asset. After editing, check navigation, mobile layout, console errors, forms, SEO metadata, and the deployment preview. If a change crosses sections, document the dependency first.</p><p><a href="README.md">Open the docs map →</a> · <a href="../../../../Websites/_Atlas/launch-board.json">Open the Atlas launch board →</a></p></section>
-  <footer data-atlas-part="footer" data-atlas-version="1.0">Last reviewed: 2026-08-02 · Deployment status: staging verified · <a href="LAUNCH-BASELINE.md">Open launch baseline</a> · <a href="PROVIDER-DECISION.md">Provider decision</a> · <a href="../../../../Websites/_Atlas/launch-board.json">Atlas board</a> · This is a local planning tool, not a security system.</footer>
+  <footer data-atlas-part="footer" data-atlas-version="1.0">Last reviewed: 2026-08-03 · Deployment status: staging verified · <a href="LAUNCH-BASELINE.md">Open launch baseline</a> · <a href="PROVIDER-DECISION.md">Provider decision</a> · <a href="../../../../Websites/_Atlas/launch-board.json">Atlas board</a> · This is a local planning tool, not a security system.</footer>
 </main>
 <script>
   const key='loom:zensen'; const boxes=[...document.querySelectorAll('input[type=checkbox]')];
@@ -71,5 +79,39 @@
   document.querySelector('#all').onclick=()=>document.querySelectorAll('section').forEach(s=>s.hidden=false);
   document.querySelector('#open').onclick=()=>document.querySelectorAll('#cards section').forEach(s=>s.hidden=[...s.querySelectorAll('input')].every(b=>b.checked));
   document.querySelector('#reset').onclick=()=>{boxes.forEach(b=>b.checked=false);save();};
+
+  const boardPath='../../../../Websites/_Atlas/launch-board.json';
+  const boardSummary=document.querySelector('#board-summary');
+  const boardState=document.querySelector('#board-state');
+  const boardComplete=document.querySelector('#board-complete');
+  const boardPending=document.querySelector('#board-pending');
+  const boardPartial=document.querySelector('#board-partial');
+  const boardProviders=document.querySelector('#board-providers');
+  const boardProvidersDetail=document.querySelector('#board-providers-detail');
+  const boardPerformance=document.querySelector('#board-performance');
+  function setText(element,value){ element.textContent=String(value ?? '—'); }
+  function loadBoard(){
+    fetch(boardPath,{cache:'no-store'}).then(response=>{
+      if(!response.ok) throw new Error(`HTTP ${response.status}`);
+      return response.json();
+    }).then(board=>{
+      const counts=board.counts || {};
+      const tracks=Object.entries(board.provider_tracks || {});
+      setText(boardState,`${board.status_label || board.status || 'Board loaded'} · updated ${board.updated || 'unknown'}`);
+      setText(boardComplete,counts.tasks_complete ?? (board.tasks || []).filter(task=>task.state==='complete').length);
+      setText(boardPending,counts.tasks_pending ?? (board.tasks || []).filter(task=>task.state==='pending').length);
+      setText(boardPartial,counts.tasks_with_partial_evidence ?? (board.tasks || []).filter(task=>task.partial_evidence).length);
+      setText(boardProviders,counts.provider_tracks_active ?? tracks.filter(([,track])=>['active','test-active','live-active'].includes(track.state)).length);
+      setText(boardProvidersDetail,`Provider tracks: ${tracks.map(([id,track])=>`${id}=${track.state}`).join(' · ') || 'none'}`);
+      setText(boardPerformance,`Performance boundary: ${board.load_boundary?.status || 'not recorded'} · local p99 ${board.load_boundary?.local_p99_ms ?? '—'} ms · Tailscale p99 ${board.load_boundary?.tailscale_p99_ms ?? '—'} ms`);
+      boardSummary.dataset.state='ready';
+    }).catch(error=>{
+      setText(boardState,`Board unavailable (${error.message}); checklist remains local.`);
+      setText(boardProvidersDetail,'Provider tracks: unavailable');
+      setText(boardPerformance,'Performance boundary: unavailable');
+      boardSummary.dataset.state='error';
+    });
+  }
+  loadBoard();
 </script>
 </body></html>
