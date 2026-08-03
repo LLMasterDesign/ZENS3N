@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+
+  <title>ZENSEN Market Position</title>
+  <link rel="stylesheet" href="zen-fonts.css" >
+
+  <style>
+    :root {
+      --black: #020304;
+      --panel: #080a0d;
+      --panel-high: #0d1014;
+      --white: #f4f7f8;
+      --muted: #929ca6;
+      --dim: #7d8791;
+      --line: rgba(255, 255, 255, 0.12);
+      --line-strong: rgba(255, 255, 255, 0.25);
+
+      /* type ladder — TELEM.TYPE.SCALE.ROM · 10px floor · do not invent sizes */
+      --t-10: 0.625rem;
+      --t-11: 0.6875rem;
+      --t-12: 0.75rem;
+      --t-13: 0.8125rem;
+      --t-14: 0.875rem;
+
+      --radiance:
+        linear-gradient(
+          90deg,
+          #5eeaff 0%,
+          #818cff 22%,
+          #e875ff 46%,
+          #ff8e68 72%,
+          #f7efa7 100%
+        );
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: var(--black);
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--white);
+      background:
+        radial-gradient(
+          circle at 50% -15%,
+          rgba(255, 255, 255, 0.08),
+          transparent 35%
+        ),
+        var(--black);
+      font-family: "DM Mono", "DS Mono", monospace;
+    }
+
+    h1, h2, h3, p { margin: 0; }
+
+    h1, h2, h3, .number, .value, .range,
+    .stage-title, .stage-number, .comp-val {
+      font-family: "Oxanium", sans-serif;
+    }
+
+    .sheet {
+      position: relative;
+      width: min(1440px, calc(100vw - 32px));
+      margin: 16px auto;
+      padding: 20px;
+
+      display: grid;
+      grid-template-columns: 1.3fr 0.85fr;
+      grid-template-rows: auto auto 1fr auto;
+      grid-template-areas:
+        "header header"
+        "strip strip"
+        "gap wedge"
+        "footer footer";
+      gap: 14px;
+
+      border: 1px solid var(--line-strong);
+      border-radius: 20px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.035),
+          transparent 35%
+        ),
+        rgba(4, 5, 7, 0.97);
+
+      box-shadow:
+        0 32px 100px rgba(0, 0, 0, 0.65),
+        inset 0 1px 0 rgba(255, 255, 255, 0.07);
+    }
+
+    .sheet::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 3px;
+      border-radius: 20px 20px 0 0;
+      background: var(--radiance);
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.025),
+          transparent 50%
+        ),
+        var(--panel);
+    }
+
+    /* ── HEADER ── */
+
+    .header {
+      grid-area: header;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 30px;
+      align-items: center;
+      padding: 22px 26px;
+    }
+
+    .brand-line {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 0.68rem;
+      letter-spacing: 0.19em;
+      text-transform: uppercase;
+    }
+
+    .brand-line::before {
+      content: "";
+      width: 36px;
+      height: 2px;
+      background: var(--radiance);
+    }
+
+    h1 {
+      font-size: clamp(2.3rem, 5.4vw, 5.4rem);
+      line-height: 0.9;
+      font-weight: 700;
+      letter-spacing: -0.065em;
+    }
+
+    .subtitle {
+      margin-top: 11px;
+      color: var(--muted);
+      font-size: 0.72rem;
+      line-height: 1.6;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .header-mark {
+      min-width: 235px;
+      padding-left: 26px;
+      border-left: 1px solid var(--line);
+      text-align: right;
+    }
+
+    .header-mark .label {
+      color: var(--muted);
+      font-size: 0.63rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .market-list {
+      margin-top: 10px;
+      list-style: none;
+      padding: 0;
+    }
+
+    .market-list li {
+      color: var(--dim);
+      font-size: var(--t-12);
+      line-height: 1.7;
+      letter-spacing: 0.06em;
+    }
+
+    .market-list li::before {
+      content: "·  ";
+      color: var(--muted);
+    }
+
+    /* ── FAILURE STRIP ── */
+
+    .failure-strip {
+      grid-area: strip;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      overflow: hidden;
+    }
+
+    .failure-stat {
+      position: relative;
+      padding: 17px 20px;
+      border-right: 1px solid var(--line);
+    }
+
+    .failure-stat:last-child {
+      border-right: 0;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: var(--t-12);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .value {
+      margin-top: 7px;
+      font-family: "Oxanium", sans-serif;
+      font-size: clamp(1.25rem, 2.2vw, 2.15rem);
+      line-height: 1;
+      font-weight: 650;
+      letter-spacing: -0.04em;
+    }
+
+    .stat-note {
+      margin-top: 7px;
+      color: var(--dim);
+      font-size: var(--t-11);
+      line-height: 1.45;
+    }
+
+    .stat-src {
+      margin-top: 4px;
+      color: var(--dim);
+      font-size: var(--t-10);
+      letter-spacing: 0.06em;
+      opacity: 0.7;
+    }
+
+    /* ── GAP PANEL ── */
+
+    .gap-panel {
+      grid-area: gap;
+      padding: 20px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: baseline;
+      margin-bottom: 15px;
+    }
+
+    .section-head h2 {
+      font-size: 0.92rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .section-head span {
+      color: var(--muted);
+      font-size: var(--t-11);
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+
+    .competitor-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .competitor {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 4px;
+      padding: 13px 15px;
+
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--panel-high);
+    }
+
+    .competitor.featured {
+      position: relative;
+      border-color: var(--line-strong);
+    }
+
+    .competitor.featured::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 2px;
+      background: var(--radiance);
+      border-radius: 2px 0 0 2px;
+    }
+
+    .comp-name {
+      font-family: "Oxanium", sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.035em;
+    }
+
+    .comp-desc {
+      color: var(--muted);
+      font-size: var(--t-11);
+      line-height: 1.55;
+    }
+
+    .comp-highlight {
+      color: var(--dim);
+      font-size: var(--t-10);
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    /* ── WEDGE PANEL ── */
+
+    .wedge-panel {
+      grid-area: wedge;
+      padding: 20px;
+    }
+
+    .wedge-stack {
+      display: grid;
+      gap: 9px;
+    }
+
+    .quote-card {
+      padding: 14px 16px;
+      border: 1px solid var(--line-strong);
+      border-radius: 10px;
+      background:
+        linear-gradient(
+          100deg,
+          rgba(94, 234, 255, 0.05),
+          rgba(232, 117, 255, 0.04),
+          rgba(255, 142, 104, 0.04)
+        ),
+        #050608;
+    }
+
+    .quote-text {
+      font-size: 0.78rem;
+      line-height: 1.55;
+      font-style: italic;
+    }
+
+    .quote-attr {
+      margin-top: 8px;
+      color: var(--dim);
+      font-size: var(--t-10);
+      letter-spacing: 0.06em;
+    }
+
+    .karp-card {
+      padding: 13px 15px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--panel-high);
+    }
+
+    .karp-quote {
+      color: var(--muted);
+      font-size: var(--t-12);
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    .karp-attr {
+      margin-top: 6px;
+      color: var(--dim);
+      font-size: var(--t-10);
+      letter-spacing: 0.06em;
+    }
+
+    .karp-invariant {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid var(--line);
+      color: var(--white);
+      font-size: var(--t-11);
+      line-height: 1.5;
+      letter-spacing: 0.02em;
+    }
+
+    .use-cases {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--panel-high);
+    }
+
+    .use-case-label {
+      width: 100%;
+      margin-bottom: 4px;
+      color: var(--muted);
+      font-size: var(--t-10);
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .use-case {
+      padding: 4px 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: var(--muted);
+      font-size: var(--t-11);
+      letter-spacing: 0.04em;
+    }
+
+    .comps-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .comps-table th,
+    .comps-table td {
+      padding: 7px 5px;
+      border-bottom: 1px solid var(--line);
+      font-size: var(--t-11);
+      text-align: left;
+    }
+
+    .comps-table th {
+      color: var(--muted);
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .comps-table td.comp-val {
+      font-family: "Oxanium", sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .comps-table td:last-child {
+      color: var(--dim);
+      font-size: var(--t-10);
+    }
+
+    .comps-label {
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: var(--t-11);
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    /* ── FOOTER ── */
+
+    .footer {
+      grid-area: footer;
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 20px;
+      align-items: center;
+      min-height: 50px;
+      padding: 11px 17px;
+
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #030405;
+    }
+
+    .band-nav {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      padding-right: 20px;
+      border-right: 1px solid var(--line);
+    }
+
+    .band-nav a {
+      position: relative;
+      padding: 6px 13px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      color: var(--muted);
+      font-family: "Oxanium", sans-serif;
+      font-size: var(--t-12);
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: color 120ms ease, border-color 120ms ease;
+    }
+
+    .band-nav a:hover {
+      color: var(--white);
+      border-color: var(--line-strong);
+    }
+
+    .band-nav a:focus-visible {
+      outline: 2px solid #5eeaff;
+      outline-offset: 2px;
+    }
+
+    .band-nav a[aria-current="page"] {
+      color: var(--white);
+      border-color: var(--line-strong);
+      background: var(--panel-high);
+    }
+
+    .band-nav a[aria-current="page"]::after {
+      content: "";
+      position: absolute;
+      inset: auto 9px 3px;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--radiance);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .band-nav a { transition: none; }
+    }
+
+    .footer-copy {
+      color: var(--muted);
+      font-size: var(--t-11);
+      line-height: 1.55;
+      letter-spacing: 0.06em;
+    }
+
+    .footer-brand {
+      text-align: right;
+    }
+
+    .footer-brand strong {
+      display: block;
+      font-family: "Oxanium", sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.13em;
+    }
+
+    .footer-brand span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: var(--t-11);
+      letter-spacing: 0.07em;
+    }
+
+    /* ── RESPONSIVE ── */
+
+    @media (max-width: 900px) {
+      .sheet {
+        width: min(100% - 18px, 1440px);
+        margin: 9px auto;
+        padding: 12px;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "header"
+          "strip"
+          "gap"
+          "wedge"
+          "footer";
+      }
+
+      .header {
+        grid-template-columns: 1fr;
+      }
+
+      .header-mark {
+        padding: 16px 0 0;
+        border-top: 1px solid var(--line);
+        border-left: 0;
+        text-align: left;
+      }
+
+      .failure-strip {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .failure-stat:nth-child(2) {
+        border-right: 0;
+      }
+
+      .failure-stat:nth-child(-n + 2) {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .footer {
+        grid-template-columns: 1fr;
+      }
+
+      .band-nav {
+        order: -1;
+        flex-wrap: wrap;
+        padding: 0 0 12px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .footer-brand {
+        text-align: left;
+      }
+    }
+
+    @media print {
+      @page {
+        size: landscape;
+        margin: 0.25in;
+      }
+
+      html, body {
+        width: 100%;
+        height: 100%;
+        background: var(--black);
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      .sheet {
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="sheet">
+
+    <header class="header panel">
+      <div>
+        <div class="brand-line">
+          ZENSEN Systems · Market Position
+        </div>
+
+        <h1>The Market</h1>
+
+        <p class="subtitle">
+          Why the governed agent runtime market is structurally open · July 2026
+        </p>
+      </div>
+
+      <div class="header-mark">
+        <div class="label">6 markets intersected</div>
+        <ul class="market-list">
+          <li>AI coding agents</li>
+          <li>Agent orchestration</li>
+          <li>Local private AI</li>
+          <li>Workflow automation</li>
+          <li>Enterprise knowledge</li>
+          <li>Runtime governance</li>
+        </ul>
+      </div>
+    </header>
+
+    <section class="failure-strip panel">
+
+      <article class="failure-stat">
+        <div class="stat-label">Pilot Failure</div>
+        <div class="value">89%</div>
+        <div class="stat-note">Agent pilots never reach production</div>
+        <div class="stat-src">Gartner, Jun 2025</div>
+      </article>
+
+      <article class="failure-stat">
+        <div class="stat-label">Canceled</div>
+        <div class="value">&gt;40%</div>
+        <div class="stat-note">Agentic projects canceled by 2027</div>
+        <div class="stat-src">Gartner, Jun 2025</div>
+      </article>
+
+      <article class="failure-stat">
+        <div class="stat-label">Real Vendors</div>
+        <div class="value">~130</div>
+        <div class="stat-note">Of thousands claiming agentic capability</div>
+        <div class="stat-src">Gartner, Jun 2025</div>
+      </article>
+
+      <article class="failure-stat">
+        <div class="stat-label">Zero Impact</div>
+        <div class="value">88%</div>
+        <div class="stat-note">Agent POCs never reach production</div>
+        <div class="stat-src">IDC, 2026</div>
+      </article>
+
+    </section>
+
+    <section class="gap-panel panel">
+      <div class="section-head">
+        <h2>The Gap</h2>
+        <span>Competitor landscape</span>
+      </div>
+
+      <div class="competitor-list">
+
+        <article class="competitor">
+          <div class="comp-name">Palantir</div>
+          <div class="comp-desc">
+            Ontology + governance · $1M+ floor · $1.633B Q1 2026 revenue (+85% Y/Y)
+          </div>
+          <div class="comp-highlight">
+            Monetizes the dependency — vendor cannot sell sovereignty over the layer it monetizes
+          </div>
+        </article>
+
+        <article class="competitor">
+          <div class="comp-name">Cursor</div>
+          <div class="comp-desc">
+            Harness + workspace · developers only · $29.3B valuation (Nov 2025)
+          </div>
+          <div class="comp-highlight">
+            Proved the harness pattern — tightly coupled to IDE surface, can't extend beyond coding
+          </div>
+        </article>
+
+        <article class="competitor">
+          <div class="comp-name">Apple</div>
+          <div class="comp-desc">
+            Provider abstraction (Cloud / On-Device / Extension) · App Intents + Foundation Models · ~1B eligible devices
+          </div>
+          <div class="comp-highlight">
+            Closed provider selector · no ontology, no receipts, no governance — zendex fills the routing layer Apple left empty
+          </div>
+        </article>
+
+        <article class="competitor featured">
+          <div class="comp-name">ZENSEN</div>
+          <div class="comp-desc">
+            Harness + ontology + orchestration · local-first · model-independent · receipt-bearing
+          </div>
+          <div class="comp-highlight">
+            Palantir-grade governed agency made accessible to the common person
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="wedge-panel panel">
+      <div class="section-head">
+        <h2>The Wedge</h2>
+        <span>Why now</span>
+      </div>
+
+      <div class="wedge-stack">
+
+        <div class="quote-card">
+          <div class="quote-text">
+            "Harnessing is not the market standard yet. That is the wedge."
+          </div>
+          <div class="quote-attr">— ZENSEN YC F26 Application</div>
+        </div>
+
+        <div class="karp-card">
+          <div class="karp-quote">
+            "Paying for tokens that create no value… stealing the weights and alpha of my business."
+          </div>
+          <div class="karp-attr">— Alex Karp, Palantir CEO · CNBC, June 30, 2026</div>
+          <div class="karp-invariant">
+            Invariant: a vendor cannot sell sovereignty over the layer it monetizes.
+            Palantir proves governance matters. ZENSEN proves it doesn't require a $1M floor.
+          </div>
+        </div>
+
+        <div class="use-cases">
+          <div class="use-case-label">Day 1 surfaces</div>
+          <span class="use-case">Household</span>
+          <span class="use-case">Classroom</span>
+          <span class="use-case">Company</span>
+          <span class="use-case">Builder</span>
+          <span class="use-case">Creator</span>
+          <span class="use-case">Finance</span>
+        </div>
+
+        <div>
+          <div class="comps-label">Comparable valuations</div>
+          <table class="comps-table">
+            <thead>
+              <tr>
+                <th>Company</th>
+                <th>Valuation</th>
+                <th>Signal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Lovable</td>
+                <td class="comp-val">$6.6B</td>
+                <td>$17M ARR → rapid · 3-month breakout · Dec 2025</td>
+              </tr>
+              <tr>
+                <td>Replit</td>
+                <td class="comp-val">$9B</td>
+                <td>~$150M ARR · 40M users · Mar 2026</td>
+              </tr>
+              <tr>
+                <td>Cursor</td>
+                <td class="comp-val">$29.3B</td>
+                <td>&gt;$1B ARR · primary work surface · Nov 2025</td>
+              </tr>
+              <tr>
+                <td>Temporal</td>
+                <td class="comp-val">$5B</td>
+                <td>Durable execution infra · Feb 2026</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-copy">
+        Market data sourced from Gartner (Jun 2025), IDC (2026), Palantir investor relations (Q1 2026),
+        and public funding announcements. All figures dated at point of publication.
+      </div>
+
+      <nav class="band-nav" aria-label="Proof band">
+        <a href="Valuation.html">Valuation</a>
+        <a href="Market.html" aria-current="page">Market</a>
+        <a href="Product.html">Product</a>
+      </nav>
+
+      <div class="footer-brand">
+        <strong>ORION</strong>
+        <span>ÆON // ÆGIS // ÆGen</span>
+      </div>
+    </footer>
+
+  </main>
+</body>
+</html>

@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" >
+  <script>
+    /* served behind a path prefix (/zensen) — relative assets need the
+       trailing slash, so normalize before anything else loads */
+    if (/\/zensen$/.test(location.pathname)) location.replace(location.pathname + '/' + location.hash);
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" >
+  <meta name="robots" content="noindex, nofollow" >
+  <meta name="description" content="Zensen Systems builds runtime infrastructure for persistent AI agents: supervised execution, authorization boundaries, and receipts for every run." >
+
+  <!-- The public domain is the intended canonical destination; noindex remains
+       deliberate until the managed production launch is authorized. -->
+  <link rel="canonical" href="https://zensensystems.com/" >
+  <meta property="og:type" content="website" >
+  <meta property="og:title" content="ZENSEN SYSTEMS" >
+  <meta property="og:description" content="Runtime infrastructure for persistent AI agents." >
+  <meta property="og:url" content="https://zensensystems.com/" >
+  <meta property="og:image" content="https://zensensystems.com/brand/zensen-mark.jpg" >
+  <meta property="og:image:alt" content="ZENSEN Systems mark" >
+  <meta name="twitter:card" content="summary" >
+  <meta name="twitter:title" content="ZENSEN SYSTEMS" >
+  <meta name="twitter:description" content="Runtime infrastructure for persistent AI agents." >
+  <meta name="twitter:image" content="https://zensensystems.com/brand/zensen-mark.jpg" >
+  <meta name="theme-color" content="#020304" >
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Zensen Systems",
+      "url": "https://zensensystems.com/",
+      "description": "Runtime infrastructure for persistent AI agents.",
+      "email": "hello@zensensystems.com"
+    }
+  </script>
+
+  <title>ZENSEN SYSTEMS</title>
+
+  <link rel="stylesheet" href="zen-fonts.css" >
+
+  <style>
+    :root {
+      --black: #020304;
+      --panel: #080a0d;
+      --panel-high: #0d1014;
+      --white: #f4f7f8;
+      --muted: #929ca6;
+      --dim: #7d8791;
+      --line: rgba(255, 255, 255, 0.10);
+      --line-strong: rgba(255, 255, 255, 0.22);
+
+      /* brand — the root */
+      --brand: #ee7a0c;
+      --brand-soft: rgba(238, 122, 12, 0.30);
+
+      /* house glyph colours */
+      --lime: #c6ff00;
+      --lime-glow: rgba(198, 255, 0, 0.34);
+      --bolt: #ff3b30;
+      --bolt-glow: rgba(255, 59, 48, 0.40);
+
+      --rad-1: #5eeaff; --rad-2: #818cff; --rad-3: #e875ff;
+      --rad-4: #ff8e68; --rad-5: #f7efa7;
+      --radiance: linear-gradient(90deg,
+        var(--rad-1) 0%, var(--rad-2) 22%, var(--rad-3) 46%,
+        var(--rad-4) 72%, var(--rad-5) 100%);
+
+      /* emitted from the cube — orange at the node, cooling outward */
+      --glow: linear-gradient(90deg,
+        var(--brand) 0%, var(--rad-4) 18%, var(--rad-3) 48%,
+        var(--rad-2) 76%, var(--rad-1) 100%);
+
+      --t-10: 0.625rem; --t-11: 0.6875rem; --t-12: 0.75rem;
+      --t-13: 0.8125rem; --t-14: 0.875rem;
+
+      --display: 'Oxanium', system-ui, sans-serif;
+      --mono: 'DM Mono', ui-monospace, monospace;
+
+      --gut: clamp(20px, 5vw, 64px);
+      --gut-l: clamp(10px, 2.5vw, 32px);
+
+      /* hero rhythm — one unit, stepped by φ (1 · 1.618 · 2.618 · 4.236) */
+      --u: clamp(7px, 1vw, 13px);
+
+      /* how far the orange rules reach past ZENSEN on each side */
+      --frame-out: clamp(34px, 7.5vw, 100px);
+
+      /* the trunk lives on the left — logo, spine and cubes all key off this */
+      --spine-x: 12px;                 /* left offset of the 2px trunk */
+      --spine-c: 13px;                 /* its centre line */
+      --limb: clamp(28px, 3.5vw, 46px);  /* how far the cards sit off the trunk */
+      --pad: clamp(22px, 3vw, 34px);     /* card inner padding */
+
+      /* card header ladder — genBloc 14px · header ≈ φ² of bloc · sub = header/2 */
+      --h2: clamp(1.4rem, 2.9vw, 2.3rem);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      background: var(--black);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--white);
+      font-family: var(--mono);
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(238, 122, 12, 0.10), transparent 60%),
+        radial-gradient(ellipse 60% 40% at 50% 100%, rgba(129, 140, 255, 0.06), transparent 60%),
+        var(--black);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, p { margin: 0; }
+    h1, h2, h3 { font-family: var(--display); }
+
+    .wrap {
+      width: min(1180px, 100% - var(--gut-l) - var(--gut));
+      margin-left: var(--gut-l);
+      margin-right: var(--gut);
+    }
+
+    /* ══ TOPBAR — invisible sticky anchor ══ */
+
+    .topbar {
+      /* fixed, not sticky — in-app browsers (Telegram etc.) lag sticky
+         recalcs behind their own collapsing chrome */
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 60;
+      padding-block: 9px;
+      padding-top: calc(9px + env(safe-area-inset-top, 0px));
+
+      /* invisible by default — hero keeps its space */
+      background: transparent;
+      border-bottom: 1px solid transparent;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1100ms ease, background 1100ms ease, border-color 1100ms ease;
+    }
+
+    /* same measure as .wrap so the logo lands exactly on the trunk */
+    .bar-in {
+      width: min(1180px, 100% - var(--gut-l) * 2);
+      margin-left: var(--gut-l);
+      margin-right: var(--gut-l);
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      column-gap: 10px;
+    }
+
+    /* line 1 = glyph header · line 2 = the name */
+    .bar-lines { display: grid; gap: 1px; min-width: 0; }
+
+    .rule {
+      display: flex;
+      align-items: baseline;
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
+      margin: 0;
+      color: var(--white);
+      opacity: .9;
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 1.3;
+      letter-spacing: 0;
+    }
+
+    .rule .rl { flex: 0 0 auto; white-space: nowrap; }
+
+    /* the ▂ run — takes the slack, clips as the screen narrows */
+    .rule .rf {
+      flex: 1 1 auto;
+      min-width: 0;
+      overflow: hidden;
+      white-space: nowrap;
+      letter-spacing: 0;
+    }
+
+    .rule .rf::before { content: "▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂"; }
+
+    /* the tag stays pinned right */
+    .rule .rr { flex: 0 0 auto; white-space: nowrap; }
+
+    .bar-brand {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      min-width: 0;
+      font-family: var(--display);
+      font-size: var(--t-13);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+    }
+
+    /* the glyph prefix — mono, compact, same white as the name */
+    .bar-brand .gl {
+      flex: 0 0 auto;
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0;
+      color: var(--white);
+    }
+
+    /* ZENSEN and SYSTEMS carry the same white — never allowed to clip */
+    .bar-brand .nm {
+      flex: 0 0 auto;
+      color: var(--white);
+    }
+
+    /* ⟦⎊⟧ — the master glyph */
+    .mg {
+      color: var(--lime);
+      text-shadow: 0 0 10px var(--lime-glow);
+    }
+
+    /* ⌁ — the bolt between the two words */
+    .bolt {
+      color: var(--bolt);
+      text-shadow: 0 0 10px var(--bolt-glow);
+      font-weight: 600;
+    }
+
+    /* which page you're on — grey, so the brand stays the bright thing */
+    .bar-brand .pg {
+      flex: 0 0 auto;
+      color: var(--muted);
+      font-weight: 400;
+      letter-spacing: 0.06em;
+    }
+
+    /* closing glyph — white, closes line 2 the way the tag closes line 1 */
+    .bar-brand .tail {
+      flex: 0 0 auto;
+      margin-left: auto;
+      padding-left: 10px;
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0;
+      color: var(--white);
+    }
+
+    .ax {
+      color: var(--brand);
+      text-shadow: 0 0 10px rgba(238, 122, 12, .55);
+      font-weight: 600;
+    }
+
+    .topbar.show {
+      opacity: 1;
+      pointer-events: auto;
+      background: rgba(2, 3, 4, 0.72);
+      backdrop-filter: blur(14px) saturate(140%);
+      -webkit-backdrop-filter: blur(14px) saturate(140%);
+      border-bottom-color: var(--line);
+    }
+
+    /* logo sits left of both lines, centred between them,
+       and on the same x as the vertical glow bar */
+    .bar-home {
+      display: block;
+      width: 26px;
+      line-height: 0;
+      text-decoration: none;
+    }
+
+    .bar-home img {
+      width: 26px;
+      height: 26px;
+      object-fit: contain;
+    }
+
+    .bar-home:focus-visible,
+    .burger:focus-visible,
+    .menu a:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 3px;
+    }
+
+    /* anything clickable — 1.7px frame on click, white turning to acid lime.
+       Driven by a .pressed class from JS: :active alone never fires on taps. */
+    a.pressed, button.pressed {
+      border-color: var(--lime);
+      animation: clickframe 380ms ease forwards;
+    }
+
+    @keyframes clickframe {
+      0%   { box-shadow: 0 0 0 2px var(--white); }
+      100% { box-shadow: 0 0 0 2px var(--lime); }
+    }
+
+    /* burger — acid lime, same family as ⟦⎊⟧.
+       Red is reserved for DENY/down states, so it can't mean "menu". */
+    .burger {
+      display: grid;
+      gap: 4px;
+      width: 32px;
+      padding: 8px 6px;
+      margin-right: -6px;          /* sit tighter to the edge, widen the lines */
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .burger i {
+      display: block;
+      height: 1.5px;
+      background: var(--lime);
+      border-radius: 2px;
+      box-shadow: 0 0 7px var(--lime-glow);
+      transition: transform 280ms cubic-bezier(.16,1,.3,1),
+                  opacity 200ms ease,
+                  box-shadow 200ms ease;
+    }
+
+    .burger:hover i { box-shadow: 0 0 12px var(--lime); }
+
+    .burger[aria-expanded="true"] i:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+    .burger[aria-expanded="true"] i:nth-child(2) { opacity: 0; }
+    .burger[aria-expanded="true"] i:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+
+    /* menu */
+    .menu {
+      position: fixed;
+      top: calc(62px + env(safe-area-inset-top, 0px));
+      right: var(--gut);
+      z-index: 59;
+      display: grid;
+      gap: 2px;
+      min-width: 190px;
+      padding: 10px;
+
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(6, 8, 11, 0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 22px 60px rgba(0, 0, 0, .6);
+
+      opacity: 0;
+      transform: translateY(-8px);
+      pointer-events: none;
+      transition: opacity 240ms ease, transform 240ms cubic-bezier(.16,1,.3,1);
+    }
+
+    .menu.open { opacity: 1; transform: none; pointer-events: auto; }
+
+    .menu a {
+      padding: 9px 12px;
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: var(--t-11);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: color 150ms ease, background 150ms ease;
+    }
+
+    .menu a:hover { color: var(--white); background: var(--panel-high); }
+    .menu hr { margin: 5px 2px; border: 0; border-top: 1px solid var(--line); }
+
+    /* ══ HERO — holds space ══ */
+
+    .hero {
+      min-height: 100svh;
+      display: grid;
+      /* top space kept lean so the copy — through the second paragraph —
+         lands inside the first view */
+      grid-template-rows: 0.55fr auto 1fr;
+      justify-items: center;
+      align-content: center;
+      gap: 0;
+      text-align: center;
+      /* +48px puts back the flow space the bar stopped occupying
+         when it went position:fixed */
+      padding: calc(clamp(32px, 6vh, 76px) + 48px) 0 0;
+    }
+
+    /* ── the mark · 3OX cube + ORION ring + roots ── */
+    .mark {
+      width: clamp(150px, 24vw, 300px);
+      height: auto;
+      margin-bottom: calc(var(--u) * 2.618);
+      overflow: visible;          /* the cube travels in from above the box */
+      z-index: 1;                 /* so it passes UNDER the title */
+      transform: translateX(-5px);
+      fill: none;
+      stroke: var(--brand);
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* text sits above the cube's flight path */
+    .lockup, .tagline, .hero-kicker, .hero-line, .hero-sub { position: relative; z-index: 2; }
+
+    .mark .ring  { stroke-width: 7; }
+    .mark .cube3ox { stroke-width: 7; }
+
+    /* the cube's body — opaque, page-black, hides whatever it lands on */
+    .mark .cube-fill { fill: var(--black); stroke: none; }
+
+    /* the real root mark — fades in under the cube once it has slotted */
+    .mark .root-img {
+      opacity: 0;
+      animation: rootfade 1000ms ease 1800ms forwards;
+    }
+
+    @keyframes rootfade { to { opacity: 1; } }
+
+    /* 3OX slots in: drops from above, under the title, into the ring's gap */
+    .mark .cube3ox {
+      transform: translateY(-330px);
+      opacity: 0;
+      animation: slot 1500ms cubic-bezier(.2, .9, .2, 1) 260ms forwards;
+    }
+
+    @keyframes slot {
+      0%   { transform: translateY(-330px); opacity: 0; }
+      12%  { opacity: 1; }
+      82%  { transform: translateY(6px); }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    /* ring draws itself once the cube has landed */
+    .mark .ring path {
+      stroke-dasharray: var(--len, 400);
+      stroke-dashoffset: var(--len, 400);
+      animation: draw 1200ms cubic-bezier(.3, 1, .35, 1) var(--dd, 1500ms) forwards;
+    }
+
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+
+    /* no-JS fallback: knock the white ground out with blending */
+    .bar-home img.raw {
+      mix-blend-mode: screen;
+      filter: invert(1) hue-rotate(180deg) saturate(1.6);
+    }
+
+    /* once JS has produced a true-alpha version, drop the blend hack */
+    .bar-home img.knocked {
+      mix-blend-mode: normal;
+      filter: none;
+    }
+
+    .hero-copy {
+      grid-row: 2;
+      margin-top: calc(var(--u) * 1.618);
+      display: grid;
+      justify-items: center;
+      gap: 0;                       /* each step set explicitly below, in φ */
+    }
+
+    .tagline   { margin-top: calc(var(--u) * 2.618); }
+    .hero-kicker { margin-top: calc(var(--u) * 1.618); }
+    .hero-line { margin-top: calc(var(--u) * 1.618); }
+    .hero-sub  { margin-top: var(--u); }
+
+    /* 前線 → ZENSEN → SYSTEMS, spaced 1.618u : 1u */
+    .lockup {
+      display: grid;
+      justify-items: center;
+      gap: calc(var(--u) * 1.618);
+    }
+
+    .wordmark {
+      display: grid;
+      justify-items: center;
+      font-size: clamp(1.9rem, 8.7vw, 5rem);
+      font-weight: 700;
+      line-height: 0.86;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+
+    .wm-main { display: block; padding-left: 0.28em; }
+
+    /* both minor lines sit at the same size — ZENSEN ÷ φ³ */
+    .sys, .eyebrow { font-size: clamp(0.85rem, 2.2vw, 1.63rem); }
+
+    .sys {
+      font-weight: 500;
+      color: var(--white);
+      transform: translateX(-1px);
+    }
+
+    /* the text inside a flanked line — fixed, never shrinks, never clips */
+    .flank > .t {
+      flex: 0 0 auto;
+      white-space: nowrap;
+    }
+
+    .sys > .t {
+      font-family: var(--display);
+      letter-spacing: 0.16em;
+      margin-right: -0.16em;   /* absorb the trailing letter-space so it centres */
+    }
+
+    /* ── flanked lines: 前線 above, SYSTEMS below.
+       Both rows are locked to ZENSEN's measured width (--frame-w), so their
+       TOTAL spans match and the rules frame the name. The rules take whatever
+       the text leaves — narrower text (前線) therefore gets longer rules. */
+    .flank {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: calc(var(--u) * 1.618);
+      width: calc(var(--frame-w, clamp(280px, 62vw, 620px)) + var(--frame-out) * 2);
+      max-width: 100%;
+    }
+
+    .flank::before, .flank::after {
+      content: "";
+      flex: 1 1 auto;
+      min-width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--brand));
+      transform: scaleX(0);
+      animation: grow 900ms cubic-bezier(.16, 1, .3, 1) var(--d, 0ms) forwards;
+    }
+
+    .flank::before { transform-origin: right center; margin-left: -1px; }
+
+    .flank::after {
+      background: linear-gradient(90deg, var(--brand), transparent);
+      transform-origin: left center;
+    }
+
+    @keyframes grow { to { transform: scaleX(1); } }
+
+    /* ── arrival cascade ── */
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(13px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    .eyebrow, .wm-main, .sys, .tagline, .hero-line, .hero-sub {
+      opacity: 0;
+      animation: rise 860ms cubic-bezier(.16, 1, .3, 1) var(--d, 0ms) forwards;
+    }
+
+    .eyebrow   { --d: 1850ms; }
+    .wm-main   { --d: 2050ms; }
+    .sys       { --d: 2250ms; }
+    .tagline   { --d: 2500ms; }
+    .hero-line { --d: 2750ms; }
+    .hero-sub  { --d: 2950ms; }
+
+    /* 前線 — bracketed out to the width of SYSTEMS below it.
+       Same word, twice: Zensen / 前線 · Systems. */
+    .eyebrow {
+      font-family: var(--display);
+      font-weight: 500;
+      color: var(--brand);
+      margin-left: -10px;
+    }
+
+    .eyebrow > .t {
+      letter-spacing: 0.2em;
+      margin-right: -0.2em;
+    }
+
+    /* the five-year-old line */
+    .tagline {
+      max-width: 40ch;
+      color: var(--white);
+      font-family: var(--display);
+      font-size: clamp(0.86rem, 1.9vw, 1.22rem);
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.45;
+      letter-spacing: 0.005em;
+    }
+
+    .hero-kicker {
+      max-width: 48ch;
+      color: var(--lime);
+      font-family: var(--mono);
+      font-size: clamp(0.72rem, 1.35vw, 0.9rem);
+      line-height: 1.5;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* after the italic line the voice changes — mono, soft, no push */
+    .hero-line {
+      max-width: 46ch;
+      color: #ccd4d9;
+      font-family: var(--mono);
+      font-weight: 400;
+      font-size: clamp(0.86rem, 1.7vw, 1.06rem);
+      line-height: 1.7;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-line em {
+      font-style: normal;
+      color: var(--brand);
+    }
+
+    .hero-sub {
+      max-width: 54ch;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: var(--t-12);
+      line-height: 1.75;
+    }
+
+    .cue {
+      grid-row: 3;
+      align-self: end;
+      display: grid;
+      justify-items: center;
+      gap: 9px;
+      /* keeps its distance from the copy even when the viewport runs short */
+      margin-top: calc(var(--u) * 4.236);
+      padding-bottom: 26px;
+      color: var(--dim);
+      font-size: var(--t-10);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .cue span { display: block; }
+
+    .cue i {
+      display: block;
+      width: 1px;
+      height: 42px;
+      background: linear-gradient(to bottom, var(--brand-soft), transparent);
+    }
+
+    /* ══ BRANCH — the scroll spine ══ */
+
+    .branch {
+      position: relative;
+      padding: clamp(40px, 9vw, 110px) 0 clamp(60px, 10vw, 130px);
+    }
+
+    /* the trunk — left side, under the bar logo */
+    .spine {
+      position: absolute;
+      top: 0;
+      bottom: -200px;            /* extends past the branch into the footer frame */
+      left: var(--spine-x);
+      width: 2px;
+      background: var(--line);
+      border-radius: 2px;
+      -webkit-mask-image: var(--spine-mask, linear-gradient(transparent,transparent));
+      mask-image: var(--spine-mask, linear-gradient(transparent,transparent));
+    }
+
+    .spine-fill {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom,
+        var(--brand) 0%, var(--rad-4) 45%, var(--rad-2) 80%, var(--rad-1) 100%);
+      transform-origin: top center;
+      transform: scaleY(0);
+      border-radius: 2px;
+    }
+
+
+    .lanes {
+      position: relative;
+      display: grid;
+      gap: clamp(56px, 9vw, 118px);
+    }
+
+    /* ── one lane ── */
+
+    .lane { position: relative; }
+
+    /* card runs trunk to wrap edge — the glow line rides its left border.
+       Text keeps its x: the old limb offset moves into padding-left. */
+    .lane > .card { margin-left: 14px; }
+
+    /* ── the card ── */
+
+    .card {
+      position: relative;
+      --bw: 1px;                 /* border width — the cube and glow key off it */
+      padding: var(--pad);
+      /* card edge 14px + border 1px + 21px = 36px — everything sits on bloc depth */
+      padding-left: 21px;
+      display: grid;
+      gap: 13px;
+      align-content: start;
+
+      border: var(--bw) solid var(--line);
+      /* top-left is not a curve — it's the cube node's notch */
+      border-radius: 0 16px 16px 16px;
+      background:
+        linear-gradient(150deg, rgba(255, 255, 255, 0.028), transparent 55%),
+        var(--panel);
+
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 900ms cubic-bezier(.16,1,.3,1),
+                  transform 900ms cubic-bezier(.16,1,.3,1),
+                  border-color 600ms ease;
+    }
+
+    .lane.in .card { opacity: 1; transform: none; }
+    .card:hover { border-color: var(--line-strong); }
+
+    /* ── MVP frame — the whole card wears the glow, sweeping ── */
+    .card.mvp {
+      --bw: 2px;
+      border: var(--bw) solid transparent;
+      background:
+        linear-gradient(150deg, rgba(255, 255, 255, 0.028), transparent 55%) padding-box,
+        linear-gradient(var(--panel), var(--panel)) padding-box,
+        linear-gradient(90deg,
+          var(--brand), var(--rad-4), var(--rad-3),
+          var(--rad-2), var(--rad-1), var(--brand)) border-box;
+      background-size: auto, auto, 300% 100%;
+      box-shadow: 0 0 26px rgba(238, 122, 12, 0.16);
+      animation: mvpsweep 6s linear infinite;
+    }
+
+    .card.mvp:hover { border-color: transparent; }
+
+    @keyframes mvpsweep {
+      from { background-position: 0 0, 0 0, 0% 0; }
+      to   { background-position: 0 0, 0 0, 300% 0; }
+    }
+
+    /* ── the cube node + the bar it emits ──
+       lit only once the vertical trunk has passed this section's top line */
+
+    /* an actual cube — three faces, isometric.
+       Sits on the trunk itself, left of the card, straddling the glow line. */
+    .cube {
+      position: absolute;
+      /* positioned from the card's padding box — subtract the border so the
+         cube centre lands exactly on the trunk's centre line at x=13 */
+      top: calc(-12px - var(--bw));
+      left: calc(-13px - var(--bw));
+      z-index: 3;
+      width: 24px;
+      height: 24px;
+      overflow: visible;
+      filter: drop-shadow(0 0 0 transparent);
+      transition: filter 640ms ease;
+    }
+
+    .cube path {
+      fill: transparent;
+      stroke: var(--brand-soft);
+      stroke-width: 1.1;
+      stroke-linejoin: round;
+      transition: fill 620ms ease 60ms, stroke 620ms ease;
+    }
+
+    /* fills in the trunk's own colours — top lit, sides falling away */
+    .lane.lit .cube path { stroke: var(--brand); }
+    .lane.lit .cube .f-top   { fill: #ffab52; }
+    .lane.lit .cube .f-left  { fill: var(--brand); }
+    .lane.lit .cube .f-right { fill: #a8500a; }
+
+    .lane.lit .cube {
+      filter: drop-shadow(0 0 9px rgba(238, 122, 12, .65));
+    }
+
+    /* horizontal glow — starts on the trunk, passes underneath the cube node,
+       runs the section's top edge, stops where the top-right curve begins */
+    .card::before {
+      content: "";
+      position: absolute;
+      top: calc(0px - var(--bw));
+      left: calc(-1px - var(--bw));   /* starts on the trunk centre, runs the edge */
+      height: 2px;
+      width: 0;
+      border-radius: 2px;
+      background: var(--glow);
+      box-shadow: 0 0 12px rgba(238, 122, 12, .35);
+      transition: width 1150ms cubic-bezier(.22, 1, .28, 1) 400ms;
+    }
+
+    /* full run: trunk → under the cube → across the edge → hands off to the curve */
+    .lane.lit .card::before {
+      width: calc(100% - 15px + var(--bw));
+    }
+
+    /* the right notch — the glow rides the frame's own top-right curve down */
+    .card::after {
+      content: "";
+      position: absolute;
+      top: -1px;
+      right: -1px;
+      width: 17px;
+      height: 17px;
+      border-top: 2px solid var(--rad-1);
+      border-right: 2px solid var(--rad-1);
+      border-top-right-radius: 16px;
+      box-shadow: 0 0 10px rgba(94, 234, 255, .3);
+      pointer-events: none;
+      -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent);
+      mask-image: linear-gradient(to bottom, #000 55%, transparent);
+      opacity: 0;
+      /* lands as the bar's ease-out tail reaches the corner — no early pop */
+      transition: opacity 380ms ease 1220ms;
+    }
+
+    .lane.lit .card::after { opacity: 1; }
+
+    /* line 1 — heading left, sub-heading scooted right as the half-line.
+       The card's own padding puts this on the imprint column already. */
+    .card-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;   /* sub-header rides the upper half of the line */
+      justify-content: space-between;
+      gap: 6px 14px;
+    }
+
+    .lane-tag {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--lime);
+      text-shadow: 0 0 10px var(--lime-glow);
+      font-size: calc(var(--h2) / 2);   /* half the header, exactly */
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .lane-tag::before {
+      content: "";
+      width: 16px;
+      height: 1px;
+      background: var(--brand);
+    }
+
+    .card h2 {
+      font-size: var(--h2);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.045em;
+    }
+
+    /* the glyph bloc on the heading — same family as the bar's line-2 imprint */
+    .card h2 .hb {
+      font-family: var(--mono);
+      font-size: var(--t-14);
+      font-weight: 400;
+      letter-spacing: 0;
+      color: var(--white);
+      opacity: 0.9;
+      vertical-align: middle;    /* centred on the header's optical middle */
+      margin-right: 7px;
+    }
+
+    /* hot rail — line 2 of the bloc: 〔 tag · tag · tag 〕, red dots */
+    .rail {
+      font-family: var(--mono);
+      font-size: var(--t-11);
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .rail b {
+      font-weight: 400;
+      color: var(--bolt);
+    }
+
+    /* the hot rail's brackets — white, like the glyph blocs */
+    .rail i {
+      font-style: normal;
+      color: var(--white);
+      opacity: 0.9;
+    }
+
+    /* line 3 separators — red, same as the rail's */
+    .status b {
+      font-weight: 400;
+      color: var(--bolt);
+    }
+
+    @media (max-width: 480px) {
+      /* tuck in so the longest rail holds one line on a phone */
+      .rail { font-size: var(--t-10); letter-spacing: 0; word-spacing: -0.1em; }
+
+      /* three buttons hold one line on a phone */
+      .links { gap: 6px; }
+      .links a { padding: 7px 11px; font-size: var(--t-10); letter-spacing: 0.06em; }
+      .foot-grid { grid-template-columns: 1fr; gap: 20px; }
+      .foot-right { text-align: left; justify-self: start; }
+    }
+
+    /* qed bloc — closes the section, house style */
+    .qed {
+      margin-top: 3px;
+      color: var(--white);
+      font-family: var(--mono);
+      font-size: var(--t-10);
+      letter-spacing: 0.14em;
+    }
+
+    .qed b {
+      font-weight: 400;
+      color: var(--white);
+      opacity: 0.75;
+    }
+
+    .card p {
+      color: var(--white);
+      font-size: var(--t-12);
+      line-height: 1.72;
+      max-width: 44ch;
+    }
+
+    .status {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 5px 8px;
+      margin-left: 8px;          /* half a depth — the dot lines with 〔 above */
+      color: var(--dim);
+      font-size: var(--t-10);
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+
+    .status::before {
+      content: "";
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--brand);
+      box-shadow: 0 0 0 3px var(--brand-soft);
+    }
+
+    .status.quiet::before { background: var(--dim); box-shadow: none; }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 2px;
+      margin-left: 16px;         /* nested one depth, with the status line */
+    }
+
+    /* the border is the glow bar itself — one gradient, windowed
+       across the row: button 1 orange end, 2 the middle, 3 the cool end */
+    .links a {
+      position: relative;
+      padding: 8px 15px;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      background:
+        linear-gradient(var(--panel), var(--panel)) padding-box,
+        var(--glow) border-box;
+      background-size: auto, 320% 100%;
+      color: var(--white);
+      text-shadow: 0 0 9px rgba(244, 247, 248, 0.45);
+      font-family: var(--display);
+      font-size: var(--t-11);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: filter 160ms ease;
+    }
+
+    .links a:hover { filter: brightness(1.18); }
+
+    .links a:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+
+    .links a:nth-child(1) { background-position: 0 0, 0% 0; }
+    .links a:nth-child(2) { background-position: 0 0, 50% 0; }
+    .links a:nth-child(3) { background-position: 0 0, 100% 0; }
+
+    /* on press the button's own frame turns lime and glows —
+       no second ring around it */
+    .links a.pressed {
+      animation: limeglow 380ms ease forwards;
+    }
+
+    @keyframes limeglow {
+      0%   { border-color: var(--white); box-shadow: 0 0 0 rgba(198, 255, 0, 0); }
+      100% { border-color: var(--lime); box-shadow: 0 0 16px var(--lime-glow); }
+    }
+
+    /* suite roster — plain, unsold */
+    .roster { display: grid; gap: 7px; margin-top: 2px; }
+
+    .roster div {
+      display: grid;
+      grid-template-columns: 8.5em 1fr;
+      gap: 12px;
+      padding-bottom: 7px;
+      border-bottom: 1px solid var(--line);
+      font-size: var(--t-11);
+    }
+
+    .roster div:last-child { border-bottom: 0; padding-bottom: 0; }
+    .roster b { font-family: var(--display); font-weight: 600; letter-spacing: 0.04em; }
+    .roster span { color: var(--dim); }
+
+    /* ══ FOOTER ══ */
+
+    .foot {
+      --foot-m: 5px;
+      padding: 40px 0 50px;
+      width: min(1180px, 100% - var(--foot-m) * 2);
+      margin-left: var(--foot-m);
+      margin-right: var(--foot-m);
+    }
+
+    .foot-in {
+      position: relative;
+      padding: 26px 28px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background:
+        linear-gradient(150deg, rgba(255, 255, 255, 0.025), transparent 55%),
+        var(--panel);
+    }
+
+    .foot-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: clamp(24px, 5vw, 60px);
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .foot-col {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .foot-col h3 {
+      font-family: var(--display);
+      font-size: var(--t-12);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .foot-col a {
+      color: var(--muted);
+      font-size: var(--t-11);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 150ms ease;
+    }
+
+    .foot-col a:hover { color: var(--white); }
+
+    .foot-dim { color: var(--dim); font-size: var(--t-11); letter-spacing: 0.04em; }
+
+    .foot-right { text-align: right; justify-self: end; }
+    .foot-grid > .foot-col:first-child { align-self: end; }
+
+    .foot-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-top: 18px;
+    }
+
+    .foot-brand strong {
+      display: block;
+      font-family: var(--display);
+      font-size: var(--t-13);
+      letter-spacing: 0.14em;
+    }
+
+    .foot-brand span {
+      display: block;
+      margin-top: 3px;
+      color: var(--dim);
+      font-size: var(--t-10);
+      letter-spacing: 0.08em;
+    }
+
+    .fcube {
+      position: absolute;
+      left: calc(var(--gut-l) - var(--foot-m));
+      width: 24px;
+      height: 24px;
+    }
+
+    .fcube path {
+      fill: var(--black);
+      stroke: var(--brand-soft);
+      stroke-width: 1.1;
+      stroke-linejoin: round;
+      transition: fill 620ms ease 60ms, stroke 620ms ease;
+    }
+
+    .fcube.lit { filter: drop-shadow(0 0 9px rgba(238, 122, 12, .65)); }
+    .fcube.lit path { stroke: var(--brand); }
+    .fcube.lit .f-top   { fill: #ffab52; }
+    .fcube.lit .f-left  { fill: var(--brand); }
+    .fcube.lit .f-right { fill: #a8500a; }
+
+    .draft {
+      display: inline-block;
+      padding: 3px 9px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      color: var(--dim);
+      font-size: var(--t-10);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .foot-banner {
+      display: grid;
+      gap: 2px;
+      margin: 18px -28px 0;
+      padding: 18px calc(var(--gut-l) + 4px - var(--foot-m)) 0;
+      border-top: 1px solid var(--line);
+    }
+
+    /* DEBUG — white reference lines */
+    .foot-in::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: calc(var(--gut-l) + var(--spine-c) - var(--foot-m) - 1px);
+      width: 1px;
+      background: white;
+      z-index: 100;
+      pointer-events: none;
+      box-shadow: 23px 0 0 white;
+    }
+    .foot-in::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: calc(var(--gut) - var(--foot-m) - 1px);
+      width: 1px;
+      background: white;
+      z-index: 100;
+      pointer-events: none;
+    }
+
+    .foot-banner .rule:last-child .rr { margin-right: -2px; }
+
+    .foot-meta { color: var(--white); }
+
+    .st {
+      color: var(--lime);
+      text-shadow: 0 0 8px var(--lime-glow);
+    }
+
+    .foot-meta .cbar {
+      flex: 1 1 auto;
+      min-width: 0;
+      align-self: center;
+      height: 2px;
+      margin: 0 9px;
+      border-radius: 2px;
+      background: var(--glow);
+    }
+
+    @media (max-width: 860px) {
+      .foot-brand { flex-wrap: wrap; }
+      .bar-brand { font-size: var(--t-11); gap: 6px; }
+      .rule { font-size: 9px; }
+      /* drop the optional pieces instead of clipping the name */
+      .bar-brand .tail { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .mark .ring path { stroke-dashoffset: 0; animation: none; }
+      .mark .cube3ox { transform: none; opacity: 1; animation: none; }
+      .mark .root-img { opacity: 1; animation: none; }
+      .eyebrow, .wm-main, .sys, .tagline, .hero-kicker, .hero-line, .hero-sub { opacity: 1; animation: none; }
+      .flank::before, .flank::after { transform: scaleX(1); animation: none; }
+      .card { opacity: 1; transform: none; transition: none; }
+      .spine-fill { transform: scaleY(1); }
+      .cube path { stroke: var(--brand); }
+      .cube .f-top { fill: #ffab52; } .cube .f-left { fill: var(--brand); } .cube .f-right { fill: #a8500a; }
+      .card::before { width: calc(100% - 15px + var(--bw)); transition: none; }
+      .card::after { opacity: 1; transition: none; }
+      .card.mvp { animation: none; }
+      .topbar { transition: none; }
+    }
+  </style>
+</head>
+
+<body id="top">
+
+  <!-- ══════ TOPBAR — invisible sticky anchor ══════ -->
+  <div class="topbar" id="topbar">
+    <div class="bar-in">
+      <a class="bar-home" href="#top" aria-label="Zensen Systems — back to top">
+        <img class="bar-mark raw" src="brand/zensen-mark.jpg" alt="" >
+      </a>
+
+      <div class="bar-lines">
+        <p class="rule"><span class="rl">///▙▖▙▖▞▞▙</span><span class="rf" aria-hidden="true"></span><span class="rr">⋮⋮<span class="ax">[ZENSEN]</span>⋮⋮</span></p>
+        <p class="bar-brand"><span class="gl">▛▞//⋮⋮ <span class="mg">⟦⎊⟧</span></span><span class="nm">ZENSEN <span class="bolt">⌁</span> SYSTEMS</span><span class="pg">:: Homepage</span><span class="tail">▞▞</span></p>
+      </div>
+
+      <button type="button" class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu">
+        <i></i><i></i><i></i>
+      </button>
+    </div>
+  </div>
+
+  <nav class="menu" id="menu" aria-label="Sections">
+    <a href="#in3ox">1N3OX</a>
+    <a href="#box">3OX.Ai</a>
+    <a href="#orion">ORION</a>
+    <a href="#warden">WARDEN</a>
+    <a href="#ledg3r">LEDG3R</a>
+    <a href="#aegen">ÆGen{τ}</a>
+    <a href="#suite">Zensen Suite</a>
+    <hr >
+    <a href="spec/Product.html">Product</a>
+    <a href="spec/Market.html">Market</a>
+    <a href="spec/Valuation.html">Valuation</a>
+  </nav>
+
+  <!-- ══════ HERO ══════ -->
+  <header class="hero wrap">
+
+
+    <div class="hero-copy">
+      <svg class="mark" viewBox="0 0 320 400" role="img"
+           aria-label="Zensen mark — the 3OX cube slotted into the ORION ring, roots below">
+
+        <defs>
+          <!-- nest the roots inside the ring — clipped to its inner circle -->
+          <clipPath id="ringclip"><circle cx="160" cy="220" r="147" /></clipPath>
+          <!-- white ground → transparent, ink → exact brand orange.
+               alpha = 1 − blue: white (b=1) clears, orange (b≈.05) stays. -->
+          <filter id="knock" color-interpolation-filters="sRGB">
+            <feColorMatrix type="matrix" values="
+              0 0 0 0 0.933
+              0 0 0 0 0.478
+              0 0 0 0 0.047
+              0 0 -1 1 0" />
+          </filter>
+        </defs>
+
+        <!-- layer 3 · the branch — real roots, nested in the ring, peak under the cube -->
+        <image class="root-img" href="brand/zensen-mark.jpg"
+               x="42" y="115" width="238" height="238"
+               preserveAspectRatio="xMidYMin meet"
+               clip-path="url(#ringclip)" filter="url(#knock)" />
+
+        <!-- layer 2 · ORION — the broken ring -->
+        <g class="ring">
+          <path d="M236 88.4 A152 152 0 0 1 294.2 291.3" />
+          <path d="M272.9 321.7 A152 152 0 0 1 8.1 225.3" />
+          <path d="M8.8 204.1 A152 152 0 0 1 84 88.4" />
+        </g>
+
+        <!-- layer 1 · 3OX — the cube, slides down and slots into the ring.
+             body is filled black so it covers the branch tip beneath it -->
+        <g class="cube3ox">
+          <path class="cube-fill" d="M160 42 L216 72 V134 L160 164 L104 134 V72 Z" />
+          <path d="M160 42 L216 72 L160 102 L104 72 Z" />
+          <path d="M104 72 V134" />
+          <path d="M216 72 V134" />
+          <path d="M160 102 V164" />
+          <path d="M104 134 L160 164 L216 134" />
+        </g>
+      </svg>
+
+      <div class="lockup">
+        <div class="eyebrow flank"><span class="t">前線</span></div>
+        <h1 class="wordmark"><span class="wm-main">ZENSEN SYSTEMS</span></h1>
+        <div class="sys flank"><span class="t">free the systemd <span class="mg">⟦⎊⟧</span></span></div>
+      </div>
+      <p class="tagline">Front Line Architecture for everyday systems.</p>
+      <p class="hero-kicker">ZENSEN is runtime infrastructure for persistent AI agents.</p>
+      <p class="hero-line">
+        The model proposes. The runtime <em>authorizes</em>. The receipts remember.
+      </p>
+      <p class="hero-sub">
+        Zensen is building the model-agnostic runtime that lets a persistent AI agent
+        continue operating correctly while its models, machines, costs, latency,
+        and availability change underneath it.
+      </p>
+    </div>
+
+    <div class="cue" aria-hidden="true">
+      <span>The suite</span>
+      <i></i>
+    </div>
+  </header>
+
+  <!-- ══════ BRANCH ══════ -->
+  <main class="branch wrap">
+    <div class="spine" aria-hidden="true"><div class="spine-fill"></div></div>
+
+    <div class="lanes">
+
+      <!-- 1N3OX — the inbox -->
+      <section id="in3ox" class="lane">
+        <article class="card">
+          <svg class="cube" viewBox="0 0 24 24" aria-hidden="true"><path class="f-top" d="M12 3 20 7.5 12 12 4 7.5Z"/><path class="f-left" d="M4 7.5 12 12 12 21 4 16.5Z"/><path class="f-right" d="M20 7.5 12 12 12 21 20 16.5Z"/></svg>
+          <div class="card-head">
+            <h2><span class="hb">▛▞⋮⋮</span> 1N3OX</h2>
+            <div class="lane-tag">The Inbox</div>
+          </div>
+          <div class="rail"><i>〔</i> inbox <b>·</b> self-routing <i>〕</i></div>
+          <span class="status quiet">Internal</span>
+          <p>
+            The mailbox that sorts itself. Drop anything in — files, notes,
+            tasks — and it routes to the right lane. 1N3OX reads INBOX.
+          </p>
+          <div class="qed">:: <b>∎</b></div>
+        </article>
+      </section>
+
+      <!-- 3OX — where it starts -->
+      <section id="box" class="lane">
+        <article class="card">
+          <svg class="cube" viewBox="0 0 24 24" aria-hidden="true"><path class="f-top" d="M12 3 20 7.5 12 12 4 7.5Z"/><path class="f-left" d="M4 7.5 12 12 12 21 4 16.5Z"/><path class="f-right" d="M20 7.5 12 12 12 21 20 16.5Z"/></svg>
+          <div class="card-head">
+            <h2><span class="hb">▛▞⋮⋮</span> 3OX.Ai</h2>
+            <div class="lane-tag">Where you begin</div>
+          </div>
+          <div class="rail"><i>〔</i> Spark <b>·</b> Brains <b>·</b> Rules <b>·</b> Toolkit <b>·</b> Links <b>·</b> Pulse <i>〕</i></div>
+          <span class="status">Live <b>·</b> tuning</span>
+          <p>
+            The agent framework. A box has six faces — so does an agent. Process,
+            memory, state and executables live inside every 3OX, so the agent
+            survives when the model underneath it changes.
+          </p>
+          <div class="links">
+            <a href="https://corbato-en0.billfish-sirius.ts.net/3ox">3ox.ai</a>
+          </div>
+          <div class="qed">:: <b>∎</b></div>
+        </article>
+      </section>
+
+      <!-- ORION -->
+      <section id="orion" class="lane">
+        <article class="card">
+          <svg class="cube" viewBox="0 0 24 24" aria-hidden="true"><path class="f-top" d="M12 3 20 7.5 12 12 4 7.5Z"/><path class="f-left" d="M4 7.5 12 12 12 21 4 16.5Z"/><path class="f-right" d="M20 7.5 12 12 12 21 20 16.5Z"/></svg>
+          <div class="card-head">
+            <h2><span class="hb">▛▞⋮⋮</span> ORION</h2>
+            <div class="lane-tag">The Ring</div>
+          </div>
+          <div class="rail"><i>〔</i> supervision <b>·</b> continuity <i>〕</i></div>
+          <span class="status quiet">Internal</span>
+          <p>
+            Supervision and continuity. Holds the processes up, restarts what
+            falls, and keeps the line of authority unbroken across the whole
+            platform.
+          </p>
+          <div class="qed">:: <b>∎</b></div>
+        </article>
+      </section>
+
+      <!-- WARDEN -->
+      <section id="warden" class="lane">
+        <article class="card">
+          <svg class="cube" viewBox="0 0 24 24" aria-hidden="true"><path class="f-top" d="M12 3 20 7.5 12 12 4 7.5Z"/><path class="f-left" d="M4 7.5 12 12 12 21 4 16.5Z"/><path class="f-right" d="M20 7.5 12 12 12 21 20 16.5Z"/></svg>
+          <div class="card-head">
+            <h2><span class="hb">▛▞⋮⋮</span> WARDEN</h2>
+            <div class="lane-tag">The Gate</div>
+          </div>
+          <div class="rail"><i>〔</i> policy <b>·</b> deterministic <b>·</b> Rust <i>〕</i></div>
+          <span class="status quiet">Internal</span>
+          <p>
+            Enforcement in code, not judgment. Every action is checked against
+            policy before it runs — it passes the gate or it doesn't.
+          </p>
+          <div class="qed">:: <b>∎</b></div>
+        </article>
+      </section>
+
+      <!-- LEDG3R -->
+      <section id="ledg3r" class="lane">
+        <article class="card">
+          <svg class="cube" viewBox="0 0 24 24" aria-hidden="true"><path class="f-top" d="M12 3 20 7.5 12 12 4 7.5Z"/><path class="f-left" d="M4 7.5 12 12 12 21 4 16.5Z"/><path class="f-right" d="M20 7.5 12 12 12 21 20 16.5Z"/></svg>
+          <div class="card-head">
+            <h2><span class="hb">▛▞⋮⋮</span> LEDG3R</h2>
+            <div class="lane-tag">The Receipts</div>
+          </div>
+          <div class="rail"><i>〔</i> append-only <b>·</b> signed <b>·</b> receipts <i>〕</i></div>
+          <span class="status quiet">Internal</span>
+          <p>
+            The receipt plane. Everything an agent does lands here as a signed,
+            append-only record — what happened, under whose authority.
+            Nothing edits history.
+          </p>
+          <div class="qed">:: <b>∎</b></div>
+        </article>
+      </section>
+
+      <!-- ÆGen{τ} — the MVP, next to last, frame lit -->
+      <section id="aegen" class="lane">
+        <article class="card mvp">
+          <svg class="cube" viewBox="0 0 24 24" aria-hidden="true"><path class="f-top" d="M12 3 20 7.5 12 12 4 7.5Z"/><path class="f-left" d="M4 7.5 12 12 12 21 4 16.5Z"/><path class="f-right" d="M20 7.5 12 12 12 21 20 16.5Z"/></svg>
+          <div class="card-head">
+            <h2><span class="hb">▛▞⋮⋮</span> ÆGen{τ}</h2>
+            <div class="lane-tag">The Runtime</div>
+          </div>
+          <div class="rail"><i>〔</i> Define <b>·</b> Compile <b>·</b> Authorize <b>·</b> Execute <b>·</b> Receipt <i>〕</i></div>
+          <span class="status">MVP <b>·</b> Building <b>·</b> Day 1 <b>·</b> Aug 8 2026</span>
+          <p>
+            Compiles an agent from a cold spec file, holds it to a contract, and
+            writes a receipt for everything it does. Model-independent — swap the
+            brain without losing identity.
+          </p>
+          <div class="links">
+            <a href="spec/Product.html">Product</a>
+            <a href="spec/Market.html">Market</a>
+            <a href="spec/Valuation.html">Valuation</a>
+          </div>
+          <div class="qed">:: <b>∎</b></div>
+        </article>
+      </section>
+
+      <!-- the suite -->
+      <section id="suite" class="lane">
+        <article class="card">
+          <svg class="cube" viewBox="0 0 24 24" aria-hidden="true"><path class="f-top" d="M12 3 20 7.5 12 12 4 7.5Z"/><path class="f-left" d="M4 7.5 12 12 12 21 4 16.5Z"/><path class="f-right" d="M20 7.5 12 12 12 21 20 16.5Z"/></svg>
+          <div class="card-head">
+            <h2><span class="hb">▛▞⋮⋮</span> Zensen Suite</h2>
+            <div class="lane-tag">The Nodes</div>
+          </div>
+          <span class="status quiet">Each in its own lane</span>
+          <div class="roster">
+            <div><b>CMD</b><span>—</span></div>
+            <div><b>Zendex</b><span>Index</span></div>
+            <div><b>Taskor</b><span>Dispatch</span></div>
+            <div><b>ArgOS</b><span>Governor</span></div>
+            <div><b>WrkDsk</b><span>Workstation</span></div>
+            <div><b>CyberDeck</b><span>—</span></div>
+            <div><b>Ender-En0</b><span>—</span></div>
+            <div><b>TelePromptR</b><span>—</span></div>
+          </div>
+          <div class="qed">:: <b>∎</b></div>
+        </article>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ══════ FOOTER ══════ -->
+  <footer class="foot wrap">
+    <div class="foot-in">
+      <span class="draft">Draft · not public</span>
+      <div class="foot-grid">
+        <div class="foot-col">
+          <h3>Contact</h3>
+          <a href="mailto:hello@zensensystems.com">hello@zensensystems.com</a>
+          <a href="https://zensensystems.com">zensensystems.com</a>
+        </div>
+        <div class="foot-col foot-right">
+          <h3>Suite</h3>
+          <a href="#in3ox">1N3OX</a>
+          <a href="#box">3OX.Ai</a>
+          <a href="#orion">ORION</a>
+          <a href="#warden">WARDEN</a>
+          <a href="#ledg3r">LEDG3R</a>
+          <a href="#aegen">ÆGen{τ}</a>
+          <a href="#suite">Zensen Suite</a>
+        </div>
+      </div>
+      <div class="foot-brand">
+        <svg class="fcube" viewBox="0 0 24 24" aria-hidden="true"><path class="f-top" d="M12 3 20 7.5 12 12 4 7.5Z"/><path class="f-left" d="M4 7.5 12 12 12 21 4 16.5Z"/><path class="f-right" d="M20 7.5 12 12 12 21 20 16.5Z"/></svg>
+        <div>
+          <strong>ORION</strong>
+          <span>ÆON // ÆGIS // ÆGen</span>
+        </div>
+      </div>
+      <div class="foot-banner">
+        <p class="rule foot-meta"><span class="rl"><span class="ax">前線</span> <em><b>Front Line Systems</b></em></span><span class="cbar" aria-hidden="true"></span><span class="rr"><span class="st">⌾-26.356.515</span></span></p>
+        <p class="rule"><span class="rl">///▙▖▙▖▞▞▙</span><span class="rf" aria-hidden="true"></span><span class="rr">〘・.°𝚫 〙</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      /* the page is an arrival — refresh always starts at the top,
+         never at the browser's remembered scroll position */
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      window.scrollTo(0, 0);
+
+      /* ── frame the lockup to ZENSEN ──
+         Both flanked rows span exactly the width of the word between them, so
+         the orange rules bracket ZENSEN instead of guessing at a length. The
+         rules flex, so 前線 (narrow) gets long rules and SYSTEMS (wide) short
+         ones — the total span is what matches. Measured, not hardcoded, and
+         re-measured once the webfont lands since metrics shift on swap. */
+      (function frame() {
+        var main = document.querySelector('.wm-main');
+        var lockup = document.querySelector('.lockup');
+        if (!main || !lockup) return;
+
+        function measure() {
+          // clear first so the row width never feeds back into the measurement
+          lockup.style.setProperty('--frame-w', 'auto');
+          var w = main.getBoundingClientRect().width;
+          if (w > 0) lockup.style.setProperty('--frame-w', Math.round(w) + 'px');
+        }
+
+        measure();
+        if (document.fonts && document.fonts.ready) {
+          document.fonts.ready.then(measure);
+        }
+
+        var t;
+        addEventListener('resize', function () {
+          clearTimeout(t);
+          t = setTimeout(measure, 120);
+        });
+      })();
+
+      /* ── measure SVG path lengths for the ring's stroke-draw ── */
+      (function measurePaths() {
+        var mark = document.querySelector('svg.mark');
+        if (!mark) return;
+        mark.querySelectorAll('.ring path').forEach(function (p) {
+          var len = Math.ceil(p.getTotalLength());
+          p.style.setProperty('--len', len);
+        });
+      })();
+
+      /* ── give the mark true transparency ──
+         The source is flat orange on white. Using min(r,g,b) as an inverse
+         alpha lifts the shape cleanly and drops JPEG fringing, then we repaint
+         it in brand orange so the colour is exact rather than compressed. */
+      (function knockout() {
+        var marks = document.querySelectorAll('.bar-mark');
+        var probe = new Image();
+        probe.onload = function () {
+          var w = probe.naturalWidth, h = probe.naturalHeight;
+          var cv = document.createElement('canvas');
+          cv.width = w; cv.height = h;
+          var ctx = cv.getContext('2d');
+          ctx.drawImage(probe, 0, 0);
+
+          var img, px;
+          try {
+            img = ctx.getImageData(0, 0, w, h);
+          } catch (e) {
+            return;                       // canvas blocked — keep the CSS fallback
+          }
+          px = img.data;
+
+          for (var i = 0; i < px.length; i += 4) {
+            var min = Math.min(px[i], px[i + 1], px[i + 2]);
+            px[i]     = 238;              // brand orange
+            px[i + 1] = 122;
+            px[i + 2] = 12;
+            px[i + 3] = 255 - min;        // white → clear, orange → solid
+          }
+
+          ctx.putImageData(img, 0, 0);
+          var url = cv.toDataURL('image/png');
+
+          marks.forEach(function (m) {
+            m.src = url;
+            m.classList.remove('raw');
+            m.classList.add('knocked');
+          });
+        };
+        probe.src = 'brand/zensen-mark.jpg';
+      })();
+
+      /* ── click frame: press any link/button → white flashes to acid lime ── */
+      document.addEventListener('pointerdown', function (e) {
+        var t = e.target.closest && e.target.closest('a, button');
+        if (!t) return;
+        t.classList.remove('pressed');
+        void t.offsetWidth;               // restart the animation on rapid taps
+        t.classList.add('pressed');
+        setTimeout(function () { t.classList.remove('pressed'); }, 460);
+      });
+
+      /* ── topbar reveals once the hero has done its job ── */
+      (function topbar() {
+        var bar = document.getElementById('topbar');
+        var burger = document.getElementById('burger');
+        var menu = document.getElementById('menu');
+        var hero = document.querySelector('.hero');
+
+        function close() {
+          menu.classList.remove('open');
+          burger.setAttribute('aria-expanded', 'false');
+        }
+
+        burger.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var open = menu.classList.toggle('open');
+          burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+
+        document.addEventListener('click', function (e) {
+          if (!menu.contains(e.target) && e.target !== burger) close();
+        });
+
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') close();
+        });
+
+        menu.addEventListener('click', function (e) {
+          if (e.target.tagName === 'A') close();
+        });
+
+        function toggle() {
+          var past = window.scrollY > hero.offsetHeight * 0.66;
+          bar.classList.toggle('show', past);
+          if (!past) close();
+        }
+
+        addEventListener('scroll', toggle, { passive: true });
+        toggle();
+      })();
+
+      if (reduce) {
+        document.querySelectorAll('.lane').forEach(function (l) {
+          l.classList.add('in');
+          l.classList.add('lit');
+        });
+        var fc = document.querySelector('.fcube');
+        if (fc) fc.classList.add('lit');
+        return;
+      }
+
+      // lanes fade in on arrival — early, so the card is standing
+      // before the trunk reaches it and the glow bar fires
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('in');
+            setTimeout(function () { e.target.classList.add('lit'); }, 200);
+            io.unobserve(e.target);
+          }
+        });
+      }, { rootMargin: '0px 0px -4% 0px', threshold: 0.05 });
+
+      document.querySelectorAll('.lane').forEach(function (l) { io.observe(l); });
+
+      // mask the spine so it only shows alongside section cards
+      function buildMask() {
+        var spine = document.querySelector('.spine');
+        var br = document.querySelector('.branch');
+        var lanesWrap = document.querySelector('.lanes');
+        if (!spine || !br || !lanesWrap) return;
+        var spineH = br.offsetHeight + 200;
+        var base = lanesWrap.offsetTop;
+        var sects = [].slice.call(lanesWrap.querySelectorAll('.lane'));
+        var stops = ['transparent 0px'];
+        sects.forEach(function (lane) {
+          var t = base + lane.offsetTop;
+          var b = t + lane.offsetHeight - 20;
+          stops.push('transparent ' + t + 'px');
+          stops.push('white ' + t + 'px');
+          stops.push('white ' + b + 'px');
+          stops.push('transparent ' + b + 'px');
+        });
+        spine.style.setProperty('--spine-mask',
+          'linear-gradient(to bottom,' + stops.join(',') + ')');
+      }
+      buildMask();
+      addEventListener('resize', buildMask);
+
+      // trunk grows with scroll — and lights each node as it passes
+      var branch = document.querySelector('.branch');
+      var fill = document.querySelector('.spine-fill');
+      var lanes = [].slice.call(document.querySelectorAll('.lane'));
+      var fcube = document.querySelector('.fcube');
+      var queued = false;
+
+      function draw() {
+        queued = false;
+        var r = branch.getBoundingClientRect();
+        var vh = window.innerHeight;
+        var p = Math.min(1, Math.max(0, (vh * 0.72 - r.top) / r.height));
+        fill.style.transform = 'scaleY(' + p + ')';
+      }
+
+      function onScroll() {
+        if (!queued) { queued = true; requestAnimationFrame(draw); }
+      }
+
+      addEventListener('scroll', onScroll, { passive: true });
+      addEventListener('resize', onScroll);
+      draw();
+
+      if (fcube) {
+        var fio = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add('lit');
+              fio.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.5 });
+        fio.observe(fcube);
+      }
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+# Local operator and test output
+*.log
+*.tmp
+*.bak
+.DS_Store
+
+# Secrets and machine-local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+
+# Tool output
+coverage/
+reports/
+test-results/
+
+# Atlas operator surface and local rollback archive
+LOOM.html
+_versions/
+__pycache__/
+*.py[cod]
