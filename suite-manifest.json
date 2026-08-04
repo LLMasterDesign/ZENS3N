@@ -130,7 +130,7 @@
       "port": 6050,
       "state": "active-staging",
       "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
-      "source": {"repository": "LLMasterDesign/ZENS3N", "branch": "website/zensensystems", "root": "satellites/3ox.studio"},
+      "source": {"repository": "LLMasterDesign/ZENS3N", "branch": "website/zensensystems", "root": ".", "config": "satellites/3ox.studio/railway.toml"},
       "routes": ["/", "/healthz"]
     },
     {
