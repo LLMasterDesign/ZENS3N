@@ -18,6 +18,12 @@ node deploy/verify-suite-manifest.mjs \
   --railway https://zens3n-production.up.railway.app
 ```
 
+Reconcile the live Railway project against the same manifest:
+
+```bash
+node deploy/verify-railway-graph.mjs
+```
+
 ## Local rehearsal
 
 From this folder:
@@ -72,6 +78,7 @@ re-verified before the hosted surface is said to contain the new node map.
 - `railway.toml` — Railway start and health-check contract
 - `satellites/3ox.studio/` — first source-backed 3OX satellite service
 - `deploy/verify-suite-manifest.mjs` — manifest, gate, and surface verifier
+- `deploy/verify-railway-graph.mjs` — Railway service and metadata reconciler
 
 `3OX-STUDIO` uses the same repository and branch as the suite, with
 `satellites/3ox.studio` as its Railway root and its local `railway.toml` as the
