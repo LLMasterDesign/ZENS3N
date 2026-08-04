@@ -73,4 +73,9 @@ re-verified before the hosted surface is said to contain the new node map.
 - `satellites/3ox.studio/` — first source-backed 3OX satellite service
 - `deploy/verify-suite-manifest.mjs` — manifest, gate, and surface verifier
 
+`3OX-STUDIO` uses the same repository root as the suite, with its Railway
+service contract at `satellites/3ox.studio/railway.toml`; the service command
+starts that satellite server directly. This keeps the GitHub branch as the
+release boundary while allowing the satellite to own its own runtime surface.
+
 The entry SHA-256 for this branch is `16f519789d48a7bb103ee25be44228cba06e1df0958ac8724bd6635e6cacfaa0`. This is a staging branch, not evidence of 10,000-user capacity or public cutover.
