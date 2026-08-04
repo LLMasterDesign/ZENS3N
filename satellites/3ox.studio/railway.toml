@@ -2,7 +2,7 @@
 builder = "railpack"
 
 [deploy]
-startCommand = "python3 satellites/3ox.studio/server.py --host 0.0.0.0 --port $PORT"
+startCommand = "python3 server.py --host 0.0.0.0 --port $PORT"
 healthcheckPath = "/healthz"
 healthcheckTimeout = 30
 restartPolicyType = "ON_FAILURE"
