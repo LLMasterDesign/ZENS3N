@@ -129,6 +129,8 @@
       "role": "studio",
       "port": 6050,
       "state": "active-staging",
+      "public_domain": {"name": "3ox.studio", "state": "not-purchased", "dns": "not-configured"},
+      "live_surfaces": {"local_port": "127.0.0.1:6050", "tailscale_port": "corbato-en0.billfish-sirius.ts.net:6050", "railway_url": "https://3ox-studio-production.up.railway.app"},
       "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
       "source": {"repository": "LLMasterDesign/ZENS3N", "branch": "website/zensensystems", "root": "satellites/3ox.studio", "config": "railway.toml"},
       "routes": ["/", "/healthz"]
