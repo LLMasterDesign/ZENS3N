@@ -1,4 +1,4 @@
-# ZENS3N Atlas
+# [1N]3OX Atlas
 
 One map for the ZENS3N suite, public surfaces, runtime families, source
 boundaries, and unresolved relationships.
@@ -147,4 +147,4 @@ _TRON + CORE.MEM
 4. Bind each node to one source root without copying implementation into Atlas.
 5. Separate the minimum launch suite from the hundred-year suite.
 6. Reconcile local, Tailscale, Railway, and eventual public-domain routes.
-7. Promote only proved relationships from `INBOX.md` into this map.
+7. Promote only proved relationships from inbox entries into this map.
