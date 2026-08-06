@@ -148,4 +148,3 @@ _TRON + CORE.MEM
 5. Separate the minimum launch suite from the hundred-year suite.
 6. Reconcile local, Tailscale, Railway, and eventual public-domain routes.
 7. Promote only proved relationships from `INBOX.md` into this map.
-

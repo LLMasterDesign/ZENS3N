@@ -23,4 +23,3 @@ runtime truth by accident.
 ## Read order
 
 `INBOX.md → MAP.md → suite-manifest.json → named source or runbook`
-

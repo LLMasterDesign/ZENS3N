@@ -46,5 +46,4 @@ Nothing in this file is authoritative.
 
 ## Raw notes
 
-- 
-
+<!-- Drop raw thoughts below. -->
