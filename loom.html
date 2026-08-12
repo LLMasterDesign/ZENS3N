@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="map-source" content="Atlas/_ops/map/Sitemap.md">
+  <meta name="manifest-source" content="suite-manifest.json">
+  <title>LOOM — ZENS3N</title>
+  <style>
+    :root{color-scheme:dark;--bg:#070a0d;--panel:#10161b;--line:#27343d;--text:#edf5f4;--muted:#9aaeb2;--mint:#75e0c4}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 system-ui,sans-serif}
+    main{max-width:960px;margin:auto;padding:28px 22px 64px}a{color:var(--mint)}
+    header,section,footer{border:1px solid var(--line);background:color-mix(in srgb,var(--panel) 92%,transparent);border-radius:14px;padding:22px;margin:16px 0}
+    .eyebrow{color:var(--mint);font:12px ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase}
+    h1{font-size:clamp(32px,6vw,56px);line-height:.95;margin:12px 0 16px;letter-spacing:-.04em}
+    h2{font-size:1.15rem;margin:0 0 12px}p,li{color:var(--muted);max-width:72ch}code{color:#9be15d}
+    pre{overflow:auto;padding:12px;border:1px solid var(--line);border-radius:8px;font:12px/1.45 ui-monospace,monospace;color:var(--muted);white-space:pre-wrap}
+    table{width:100%;border-collapse:collapse;font-size:13px}th,td{border-top:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top;color:var(--muted)}
+    th{color:var(--text);font-weight:600}.batch{margin:10px 0 0;padding:10px 12px;border:1px solid var(--line);border-radius:8px}
+    .batch strong{color:var(--text)}.nodes{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+    .node{border:1px solid var(--line);border-radius:6px;padding:4px 8px;font:12px ui-monospace,monospace;color:var(--muted)}
+    .node[data-state="active-staging"]{color:var(--mint)}.err{color:#f0a0a0}#status{font:12px ui-monospace,monospace;color:var(--muted)}
+    pre.mermaid{background:transparent;border-color:var(--line);color:var(--text)}
+  </style>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({ startOnLoad: false, theme: "dark", securityLevel: "strict" });
+    window.__zens3nMermaid = mermaid;
+  </script>
+</head>
+<body><main>
+  <header>
+    <div class="eyebrow">▛▞ // ZENS3N // LOOM</div>
+    <h1>ZENS3N suite loom</h1>
+    <p>Site loom for this suite. Map data: <code>Atlas/_ops/map/Sitemap.md</code>. Graph: <code>suite-manifest.json</code>.</p>
+    <p><code>data · Sitemap.md</code> + <code>suite-manifest.json</code> → <code>face · loom.html</code></p>
+    <p id="status">Loading map…</p>
+  </header>
+
+  <section id="batches">
+    <h2>Batches · Railway chunks</h2>
+    <div id="batch-root"><p>Waiting for manifest…</p></div>
+  </section>
+
+  <section id="nodes">
+    <h2>Node register</h2>
+    <div id="node-root"><p>Waiting for manifest…</p></div>
+  </section>
+
+  <section id="sitemap-sections">
+    <h2>Sitemap sections</h2>
+    <div id="md-root"><p>Waiting for <code>Sitemap.md</code>…</p></div>
+  </section>
+
+  <footer>
+    <small>ZENS3N suite loom · <a href="./Atlas/_ops/map/Sitemap.md"><code>Sitemap.md</code></a> · <a href="./suite-manifest.json"><code>suite-manifest.json</code></a> · Atlas inbox is <code>[1N]3OX Atlas/</code></small>
+  </footer>
+</main>
+<script>
+(function () {
+  const STATUS = document.getElementById("status");
+  const BATCH = document.getElementById("batch-root");
+  const NODE = document.getElementById("node-root");
+  const MD = document.getElementById("md-root");
+  const notes = [];
+
+  function esc(s) {
+    return String(s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function parseMdSections(text) {
+    const lines = text.replace(/\r\n/g, "\n").split("\n");
+    const sections = [];
+    let cur = null;
+    for (const line of lines) {
+      const m = /^(#{1,3})\s+(.+)$/.exec(line);
+      if (m) {
+        if (cur) sections.push(cur);
+        cur = { level: m[1].length, title: m[2].trim(), body: [] };
+        continue;
+      }
+      if (!cur) continue;
+      cur.body.push(line);
+    }
+    if (cur) sections.push(cur);
+    return sections;
+  }
+
+  function renderFenced(block) {
+    const m = /^```([a-zA-Z0-9_-]*)\n?([\s\S]*?)\n?```$/.exec(block.trim());
+    if (!m) return "<pre>" + esc(block) + "</pre>";
+    const lang = (m[1] || "").toLowerCase();
+    const code = m[2] || "";
+    if (lang === "mermaid") {
+      return '<pre class="mermaid">' + esc(code) + "</pre>";
+    }
+    return "<pre>" + esc(code) + "</pre>";
+  }
+
+  function renderMdBody(bodyLines) {
+    const body = bodyLines.join("\n").trim();
+    if (!body) return "<p><em>empty</em></p>";
+
+    // Split so fences (incl. mermaid) survive mixed table/prose sections.
+    const parts = body.split(/(```[\s\S]*?```)/);
+    return parts
+      .map((part) => {
+        if (!part) return "";
+        if (part.startsWith("```")) return renderFenced(part);
+        if (part.includes("|")) {
+          const rows = part.split("\n").filter((l) => l.trim().startsWith("|"));
+          if (rows.length >= 2) {
+            const cells = (row) =>
+              row
+                .split("|")
+                .slice(1, -1)
+                .map((c) => c.trim());
+            const head = cells(rows[0]);
+            const data = rows.slice(2).map(cells);
+            let html =
+              "<table><thead><tr>" +
+              head.map((h) => "<th>" + esc(h) + "</th>").join("") +
+              "</tr></thead><tbody>";
+            for (const r of data) {
+              html += "<tr>" + r.map((c) => "<td>" + esc(c) + "</td>").join("") + "</tr>";
+            }
+            return html + "</tbody></table>";
+          }
+        }
+        const trimmed = part.trim();
+        if (!trimmed) return "";
+        return trimmed
+          .split(/\n{2,}/)
+          .map((p) => "<p>" + esc(p).replace(/\n/g, "<br>") + "</p>")
+          .join("");
+      })
+      .join("");
+  }
+
+  async function runMermaid() {
+    const nodes = MD.querySelectorAll("pre.mermaid");
+    if (!nodes.length) return;
+    const wait = async () => {
+      for (let i = 0; i < 40; i++) {
+        if (window.__zens3nMermaid) return window.__zens3nMermaid;
+        await new Promise((r) => setTimeout(r, 50));
+      }
+      return null;
+    };
+    const mermaid = await wait();
+    if (!mermaid) {
+      notes.push("mermaid fail");
+      return;
+    }
+    await mermaid.run({ nodes: Array.from(nodes) });
+    notes.push("mermaid ok · " + nodes.length);
+  }
+
+  function renderBatches(manifest) {
+    const batches = manifest.batches || {};
+    const nodes = manifest.nodes || [];
+    const byService = Object.fromEntries(nodes.map((n) => [n.service, n]));
+    const html = Object.entries(batches)
+      .map(([name, list]) => {
+        const chips = list
+          .map((svc) => {
+            const n = byService[svc] || {};
+            const state = n.state || "unknown";
+            const port = n.port != null ? " · " + n.port : "";
+            return (
+              '<span class="node" data-state="' +
+              esc(state) +
+              '">' +
+              esc(svc) +
+              port +
+              " · " +
+              esc(state) +
+              "</span>"
+            );
+          })
+          .join("");
+        return (
+          '<div class="batch"><strong>' +
+          esc(name) +
+          "</strong> · " +
+          list.length +
+          ' node(s)<div class="nodes">' +
+          chips +
+          "</div></div>"
+        );
+      })
+      .join("");
+    BATCH.innerHTML = html || "<p>No batches in manifest.</p>";
+  }
+
+  function renderNodes(manifest) {
+    const nodes = manifest.nodes || [];
+    if (!nodes.length) {
+      NODE.innerHTML = "<p>No nodes in manifest.</p>";
+      return;
+    }
+    let html =
+      "<table><thead><tr><th>Node</th><th>Batch</th><th>Role</th><th>Port</th><th>State</th><th>Identity</th></tr></thead><tbody>";
+    for (const n of nodes) {
+      html +=
+        "<tr><td><code>" +
+        esc(n.service) +
+        "</code></td><td>" +
+        esc(n.batch || "") +
+        "</td><td>" +
+        esc(n.role || "") +
+        "</td><td>" +
+        esc(n.port != null ? n.port : "—") +
+        '</td><td data-state="' +
+        esc(n.state || "") +
+        '">' +
+        esc(n.state || "") +
+        "</td><td>" +
+        esc(n.identity || "") +
+        "</td></tr>";
+    }
+    NODE.innerHTML = html + "</tbody></table>";
+  }
+
+  function renderSitemap(text) {
+    const sections = parseMdSections(text).filter((s) => s.level >= 2);
+    if (!sections.length) {
+      MD.innerHTML = "<p class='err'>No ## sections found in Sitemap.md</p>";
+      return;
+    }
+    MD.innerHTML = sections
+      .map((s) => {
+        return (
+          "<article class='batch'><h2>" +
+          esc(s.title) +
+          "</h2>" +
+          renderMdBody(s.body) +
+          "</article>"
+        );
+      })
+      .join("");
+  }
+
+  async function load() {
+    const mdUrl = new URL("Atlas/_ops/map/Sitemap.md", location.href).href;
+    const manUrl = new URL("suite-manifest.json", location.href).href;
+
+    const mdP = fetch(mdUrl).then((r) => {
+      if (!r.ok) throw new Error("Sitemap.md " + r.status);
+      return r.text();
+    });
+    const manP = fetch(manUrl).then((r) => {
+      if (!r.ok) throw new Error("suite-manifest.json " + r.status);
+      return r.json();
+    });
+
+    try {
+      const man = await manP;
+      renderBatches(man);
+      renderNodes(man);
+      notes.push("manifest ok · " + (man.nodes || []).length + " nodes");
+    } catch (e) {
+      BATCH.innerHTML = "<p class='err'>" + esc(e.message) + "</p>";
+      NODE.innerHTML = "<p class='err'>Manifest unavailable (serve over http, not file://).</p>";
+      notes.push("manifest fail");
+    }
+
+    try {
+      const text = await mdP;
+      renderSitemap(text);
+      notes.push("Sitemap.md ok");
+      await runMermaid();
+    } catch (e) {
+      MD.innerHTML =
+        "<p class='err'>" +
+        esc(e.message) +
+        "</p><p>Open via a local/static server so fetch can read <a href='./Atlas/_ops/map/Sitemap.md'>Sitemap.md</a>.</p>";
+      notes.push("Sitemap fail");
+    }
+
+    STATUS.textContent = notes.join(" · ");
+  }
+
+  load();
+})();
+</script>
+</body>
+</html>

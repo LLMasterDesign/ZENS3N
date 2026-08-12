@@ -1,0 +1,9 @@
+[build]
+builder = "railpack"
+
+[deploy]
+startCommand = "python3 server.py --host 0.0.0.0 --port $PORT"
+healthcheckPath = "/healthz"
+healthcheckTimeout = 30
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 3

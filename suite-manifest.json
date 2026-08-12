@@ -3,7 +3,7 @@
   "schema": "zensen-suite-manifest/v1",
   "version": 1,
   "authoritative": true,
-  "updated": "2026-08-03",
+  "updated": "2026-08-12",
   "project": {
     "name": "ZENS3N-Website",
     "id": "0b264c43-6ca1-4d2c-b269-fb29d5963f5e",
@@ -56,12 +56,13 @@
       "identity": "zensen.live",
       "owner": "ZENSEN Systems",
       "batch": "ZENSEN-SITES",
-      "role": "public-site",
+      "role": "try",
       "port": 6061,
-      "state": "card-only",
+      "state": "active-staging",
       "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
-      "source": null,
-      "routes": []
+      "source": {"repository": "LLMasterDesign/ZENS3N", "branch": "website/zensensystems", "root": "satellites/zensen.live", "config": "railway.toml"},
+      "live_surfaces": {"local_port": "127.0.0.1:6061", "tailscale_port": "corbato-en0.billfish-sirius.ts.net:6061", "railway_url": null},
+      "routes": ["/", "/Notepad", "/Notepad/", "/healthz"]
     },
     {
       "service": "ZENSEN-SOLUTIONS",
@@ -70,12 +71,13 @@
       "identity": "zensen.solutions",
       "owner": "ZENSEN Systems",
       "batch": "ZENSEN-SITES",
-      "role": "public-site",
+      "role": "hire",
       "port": 6062,
-      "state": "card-only",
+      "state": "active-staging",
       "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
-      "source": null,
-      "routes": []
+      "source": {"repository": "LLMasterDesign/ZENS3N", "branch": "website/zensensystems", "root": "satellites/zensen.solutions", "config": "railway.toml"},
+      "live_surfaces": {"local_port": "127.0.0.1:6062", "tailscale_port": "corbato-en0.billfish-sirius.ts.net:6062", "railway_url": null},
+      "routes": ["/", "/healthz"]
     },
     {
       "service": "ZENSEN-SYSTEMS",
@@ -84,12 +86,13 @@
       "identity": "zensen.systems",
       "owner": "ZENSEN Systems",
       "batch": "ZENSEN-SITES",
-      "role": "public-site",
+      "role": "educate",
       "port": 6063,
-      "state": "card-only",
+      "state": "active-staging",
       "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
-      "source": null,
-      "routes": []
+      "source": {"repository": "LLMasterDesign/ZENS3N", "branch": "website/zensensystems", "root": "satellites/zensen.systems", "config": "railway.toml"},
+      "live_surfaces": {"local_port": "127.0.0.1:6063", "tailscale_port": "corbato-en0.billfish-sirius.ts.net:6063", "railway_url": null},
+      "routes": ["/", "/Notepad", "/Notepad/", "/healthz"]
     },
     {
       "service": "ZENSEN-STORE",
@@ -98,12 +101,13 @@
       "identity": "zensen.store",
       "owner": "ZENSEN Systems",
       "batch": "ZENSEN-SITES",
-      "role": "public-site",
+      "role": "own",
       "port": 6064,
-      "state": "card-only",
+      "state": "active-staging",
       "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
-      "source": null,
-      "routes": []
+      "source": {"repository": "LLMasterDesign/ZENS3N", "branch": "website/zensensystems", "root": "satellites/zensen.store", "config": "railway.toml"},
+      "live_surfaces": {"local_port": "127.0.0.1:6064", "tailscale_port": "corbato-en0.billfish-sirius.ts.net:6064", "railway_url": null},
+      "routes": ["/", "/Notepad", "/Notepad/", "/healthz"]
     },
     {
       "service": "ZENSEN-ENTERPRISES",
@@ -145,9 +149,11 @@
       "role": "ai",
       "port": 6051,
       "state": "card-only",
+      "public_domain": {"name": "3ox.ai", "state": "not-purchased", "dns": "not-configured"},
+      "live_surfaces": {"local_port": "127.0.0.1:6051", "tailscale_port": "corbato-en0.billfish-sirius.ts.net:6051", "railway_url": null},
       "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
-      "source": null,
-      "routes": []
+      "source": {"repository": "LLMasterDesign/ZENS3N", "branch": "website/zensensystems", "root": "satellites/3ox.ai", "config": "railway.toml"},
+      "routes": ["/", "/healthz"]
     },
     {
       "service": "3OX-STORE",
