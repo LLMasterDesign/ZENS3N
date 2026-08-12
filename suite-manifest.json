@@ -61,7 +61,7 @@
       "state": "active-staging",
       "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
       "source": {"repository": "LLMasterDesign/ZENS3N", "branch": "website/zensensystems", "root": "satellites/zensen.live", "config": "railway.toml"},
-      "live_surfaces": {"local_port": "127.0.0.1:6061", "tailscale_port": "corbato-en0.billfish-sirius.ts.net:6061", "railway_url": null},
+      "live_surfaces": {"local_port": "127.0.0.1:6061", "tailscale_port": "corbato-en0.billfish-sirius.ts.net:6061", "railway_url": "https://zensen-live-production.up.railway.app"},
       "routes": ["/", "/Notepad", "/Notepad/", "/healthz"]
     },
     {
@@ -76,7 +76,7 @@
       "state": "active-staging",
       "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
       "source": {"repository": "LLMasterDesign/ZENS3N", "branch": "website/zensensystems", "root": "satellites/zensen.solutions", "config": "railway.toml"},
-      "live_surfaces": {"local_port": "127.0.0.1:6062", "tailscale_port": "corbato-en0.billfish-sirius.ts.net:6062", "railway_url": null},
+      "live_surfaces": {"local_port": "127.0.0.1:6062", "tailscale_port": "corbato-en0.billfish-sirius.ts.net:6062", "railway_url": "https://zensen-solutions-production.up.railway.app"},
       "routes": ["/", "/healthz"]
     },
     {
@@ -91,7 +91,7 @@
       "state": "active-staging",
       "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
       "source": {"repository": "LLMasterDesign/ZENS3N", "branch": "website/zensensystems", "root": "satellites/zensen.systems", "config": "railway.toml"},
-      "live_surfaces": {"local_port": "127.0.0.1:6063", "tailscale_port": "corbato-en0.billfish-sirius.ts.net:6063", "railway_url": null},
+      "live_surfaces": {"local_port": "127.0.0.1:6063", "tailscale_port": "corbato-en0.billfish-sirius.ts.net:6063", "railway_url": "https://zensen-systems-production.up.railway.app"},
       "routes": ["/", "/Notepad", "/Notepad/", "/healthz"]
     },
     {
@@ -106,7 +106,7 @@
       "state": "active-staging",
       "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
       "source": {"repository": "LLMasterDesign/ZENS3N", "branch": "website/zensensystems", "root": "satellites/zensen.store", "config": "railway.toml"},
-      "live_surfaces": {"local_port": "127.0.0.1:6064", "tailscale_port": "corbato-en0.billfish-sirius.ts.net:6064", "railway_url": null},
+      "live_surfaces": {"local_port": "127.0.0.1:6064", "tailscale_port": "corbato-en0.billfish-sirius.ts.net:6064", "railway_url": "https://zensen-store-production.up.railway.app"},
       "routes": ["/", "/Notepad", "/Notepad/", "/healthz"]
     },
     {

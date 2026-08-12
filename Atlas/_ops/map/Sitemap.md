@@ -147,10 +147,10 @@ unmapped until the next layer is explicitly added.
 | Surface | Local | Tailscale | Railway | Public DNS |
 |---|---|---|---|---|
 | ZENSEN suite (home) | `127.0.0.1:7120` | port `6060` | `zens3n-production.up.railway.app` | not approved |
-| zensen.live | `127.0.0.1:6061` | port `6061` | pending deploy | not approved |
-| zensen.solutions | `127.0.0.1:6062` | port `6062` | pending deploy | not approved |
-| zensen.systems | `127.0.0.1:6063` | port `6063` | pending deploy | not approved |
-| zensen.store | `127.0.0.1:6064` | port `6064` | pending deploy | not approved |
+| zensen.live | `127.0.0.1:6061` | port `6061` | `zensen-live-production.up.railway.app` | not approved |
+| zensen.solutions | `127.0.0.1:6062` | port `6062` | `zensen-solutions-production.up.railway.app` | not approved |
+| zensen.systems | `127.0.0.1:6063` | port `6063` | `zensen-systems-production.up.railway.app` | not approved |
+| zensen.store | `127.0.0.1:6064` | port `6064` | `zensen-store-production.up.railway.app` | not approved |
 | 3OX Studio | port `6050` | port `6050` | `3ox-studio-production.up.railway.app` | not purchased |
 
 The manifest records declarations. Deployment verifiers and live requests prove
