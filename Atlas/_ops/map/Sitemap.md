@@ -29,7 +29,7 @@ Atlas binds these authorities. It does not replace them.
 | Public `@zensensystems.com` groups + surface→mailto | `ZEN.HUB/website/contacts/contacts.json` |
 | Injection | pages mount `[data-chrome=header\|footer]` + `/chrome/chrome.js` |
 
-Surface primary mailto: home/systems → `hello@` · live → `support@` · store/solutions → `sales@`. No personal Gmail on public intake.
+Surface primary mailto: home/systems → `hello@` · live → `support@` · store → `sales@` · solutions → `solutions@` (secondary `hello@`). Founder seat: `accounts@` (llmaster). No personal Gmail on public intake.
 
 ## Public domain roles (locked)
 
