@@ -13,11 +13,23 @@ boundaries, and unresolved relationships.
 | `../../../` | executable website, satellite source, deployment verifiers | ecosystem-wide canon |
 | `../../../../!WORKDESK/Projects/Atlas/` | public-site Looms, launch gates, rehearsals | suite-node graph |
 | `../../../../ZEN.HUB/` | provider references, specs, patterns, runbooks | project implementation truth |
+| `../../../../ZEN.HUB/website/` | **live page chrome** (header imprint, footer, `css/chrome.css`, `contacts.json`, `chrome.js`) | page body copy / product IA |
+| `../../../chrome/` | published mirror of `ZEN.HUB/website/` (served + satellite copies via `bin/publish-chrome.sh`) | edit locus (edit hub, then publish) |
 | `../../../../_TRON/` | runtime agents, services, stations, and system generation | public-site state |
 | `../../../../../!7HE.BRIDGE/7HE.CITADEL/!CORE.MEM/` | durable contracts and canon | live provider state |
 | Railway and public endpoints | current deployed behavior | design intent or local source truth |
 
 Atlas binds these authorities. It does not replace them.
+
+## Chrome + contacts (P0)
+
+| Item | Authority |
+|---|---|
+| Glow bar · imprint `⋮⋮[0xLHT]⋮⋮` · footer frame · `⋮⋮[crc:…]⋮⋮` | `ZEN.HUB/website/` → publish → `ZENS3N/chrome/` |
+| Public `@zensensystems.com` groups + surface→mailto | `ZEN.HUB/website/contacts/contacts.json` |
+| Injection | pages mount `[data-chrome=header\|footer]` + `/chrome/chrome.js` |
+
+Surface primary mailto: home/systems → `hello@` · live → `support@` · store/solutions → `sales@`. No personal Gmail on public intake.
 
 ## Public domain roles (locked)
 
@@ -161,6 +173,8 @@ current behavior.
 ```text
 ZENS3N repository
 ├── loom.html                 suite loom face (reads Sitemap + manifest)
+├── chrome/                   published UI chrome (from ZEN.HUB/website/)
+├── bin/publish-chrome.sh     hub → chrome + satellite mirrors
 ├── Atlas/_ops/map/           Sitemap.md (map data)
 ├── [1N]3OX Atlas/            inbox for unfinished fragments
 ├── suite-manifest.json       authoritative 21-node graph

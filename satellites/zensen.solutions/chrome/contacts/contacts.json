@@ -1,0 +1,80 @@
+{
+  "domain": "zensensystems.com",
+  "updated": "2026-08-12",
+  "source": "Google Workspace Admin · Groups",
+  "groups": {
+    "accounts": {
+      "email": "accounts@zensensystems.com",
+      "label": "Accounts",
+      "use": "Business software accounts, cloud services, domains"
+    },
+    "billing": {
+      "email": "billing@zensensystems.com",
+      "label": "Billing",
+      "use": "Invoices, subscriptions, payments, refunds"
+    },
+    "finance": {
+      "email": "finance@zensensystems.com",
+      "label": "Finance",
+      "use": "Banking, taxes, grants, accounting"
+    },
+    "hello": {
+      "email": "hello@zensensystems.com",
+      "label": "Hello",
+      "use": "General public inquiries from website"
+    },
+    "invest": {
+      "email": "invest@zensensystems.com",
+      "label": "Invest",
+      "use": "Investors, VC, angels, accelerators"
+    },
+    "legal": {
+      "email": "legal@zensensystems.com",
+      "label": "Legal",
+      "use": "Contracts, IP, trademarks, patents"
+    },
+    "media": {
+      "email": "media@zensensystems.com",
+      "label": "Media",
+      "use": "Marketing, public outreach, branding"
+    },
+    "partners": {
+      "email": "partners@zensensystems.com",
+      "label": "Partners",
+      "use": "Strategic partnerships, alliances"
+    },
+    "press": {
+      "email": "press@zensensystems.com",
+      "label": "Press",
+      "use": "PR, interviews, speaking"
+    },
+    "research": {
+      "email": "research@zensensystems.com",
+      "label": "Research",
+      "use": "Academic collaborations, publications"
+    },
+    "sales": {
+      "email": "sales@zensensystems.com",
+      "label": "Sales",
+      "use": "Licensing, enterprise sales, demos"
+    },
+    "support": {
+      "email": "support@zensensystems.com",
+      "label": "Support",
+      "use": "Customer support, bugs, feature requests"
+    },
+    "systems": {
+      "email": "systems@zensensystems.com",
+      "label": "Systems",
+      "use": "Infrastructure, hosting, networking"
+    }
+  },
+  "surfaces": {
+    "home": { "primary": "hello", "secondary": null },
+    "systems": { "primary": "hello", "secondary": "support" },
+    "live": { "primary": "support", "secondary": null },
+    "store": { "primary": "sales", "secondary": null },
+    "solutions": { "primary": "sales", "secondary": "hello" },
+    "loom": { "primary": "systems", "secondary": null }
+  }
+}

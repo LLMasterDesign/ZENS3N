@@ -1,0 +1,227 @@
+/* ZEN.HUB/website/css/chrome.css — public chrome P0
+   Baselines: Valuation.html · 3ox-map.html */
+
+:root {
+  --black: #020304;
+  --panel: #080a0d;
+  --panel-high: #0d1014;
+  --white: #f4f7f8;
+  --muted: #929ca6;
+  --dim: #7d8791;
+  --line: rgba(255, 255, 255, 0.12);
+  --line-strong: rgba(255, 255, 255, 0.25);
+  --t-10: 0.625rem;
+  --t-11: 0.6875rem;
+  --t-12: 0.75rem;
+  --t-13: 0.8125rem;
+  --t-14: 0.875rem;
+  --radiance: linear-gradient(
+    90deg,
+    #5eeaff 0%,
+    #818cff 22%,
+    #e875ff 46%,
+    #ff8e68 72%,
+    #f7efa7 100%
+  );
+  --mint: #75e0c4;
+}
+
+.zh-page {
+  width: min(960px, calc(100vw - 32px));
+  margin: 16px auto 48px;
+  display: grid;
+  gap: 14px;
+  color: var(--white);
+  font-family: "DM Mono", ui-monospace, monospace;
+}
+
+.zh-header {
+  position: relative;
+  padding: 18px 22px;
+  border: 1px solid var(--line-strong);
+  border-radius: 16px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.035), transparent 35%),
+    rgba(4, 5, 7, 0.97);
+  overflow: hidden;
+}
+
+.zh-header::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  border-radius: 16px 16px 0 0;
+  background: var(--radiance);
+}
+
+.zh-imprint {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: var(--t-11);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+}
+
+.zh-eyebrow {
+  color: var(--mint);
+  font-size: var(--t-11);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin: 0 0 8px;
+}
+
+.zh-title {
+  margin: 0;
+  font-family: "Oxanium", sans-serif;
+  font-size: clamp(1.6rem, 5vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  color: var(--white);
+}
+
+.zh-body {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.02), transparent 50%),
+    var(--panel);
+}
+
+.zh-body p,
+.zh-body li {
+  color: var(--muted);
+  max-width: 68ch;
+  line-height: 1.55;
+}
+
+.zh-body a {
+  color: var(--mint);
+}
+
+.zh-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.zh-btn {
+  display: inline-block;
+  padding: 10px 16px;
+  border: 1px solid var(--mint);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--black);
+  background: var(--mint);
+  font-weight: 600;
+  font-size: var(--t-13);
+}
+
+.zh-btn.ghost {
+  background: transparent;
+  color: var(--mint);
+}
+
+.zh-footer {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px 22px;
+  background: color-mix(in srgb, var(--panel) 92%, transparent);
+  display: grid;
+  gap: 14px;
+}
+
+.zh-footer-copy {
+  color: var(--muted);
+  font-size: var(--t-12);
+  max-width: 68ch;
+  line-height: 1.5;
+}
+
+.zh-footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.zh-footer-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: var(--t-11);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 5px 11px;
+}
+
+.zh-footer-nav a:hover,
+.zh-footer-nav a[aria-current="page"] {
+  color: var(--white);
+  border-color: var(--line-strong);
+}
+
+.zh-footer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.zh-footer-brand strong {
+  display: block;
+  color: var(--white);
+  font-family: "Oxanium", sans-serif;
+  letter-spacing: 0.08em;
+}
+
+.zh-footer-brand span {
+  color: var(--dim);
+  font-size: var(--t-11);
+}
+
+.zh-footer-contact a {
+  color: var(--mint);
+  font-size: var(--t-12);
+  text-decoration: none;
+}
+
+.zh-footer-crc {
+  margin: 0;
+  color: var(--dim);
+  font-size: var(--t-11);
+  letter-spacing: 0.06em;
+  font-family: ui-monospace, "DM Mono", monospace;
+}
+
+.zh-card {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px;
+  margin: 10px 0;
+  color: var(--muted);
+}
+
+.zh-card strong {
+  display: block;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+.zh-rail {
+  font-size: var(--t-12);
+  color: var(--mint);
+  font-family: ui-monospace, monospace;
+}
+
+.zh-chrome-err {
+  color: #f0a0a0;
+  font-size: var(--t-12);
+  padding: 8px 0;
+}

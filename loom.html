@@ -1,60 +1,72 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-surface="loom">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="map-source" content="Atlas/_ops/map/Sitemap.md">
   <meta name="manifest-source" content="suite-manifest.json">
   <title>LOOM — ZENS3N</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Oxanium:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/chrome/css/chrome.css">
   <style>
-    :root{color-scheme:dark;--bg:#070a0d;--panel:#10161b;--line:#27343d;--text:#edf5f4;--muted:#9aaeb2;--mint:#75e0c4}
-    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 system-ui,sans-serif}
-    main{max-width:960px;margin:auto;padding:28px 22px 64px}a{color:var(--mint)}
-    header,section,footer{border:1px solid var(--line);background:color-mix(in srgb,var(--panel) 92%,transparent);border-radius:14px;padding:22px;margin:16px 0}
-    .eyebrow{color:var(--mint);font:12px ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase}
-    h1{font-size:clamp(32px,6vw,56px);line-height:.95;margin:12px 0 16px;letter-spacing:-.04em}
-    h2{font-size:1.15rem;margin:0 0 12px}p,li{color:var(--muted);max-width:72ch}code{color:#9be15d}
-    pre{overflow:auto;padding:12px;border:1px solid var(--line);border-radius:8px;font:12px/1.45 ui-monospace,monospace;color:var(--muted);white-space:pre-wrap}
-    table{width:100%;border-collapse:collapse;font-size:13px}th,td{border-top:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top;color:var(--muted)}
-    th{color:var(--text);font-weight:600}.batch{margin:10px 0 0;padding:10px 12px;border:1px solid var(--line);border-radius:8px}
-    .batch strong{color:var(--text)}.nodes{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+    :root{color-scheme:dark}
+    body{margin:0;background:var(--black)}
+    .zh-body h2{font-size:1.15rem;margin:0 0 12px;color:var(--white)}
+    .zh-body code{color:#9be15d}
+    .zh-body pre{overflow:auto;padding:12px;border:1px solid var(--line);border-radius:8px;font:12px/1.45 ui-monospace,monospace;color:var(--muted);white-space:pre-wrap}
+    .zh-body table{width:100%;border-collapse:collapse;font-size:13px}
+    .zh-body th,.zh-body td{border-top:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top;color:var(--muted)}
+    .zh-body th{color:var(--white);font-weight:600}
+    .batch{margin:10px 0 0;padding:10px 12px;border:1px solid var(--line);border-radius:8px}
+    .batch strong{color:var(--white)}
+    .nodes{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
     .node{border:1px solid var(--line);border-radius:6px;padding:4px 8px;font:12px ui-monospace,monospace;color:var(--muted)}
-    .node[data-state="active-staging"]{color:var(--mint)}.err{color:#f0a0a0}#status{font:12px ui-monospace,monospace;color:var(--muted)}
-    pre.mermaid{background:transparent;border-color:var(--line);color:var(--text)}
+    .node[data-state="active-staging"]{color:var(--mint)}
+    .err{color:#f0a0a0}#status{font:12px ui-monospace,monospace;color:var(--muted)}
+    pre.mermaid{background:transparent;border-color:var(--line);color:var(--white)}
+    section.zh-body{margin:0}
   </style>
   <script type="module">
     import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
     mermaid.initialize({ startOnLoad: false, theme: "dark", securityLevel: "strict" });
     window.__zens3nMermaid = mermaid;
   </script>
+  <script src="/chrome/chrome.js" defer></script>
 </head>
-<body><main>
-  <header>
-    <div class="eyebrow">▛▞ // ZENS3N // LOOM</div>
-    <h1>ZENS3N suite loom</h1>
+<body>
+<main class="zh-page">
+  <div data-chrome="header"
+       data-slot-eyebrow="ZENS3N // LOOM"
+       data-slot-title="ZENS3N suite loom"></div>
+
+  <section class="zh-body">
     <p>Site loom for this suite. Map data: <code>Atlas/_ops/map/Sitemap.md</code>. Graph: <code>suite-manifest.json</code>.</p>
     <p><code>data · Sitemap.md</code> + <code>suite-manifest.json</code> → <code>face · loom.html</code></p>
     <p id="status">Loading map…</p>
-  </header>
+  </section>
 
-  <section id="batches">
+  <section class="zh-body" id="batches">
     <h2>Batches · Railway chunks</h2>
     <div id="batch-root"><p>Waiting for manifest…</p></div>
   </section>
 
-  <section id="nodes">
+  <section class="zh-body" id="nodes">
     <h2>Node register</h2>
     <div id="node-root"><p>Waiting for manifest…</p></div>
   </section>
 
-  <section id="sitemap-sections">
+  <section class="zh-body" id="sitemap-sections">
     <h2>Sitemap sections</h2>
     <div id="md-root"><p>Waiting for <code>Sitemap.md</code>…</p></div>
   </section>
 
-  <footer>
-    <small>ZENS3N suite loom · <a href="./Atlas/_ops/map/Sitemap.md"><code>Sitemap.md</code></a> · <a href="./suite-manifest.json"><code>suite-manifest.json</code></a> · Atlas inbox is <code>[1N]3OX Atlas/</code></small>
-  </footer>
+  <div data-chrome="footer"
+       data-surface="loom"
+       data-slot-copy="ZENS3N suite loom · Sitemap.md + suite-manifest.json · Atlas inbox [1N]3OX Atlas/"
+       data-slot-nav='[{"href":"./","label":"Home"},{"href":"./Atlas/_ops/map/Sitemap.md","label":"Sitemap"},{"href":"./suite-manifest.json","label":"Manifest"},{"href":"./loom.html","label":"Loom","current":true}]'
+       data-slot-crc="∅"></div>
 </main>
 <script>
 (function () {

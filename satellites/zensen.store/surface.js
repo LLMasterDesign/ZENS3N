@@ -6,12 +6,17 @@ window.ZENSEN = window.ZENSEN || {
   store: "https://zensen-store-production.up.railway.app",
   operatorNotepad: "http://corbato-en0.billfish-sirius.ts.net:7075/"
 };
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll("[data-link]").forEach((el) => {
+
+function zensenApplyLinks(root) {
+  const scope = root || document;
+  scope.querySelectorAll("[data-link]").forEach((el) => {
     const key = el.getAttribute("data-link");
     const base = window.ZENSEN[key];
     if (!base) return;
     const path = el.getAttribute("data-path") || "";
     el.setAttribute("href", base.replace(/\/$/, "") + path);
   });
-});
+}
+
+document.addEventListener("DOMContentLoaded", () => zensenApplyLinks(document));
+document.addEventListener("zensenchrome:ready", () => zensenApplyLinks(document));
