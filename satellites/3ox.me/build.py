@@ -284,7 +284,7 @@ def front_door() -> str:
        identity that outlives whatever model or runtime is behind it today.
        This is where a 3ox becomes reachable by name.</p>
 
-    <p class="zh-rail">APEX :: 3ox.me · NAMESPACES :: 1 · PROCESSES :: {{len(PROFILES)}}</p>
+    <p class="zh-rail">APEX :: 3ox.me · NAMESPACES :: 1 · PROCESSES :: {len(PROFILES)}</p>
 
     <h3>How it works</h3>
     <ol class="fd-steps">
@@ -298,8 +298,8 @@ def front_door() -> str:
 
     <h3>See one</h3>
     <div class="p-grid">
-      <a class="p-card" href="https://{{example['name']}}.3ox.me"><b>{{example['glyph']}} {{example['title']}}</b><span>{{example['who'].split('.')[0]}}.</span><em>{{example['name']}}.3ox.me · live</em><span class="p-go">Open →</span></a>
-      <a class="p-card" href="/Zensen/"><b>◈ Zensen</b><span>The first namespace — {{len(PROFILES)}} processes running.</span><em>3ox.me/Zensen/ · live</em><span class="p-go">Open →</span></a>
+      <a class="p-card" href="https://{example['name']}.3ox.me"><b>{example['glyph']} {example['title']}</b><span>{example['who'].split('.')[0]}.</span><em>{example['name']}.3ox.me · live</em><span class="p-go">Open →</span></a>
+      <a class="p-card" href="/Zensen/"><b>◈ Zensen</b><span>The first namespace — {len(PROFILES)} processes running.</span><em>3ox.me/Zensen/ · live</em><span class="p-go">Open →</span></a>
     </div>
 
     <h3>Claim yours</h3>
