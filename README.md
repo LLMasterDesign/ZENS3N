@@ -4,7 +4,7 @@ Canonical static company page and executable suite manifest for ZENSEN Systems.
 
 ## Suite manifest
 
-[`suite-manifest.json`](suite-manifest.json) is the authoritative 21-node graph.
+[`suite-manifest.json`](suite-manifest.json) is the authoritative 24-node graph.
 It records service ownership, batch, role, port, state, source boundary, and
 the Railway private-network reference. Atlas records the manifest hash and node
 count; it does not maintain a second copy of the graph.
@@ -22,6 +22,12 @@ Reconcile the live Railway project against the same manifest:
 
 ```bash
 node deploy/verify-railway-graph.mjs
+```
+
+Reconcile only the SysGen batch while other Suite edits are in flight:
+
+```bash
+node deploy/verify-railway-graph.mjs --batch SYSGEN
 ```
 
 ## Local rehearsal
@@ -61,8 +67,9 @@ The Railway entry view is the `ZENSEN SYSTEM SUITE` hub at `#suite`. It lists
 the internal suite nodes, the six ZENSEN site nodes on `6060`, `6061`, `6062`,
 `6063`, `6064`, and `6066`, and the
 three separately routed 3OX site nodes on `6050–6052`. Every site node links
-back to `#suite`; card-only domains remain publication-pending until DNS is
-approved.
+back to `#suite`. The SysGen pair reserves `6100` for release-gated installer
+distribution and serves docs plus evidence Q&A from `6101`; card-only domains
+remain publication-pending until DNS is approved.
 
 The source implementation is `index.html`. The hosted readiness receipt in
 Atlas records the last deployed hash; this source change must be deployed and

@@ -7,7 +7,8 @@
 
   const SCRIPT = document.currentScript;
   const DEFAULT_BRAND_HTML =
-    "<strong>ORION</strong><span>ÆON // ÆGIS // ÆGen</span>";
+    '<strong>3OX</strong> <span class="sl">//</span> <span class="brk">〔</span> <span>Zensen</span><span class="rail-dot">·</span><span>Ender</span> <span class="brk">〕</span>';
+  const SIRIUS_EPOCH_UTC = new Date(2025, 7, 8, 3, 35, 0).getTime();
 
   function scriptBase() {
     if (window.ZENSEN_CHROME_BASE) {
@@ -123,9 +124,98 @@
   }
 
   function crcLine(value) {
-    const token = value && value !== "" ? value : "∅";
-    if (token.indexOf("crc:") === 0) return "⋮⋮[" + token + "]⋮⋮";
-    return "⋮⋮[crc:" + token + "]⋮⋮";
+    let token = value && value !== "" ? String(value) : "∅";
+    if (token.indexOf("crc:") === 0) token = token.slice(4);
+    return "⋮⋮" + token + ":crc⋮⋮";
+  }
+
+  function metaFloor(meta) {
+    const lead = meta.querySelector(".meta-lead");
+    const segs = Array.from(meta.querySelectorAll(".path .seg"));
+    const prevMin = meta.style.minWidth;
+    meta.style.minWidth = "0px";
+    if (lead) lead.hidden = true;
+    segs.forEach(function (s) { s.hidden = true; });
+    const w = meta.scrollWidth;
+    if (lead) lead.hidden = false;
+    segs.forEach(function (s) { s.hidden = false; });
+    meta.style.minWidth = prevMin;
+    return w;
+  }
+
+  function foldMeta(meta) {
+    if (!meta) return;
+    const lead = meta.querySelector(".meta-lead");
+    const segs = Array.from(meta.querySelectorAll(".path .seg"));
+    const floor = metaFloor(meta);
+    meta.style.minWidth = floor + "px";
+    const frame = meta.closest(".foot-frame");
+    const title = frame && frame.querySelector(".foot-title");
+    if (frame && title) {
+      const inner = frame.clientWidth - 34;
+      meta.style.flexBasis = (title.offsetWidth + floor > inner) ? "100%" : "";
+    }
+    if (lead) lead.hidden = false;
+    segs.forEach(function (s) { s.hidden = false; });
+    function overflow() {
+      return meta.scrollWidth > meta.clientWidth + 1;
+    }
+    var i = 0;
+    while (overflow() && i < segs.length) {
+      segs[i].hidden = true;
+      i += 1;
+    }
+    if (overflow() && lead) lead.hidden = true;
+  }
+
+  function watchMeta(root) {
+    const meta = root.querySelector(".foot-meta");
+    if (!meta) return;
+    const run = function () { foldMeta(meta); };
+    run();
+    if (typeof ResizeObserver !== "undefined") {
+      const ro = new ResizeObserver(run);
+      ro.observe(meta);
+      const frame = root.classList && root.classList.contains("foot-frame") ? root : root.querySelector(".foot-frame");
+      if (frame) ro.observe(frame);
+    }
+    window.addEventListener("resize", run);
+  }
+
+  function fillBanner(fill) {
+    if (!fill) return;
+    var n = 220;
+    fill.textContent = "▂".repeat(n);
+    var w = fill.clientWidth;
+    if (!w) return;
+    while (n > 6 && fill.scrollWidth > w) {
+      n--;
+      fill.textContent = "▂".repeat(n);
+    }
+    while (n < 800 && fill.scrollWidth <= w) {
+      n++;
+      fill.textContent = "▂".repeat(n);
+      if (fill.scrollWidth > fill.clientWidth) {
+        n--;
+        fill.textContent = "▂".repeat(n);
+        break;
+      }
+    }
+  }
+
+  function watchBanner(root) {
+    var banner = root.querySelector(".head-banner");
+    var fill = root.querySelector(".head-banner .rf");
+    if (!banner || !fill) return;
+    var run = function () { fillBanner(fill); };
+    run();
+    if (typeof ResizeObserver !== "undefined") {
+      var ro = new ResizeObserver(run);
+      ro.observe(banner);
+      var frame = root.classList && root.classList.contains("zh-header") ? root : root.querySelector(".zh-header");
+      if (frame) ro.observe(frame);
+    }
+    window.addEventListener("resize", run);
   }
 
   function applyHeader(mount, html) {
@@ -133,21 +223,38 @@
     const root = mount.querySelector("[data-chrome-root]") || mount;
     fillSlot(root, "eyebrow", attr(mount, "data-slot-eyebrow"), false);
     fillSlot(root, "title", attr(mount, "data-slot-title"), false);
+    var hex = attr(mount, "data-slot-hex");
+    if (hex) {
+      var hexEl = root.querySelector('[data-slot="hex"]');
+      if (hexEl) hexEl.textContent = "⋮⋮[" + hex + "]⋮⋮";
+    }
+    watchBanner(root);
+  }
+
+  function siriusStamp() {
+    const elapsed = Date.now() - SIRIUS_EPOCH_UTC;
+    const days = Math.floor(elapsed / 864e5);
+    const remainder = elapsed - days * 864e5;
+    const fff = String(Math.min(999, Math.floor((remainder * 1000) / 864e5))).padStart(3, "0");
+    return "⌾-26." + days + "." + fff;
   }
 
   function applyFooter(mount, html, contacts) {
     mount.innerHTML = html;
     const root = mount.querySelector("[data-chrome-root]") || mount;
-    fillSlot(root, "copy", attr(mount, "data-slot-copy"), false);
+    const copyRaw = attr(mount, "data-slot-copy");
+    if (copyRaw) fillSlot(root, "copy", copyRaw, true);
 
     const navEl = root.querySelector('[data-slot="nav"]');
     if (navEl) renderNav(navEl, parseNav(attr(mount, "data-slot-nav")));
 
     const brandRaw = attr(mount, "data-slot-brand");
     const brandEl = root.querySelector('[data-slot="brand"]');
-    if (brandEl) {
-      if (brandRaw) brandEl.innerHTML = brandRaw;
-      else if (!brandEl.innerHTML.trim()) brandEl.innerHTML = DEFAULT_BRAND_HTML;
+    if (brandEl && brandRaw) {
+      brandEl.innerHTML = brandRaw;
+    } else {
+      const run = root.querySelector(".title-run");
+      if (run) run.innerHTML = DEFAULT_BRAND_HTML;
     }
 
     const contactEl = root.querySelector('[data-slot="contact"]');
@@ -158,8 +265,43 @@
 
     const crcEl = root.querySelector('[data-slot="crc"]');
     if (crcEl) {
-      const crc = attr(mount, "data-slot-crc") || "∅";
-      crcEl.textContent = crcLine(crc);
+      crcEl.textContent = crcLine(attr(mount, "data-slot-crc") || "∅");
+    }
+
+    const stampEl = root.querySelector('[data-slot="stamp"]');
+    if (stampEl) {
+      const frozen = attr(mount, "data-slot-stamp");
+      if (frozen) {
+        stampEl.textContent = frozen;
+      } else {
+        const tick = function () {
+          stampEl.textContent = siriusStamp();
+        };
+        tick();
+        if (window.__zhSirius) clearInterval(window.__zhSirius);
+        window.__zhSirius = setInterval(tick, 1000);
+      }
+    }
+
+    watchMeta(root);
+
+    var portEl = root.querySelector(".port");
+    var syncDot = root.querySelector(".sync-dot");
+    if (portEl && syncDot) {
+      var port = portEl.textContent.trim();
+      var syncUrl = "http://127.0.0.1" + port + "/api/health";
+      var lead = root.querySelector(".meta-lead");
+      if (lead) {
+        var syncLink = document.createElement("a");
+        syncLink.href = syncUrl;
+        syncLink.textContent = "sync";
+        syncLink.style.cssText = "color:inherit;text-decoration:none;";
+        var firstText = lead.firstChild;
+        if (firstText && firstText.nodeType === 3 && firstText.textContent.indexOf("sync") !== -1) {
+          firstText.textContent = firstText.textContent.replace("sync", "");
+          lead.insertBefore(syncLink, lead.firstChild);
+        }
+      }
     }
   }
 

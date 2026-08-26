@@ -9,7 +9,7 @@ boundaries, and unresolved relationships.
 
 | Authority | Owns | Does not own |
 |---|---|---|
-| `../../../suite-manifest.json` | 21-node suite graph, batches, ports, states, source bindings | explanatory architecture |
+| `../../../suite-manifest.json` | 24-node suite graph, batches, ports, states, source bindings | explanatory architecture |
 | `../../../` | executable website, satellite source, deployment verifiers | ecosystem-wide canon |
 | `../../../../!WORKDESK/Projects/Atlas/` | public-site Looms, launch gates, rehearsals | suite-node graph |
 | `../../../../ZEN.HUB/` | provider references, specs, patterns, runbooks | project implementation truth |
@@ -123,6 +123,7 @@ unmapped until the next layer is explicitly added.
 | `SUITE` | 1 | suite edge and primary map | active staging |
 | `ZENSEN-SITES` | 5 | public company surfaces | live/systems/store/solutions scaffolding; enterprises card-only |
 | `3OX` | 3 | studio, AI, and store surfaces | studio active; two card-only |
+| `SYSGEN` | 2 | installer distribution and docs/evidence | docs active-staging; installer release-gated |
 | `ÆGEN` | 3 | runtime, governance, runtime receipt | card-only |
 | `CONTROL` | 3 | supervision, policy gate, receipts | card-only |
 | `STRATA-OP` | 3 | strata operations, index, workstation | card-only |
@@ -141,10 +142,12 @@ unmapped until the next layer is explicitly added.
 | `3OX-STUDIO` | 3OX | studio | 6050 | active-staging | `satellites/3ox.studio/` |
 | `3OX.Ai` | 3OX | ai | 6051 | card-only | unbound |
 | `3OX-STORE` | 3OX | store | 6052 | card-only | unbound |
+| `SYSGEN-SH` | SYSGEN | installer-distribution | 6100 | release-gated | Railway service; release source not connected |
+| `SYSGEN-DEV` | SYSGEN | docs-sdk-evidence | 6101 | active-staging | `ZENSEN.CMD/SYSCOM/sysgen/[DROP]` |
 | `ÆGen` | ÆGEN | runtime | — | card-only | unbound |
 | `ÆGIS` | ÆGEN | governance | — | card-only | unbound |
 | `ÆGen{τ}` | ÆGEN | runtime-receipt | — | card-only | unbound |
-| `ORION` | CONTROL | supervision | — | card-only | unbound |
+| `ORION` | CONTROL | supervision | 8400 | active-staging | `orion/` Mix satellite + en0 Gen band |
 | `WARDEN` | CONTROL | policy-gate | — | card-only | unbound |
 | `LEDG3R` | CONTROL | receipts | — | card-only | unbound |
 | `1N3OX` | STRATA-OP | strata-ops | — | card-only | unbound |
@@ -164,6 +167,7 @@ unmapped until the next layer is explicitly added.
 | zensen.systems | `127.0.0.1:6063` | port `6063` | `zensen-systems-production.up.railway.app` | not approved |
 | zensen.store | `127.0.0.1:6064` | port `6064` | `zensen-store-production.up.railway.app` | not approved |
 | 3OX Studio | port `6050` | port `6050` | `3ox-studio-production.up.railway.app` | not purchased |
+| SysGen docs | `127.0.0.1:6101` | unassigned | `sysgen-dev-production.up.railway.app` | `doc.sysgen.dev` CNAME pending |
 
 The manifest records declarations. Deployment verifiers and live requests prove
 current behavior.
@@ -177,7 +181,7 @@ ZENS3N repository
 ├── bin/publish-chrome.sh     hub → chrome + satellite mirrors
 ├── Atlas/_ops/map/           Sitemap.md (map data)
 ├── [1N]3OX Atlas/            inbox for unfinished fragments
-├── suite-manifest.json       authoritative 21-node graph
+├── suite-manifest.json       authoritative 24-node graph
 ├── index.html                suite presentation (home)
 ├── deploy/                   graph and surface verification
 ├── satellites/zensen.live/   try surface

@@ -24,15 +24,20 @@ const requireField = (condition, message) => { if (!condition) failures.push(mes
 const nodes = Array.isArray(manifest.nodes) ? manifest.nodes : [];
 const names = new Set(nodes.map((node) => node.service));
 const ports = new Set();
+const batchMembers = new Set();
 
 requireField(manifest.authoritative === true, 'manifest must declare authoritative=true');
 requireField(manifest.schema === 'zensen-suite-manifest/v1', 'manifest schema is not zensen-suite-manifest/v1');
-requireField(nodes.length === 21, `expected 21 nodes, found ${nodes.length}`);
-requireField(Object.keys(manifest.batches || {}).length === 7, 'expected seven declared batches');
+requireField(nodes.length > 0, 'manifest has no nodes');
+requireField(names.size === nodes.length, 'manifest contains duplicate service names');
+requireField(Object.keys(manifest.batches || {}).length > 0, 'manifest has no declared batches');
 
 for (const node of nodes) {
-  for (const field of ['service', 'service_id', 'kind', 'identity', 'owner', 'batch', 'role', 'state', 'private_network']) {
+  for (const field of ['service', 'kind', 'identity', 'owner', 'batch', 'role', 'state', 'private_network']) {
     requireField(node[field] !== undefined && node[field] !== '', `${node.service || '<unnamed>'} missing ${field}`);
+  }
+  if (node.state === 'active-staging') {
+    requireField(node.service_id !== undefined && node.service_id !== '', `${node.service || '<unnamed>'} missing service_id`);
   }
   requireField(manifest.batches?.[node.batch]?.includes(node.service), `${node.service} is not listed in batch ${node.batch}`);
   requireField(node.private_network?.domain === manifest.network?.suite_private_domain, `${node.service} private domain mismatch`);
@@ -44,9 +49,14 @@ for (const node of nodes) {
 }
 
 for (const [batch, members] of Object.entries(manifest.batches || {})) {
-  requireField(members.length === 1 || members.length === 3 || batch === 'ZENSEN-SITES', `${batch} is not a valid batch shape`);
-  for (const member of members) requireField(names.has(member), `${batch} references unknown node ${member}`);
+  requireField(members.length >= 1, `${batch} is empty`);
+  for (const member of members) {
+    requireField(names.has(member), `${batch} references unknown node ${member}`);
+    requireField(!batchMembers.has(member), `${member} is listed in more than one batch`);
+    batchMembers.add(member);
+  }
 }
+requireField(batchMembers.size === nodes.length, `batch membership covers ${batchMembers.size} of ${nodes.length} nodes`);
 
 function baseUrl(value) {
   if (!value) return null;

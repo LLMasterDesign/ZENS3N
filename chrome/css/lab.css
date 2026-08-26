@@ -65,6 +65,7 @@ body.lab-body {
 }
 
 .lab-shell {
+  position: relative;
   width: min(1180px, calc(100% - 32px));
   margin: 20px auto 64px;
   display: grid;
@@ -72,29 +73,72 @@ body.lab-body {
 }
 
 .lab-banner {
-  border: 1px solid var(--line-strong);
-  border-radius: 12px;
-  padding: 14px 18px;
-  background: color-mix(in srgb, var(--panel) 92%, transparent);
-}
-
-.lab-banner h1 {
-  margin: 0 0 6px;
-  font-family: var(--display);
-  font-size: 1.15rem;
-  letter-spacing: 0.04em;
-}
-
-.lab-banner p {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
   margin: 0;
   color: var(--muted);
   font-size: var(--t-12);
-  max-width: 72ch;
-  line-height: 1.5;
 }
 
-.lab-banner code {
-  color: #9be15d;
+.lab-label {
+  margin: 8px 0 0;
+  color: var(--dim);
+  font-size: var(--t-10);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.lab-off {
+  margin: 0;
+  padding: 18px;
+  text-align: center;
+  color: var(--dim);
+  font-size: var(--t-11);
+  letter-spacing: 0.08em;
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+}
+
+.lab-hero {
+  position: relative;
+  min-height: 88px;
+  padding: 22px;
+  border: 1px solid var(--line-strong);
+  border-radius: 16px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.035), transparent 35%),
+    rgba(4, 5, 7, 0.97);
+  overflow: hidden;
+}
+
+.lab-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  border-radius: 16px 16px 0 0;
+  background: var(--radiance);
+}
+
+.lab-hero-mark {
+  margin: 18px 0 0;
+  color: var(--dim);
+  font-size: var(--t-11);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.lab-metadex-in {
+  position: relative;
+  padding: 26px 28px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background:
+    linear-gradient(150deg, rgba(255, 255, 255, 0.025), transparent 55%),
+    var(--panel);
 }
 
 .lab-section {
@@ -448,31 +492,34 @@ body.lab-body {
   letter-spacing: 0.06em;
 }
 
-/* DEBUG white reference lines — toggle via .lab-guides-on */
+/* DEBUG white guides — lock to footer chrome, not MetaDex padding.
+   Left 1: tape glyphs ▛▞ / ///▙▖ (foot-frame pad 17)
+   Left 2: text start 3OX (pad 17 + cube 16 + gap 6 = 39)
+   Right:  CRC + Sirius end (foot-frame pad 17) */
 .lab-tpl .foot-in::after,
 .lab-tpl .foot-in::before {
   content: none;
 }
 
-.lab-guides-on .lab-tpl .foot-in::after {
+.lab-guides-on .lab-shell::after {
   content: "";
   position: absolute;
   top: 0;
   bottom: 0;
-  left: calc(var(--gut-l) + var(--spine-c) - 1px);
+  left: 17px;
   width: 1px;
   background: white;
   z-index: 100;
   pointer-events: none;
-  box-shadow: 23px 0 0 white;
+  box-shadow: 22px 0 0 white;
 }
 
-.lab-guides-on .lab-tpl .foot-in::before {
+.lab-guides-on .lab-shell::before {
   content: "";
   position: absolute;
   top: 0;
   bottom: 0;
-  right: calc(var(--gut) - 1px);
+  right: 17px;
   width: 1px;
   background: white;
   z-index: 100;

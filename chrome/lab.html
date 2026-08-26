@@ -1,254 +1,138 @@
 <!doctype html>
-<html lang="en" data-surface="home">
+<html lang="en" data-surface="systems">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
-  <title>Chrome lab · approve header / footer</title>
+  <title>Header · Hero · MetaDex · Footer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Oxanium:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/chrome.css">
   <link rel="stylesheet" href="./css/lab.css">
 </head>
-<body class="lab-body">
+<body class="lab-body lab-guides-on">
   <div class="lab-shell">
-    <header class="lab-banner">
-      <h1>Chrome lab · approve</h1>
-      <p>
-        Shipping chrome (what satellites inject now) vs home template (zensensystems.com foot shape).
-        White spine lines are DEBUG guides — toggle on the template. Approve template → promote into
-        <code>footer.html</code> / <code>chrome.css</code> next pass.
-      </p>
-      <p id="status" class="lab-note" style="margin-top:8px">Loading chrome…</p>
-    </header>
+    <p class="lab-banner">
+      Four page parts. Body is off this view.
+      <button type="button" class="lab-toggle" id="guides-toggle" aria-pressed="true">White lines on</button>
+    </p>
 
-    <section class="lab-section" aria-labelledby="slots-h">
-      <h2 id="slots-h"><span>01</span> · Slot strip</h2>
-      <div class="lab-controls">
-        <label>Surface
-          <select id="slot-surface">
-            <option value="home">home → hello@</option>
-            <option value="systems">systems → hello@</option>
-            <option value="live">live → support@</option>
-            <option value="store">store → sales@</option>
-            <option value="solutions">solutions → solutions@</option>
-            <option value="loom">loom → systems@</option>
-          </select>
-        </label>
-        <label>Eyebrow
-          <input id="slot-eyebrow" type="text" value="CHROME LAB // APPROVE">
-        </label>
-        <label>Title
-          <input id="slot-title" type="text" value="Header + footer">
-        </label>
-        <label>Copy
-          <input id="slot-copy" type="text" value="Candidate chrome · not promoted">
-        </label>
-        <label>CRC
-          <input id="slot-crc" type="text" value="∅">
-        </label>
-        <button type="button" id="slot-apply">Apply to shipping</button>
-        <button type="button" class="lab-toggle" id="guides-toggle" aria-pressed="true">Guides on</button>
-      </div>
-    </section>
+    <p class="lab-label">1 · Header</p>
+    <div data-chrome="header"
+         data-slot-eyebrow="EDUCATE // NOTEPAD"
+         data-slot-title="Notepad"></div>
 
-    <section class="lab-section" aria-labelledby="ship-h">
-      <h2 id="ship-h"><span>02</span> · Shipping (chrome.js)</h2>
-      <p class="lab-note">Live mounts from this folder’s header/footer/css — same injector satellites use.</p>
-      <div class="lab-stage zh-page" style="width:100%;margin:0">
-        <div id="ship-header"
-             data-chrome="header"
-             data-slot-eyebrow="CHROME LAB // APPROVE"
-             data-slot-title="Header + footer"></div>
-        <div id="ship-footer"
-             data-chrome="footer"
-             data-surface="home"
-             data-slot-copy="Candidate chrome · not promoted"
-             data-slot-nav='[{"href":"#ship-h","label":"Shipping","current":true},{"href":"#tpl-h","label":"Template"},{"href":"/","label":"Suite home"}]'
-             data-slot-crc="∅"></div>
-      </div>
-    </section>
+    <p class="lab-label">2 · Hero</p>
+    <div class="lab-hero" aria-label="Hero">
+      <p class="lab-hero-mark">hero</p>
+    </div>
 
-    <section class="lab-section" id="tpl-root" aria-labelledby="tpl-h">
-      <h2 id="tpl-h"><span>03</span> · Template (approve) · zensensystems.com foot</h2>
-      <p class="lab-note">Home foot geometry + imprint rule. Not wired to chrome.js yet.</p>
+    <p class="lab-label">3 · Body</p>
+    <p class="lab-off">off this view</p>
 
-      <div class="lab-tpl">
-        <header class="lab-tpl-header">
-          <p class="rule" aria-hidden="true">
-            <span class="rl">///▙▖▙▖▞▞▙</span><span class="rf"></span><span class="rr">⋮⋮[0xLHT]⋮⋮</span>
-          </p>
-          <div class="lab-tpl-eyebrow" id="tpl-eyebrow">CHROME LAB // APPROVE</div>
-          <h1 class="lab-tpl-title" id="tpl-title">Header + footer</h1>
-        </header>
-
-        <footer class="foot" style="margin-top:14px">
-          <div class="foot-in">
-            <span class="draft">Template · approve</span>
-            <div class="foot-grid">
-              <div class="foot-col">
-                <h3>Contact</h3>
-                <a id="tpl-contact" href="mailto:hello@zensensystems.com">hello@zensensystems.com</a>
-                <a href="https://zensensystems.com">zensensystems.com</a>
-              </div>
-              <div class="foot-col foot-right">
-                <h3>Suite</h3>
-                <a href="#ship-h">Shipping chrome</a>
-                <a href="#tpl-h">This template</a>
-                <a href="/loom.html">Loom</a>
-                <a href="/">zensensystems.com</a>
-              </div>
-            </div>
-            <div class="foot-brand">
-              <svg class="fcube" viewBox="0 0 24 24" aria-hidden="true">
-                <path class="f-top" d="M12 3 20 7.5 12 12 4 7.5Z"/>
-                <path class="f-left" d="M4 7.5 12 12 12 21 4 16.5Z"/>
-                <path class="f-right" d="M20 7.5 12 12 12 21 20 16.5Z"/>
-              </svg>
-              <div>
-                <strong>ORION</strong>
-                <span>ÆON // ÆGIS // ÆGen</span>
-              </div>
-            </div>
-            <div class="foot-banner">
-              <p class="rule foot-meta">
-                <span class="rl"><span class="ax">前線</span> <em><b>Front Line Systems</b></em></span>
-                <span class="cbar" aria-hidden="true"></span>
-                <span class="rr"><span class="st">⌾-26.356.515</span></span>
-              </p>
-              <p class="rule">
-                <span class="rl">///▙▖▙▖▞▞▙</span>
-                <span class="rf" aria-hidden="true"></span>
-                <span class="rr">〘・.°𝚫 〙</span>
-              </p>
-            </div>
-            <p class="foot-crc" id="tpl-crc">⋮⋮[crc:∅]⋮⋮</p>
+    <p class="lab-label">4a · MetaDex — Standard (Contact + Suite)</p>
+    <section class="lab-metadex lab-tpl" aria-label="MetaDex">
+      <div class="lab-metadex-in foot-in">
+        <div class="foot-grid">
+          <div class="foot-col">
+            <h3>Contact</h3>
+            <a href="mailto:hello@zensensystems.com">hello@zensensystems.com</a>
+            <a href="https://zensensystems.com">zensensystems.com</a>
           </div>
-        </footer>
+          <div class="foot-col foot-right">
+            <h3>Suite</h3>
+            <a href="/">zensensystems.com</a>
+            <a href="/loom.html">Loom</a>
+            <a href="https://zensen-systems-production.up.railway.app/Notepad/">Notepad</a>
+          </div>
+        </div>
       </div>
     </section>
-  </div>
 
+    <p class="lab-label">4b · SiteMap — Public (full network)</p>
+    <section class="lab-metadex lab-tpl" aria-label="SiteMap">
+      <div class="lab-metadex-in foot-in">
+        <div class="foot-grid">
+          <div class="foot-col">
+            <h3>Company</h3>
+            <a href="https://zensensystems.com">zensensystems.com</a>
+            <a href="https://zensen.systems">zensen.systems</a>
+            <a href="https://zensen.live">zensen.live</a>
+            <a href="https://zensen.store">zensen.store</a>
+            <a href="https://zensen.solutions">zensen.solutions</a>
+          </div>
+          <div class="foot-col foot-right">
+            <h3>Products</h3>
+            <a href="https://3ox.studio">3ox.studio</a>
+            <a href="https://3ox.ai">3OX.Ai</a>
+            <a href="/Notepad/">Notepad</a>
+            <a href="/loom.html">Loom</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <p class="lab-label">4c · MetaDex — Internal (ops + runtime)</p>
+    <section class="lab-metadex lab-tpl" aria-label="MetaDex Internal">
+      <div class="lab-metadex-in foot-in">
+        <div class="foot-grid">
+          <div class="foot-col">
+            <h3>Runtime</h3>
+            <a href="http://127.0.0.1:8400/">Orion :8400</a>
+            <a href="http://127.0.0.1:8095/">Zendex :8095</a>
+            <a href="http://127.0.0.1:8090/">Cohere :8090</a>
+            <a href="http://127.0.0.1:7075/">Notepad :7075</a>
+          </div>
+          <div class="foot-col foot-right">
+            <h3>Ops</h3>
+            <a href="http://127.0.0.1:7071/">CMD :7071</a>
+            <a href="http://127.0.0.1:7120/loom.html">Loom :7120</a>
+            <a href="http://127.0.0.1:7096/">Ledg3r :7096</a>
+            <a href="http://127.0.0.1:7089/">TPR :7089</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <p class="lab-label">5 · Footer — 3OX (default, synced)</p>
+    <div data-chrome="footer"></div>
+
+    <p class="lab-label">5b · Footer — ZENSEN Educate</p>
+    <div data-chrome="footer"
+         data-slot-brand="<svg class='fcube' viewBox='0 0 24 24' aria-hidden='true'><path class='f-top' d='M12 3 20 7.5 12 12 4 7.5Z'/><path class='f-left' d='M4 7.5 12 12 12 21 4 16.5Z'/><path class='f-right' d='M20 7.5 12 12 12 21 20 16.5Z'/></svg> <span class='title-run'><strong>ZENSEN</strong> <span class='sl'>//</span> <span class='brk'>〔</span> <span>Educate</span> <span class='brk'>〕</span></span>"
+         data-slot-copy="<span class='meta-lead'>sync<span class='sync-dot'></span><span class='rail-dot'>&middot;</span><span class='port'>:6063</span><span class='rail-dot'>&middot;</span></span><a class='path' href='notepad/index.html'><span class='seg'>notepad/</span><span class='file'>index.html</span></a><span class='rail-dot meta-crc-dot'>&middot;</span><span data-slot='crc'></span>"
+         data-slot-crc="b4e1"></div>
+
+    <p class="lab-label">5c · Footer — ORION Control</p>
+    <div data-chrome="footer"
+         data-slot-brand="<svg class='fcube' viewBox='0 0 24 24' aria-hidden='true'><path class='f-top' d='M12 3 20 7.5 12 12 4 7.5Z'/><path class='f-left' d='M4 7.5 12 12 12 21 4 16.5Z'/><path class='f-right' d='M20 7.5 12 12 12 21 20 16.5Z'/></svg> <span class='title-run'><strong>ORION</strong> <span class='sl'>//</span> <span class='brk'>〔</span> <span>Control</span> <span class='brk'>〕</span></span>"
+         data-slot-copy="<span class='meta-lead'>sync<span class='sync-dot' data-state='unsync'></span><span class='rail-dot'>&middot;</span><span class='port'>:8400</span><span class='rail-dot'>&middot;</span></span><a class='path' href='orion/gen/state.json'><span class='seg'>orion/</span><span class='seg'>gen/</span><span class='file'>state.json</span></a><span class='rail-dot meta-crc-dot'>&middot;</span><span data-slot='crc'></span>"
+         data-slot-crc="7f09ac"></div>
+
+    <p class="lab-label">5d · Footer — ÆGen Runtime</p>
+    <div data-chrome="footer"
+         data-slot-brand="<svg class='fcube' viewBox='0 0 24 24' aria-hidden='true'><path class='f-top' d='M12 3 20 7.5 12 12 4 7.5Z'/><path class='f-left' d='M4 7.5 12 12 12 21 4 16.5Z'/><path class='f-right' d='M20 7.5 12 12 12 21 20 16.5Z'/></svg> <span class='title-run'><strong>ÆGen</strong> <span class='sl'>//</span> <span class='brk'>〔</span> <span>Zensen</span><span class='rail-dot'>·</span><span>Runtime</span> <span class='brk'>〕</span></span>"
+         data-slot-copy="<span class='meta-lead'>sync<span class='sync-dot' data-state='degraded'></span><span class='rail-dot'>&middot;</span><span class='port'>:8090</span><span class='rail-dot'>&middot;</span></span><a class='path' href='cohere/session.tok'><span class='seg'>cohere/</span><span class='file'>session.tok</span></a><span class='rail-dot meta-crc-dot'>&middot;</span><span data-slot='crc'></span>"
+         data-slot-crc="∅"></div>
+
+    <p class="lab-label">5e · Footer — CMD Ops (frozen)</p>
+    <div data-chrome="footer"
+         data-slot-brand="<svg class='fcube' viewBox='0 0 24 24' aria-hidden='true'><path class='f-top' d='M12 3 20 7.5 12 12 4 7.5Z'/><path class='f-left' d='M4 7.5 12 12 12 21 4 16.5Z'/><path class='f-right' d='M20 7.5 12 12 12 21 20 16.5Z'/></svg> <span class='title-run'><strong>CMD</strong> <span class='sl'>//</span> <span class='brk'>〔</span> <span>Ops</span> <span class='brk'>〕</span></span>"
+         data-slot-copy="<span class='meta-lead'>sync<span class='sync-dot'></span><span class='rail-dot'>&middot;</span><span class='port'>:7071</span><span class='rail-dot'>&middot;</span></span><a class='path' href='milestones/launch.gensL'><span class='seg'>milestones/</span><span class='file'>launch.gensL</span></a><span class='rail-dot meta-crc-dot'>&middot;</span><span data-slot='crc'></span>"
+         data-slot-crc="e31a"
+         data-slot-stamp="⌾-26.370.112"></div>
+  </div>
   <script src="./chrome.js" defer></script>
   <script>
-  (function () {
-    const STATUS = document.getElementById("status");
-    const ROOT = document.getElementById("tpl-root");
-    const guidesBtn = document.getElementById("guides-toggle");
-    const surfaceEl = document.getElementById("slot-surface");
-    const eyebrowEl = document.getElementById("slot-eyebrow");
-    const titleEl = document.getElementById("slot-title");
-    const copyEl = document.getElementById("slot-copy");
-    const crcEl = document.getElementById("slot-crc");
-    const shipHeader = document.getElementById("ship-header");
-    const shipFooter = document.getElementById("ship-footer");
-    const tplEyebrow = document.getElementById("tpl-eyebrow");
-    const tplTitle = document.getElementById("tpl-title");
-    const tplContact = document.getElementById("tpl-contact");
-    const tplCrc = document.getElementById("tpl-crc");
-
-    let contacts = null;
-
-    function crcLine(v) {
-      const token = v && v !== "" ? v : "∅";
-      if (String(token).indexOf("crc:") === 0) return "⋮⋮[" + token + "]⋮⋮";
-      return "⋮⋮[crc:" + token + "]⋮⋮";
-    }
-
-    function setGuides(on) {
-      document.body.classList.toggle("lab-guides-on", on);
-      guidesBtn.setAttribute("aria-pressed", on ? "true" : "false");
-      guidesBtn.textContent = on ? "Guides on" : "Guides off";
-    }
-
-    guidesBtn.addEventListener("click", () => {
-      setGuides(guidesBtn.getAttribute("aria-pressed") !== "true");
-    });
-    setGuides(true);
-
-    async function loadContacts() {
-      const res = await fetch("./contacts/contacts.json", { cache: "no-store" });
-      if (!res.ok) throw new Error(res.status + " contacts");
-      contacts = await res.json();
-    }
-
-    function contactFor(surface) {
-      if (!contacts) return null;
-      const map = contacts.surfaces[surface] || contacts.surfaces.home;
-      return contacts.groups[map.primary] || null;
-    }
-
-    function fillTplSlots() {
-      const surface = surfaceEl.value;
-      const group = contactFor(surface);
-      tplEyebrow.textContent = eyebrowEl.value;
-      tplTitle.textContent = titleEl.value;
-      tplCrc.textContent = crcLine(crcEl.value);
-      if (group) {
-        tplContact.href = "mailto:" + group.email;
-        tplContact.textContent = group.email;
-      }
-    }
-
-    function applyShipping() {
-      const surface = surfaceEl.value;
-      document.documentElement.setAttribute("data-surface", surface);
-      shipHeader.setAttribute("data-slot-eyebrow", eyebrowEl.value);
-      shipHeader.setAttribute("data-slot-title", titleEl.value);
-      shipFooter.setAttribute("data-surface", surface);
-      shipFooter.setAttribute("data-slot-copy", copyEl.value);
-      shipFooter.setAttribute("data-slot-crc", crcEl.value || "∅");
-
-      // Re-fill already-injected shipping slots without a full remount
-      const h = shipHeader.querySelector("[data-chrome-root]") || shipHeader;
-      const f = shipFooter.querySelector("[data-chrome-root]") || shipFooter;
-      const eye = h.querySelector('[data-slot="eyebrow"]');
-      const title = h.querySelector('[data-slot="title"]');
-      const copy = f.querySelector('[data-slot="copy"]');
-      const crc = f.querySelector('[data-slot="crc"]');
-      const contact = f.querySelector('[data-slot="contact"]');
-      if (eye) {
-        eye.hidden = !eyebrowEl.value;
-        eye.textContent = eyebrowEl.value;
-      }
-      if (title) {
-        title.hidden = !titleEl.value;
-        title.textContent = titleEl.value;
-      }
-      if (copy) copy.textContent = copyEl.value;
-      if (crc) crc.textContent = crcLine(crcEl.value);
-      if (contact) {
-        const group = contactFor(surface);
-        contact.innerHTML = "";
-        if (group) {
-          const a = document.createElement("a");
-          a.href = "mailto:" + group.email;
-          a.textContent = group.email;
-          contact.appendChild(a);
-        }
-      }
-      fillTplSlots();
-      STATUS.textContent = "Slots applied · surface=" + surface;
-    }
-
-    document.getElementById("slot-apply").addEventListener("click", applyShipping);
-
-    document.addEventListener("zensenchrome:ready", () => {
-      STATUS.textContent = "Shipping chrome loaded · compare to template below";
-      applyShipping();
-    });
-
-    loadContacts()
-      .then(() => {
-        fillTplSlots();
-        STATUS.textContent = "Contacts ready · waiting for chrome.js…";
-      })
-      .catch((err) => {
-        STATUS.textContent = "chrome/contacts fail: " + err.message;
-        STATUS.classList.add("err");
+    (function () {
+      var btn = document.getElementById("guides-toggle");
+      btn.addEventListener("click", function () {
+        var on = document.body.classList.toggle("lab-guides-on");
+        btn.setAttribute("aria-pressed", on ? "true" : "false");
+        btn.textContent = on ? "White lines on" : "White lines off";
       });
-  })();
+    })();
   </script>
 </body>
 </html>
