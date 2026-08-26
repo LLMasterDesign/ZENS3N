@@ -1,0 +1,98 @@
+{
+  "domain": "zensensystems.com",
+  "updated": "2026-08-12",
+  "source": "Google Workspace Admin · Groups",
+  "founder": {
+    "handle": "llmaster",
+    "role": "Founder",
+    "group": "accounts",
+    "email": "accounts@zensensystems.com"
+  },
+  "groups": {
+    "accounts": {
+      "email": "accounts@zensensystems.com",
+      "label": "Accounts",
+      "use": "Business software accounts, cloud services, domains, licensing, and SaaS registrations",
+      "note": "Founder seat (llmaster)"
+    },
+    "signup": {
+      "email": "signup@zensensystems.com",
+      "label": "Ad Space",
+      "use": "Website signups",
+      "status": "domain_disabled"
+    },
+    "billing": {
+      "email": "billing@zensensystems.com",
+      "label": "Billing",
+      "use": "Invoices, subscriptions, payments, refunds, and accounting inquiries"
+    },
+    "finance": {
+      "email": "finance@zensensystems.com",
+      "label": "Finance",
+      "use": "Banking, taxes, grants, accounting, bookkeeping, financial admin"
+    },
+    "hello": {
+      "email": "hello@zensensystems.com",
+      "label": "Hello",
+      "use": "General public inquiries from website and contact forms"
+    },
+    "invest": {
+      "email": "invest@zensensystems.com",
+      "label": "Invest",
+      "use": "Investors, venture capital, angel investors, accelerators, and fundraising"
+    },
+    "legal": {
+      "email": "legal@zensensystems.com",
+      "label": "Legal",
+      "use": "Contracts, intellectual property, trademarks, patents, compliance, legal correspondence"
+    },
+    "media": {
+      "email": "media@zensensystems.com",
+      "label": "Media",
+      "use": "Media, marketing, public outreach, branding, podcasts, content"
+    },
+    "partners": {
+      "email": "partners@zensensystems.com",
+      "label": "Partners",
+      "use": "Strategic partnerships, technology alliances, hardware vendors, cloud providers, enterprise collaborations, ecosystem relationships"
+    },
+    "press": {
+      "email": "press@zensensystems.com",
+      "label": "Press",
+      "use": "Media, podcasts, interviews, public relations, speaking requests"
+    },
+    "research": {
+      "email": "research@zensensystems.com",
+      "label": "Research",
+      "use": "Academic collaborations, publications, and technical discussions"
+    },
+    "sales": {
+      "email": "sales@zensensystems.com",
+      "label": "Sales",
+      "use": "Licensing, enterprise sales, partnerships, demos, and customer inquiries"
+    },
+    "solutions": {
+      "email": "solutions@zensensystems.com",
+      "label": "Solutions",
+      "use": "Hire / work intake"
+    },
+    "support": {
+      "email": "support@zensensystems.com",
+      "label": "Support",
+      "use": "Customer support, bug reports, feature requests, and technical assistance"
+    },
+    "systems": {
+      "email": "systems@zensensystems.com",
+      "label": "Systems",
+      "use": "Infrastructure, hosting, networking"
+    }
+  },
+  "surfaces": {
+    "home": { "primary": "hello", "secondary": null },
+    "systems": { "primary": "hello", "secondary": "support" },
+    "live": { "primary": "support", "secondary": null },
+    "store": { "primary": "sales", "secondary": null },
+    "solutions": { "primary": "solutions", "secondary": "hello" },
+    "loom": { "primary": "systems", "secondary": null }
+  }
+}

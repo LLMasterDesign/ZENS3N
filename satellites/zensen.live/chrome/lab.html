@@ -13,8 +13,9 @@
 </head>
 <body class="lab-body lab-guides-on">
   <div class="lab-shell">
+    <div class="lab-page-rail" aria-hidden="true"></div>
     <p class="lab-banner">
-      Four page parts. Body is off this view.
+      Four page parts.
       <button type="button" class="lab-toggle" id="guides-toggle" aria-pressed="true">White lines on</button>
     </p>
 
@@ -29,7 +30,10 @@
     </div>
 
     <p class="lab-label">3 · Body</p>
-    <p class="lab-off">off this view</p>
+    <section class="lab-body-measure" aria-label="Body">
+      <p class="lab-mark-open">▛▞</p>
+      <p class="lab-mark-close">:: ∎</p>
+    </section>
 
     <p class="lab-label">4a · MetaDex — Standard (Contact + Suite)</p>
     <section class="lab-metadex lab-tpl" aria-label="MetaDex">
@@ -132,6 +136,18 @@
         btn.setAttribute("aria-pressed", on ? "true" : "false");
         btn.textContent = on ? "White lines on" : "White lines off";
       });
+
+      function pinPageRail() {
+        var shell = document.querySelector(".lab-shell");
+        var rail = document.querySelector(".lab-page-rail");
+        var cube = document.querySelector('[data-chrome="footer"] .fcube');
+        if (!shell || !rail || !cube) return;
+        var sr = shell.getBoundingClientRect();
+        var cr = cube.getBoundingClientRect();
+        rail.style.left = (cr.left + cr.width / 2 - sr.left - 1) + "px";
+      }
+      document.addEventListener("zensenchrome:ready", pinPageRail);
+      window.addEventListener("resize", pinPageRail);
     })();
   </script>
 </body>

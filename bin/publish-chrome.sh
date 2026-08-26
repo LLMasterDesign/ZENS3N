@@ -22,6 +22,7 @@ SATS=(
   "satellites/zensen.systems"
   "satellites/zensen.store"
   "satellites/zensen.solutions"
+  "satellites/3ox.me"
 )
 
 for rel in "${SATS[@]}"; do

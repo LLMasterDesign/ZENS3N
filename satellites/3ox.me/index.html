@@ -1,31 +1,72 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-surface="3ox">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#020304">
-  <title>3ox.me :: under construction</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>3ox.me :: every 3ox has a face</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Oxanium:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/chrome/css/chrome.css">
   <style>
-    :root { color-scheme: dark; --black:#020304; --white:#f4f7f8; --muted:#929ca6; --brand:#ee7a0c; --lime:#c6ff00; }
-    * { box-sizing:border-box; }
-    body { min-height:100vh; margin:0; display:grid; place-items:center; padding:24px; color:var(--white); background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(238,122,12,.12),transparent 65%),var(--black); font:14px/1.6 'DM Mono',ui-monospace,monospace; }
-    main { width:min(680px,100%); padding:clamp(28px,7vw,72px); border:1px solid rgba(255,255,255,.14); border-radius:16px; background:rgba(8,10,13,.86); box-shadow:0 24px 80px rgba(0,0,0,.35); }
-    .eyebrow { color:var(--brand); font-size:.7rem; letter-spacing:.18em; text-transform:uppercase; }
-    h1 { margin:18px 0 10px; font:800 clamp(2.2rem,8vw,5rem)/.95 'Oxanium',system-ui,sans-serif; letter-spacing:-.04em; }
-    p { max-width:40em; color:var(--muted); }
-    .state { margin-top:16px; color:var(--brand); font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; }
-    a { display:inline-block; margin-top:20px; color:var(--lime); text-decoration:none; border-bottom:1px solid currentColor; }
-    a:focus-visible { outline:2px solid var(--brand); outline-offset:4px; }
+    :root{color-scheme:dark}
+    body{margin:0;background:var(--black)}
+    .p-id{display:flex;align-items:baseline;gap:14px;margin:0 0 6px}
+    .p-glyph{font-size:2.2rem;line-height:1;color:var(--brand)}
+    .p-class{font-size:.62rem;letter-spacing:.18em;color:var(--muted);text-transform:uppercase}
+    .p-not{color:var(--muted);font-style:italic}
+    .p-ports{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:.8rem;margin:4px 0 0}
+    .p-ports td{padding:5px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+    .p-ports td:first-child{color:var(--brand);width:11em}
+    .p-ports td:last-child{color:var(--muted)}
+    .p-grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));margin-top:6px}
+    .p-card{display:block;padding:12px 14px;border:1px solid rgba(255,255,255,.12);border-radius:10px;text-decoration:none;color:inherit}
+    .p-card:hover{border-color:var(--brand)}
+    .p-card b{display:block;font-family:var(--mono);font-size:.9rem}
+    .p-card span{display:block;font-size:.72rem;color:var(--muted);margin-top:3px}
+    .p-card em{display:block;font-size:.62rem;color:var(--brand);font-style:normal;letter-spacing:.14em;margin-top:6px;text-transform:uppercase}
+    .p-off{opacity:.45}
+    .p-off:hover{border-color:rgba(255,255,255,.12)}
   </style>
+  <script src="/chrome/chrome.js" defer></script>
 </head>
 <body>
-  <main>
-    <div class="eyebrow">under construction // X lane // 3OX</div>
-    <h1>3ox.me</h1>
-    <p>Agent identity profiles. Every agent gets a face at {agent}.3ox.me — durable identity that outlives any single model or runtime. This surface is being built.</p>
-    <div class="state">STATE :: BUILDING · OWNER :: 3OX · PORT :: 6053</div>
-    <a href="https://zensensystems.com">Return to ZENSEN Systems →</a>
-  </main>
+<main class="zh-page">
+  <div data-chrome="header"
+       data-slot-hex="0x3OXME"
+       data-slot-eyebrow="3OX.ME // PROFILE ROUTER // X LANE"
+       data-slot-title="Every 3ox has a face"></div>
+
+  <section class="zh-body">
+    <p>A 3ox is a cube — an agent, a station, a set. This is where each one
+       is reachable by name. <code>{name}.3ox.me</code> mirrors disk
+       <code>{Name}.me</code>; the page is the reflection, the cube is the thing.</p>
+
+    <p class="zh-rail">LANE :: X · APEX :: 3ox.me · 7 LIVE</p>
+
+    <div class="p-grid">
+      <a class="p-card" href="https://ender.3ox.me"><b>Δ ENDER</b><span>Warden-governor of the abzu STRATA under ΛrgOS.</span><em>ender.3ox.me · live</em></a>
+      <a class="p-card" href="https://raven.3ox.me"><b>ᚱ RAVEN</b><span>Witness · scout · Lucius&#x27;s sidekik.</span><em>raven.3ox.me · live</em></a>
+      <a class="p-card" href="https://forge.3ox.me"><b>⚒ FORGE</b><span>Cursor / build agent on the mesh.</span><em>forge.3ox.me · live</em></a>
+      <a class="p-card" href="https://orion.3ox.me"><b>Ω ORION</b><span>The door to ORION, the OTP peer.</span><em>orion.3ox.me · live</em></a>
+      <a class="p-card" href="https://tpr.3ox.me"><b>⟿ TELEPROMPTR</b><span>The Telegram relay station.</span><em>tpr.3ox.me · live</em></a>
+      <a class="p-card" href="https://ledg3r.3ox.me"><b>₪ LEDG3R</b><span>The finance guardian.</span><em>ledg3r.3ox.me · building</em></a>
+      <a class="p-card" href="https://slate7.3ox.me"><b>◈ SLATE7</b><span>The always-on mesh node — “the VPS we didn’t buy.</span><em>slate7.3ox.me · live</em></a>
+    </div>
+
+    <p class="zh-rail" style="margin-top:22px">DECLARED · NOT YET STANDING</p>
+    <div class="p-grid">
+      <span class="p-card p-off"><b>obsidia</b><span>no cube yet — seat pending under device runtime</span><em>not yet</em></span>
+      <span class="p-card p-off"><b>vso</b><span>archived — real cube, not in the live tree</span><em>not yet</em></span>
+      <span class="p-card p-off"><b>notepad</b><span>authority unresolved</span><em>not yet</em></span>
+    </div>
+  </section>
+
+  <div data-chrome="footer"
+       data-slot-brand="<svg class='fcube' viewBox='0 0 24 24' aria-hidden='true'><path class='f-top' d='M12 3 20 7.5 12 12 4 7.5Z'/><path class='f-left' d='M4 7.5 12 12 12 21 4 16.5Z'/><path class='f-right' d='M20 7.5 12 12 12 21 20 16.5Z'/></svg> <span class='title-run'><strong>3OX</strong> <span class='sl'>//</span> <span class='brk'>〔</span> <span>3OX</span><span class='rail-dot'>·</span><span>Profiles</span> <span class='brk'>〕</span></span>"
+       data-slot-copy="<span class='meta-lead'>sync<span class='sync-dot'></span><span class='rail-dot'>&middot;</span><span class='port'>:6053</span><span class='rail-dot'>&middot;</span></span><a class='path' href='#'><span class='seg'>satellites/3ox.me/</span><span class='file'>profiles/</span></a><span class='rail-dot meta-crc-dot'>&middot;</span><span data-slot='crc'></span>"
+       data-slot-crc="4261"></div>
+</main>
 </body>
 </html>

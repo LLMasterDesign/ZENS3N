@@ -44,7 +44,7 @@
   --mono: "DM Mono", ui-monospace, monospace;
   --gut: clamp(20px, 5vw, 64px);
   --gut-l: clamp(10px, 2.5vw, 32px);
-  --spine-c: 13px;
+  --spine-c: 25px; /* cube centre: foot-frame pad 17 + half of 16px cube */
 }
 
 * {
@@ -70,6 +70,18 @@ body.lab-body {
   margin: 20px auto 64px;
   display: grid;
   gap: 22px;
+}
+
+.lab-guides-on .lab-page-rail {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(var(--spine-c) - 1px);
+  width: 2px;
+  background: var(--rad-3);
+  z-index: 99;
+  pointer-events: none;
+  border-radius: 1px;
 }
 
 .lab-banner {
@@ -100,6 +112,29 @@ body.lab-body {
   letter-spacing: 0.08em;
   border: 1px dashed var(--line);
   border-radius: 10px;
+}
+
+.lab-body-measure {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 12px 17px;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.lab-mark-open,
+.lab-mark-close {
+  margin: 0;
+  color: var(--lime);
+  text-shadow: 0 0 8px var(--lime-glow);
+}
+
+.lab-mark-close {
+  margin-top: 8px;
+  width: 22px;
+  font-size: 9px;
+  white-space: nowrap;
 }
 
 .lab-hero {
@@ -495,7 +530,8 @@ body.lab-body {
 /* DEBUG white guides — lock to footer chrome, not MetaDex padding.
    Left 1: tape glyphs ▛▞ / ///▙▖ (foot-frame pad 17)
    Left 2: text start 3OX (pad 17 + cube 16 + gap 6 = 39)
-   Right:  CRC + Sirius end (foot-frame pad 17) */
+   Right:  CRC + Sirius end (foot-frame pad 17)
+   Pink rail: page up-down through cube centre (--spine-c) */
 .lab-tpl .foot-in::after,
 .lab-tpl .foot-in::before {
   content: none;
