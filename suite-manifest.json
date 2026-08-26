@@ -27,18 +27,59 @@
   },
   "port_registry": {
     "law": "CENTRAL.CMD/7HE.HARBOR/minLD/PORT.CHANNEL.LAW",
-    "types": ["Agent", "Station", "SysService"],
-    "claim_fields": ["registry_type", "registry_decade", "port_band"]
+    "types": [
+      "Agent",
+      "Station",
+      "SysService"
+    ],
+    "claim_fields": [
+      "registry_type",
+      "registry_decade",
+      "port_band"
+    ]
   },
   "batches": {
-    "SUITE": ["ZENSEN-SYSTEM-SUITE"],
-    "ZENSEN-SITES": ["ZENSEN-LIVE", "ZENSEN-SOLUTIONS", "ZENSEN-SYSTEMS", "ZENSEN-STORE", "ZENSEN-COM", "ZENSEN-ENTERPRISES"],
-    "3OX": ["3OX-STUDIO", "3OX.Ai", "3OX-STORE"],
-    "SYSGEN": ["SYSGEN-SH", "SYSGEN-DEV"],
-    "ÆGEN": ["ÆGen", "ÆGIS", "ÆGen{τ}"],
-    "CONTROL": ["ORION", "WARDEN", "LEDG3R"],
-    "STRATA-OP": ["1N3OX", "ZENDEX", "WRKDSK"],
-    "CMD-OPS": ["CMD", "TELEPROMPTR", "ArgOS"]
+    "SUITE": [
+      "ZENSEN-SYSTEM-SUITE"
+    ],
+    "ZENSEN-SITES": [
+      "ZENSEN-LIVE",
+      "ZENSEN-SOLUTIONS",
+      "ZENSEN-SYSTEMS",
+      "ZENSEN-STORE",
+      "ZENSEN-COM",
+      "ZENSEN-ENTERPRISES"
+    ],
+    "3OX": [
+      "3OX-STUDIO",
+      "3OX.Ai",
+      "3OX-STORE",
+      "3OX-ME"
+    ],
+    "SYSGEN": [
+      "SYSGEN-SH",
+      "SYSGEN-DEV"
+    ],
+    "ÆGEN": [
+      "ÆGen",
+      "ÆGIS",
+      "ÆGen{τ}"
+    ],
+    "CONTROL": [
+      "ORION",
+      "WARDEN",
+      "LEDG3R"
+    ],
+    "STRATA-OP": [
+      "1N3OX",
+      "ZENDEX",
+      "WRKDSK"
+    ],
+    "CMD-OPS": [
+      "CMD",
+      "TELEPROMPTR",
+      "ArgOS"
+    ]
   },
   "nodes": [
     {
@@ -51,9 +92,22 @@
       "role": "suite-edge",
       "port": 6060,
       "state": "active-staging",
-      "private_network": {"domain": "zens3n.railway.internal", "reference": "self"},
-      "source": {"repository": "LLMasterDesign/ZENS3N", "branch": "website/zensensystems", "root": "."},
-      "routes": ["/", "/healthz", "/spec/Market.html", "/spec/Product.html", "/spec/Valuation.html"]
+      "private_network": {
+        "domain": "zens3n.railway.internal",
+        "reference": "self"
+      },
+      "source": {
+        "repository": "LLMasterDesign/ZENS3N",
+        "branch": "website/zensensystems",
+        "root": "."
+      },
+      "routes": [
+        "/",
+        "/healthz",
+        "/spec/Market.html",
+        "/spec/Product.html",
+        "/spec/Valuation.html"
+      ]
     },
     {
       "service": "ZENSEN-LIVE",
@@ -65,10 +119,27 @@
       "role": "try",
       "port": 6061,
       "state": "active-staging",
-      "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
-      "source": {"repository": "LLMasterDesign/ZENS3N", "branch": "website/zensensystems", "root": "satellites/zensen.live", "config": "railway.toml"},
-      "live_surfaces": {"local_port": "127.0.0.1:6061", "tailscale_port": "corbato-en0.billfish-sirius.ts.net:6061", "railway_url": "https://zensen-live-production.up.railway.app"},
-      "routes": ["/", "/Notepad", "/Notepad/", "/healthz"]
+      "private_network": {
+        "domain": "zens3n.railway.internal",
+        "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"
+      },
+      "source": {
+        "repository": "LLMasterDesign/ZENS3N",
+        "branch": "website/zensensystems",
+        "root": "satellites/zensen.live",
+        "config": "railway.toml"
+      },
+      "live_surfaces": {
+        "local_port": "127.0.0.1:6061",
+        "tailscale_port": "corbato-en0.billfish-sirius.ts.net:6061",
+        "railway_url": "https://zensen-live-production.up.railway.app"
+      },
+      "routes": [
+        "/",
+        "/Notepad",
+        "/Notepad/",
+        "/healthz"
+      ]
     },
     {
       "service": "ZENSEN-SOLUTIONS",
@@ -80,10 +151,25 @@
       "role": "hire",
       "port": 6063,
       "state": "active-staging",
-      "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
-      "source": {"repository": "LLMasterDesign/ZENS3N", "branch": "website/zensensystems", "root": "satellites/zensen.solutions", "config": "railway.toml"},
-      "live_surfaces": {"local_port": "127.0.0.1:6063", "tailscale_port": "corbato-en0.billfish-sirius.ts.net:6063", "railway_url": "https://zensen-solutions-production.up.railway.app"},
-      "routes": ["/", "/healthz"]
+      "private_network": {
+        "domain": "zens3n.railway.internal",
+        "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"
+      },
+      "source": {
+        "repository": "LLMasterDesign/ZENS3N",
+        "branch": "website/zensensystems",
+        "root": "satellites/zensen.solutions",
+        "config": "railway.toml"
+      },
+      "live_surfaces": {
+        "local_port": "127.0.0.1:6063",
+        "tailscale_port": "corbato-en0.billfish-sirius.ts.net:6063",
+        "railway_url": "https://zensen-solutions-production.up.railway.app"
+      },
+      "routes": [
+        "/",
+        "/healthz"
+      ]
     },
     {
       "service": "ZENSEN-SYSTEMS",
@@ -95,10 +181,27 @@
       "role": "educate",
       "port": 6062,
       "state": "active-staging",
-      "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
-      "source": {"repository": "LLMasterDesign/ZENS3N", "branch": "website/zensensystems", "root": "satellites/zensen.systems", "config": "railway.toml"},
-      "live_surfaces": {"local_port": "127.0.0.1:6062", "tailscale_port": "corbato-en0.billfish-sirius.ts.net:6062", "railway_url": "https://zensen-systems-production.up.railway.app"},
-      "routes": ["/", "/Notepad", "/Notepad/", "/healthz"]
+      "private_network": {
+        "domain": "zens3n.railway.internal",
+        "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"
+      },
+      "source": {
+        "repository": "LLMasterDesign/ZENS3N",
+        "branch": "website/zensensystems",
+        "root": "satellites/zensen.systems",
+        "config": "railway.toml"
+      },
+      "live_surfaces": {
+        "local_port": "127.0.0.1:6062",
+        "tailscale_port": "corbato-en0.billfish-sirius.ts.net:6062",
+        "railway_url": "https://zensen-systems-production.up.railway.app"
+      },
+      "routes": [
+        "/",
+        "/Notepad",
+        "/Notepad/",
+        "/healthz"
+      ]
     },
     {
       "service": "ZENSEN-STORE",
@@ -110,10 +213,27 @@
       "role": "own",
       "port": 6064,
       "state": "active-staging",
-      "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
-      "source": {"repository": "LLMasterDesign/ZENS3N", "branch": "website/zensensystems", "root": "satellites/zensen.store", "config": "railway.toml"},
-      "live_surfaces": {"local_port": "127.0.0.1:6064", "tailscale_port": "corbato-en0.billfish-sirius.ts.net:6064", "railway_url": "https://zensen-store-production.up.railway.app"},
-      "routes": ["/", "/Notepad", "/Notepad/", "/healthz"]
+      "private_network": {
+        "domain": "zens3n.railway.internal",
+        "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"
+      },
+      "source": {
+        "repository": "LLMasterDesign/ZENS3N",
+        "branch": "website/zensensystems",
+        "root": "satellites/zensen.store",
+        "config": "railway.toml"
+      },
+      "live_surfaces": {
+        "local_port": "127.0.0.1:6064",
+        "tailscale_port": "corbato-en0.billfish-sirius.ts.net:6064",
+        "railway_url": "https://zensen-store-production.up.railway.app"
+      },
+      "routes": [
+        "/",
+        "/Notepad",
+        "/Notepad/",
+        "/healthz"
+      ]
     },
     {
       "service": "ZENSEN-COM",
@@ -124,9 +244,16 @@
       "role": "home",
       "port": 6065,
       "state": "card-only",
-      "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
+      "private_network": {
+        "domain": "zens3n.railway.internal",
+        "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"
+      },
       "source": null,
-      "live_surfaces": {"local_port": "127.0.0.1:6065", "tailscale_port": "corbato-en0.billfish-sirius.ts.net:6065", "public_face": ":443"},
+      "live_surfaces": {
+        "local_port": "127.0.0.1:6065",
+        "tailscale_port": "corbato-en0.billfish-sirius.ts.net:6065",
+        "public_face": ":443"
+      },
       "routes": []
     },
     {
@@ -139,7 +266,10 @@
       "role": "public-site",
       "port": 6066,
       "state": "card-only",
-      "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
+      "private_network": {
+        "domain": "zens3n.railway.internal",
+        "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"
+      },
       "source": null,
       "routes": []
     },
@@ -153,11 +283,30 @@
       "role": "studio",
       "port": 6050,
       "state": "active-staging",
-      "public_domain": {"name": "3ox.studio", "state": "not-purchased", "dns": "not-configured"},
-      "live_surfaces": {"local_port": "127.0.0.1:6050", "tailscale_port": "corbato-en0.billfish-sirius.ts.net:6050", "railway_url": "https://3ox-studio-production.up.railway.app"},
-      "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
-      "source": {"repository": "LLMasterDesign/ZENS3N", "branch": "website/zensensystems", "root": "satellites/3ox.studio", "config": "railway.toml"},
-      "routes": ["/", "/healthz"]
+      "public_domain": {
+        "name": "3ox.studio",
+        "state": "not-purchased",
+        "dns": "not-configured"
+      },
+      "live_surfaces": {
+        "local_port": "127.0.0.1:6050",
+        "tailscale_port": "corbato-en0.billfish-sirius.ts.net:6050",
+        "railway_url": "https://3ox-studio-production.up.railway.app"
+      },
+      "private_network": {
+        "domain": "zens3n.railway.internal",
+        "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"
+      },
+      "source": {
+        "repository": "LLMasterDesign/ZENS3N",
+        "branch": "website/zensensystems",
+        "root": "satellites/3ox.studio",
+        "config": "railway.toml"
+      },
+      "routes": [
+        "/",
+        "/healthz"
+      ]
     },
     {
       "service": "3OX.Ai",
@@ -169,11 +318,30 @@
       "role": "ai",
       "port": 6051,
       "state": "card-only",
-      "public_domain": {"name": "3ox.ai", "state": "not-purchased", "dns": "not-configured"},
-      "live_surfaces": {"local_port": "127.0.0.1:6051", "tailscale_port": "corbato-en0.billfish-sirius.ts.net:6051", "railway_url": null},
-      "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
-      "source": {"repository": "LLMasterDesign/ZENS3N", "branch": "website/zensensystems", "root": "satellites/3ox.ai", "config": "railway.toml"},
-      "routes": ["/", "/healthz"]
+      "public_domain": {
+        "name": "3ox.ai",
+        "state": "not-purchased",
+        "dns": "not-configured"
+      },
+      "live_surfaces": {
+        "local_port": "127.0.0.1:6051",
+        "tailscale_port": "corbato-en0.billfish-sirius.ts.net:6051",
+        "railway_url": null
+      },
+      "private_network": {
+        "domain": "zens3n.railway.internal",
+        "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"
+      },
+      "source": {
+        "repository": "LLMasterDesign/ZENS3N",
+        "branch": "website/zensensystems",
+        "root": "satellites/3ox.ai",
+        "config": "railway.toml"
+      },
+      "routes": [
+        "/",
+        "/healthz"
+      ]
     },
     {
       "service": "3OX-STORE",
@@ -185,7 +353,10 @@
       "role": "store",
       "port": 6052,
       "state": "card-only",
-      "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
+      "private_network": {
+        "domain": "zens3n.railway.internal",
+        "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"
+      },
       "source": null,
       "routes": []
     },
@@ -199,10 +370,21 @@
       "role": "installer-distribution",
       "port": 6100,
       "state": "release-gated",
-      "public_domain": {"name": "sysgen.sh", "state": "held", "dns": "parked"},
-      "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
+      "public_domain": {
+        "name": "sysgen.sh",
+        "state": "held",
+        "dns": "parked"
+      },
+      "private_network": {
+        "domain": "zens3n.railway.internal",
+        "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"
+      },
       "source": null,
-      "release_source": {"repository": "LLMasterDesign/MARDUK", "branch": "boot/sysgen", "root": "BOOT/Sysgen"},
+      "release_source": {
+        "repository": "LLMasterDesign/MARDUK",
+        "branch": "boot/sysgen",
+        "root": "BOOT/Sysgen"
+      },
       "routes": []
     },
     {
@@ -215,11 +397,31 @@
       "role": "docs-sdk-evidence",
       "port": 6101,
       "state": "active-staging",
-      "public_domain": {"name": "doc.sysgen.dev", "state": "railway-created", "dns": "requires-cname"},
-      "live_surfaces": {"local_port": "127.0.0.1:6101", "tailscale_port": null, "railway_url": "https://sysgen-dev-production.up.railway.app"},
-      "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
-      "source": {"workspace": "ZENSEN.CMD/SYSCOM/sysgen/[DROP]", "config": "railway.toml", "promotion_target": "satellites/sysgen.dev"},
-      "routes": ["/", "/healthz", "/api/health", "/api/ask"]
+      "public_domain": {
+        "name": "doc.sysgen.dev",
+        "state": "railway-created",
+        "dns": "requires-cname"
+      },
+      "live_surfaces": {
+        "local_port": "127.0.0.1:6101",
+        "tailscale_port": null,
+        "railway_url": "https://sysgen-dev-production.up.railway.app"
+      },
+      "private_network": {
+        "domain": "zens3n.railway.internal",
+        "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"
+      },
+      "source": {
+        "workspace": "ZENSEN.CMD/SYSCOM/sysgen/[DROP]",
+        "config": "railway.toml",
+        "promotion_target": "satellites/sysgen.dev"
+      },
+      "routes": [
+        "/",
+        "/healthz",
+        "/api/health",
+        "/api/ask"
+      ]
     },
     {
       "service": "ÆGen",
@@ -231,7 +433,10 @@
       "role": "runtime",
       "port": null,
       "state": "card-only",
-      "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
+      "private_network": {
+        "domain": "zens3n.railway.internal",
+        "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"
+      },
       "source": null,
       "routes": []
     },
@@ -245,7 +450,10 @@
       "role": "governance",
       "port": null,
       "state": "card-only",
-      "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
+      "private_network": {
+        "domain": "zens3n.railway.internal",
+        "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"
+      },
       "source": null,
       "routes": []
     },
@@ -259,7 +467,10 @@
       "role": "runtime-receipt",
       "port": null,
       "state": "card-only",
-      "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
+      "private_network": {
+        "domain": "zens3n.railway.internal",
+        "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"
+      },
       "source": null,
       "routes": []
     },
@@ -276,9 +487,21 @@
       "registry_type": "SysService",
       "registry_decade": 8400,
       "state": "active-staging",
-      "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
-      "source": {"repository": "LLMasterDesign/ZENS3N", "branch": "website/zensensystems", "root": "orion"},
-      "routes": ["/health", "/orion/gen/state", "/orion/seats", "/v1/chat/completions"]
+      "private_network": {
+        "domain": "zens3n.railway.internal",
+        "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"
+      },
+      "source": {
+        "repository": "LLMasterDesign/ZENS3N",
+        "branch": "website/zensensystems",
+        "root": "orion"
+      },
+      "routes": [
+        "/health",
+        "/orion/gen/state",
+        "/orion/seats",
+        "/v1/chat/completions"
+      ]
     },
     {
       "service": "WARDEN",
@@ -290,7 +513,10 @@
       "role": "policy-gate",
       "port": null,
       "state": "card-only",
-      "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
+      "private_network": {
+        "domain": "zens3n.railway.internal",
+        "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"
+      },
       "source": null,
       "routes": []
     },
@@ -304,7 +530,10 @@
       "role": "receipts",
       "port": null,
       "state": "card-only",
-      "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
+      "private_network": {
+        "domain": "zens3n.railway.internal",
+        "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"
+      },
       "source": null,
       "routes": []
     },
@@ -318,7 +547,10 @@
       "role": "strata-ops",
       "port": null,
       "state": "card-only",
-      "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
+      "private_network": {
+        "domain": "zens3n.railway.internal",
+        "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"
+      },
       "source": null,
       "routes": []
     },
@@ -332,7 +564,10 @@
       "role": "index",
       "port": null,
       "state": "card-only",
-      "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
+      "private_network": {
+        "domain": "zens3n.railway.internal",
+        "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"
+      },
       "source": null,
       "routes": []
     },
@@ -346,7 +581,10 @@
       "role": "workstation",
       "port": null,
       "state": "card-only",
-      "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
+      "private_network": {
+        "domain": "zens3n.railway.internal",
+        "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"
+      },
       "source": null,
       "routes": []
     },
@@ -360,7 +598,10 @@
       "role": "command",
       "port": null,
       "state": "card-only",
-      "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
+      "private_network": {
+        "domain": "zens3n.railway.internal",
+        "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"
+      },
       "source": null,
       "routes": []
     },
@@ -374,7 +615,10 @@
       "role": "TELPROMPT",
       "port": null,
       "state": "card-only",
-      "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
+      "private_network": {
+        "domain": "zens3n.railway.internal",
+        "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"
+      },
       "source": null,
       "routes": []
     },
@@ -388,9 +632,51 @@
       "role": "governor",
       "port": null,
       "state": "card-only",
-      "private_network": {"domain": "zens3n.railway.internal", "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"},
+      "private_network": {
+        "domain": "zens3n.railway.internal",
+        "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"
+      },
       "source": null,
       "routes": []
+    },
+    {
+      "service": "3OX-ME",
+      "service_id": null,
+      "kind": "site",
+      "identity": "3ox.me",
+      "owner": "3OX",
+      "batch": "3OX",
+      "role": "agent-profile-router",
+      "port": 6053,
+      "state": "vps-live",
+      "public_domain": {
+        "name": "3ox.me",
+        "state": "vps-served",
+        "dns": "knot-authoritative-wildcard"
+      },
+      "live_surfaces": {
+        "local_port": "127.0.0.1:6053",
+        "tailscale_port": null,
+        "railway_url": null,
+        "vps_url": "https://3ox.me",
+        "wildcard": "https://{name}.3ox.me"
+      },
+      "private_network": {
+        "domain": "zens3n.railway.internal",
+        "reference": "${{ZENSEN-SYSTEM-SUITE.RAILWAY_PRIVATE_DOMAIN}}"
+      },
+      "source": {
+        "workspace": "ZENSEN.CMD/ZENS3N/satellites/3ox.me",
+        "config": "allow.py + build.py",
+        "promotion_target": "minsky-vps /srv/zens3n/satellites/3ox.me"
+      },
+      "routes": [
+        "/",
+        "/allow",
+        "/healthz",
+        "/api/health",
+        "/profiles/{name}/"
+      ]
     }
   ]
 }
