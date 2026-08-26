@@ -137,7 +137,9 @@
   line-height: 1.55;
 }
 
-.zh-body a {
+/* a solid .zh-btn must keep its own colour — .zh-body a (0,1,1) would
+   otherwise outrank .zh-btn (0,1,0) and paint mint on mint */
+.zh-body a:not(.zh-btn) {
   color: var(--mint);
 }
 
