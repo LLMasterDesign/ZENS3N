@@ -149,6 +149,24 @@ HEAD = """<!doctype html>
     .p-card em{{display:block;font-size:.62rem;color:var(--brand);font-style:normal;letter-spacing:.14em;margin-top:6px;text-transform:uppercase}}
     .p-off{{opacity:.45}}
     .p-off:hover{{border-color:rgba(255,255,255,.12)}}
+    .p-card{{position:relative;overflow:hidden;transition:border-color .2s,box-shadow .2s}}
+    .p-card::before{{content:"";position:absolute;inset:0 0 auto 0;height:2px;background:var(--radiance);opacity:0;transition:opacity .2s}}
+    .p-card:hover::before{{opacity:1}}
+    .p-card:hover{{box-shadow:0 0 0 1px var(--line-strong),0 8px 26px rgba(0,0,0,.5)}}
+    .p-card:hover b{{text-shadow:0 0 10px var(--neon-glow)}}
+    .p-go{{display:inline-block;margin-top:10px;padding:6px 12px;border-radius:7px;
+      border:1px solid var(--line);font-family:var(--mono);font-size:.68rem;
+      color:var(--white);background:rgba(255,255,255,.03);transition:all .2s}}
+    .p-card:hover .p-go{{border-color:transparent;color:var(--black);
+      background:var(--radiance);box-shadow:0 0 18px rgba(230,240,255,.22)}}
+    .p-off .p-go{{display:none}}
+    .fd-lede{{font-size:1.02rem;line-height:1.6}}
+    .fd-steps{{counter-reset:s;list-style:none;padding:0}}
+    .fd-steps li{{counter-increment:s;padding:10px 0 10px 34px;position:relative;border-bottom:1px solid var(--line)}}
+    .fd-steps li::before{{content:counter(s);position:absolute;left:0;top:10px;
+      width:20px;height:20px;border-radius:5px;background:var(--radiance);color:var(--black);
+      font-family:var(--mono);font-size:.7rem;font-weight:700;display:grid;place-items:center}}
+    code{{font-family:var(--mono);color:var(--mint);font-size:.86em}}
   </style>
   <script src="/chrome/chrome.js" defer></script>
 </head>
@@ -196,7 +214,7 @@ def page(p: dict) -> str:
 {ports}    </table>
 
     <div class="zh-ctas">
-      <a class="zh-btn" href="/">All 3ox</a>
+      <a class="zh-btn" href="https://3ox.me/Zensen/">All Zensen 3ox</a>
       <a class="zh-btn ghost" href="https://3ox.dev">3ox.dev</a>
     </div>
   </section>
@@ -210,13 +228,14 @@ def page(p: dict) -> str:
                                 crc=crc_of(p["name"])))
 
 
-def index() -> str:
+def zensen() -> str:
     e = html.escape
     cards = "".join(
         f"      <a class=\"p-card\" href=\"https://{p['name']}.3ox.me\">"
         f"<b>{p['glyph']} {e(p['title'])}</b>"
         f"<span>{e(p['who'].split('.')[0])}.</span>"
-        f"<em>{p['name']}.3ox.me · {p['state']}</em></a>\n"
+        f"<em>{p['name']}.3ox.me · {p['state']}</em>"
+        f"<span class=\"p-go\">Open →</span></a>\n"
         for p in PROFILES
     )
     off = "".join(
@@ -225,16 +244,16 @@ def index() -> str:
         for n, why in DEFERRED
     )
     body = f"""  <div data-chrome="header"
-       data-slot-hex="0x3OXME"
-       data-slot-eyebrow="3OX.ME // PROFILE ROUTER // X LANE"
-       data-slot-title="Every 3ox has a face"></div>
+       data-slot-hex="0xZENSEN"
+       data-slot-eyebrow="3OX.ME / ZENSEN // NAMESPACE // X LANE"
+       data-slot-title="Zensen"></div>
 
   <section class="zh-body">
-    <p>A 3ox is a cube — an agent, a station, a set. This is where each one
-       is reachable by name. <code>{{name}}.3ox.me</code> mirrors disk
+    <p>The 3oxes Zensen runs. Each one is a cube — an agent, a station, a set —
+       reachable at its own name. <code>{{name}}.3ox.me</code> mirrors disk
        <code>{{Name}}.me</code>; the page is the reflection, the cube is the thing.</p>
 
-    <p class="zh-rail">LANE :: X · APEX :: 3ox.me · {len(PROFILES)} LIVE</p>
+    <p class="zh-rail">NAMESPACE :: Zensen · {len(PROFILES)} LIVE · {len(DEFERRED)} DECLARED</p>
 
     <div class="p-grid">
 {cards}    </div>
@@ -245,11 +264,56 @@ def index() -> str:
   </section>
 
 """
-    return (HEAD.format(title="3ox.me :: every 3ox has a face")
+    return (HEAD.format(title="3ox.me/Zensen :: the Zensen namespace")
             + body
             + FOOT_MOUNT.format(cube=CUBE, title="3OX", tag="Profiles",
                                 badge=":6053", dot="",
                                 seg="satellites/3ox.me/", file="profiles/",
+                                crc=crc_of("3ox.me")))
+
+
+def front_door() -> str:
+    example = PROFILES[0]
+    body = f"""  <div data-chrome="header"
+       data-slot-hex="0x3OXME"
+       data-slot-eyebrow="3OX.ME // THE FRONT DOOR // X LANE"
+       data-slot-title="Every 3ox has a face"></div>
+
+  <section class="zh-body">
+    <p class="fd-lede">A <b>3ox</b> is a cube — one agent, station, or set, with an
+       identity that outlives whatever model or runtime is behind it today.
+       This is where a 3ox becomes reachable by name.</p>
+
+    <p class="zh-rail">APEX :: 3ox.me · NAMESPACES :: 1 · PROCESSES :: {{len(PROFILES)}}</p>
+
+    <h3>How it works</h3>
+    <ol class="fd-steps">
+      <li><b>Claim a namespace.</b> <code>3ox.me/&lt;you&gt;/</code> is yours —
+          the list of every 3ox you run.</li>
+      <li><b>Register a process.</b> Each one takes a name and answers at
+          <code>&lt;proc&gt;.3ox.me</code>, with its own origin and its own certificate.</li>
+      <li><b>The page mirrors the disk.</b> A 3ox's identity lives in its own cube;
+          the page is generated from it, so the two cannot drift apart.</li>
+    </ol>
+
+    <h3>See one</h3>
+    <div class="p-grid">
+      <a class="p-card" href="https://{{example['name']}}.3ox.me"><b>{{example['glyph']}} {{example['title']}}</b><span>{{example['who'].split('.')[0]}}.</span><em>{{example['name']}}.3ox.me · live</em><span class="p-go">Open →</span></a>
+      <a class="p-card" href="/Zensen/"><b>◈ Zensen</b><span>The first namespace — {{len(PROFILES)}} processes running.</span><em>3ox.me/Zensen/ · live</em><span class="p-go">Open →</span></a>
+    </div>
+
+    <h3>Claim yours</h3>
+    <p>Namespaces are not open yet — registration needs an account system, and
+       that is being built rather than faked. Until then <code>3ox.me/Zensen/</code>
+       is the worked example of what yours will look like.</p>
+  </section>
+
+"""
+    return (HEAD.format(title="3ox.me :: every 3ox has a face")
+            + body
+            + FOOT_MOUNT.format(cube=CUBE, title="3OX", tag="Front Door",
+                                badge=":6053", dot="",
+                                seg="satellites/3ox.me/", file="index.html",
                                 crc=crc_of("3ox.me")))
 
 
@@ -260,8 +324,11 @@ def main() -> None:
         d.mkdir(exist_ok=True)
         (d / "index.html").write_text(page(p), encoding="utf-8")
         print(f"  ∎ profiles/{p['name']}/index.html")
-    (ROOT / "index.html").write_text(index(), encoding="utf-8")
-    print(f"  ∎ index.html  ({len(PROFILES)} live · {len(DEFERRED)} declared)")
+    (ROOT / "Zensen").mkdir(exist_ok=True)
+    (ROOT / "Zensen" / "index.html").write_text(zensen(), encoding="utf-8")
+    print(f"  ∎ Zensen/index.html  ({len(PROFILES)} live · {len(DEFERRED)} declared)")
+    (ROOT / "index.html").write_text(front_door(), encoding="utf-8")
+    print("  ∎ index.html  (front door)")
     (ROOT / "roster.json").write_text(
         json.dumps({"live": [p["name"] for p in PROFILES],
                     "declared": [n for n, _ in DEFERRED]}, indent=2) + "\n",

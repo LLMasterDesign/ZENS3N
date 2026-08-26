@@ -28,6 +28,24 @@
     .p-card em{display:block;font-size:.62rem;color:var(--brand);font-style:normal;letter-spacing:.14em;margin-top:6px;text-transform:uppercase}
     .p-off{opacity:.45}
     .p-off:hover{border-color:rgba(255,255,255,.12)}
+    .p-card{position:relative;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+    .p-card::before{content:"";position:absolute;inset:0 0 auto 0;height:2px;background:var(--radiance);opacity:0;transition:opacity .2s}
+    .p-card:hover::before{opacity:1}
+    .p-card:hover{box-shadow:0 0 0 1px var(--line-strong),0 8px 26px rgba(0,0,0,.5)}
+    .p-card:hover b{text-shadow:0 0 10px var(--neon-glow)}
+    .p-go{display:inline-block;margin-top:10px;padding:6px 12px;border-radius:7px;
+      border:1px solid var(--line);font-family:var(--mono);font-size:.68rem;
+      color:var(--white);background:rgba(255,255,255,.03);transition:all .2s}
+    .p-card:hover .p-go{border-color:transparent;color:var(--black);
+      background:var(--radiance);box-shadow:0 0 18px rgba(230,240,255,.22)}
+    .p-off .p-go{display:none}
+    .fd-lede{font-size:1.02rem;line-height:1.6}
+    .fd-steps{counter-reset:s;list-style:none;padding:0}
+    .fd-steps li{counter-increment:s;padding:10px 0 10px 34px;position:relative;border-bottom:1px solid var(--line)}
+    .fd-steps li::before{content:counter(s);position:absolute;left:0;top:10px;
+      width:20px;height:20px;border-radius:5px;background:var(--radiance);color:var(--black);
+      font-family:var(--mono);font-size:.7rem;font-weight:700;display:grid;place-items:center}
+    code{font-family:var(--mono);color:var(--mint);font-size:.86em}
   </style>
   <script src="/chrome/chrome.js" defer></script>
 </head>
@@ -35,37 +53,41 @@
 <main class="zh-page">
   <div data-chrome="header"
        data-slot-hex="0x3OXME"
-       data-slot-eyebrow="3OX.ME // PROFILE ROUTER // X LANE"
+       data-slot-eyebrow="3OX.ME // THE FRONT DOOR // X LANE"
        data-slot-title="Every 3ox has a face"></div>
 
   <section class="zh-body">
-    <p>A 3ox is a cube — an agent, a station, a set. This is where each one
-       is reachable by name. <code>{name}.3ox.me</code> mirrors disk
-       <code>{Name}.me</code>; the page is the reflection, the cube is the thing.</p>
+    <p class="fd-lede">A <b>3ox</b> is a cube — one agent, station, or set, with an
+       identity that outlives whatever model or runtime is behind it today.
+       This is where a 3ox becomes reachable by name.</p>
 
-    <p class="zh-rail">LANE :: X · APEX :: 3ox.me · 7 LIVE</p>
+    <p class="zh-rail">APEX :: 3ox.me · NAMESPACES :: 1 · PROCESSES :: {len(PROFILES)}</p>
 
+    <h3>How it works</h3>
+    <ol class="fd-steps">
+      <li><b>Claim a namespace.</b> <code>3ox.me/&lt;you&gt;/</code> is yours —
+          the list of every 3ox you run.</li>
+      <li><b>Register a process.</b> Each one takes a name and answers at
+          <code>&lt;proc&gt;.3ox.me</code>, with its own origin and its own certificate.</li>
+      <li><b>The page mirrors the disk.</b> A 3ox's identity lives in its own cube;
+          the page is generated from it, so the two cannot drift apart.</li>
+    </ol>
+
+    <h3>See one</h3>
     <div class="p-grid">
-      <a class="p-card" href="https://ender.3ox.me"><b>Δ ENDER</b><span>Warden-governor of the abzu STRATA under ΛrgOS.</span><em>ender.3ox.me · live</em></a>
-      <a class="p-card" href="https://raven.3ox.me"><b>ᚱ RAVEN</b><span>Witness · scout · Lucius&#x27;s sidekik.</span><em>raven.3ox.me · live</em></a>
-      <a class="p-card" href="https://forge.3ox.me"><b>⚒ FORGE</b><span>Cursor / build agent on the mesh.</span><em>forge.3ox.me · live</em></a>
-      <a class="p-card" href="https://orion.3ox.me"><b>Ω ORION</b><span>The door to ORION, the OTP peer.</span><em>orion.3ox.me · live</em></a>
-      <a class="p-card" href="https://tpr.3ox.me"><b>⟿ TELEPROMPTR</b><span>The Telegram relay station.</span><em>tpr.3ox.me · live</em></a>
-      <a class="p-card" href="https://ledg3r.3ox.me"><b>₪ LEDG3R</b><span>The finance guardian.</span><em>ledg3r.3ox.me · building</em></a>
-      <a class="p-card" href="https://slate7.3ox.me"><b>◈ SLATE7</b><span>The always-on mesh node — “the VPS we didn’t buy.</span><em>slate7.3ox.me · live</em></a>
+      <a class="p-card" href="https://{example['name']}.3ox.me"><b>{example['glyph']} {example['title']}</b><span>{example['who'].split('.')[0]}.</span><em>{example['name']}.3ox.me · live</em><span class="p-go">Open →</span></a>
+      <a class="p-card" href="/Zensen/"><b>◈ Zensen</b><span>The first namespace — {len(PROFILES)} processes running.</span><em>3ox.me/Zensen/ · live</em><span class="p-go">Open →</span></a>
     </div>
 
-    <p class="zh-rail" style="margin-top:22px">DECLARED · NOT YET STANDING</p>
-    <div class="p-grid">
-      <span class="p-card p-off"><b>obsidia</b><span>no cube yet — seat pending under device runtime</span><em>not yet</em></span>
-      <span class="p-card p-off"><b>vso</b><span>archived — real cube, not in the live tree</span><em>not yet</em></span>
-      <span class="p-card p-off"><b>notepad</b><span>authority unresolved</span><em>not yet</em></span>
-    </div>
+    <h3>Claim yours</h3>
+    <p>Namespaces are not open yet — registration needs an account system, and
+       that is being built rather than faked. Until then <code>3ox.me/Zensen/</code>
+       is the worked example of what yours will look like.</p>
   </section>
 
   <div data-chrome="footer"
-       data-slot-brand="<svg class='fcube' viewBox='0 0 24 24' aria-hidden='true'><path class='f-top' d='M12 3 20 7.5 12 12 4 7.5Z'/><path class='f-left' d='M4 7.5 12 12 12 21 4 16.5Z'/><path class='f-right' d='M20 7.5 12 12 12 21 20 16.5Z'/></svg> <span class='title-run'><strong>3OX</strong> <span class='sl'>//</span> <span class='brk'>〔</span> <span>3OX</span><span class='rail-dot'>·</span><span>Profiles</span> <span class='brk'>〕</span></span>"
-       data-slot-copy="<span class='meta-lead'>sync<span class='sync-dot'></span><span class='rail-dot'>&middot;</span><span class='port'>:6053</span><span class='rail-dot'>&middot;</span></span><a class='path' href='#'><span class='seg'>satellites/3ox.me/</span><span class='file'>profiles/</span></a><span class='rail-dot meta-crc-dot'>&middot;</span><span data-slot='crc'></span>"
+       data-slot-brand="<svg class='fcube' viewBox='0 0 24 24' aria-hidden='true'><path class='f-top' d='M12 3 20 7.5 12 12 4 7.5Z'/><path class='f-left' d='M4 7.5 12 12 12 21 4 16.5Z'/><path class='f-right' d='M20 7.5 12 12 12 21 20 16.5Z'/></svg> <span class='title-run'><strong>3OX</strong> <span class='sl'>//</span> <span class='brk'>〔</span> <span>3OX</span><span class='rail-dot'>·</span><span>Front Door</span> <span class='brk'>〕</span></span>"
+       data-slot-copy="<span class='meta-lead'>sync<span class='sync-dot'></span><span class='rail-dot'>&middot;</span><span class='port'>:6053</span><span class='rail-dot'>&middot;</span></span><a class='path' href='#'><span class='seg'>satellites/3ox.me/</span><span class='file'>index.html</span></a><span class='rail-dot meta-crc-dot'>&middot;</span><span data-slot='crc'></span>"
        data-slot-crc="4261"></div>
 </main>
 </body>

@@ -28,6 +28,24 @@
     .p-card em{display:block;font-size:.62rem;color:var(--brand);font-style:normal;letter-spacing:.14em;margin-top:6px;text-transform:uppercase}
     .p-off{opacity:.45}
     .p-off:hover{border-color:rgba(255,255,255,.12)}
+    .p-card{position:relative;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+    .p-card::before{content:"";position:absolute;inset:0 0 auto 0;height:2px;background:var(--radiance);opacity:0;transition:opacity .2s}
+    .p-card:hover::before{opacity:1}
+    .p-card:hover{box-shadow:0 0 0 1px var(--line-strong),0 8px 26px rgba(0,0,0,.5)}
+    .p-card:hover b{text-shadow:0 0 10px var(--neon-glow)}
+    .p-go{display:inline-block;margin-top:10px;padding:6px 12px;border-radius:7px;
+      border:1px solid var(--line);font-family:var(--mono);font-size:.68rem;
+      color:var(--white);background:rgba(255,255,255,.03);transition:all .2s}
+    .p-card:hover .p-go{border-color:transparent;color:var(--black);
+      background:var(--radiance);box-shadow:0 0 18px rgba(230,240,255,.22)}
+    .p-off .p-go{display:none}
+    .fd-lede{font-size:1.02rem;line-height:1.6}
+    .fd-steps{counter-reset:s;list-style:none;padding:0}
+    .fd-steps li{counter-increment:s;padding:10px 0 10px 34px;position:relative;border-bottom:1px solid var(--line)}
+    .fd-steps li::before{content:counter(s);position:absolute;left:0;top:10px;
+      width:20px;height:20px;border-radius:5px;background:var(--radiance);color:var(--black);
+      font-family:var(--mono);font-size:.7rem;font-weight:700;display:grid;place-items:center}
+    code{font-family:var(--mono);color:var(--mint);font-size:.86em}
   </style>
   <script src="/chrome/chrome.js" defer></script>
 </head>
@@ -53,7 +71,7 @@
     </table>
 
     <div class="zh-ctas">
-      <a class="zh-btn" href="/">All 3ox</a>
+      <a class="zh-btn" href="https://3ox.me/Zensen/">All Zensen 3ox</a>
       <a class="zh-btn ghost" href="https://3ox.dev">3ox.dev</a>
     </div>
   </section>
