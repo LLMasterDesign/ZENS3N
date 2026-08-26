@@ -167,6 +167,20 @@ HEAD = """<!doctype html>
       width:20px;height:20px;border-radius:5px;background:var(--radiance);color:var(--black);
       font-family:var(--mono);font-size:.7rem;font-weight:700;display:grid;place-items:center}}
     code{{font-family:var(--mono);color:var(--mint);font-size:.86em}}
+    .wl{{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;max-width:520px}}
+    .wl input[type=email]{{flex:1 1 240px;padding:10px 12px;border-radius:8px;
+      border:1px solid var(--line);background:rgba(255,255,255,.03);
+      color:var(--white);font-family:var(--mono);font-size:.82rem}}
+    .wl input[type=email]:focus{{outline:none;border-color:var(--mint);
+      box-shadow:0 0 0 3px rgba(117,224,196,.12)}}
+    .wl button{{padding:10px 18px;border-radius:8px;border:1px solid var(--mint);
+      background:var(--mint);color:var(--black);font-weight:600;
+      font-family:var(--mono);font-size:.78rem;cursor:pointer;transition:box-shadow .2s}}
+    .wl button:hover{{box-shadow:0 0 20px rgba(117,224,196,.4)}}
+    .wl-hp{{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}}
+    .wl-say{{margin-top:8px;font-family:var(--mono);font-size:.76rem;min-height:1.2em}}
+    .wl-say.ok{{color:var(--mint)}}
+    .wl-say.no{{color:#ff8e68}}
   </style>
   <script src="/chrome/chrome.js" defer></script>
 </head>
@@ -271,6 +285,35 @@ def zensen() -> str:
                                 seg="satellites/3ox.me/", file="profiles/",
                                 crc=crc_of("3ox.me")))
 
+WL_SCRIPT = """
+  <script>
+  (function () {
+    var f = document.getElementById("wl"), say = document.getElementById("wl-say");
+    if (!f || !window.fetch) return;          /* no JS: the plain POST still works */
+    f.addEventListener("submit", function (e) {
+      e.preventDefault();
+      say.className = "wl-say"; say.textContent = "\u2026";
+      fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: f.email.value, website: f.website.value })
+      }).then(function (r) { return r.json().catch(function () { return {}; }); })
+        .then(function (d) {
+          if (d && d.ok) {
+            say.className = "wl-say ok"; say.textContent = "\u220e on the list"; f.reset();
+          } else {
+            say.className = "wl-say no";
+            say.textContent = "\u21af " + ((d && d.error) || "did not take");
+          }
+        })
+        .catch(function () {
+          say.className = "wl-say no"; say.textContent = "\u21af could not reach the server";
+        });
+    });
+  })();
+  </script>
+"""
+
 
 def front_door() -> str:
     example = PROFILES[0]
@@ -304,13 +347,22 @@ def front_door() -> str:
 
     <h3>Claim yours</h3>
     <p>Namespaces are not open yet — registration needs an account system, and
-       that is being built rather than faked. Until then <code>3ox.me/Zensen/</code>
-       is the worked example of what yours will look like.</p>
+       that is being built rather than faked. Leave an address and you will hear
+       when <code>3ox.me/&lt;you&gt;/</code> can be claimed. Nothing else, no list.</p>
+
+    <form class="wl" id="wl" method="post" action="/api/waitlist">
+      <label class="wl-hp" aria-hidden="true">Leave this empty
+        <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+      <input type="email" name="email" required autocomplete="email"
+             placeholder="you@somewhere" aria-label="Email address">
+      <button type="submit">Tell me when</button>
+    </form>
+    <p class="wl-say" id="wl-say" role="status" aria-live="polite"></p>
   </section>
 
 """
     return (HEAD.format(title="3ox.me :: every 3ox has a face")
-            + body
+            + body + WL_SCRIPT
             + FOOT_MOUNT.format(cube=CUBE, title="3OX", tag="Front Door",
                                 badge=":6053", dot="",
                                 seg="satellites/3ox.me/", file="index.html",

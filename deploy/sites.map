@@ -11,7 +11,8 @@
 sysgen.sh     sysgen.sh www.sysgen.sh
 sysgen.dev    sysgen.dev www.sysgen.dev
 3ox.dev       3ox.dev www.3ox.dev
-3ox.me        3ox.me www.3ox.me
+# 3ox.me is served by /etc/caddy/sites.d/00-3oxme.caddy — apex,
+# wildcard subdomains, and the /api/* gate all live there together.
 
 # Still served by Squarespace — uncomment as each apex A record is
 # repointed at 95.216.71.253 in the Knot zone:
