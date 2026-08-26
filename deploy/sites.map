@@ -1,0 +1,27 @@
+# ⎊::ZENS3N sites.map — read by the post-receive hook on minsky-vps
+#
+# format:  <satellites/ dir>   <domain> [alias ...]
+#
+# A line here means: publish this directory at these hostnames and let
+# Caddy obtain a certificate for them. Only add a domain once its DNS
+# actually points at the VPS, or the certificate request will fail.
+#
+# Delegated to ns1.zensen.systems, apex A -> 95.216.71.253:
+
+sysgen.sh     sysgen.sh www.sysgen.sh
+sysgen.dev    sysgen.dev www.sysgen.dev
+3ox.dev       3ox.dev www.3ox.dev
+3ox.me        3ox.me www.3ox.me
+
+# Still served by Squarespace — uncomment as each apex A record is
+# repointed at 95.216.71.253 in the Knot zone:
+#
+# zensen.systems         zensen.systems www.zensen.systems
+# zensen.live            zensen.live www.zensen.live
+# zensen.solutions       zensen.solutions www.zensen.solutions
+# zensen.store           zensen.store www.zensen.store
+# zensenenterprise.com   zensenenterprises.com www.zensenenterprises.com
+#
+# note: the satellite dir is zensenenterprise.com (singular) but the
+# domain you own is zensenenterprises.com (plural). Directory name is
+# cosmetic; the domain column is what matters.

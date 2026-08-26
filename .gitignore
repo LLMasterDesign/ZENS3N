@@ -23,3 +23,10 @@ LOOM.html
 _versions/
 __pycache__/
 *.py[cod]
+
+# mistyped-URL artifact from a railway CLI invocation
+https:/
+
+# elixir build output (orion is a separate project tree)
+orion/_build/
+orion/deps/
