@@ -136,6 +136,25 @@ class Gate(BaseHTTPRequestHandler):
         self._send(404, b"not found\n")
 
     def do_POST(self):  # noqa: N802
+        # Drain the body FIRST, before any early return. This is HTTP/1.1 with
+        # keep-alive: bytes left unread stay in the socket, and the next request
+        # on that connection starts parsing mid-body and sees a garbage method.
+        try:
+            n = int(self.headers.get("Content-Length", "0"))
+        except ValueError:
+            n = 0
+        raw = ""
+        if 0 < n <= MAX_BODY:
+            raw = self.rfile.read(n).decode("utf-8", "replace")
+        elif n > MAX_BODY:
+            # too big to want, still has to leave the socket clean
+            left = n
+            while left > 0:
+                chunk = self.rfile.read(min(left, 65536))
+                if not chunk:
+                    break
+                left -= len(chunk)
+
         if urlsplit(self.path).path != "/api/waitlist":
             self._send(404, b"not found\n")
             return
@@ -146,16 +165,11 @@ class Gate(BaseHTTPRequestHandler):
                        "application/json; charset=utf-8")
             return
 
-        try:
-            n = int(self.headers.get("Content-Length", "0"))
-        except ValueError:
-            n = 0
-        if n <= 0 or n > MAX_BODY:
+        if not raw:
             self._send(400, b'{"ok":false,"error":"bad request"}\n',
                        "application/json; charset=utf-8")
             return
 
-        raw = self.rfile.read(n).decode("utf-8", "replace")
         ctype = (self.headers.get("Content-Type") or "").split(";")[0].strip()
         if ctype == "application/json":
             try:
