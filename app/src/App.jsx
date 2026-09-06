@@ -64,7 +64,32 @@ function Section({ title, kind, items, onAdd }) {
   );
 }
 
-function Profile({ initData, user, data, refresh }) {
+function Groups({ groups, topics }) {
+  return (
+    <div style={{ ...cardS, marginTop:14 }}>
+      <div style={{ color:C.dim, fontSize:12, marginBottom:6, textTransform:"uppercase", letterSpacing:1 }}>Groups</div>
+      {groups && groups.length ? groups.map(g => {
+        const gt = (topics||[]).filter(t => t.group_slug === g.slug);
+        return (
+          <div key={g.id||g.chat_id} style={{ padding:"8px 0", borderTop:`1px solid ${C.border}` }}>
+            <div style={{ display:"flex", justifyContent:"space-between" }}>
+              <span style={{ color:C.ink, fontWeight:600 }}>{g.title||g.slug}</span>
+              <span style={{ color:g.state==="joined"?C.ok:C.dim, fontSize:12 }}>{g.state}</span>
+            </div>
+            {gt.length ? gt.map(t => (
+              <div key={t.id||t.name} style={{ display:"flex", justifyContent:"space-between", paddingLeft:14, marginTop:4, fontSize:13 }}>
+                <span style={{ color:C.dim }}># {t.name}</span>
+                <span style={{ color:C.gold }}>{t.being}<span style={{color:C.dim}}> · {t.tier}</span></span>
+              </div>
+            )) : <div style={{ color:C.dim, fontSize:12, paddingLeft:14, marginTop:4 }}>no topics yet</div>}
+          </div>
+        );
+      }) : <div style={{ color:C.dim, fontSize:13, paddingTop:6 }}>TPR is in no groups yet. Add it to a group and turn Topics on.</div>}
+    </div>
+  );
+}
+
+function Profile({ initData, user, data, refresh, view }) {
   const [copied, setCopied] = useState(false);
   const copy = () => { navigator.clipboard?.writeText(user.telegram_id); setCopied(true); setTimeout(()=>setCopied(false),1200); };
   const add = (kind) => async (fields) => {
@@ -86,9 +111,10 @@ function Profile({ initData, user, data, refresh }) {
           <button onClick={copy} style={{ marginLeft:10, ...ghostBtn, padding:"2px 8px", fontSize:11 }}>{copied?"copied":"copy"}</button></span>} />
         {user.username && <Row k="handle" v={"@"+user.username} />}
       </div>
+      {view === "workspace" && <Groups groups={data.groups} topics={data.topics} />}
       <Section title="Agents"   kind="agent"   items={data.agents}   onAdd={add("agent")} />
-      <Section title="Stations" kind="station" items={data.stations} onAdd={add("station")} />
-      <Section title="Services" kind="service" items={data.services} onAdd={add("service")} />
+      {view === "workspace" && <Section title="Stations" kind="station" items={data.stations} onAdd={add("station")} />}
+      {view === "workspace" && <Section title="Services" kind="service" items={data.services} onAdd={add("service")} />}
     </div>
   );
 }
@@ -100,7 +126,7 @@ function Landing({ name, onEnter }) {
         <div style={{ color:C.gold, fontWeight:700, marginBottom:10, fontSize:18 }}>▛▞ TelePromptR</div>
         <div style={{ color:C.dim, marginBottom:4, fontSize:13 }}>signed in as</div>
         <div style={{ color:C.ink, marginBottom:16, fontWeight:600 }}>{name}</div>
-        <button style={goldBtn} onClick={onEnter}>Enter your door</button>
+        <button style={goldBtn} onClick={onEnter}>Enter</button>
       </div>
     </div>
   );
@@ -122,8 +148,9 @@ export default function App() {
   const [phase, setPhase] = useState("checking");
   const [initData, setInitData] = useState("");
   const [user, setUser] = useState(null);
-  const [data, setData] = useState({ agents:[], stations:[], services:[] });
+  const [data, setData] = useState({ agents:[], stations:[], services:[], groups:[], topics:[] });
   const [reason, setReason] = useState("");
+  const view = new URLSearchParams(window.location.search).get("view") === "workspace" ? "workspace" : "user";
 
   const runAuth = async (idata) => {
     const res = await base44.functions.invoke("auth", { initData: idata });
@@ -131,7 +158,7 @@ export default function App() {
   };
   const refresh = async () => {
     try { const d = await runAuth(initData);
-      if (d?.ok) setData({ agents:d.agents||[], stations:d.stations||[], services:d.services||[] }); } catch {}
+      if (d?.ok) setData({ agents:d.agents||[], stations:d.stations||[], services:d.services||[], groups:d.groups||[], topics:d.topics||[] }); } catch {}
   };
 
   useEffect(() => {
@@ -143,7 +170,7 @@ export default function App() {
     (async () => {
       try {
         const d = await runAuth(idata);
-        if (d?.ok) { setUser(d.user); setData({ agents:d.agents||[], stations:d.stations||[], services:d.services||[] }); setPhase("landing"); }
+        if (d?.ok) { setUser(d.user); setData({ agents:d.agents||[], stations:d.stations||[], services:d.services||[], groups:d.groups||[], topics:d.topics||[] }); setPhase("landing"); }
         else { setReason("This link could not be verified. Open TPR again from Telegram."); setPhase("door"); }
       } catch (e) { setReason(e?.response?.data?.reason || "This link could not be verified. Open TPR again from Telegram."); setPhase("door"); }
     })();
@@ -154,7 +181,7 @@ export default function App() {
       {phase==="checking" && <div style={{ minHeight:"70vh", display:"grid", placeItems:"center", color:C.dim }}>checking signature</div>}
       {phase==="door" && <Door reason={reason} />}
       {phase==="landing" && <Landing name={user?.first_name || user?.username || "you"} onEnter={()=>setPhase("in")} />}
-      {phase==="in" && <Profile initData={initData} user={user} data={data} refresh={refresh} />}
+      {phase==="in" && <Profile initData={initData} user={user} data={data} refresh={refresh} view={view} />}
     </div>
   );
 }

@@ -116,6 +116,9 @@ export default async function (req: Request): Promise<Response> {
   try { agents = await db.entities.Agent.list(); } catch { agents = []; }
   try { stations = await db.entities.Station.list(); } catch { stations = []; }
   try { services = await db.entities.Service.list(); } catch { services = []; }
+  let groups: any[] = [], topics: any[] = [];
+  try { groups = await db.entities.Group.list(); } catch { groups = []; }
+  try { topics = await db.entities.Topic.list(); } catch { topics = []; }
 
   return Response.json({
     ok: true,
@@ -126,6 +129,6 @@ export default async function (req: Request): Promise<Response> {
       created_at: row.created_at,
       last_seen: row.last_seen,
     },
-    agents, stations, services,
+    agents, stations, services, groups, topics,
   });
 }

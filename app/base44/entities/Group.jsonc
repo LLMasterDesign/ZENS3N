@@ -1,0 +1,11 @@
+{
+  "name": "Group",
+  "type": "object",
+  "properties": {
+    "slug":    { "type": "string", "description": "Folder slug, e.g. 7HE-PAN7HEON" },
+    "title":   { "type": "string", "description": "Telegram group title" },
+    "chat_id": { "type": "string", "description": "Telegram chat id" },
+    "state":   { "type": "string", "description": "joined · left" }
+  },
+  "required": ["chat_id"]
+}
