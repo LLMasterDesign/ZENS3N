@@ -1,0 +1,83 @@
+⟦⎊⟧ How TPR actually starts — traced, not assumed
+⋮⋮TPR.HUB⋮⋮
+⧗-26.392 · read from the running system, every claim checkable
+
+── TODAY · what actually happens ──────────────────────────────
+
+  systemd --user
+  ~/.config/systemd/user/tpr.service        ← vec3 law forbids
+      │                                       this location
+      │ ExecStart
+      ▼
+  TPR.Gen/.venv/bin/python3 -u run.py       ← 123 KB of Python
+      │
+      ├─1 locate station   TPR_HOME → .station/
+      ├─2 load::lock       .station/tpr/lock3ox.kdl → 10 tiers
+      │                    then the token from
+      │                    .station/vec3/lib/keys/Ender_Zen
+      │                    (missing token = hard stop, only one)
+      ├─3 identity         7HE.ENDER/.3ox/.ae/Ender.ae
+      │                    + tpr.spark + Ender.sparkfile
+      │                    = SYSTEM_PROMPT
+      ├─4 webhook          setWebhook + getMe
+      └─5 listen           :7089
+
+  NO run.rb. NO brains. NO .rs. NO Brains/ folder.
+  The TPR tree holds: run.py · kappa.py · streaming.py ·
+  loop_controller.py · webapp/ · .station/{tpr,vec3/lib}
+:: ∎
+
+── THE 3OX SHAPE · what a cube boots like ─────────────────────
+
+  1-Spark → 2-Brains → 3-Rules → 4-Toolkit → 5-Links → 6-Pulse
+              │
+              └─ 2-Brains/rust ──brains-build──► vec3/bin/brains
+                                                 (static musl ELF)
+  vec3/rc/run.rb   ruby · verbs: boot|ack|paths|status
+                   writes vec3/proc/<port>
+                   LAW: no tool may REQUIRE run.rb
+                        (one exception: the brains compile)
+:: ∎
+
+── THE GAP · why the chain in your head is not on disk ────────
+
+  A cube has six numbered faces. TPR is not a cube — it is a
+  STATION, and its .station/ holds two things only: the lock
+  (tpr/) and the keyring (vec3/lib). There is no face 2, so
+  there is nothing for brains to be, and nothing calls run.rb.
+
+  So `tpr.service → Brains/brain.rs → run.rb` is a TARGET, not
+  a trace. To make it real, three things must exist that do not:
+    a station-shaped set of six faces under station names
+    a compiled face 2 for the station (its own brains-build)
+    a boot verb that writes proc/ for a station, not a cube
+:: ∎
+
+── 100 YEAR TEST · what survives, what rots ───────────────────
+
+  survives   KDL that declares shape · a static musl binary ·
+             plain text cards · a port map
+  rots       Python + a venv (interpreter drifts) · JSON packs ·
+             a unit file in ~/.config/systemd/user · three
+             registries claiming three different homes for the
+             same station
+  wire law   JSON is the Telegram API's language, not ours —
+             it belongs at the send boundary, rendered from KDL,
+             never as the thing a human edits
+:: ∎
+
+── PORT BAND · xxx0 + five ────────────────────────────────────
+
+  :7080-7084  STORE.CC   (taken · CISA-0 Observe)
+  :7090-7094  TPR        ← the next free start-on-zero pentad
+      7090  0 Observe   the door · health · webhook in
+      7091  1 Relate    .Gen · the relay itself
+      7092  2 Infer     model reach
+      7093  3 Weigh     routing · being resolution
+      7094  4 Remember  spool · history
+  ONE thing sits in the way: :7094 = ender-trainview (declared,
+  own systemd unit). It is a telemetry view → digit 7 → :7087,
+  which is free. One unit edit and the pentad is clean.
+  Also squatting the band undeclared: :7078 and :7099, both
+  `python3 -m http.server` static servers.
+:: ∎

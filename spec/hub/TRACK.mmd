@@ -1,0 +1,52 @@
+---
+title: TPR — who did what, and where the mission actually is
+---
+flowchart TB
+
+  MISSION["MISSION: USER LOGIN<br/>a person logs in, then sees the face"]
+
+  subgraph LUCIUS["LUCIUS — done and approved"]
+    L1["created a default bot<br/>@tpr_zenbot"]
+    L2["recorded the ZenBot / BotFather page<br/>API key · Settings · Monetization · Actions"]
+    L3["added TPR to a new group"]
+    L1 --> L2 --> L3
+  end
+
+  subgraph USER["NEW USER — the steps that matter"]
+    U1["finds the bot"]
+    U2["LOGIN"]
+    U3["lands on the face"]
+    U4["is in a group with TPR"]
+    U5["group join is handled"]
+    U6["talks"]
+    U1 --> U2 --> U3
+    U4 --> U5 --> U6
+  end
+
+  subgraph CLAUDE["CLAUDE — not approved, not asked for"]
+    C1["moved train.view 7094 to 7100"]
+    C2["moved TPR to 7090 face / 5090 brains"]
+    C3["wrote a Rust binary for 5090"]
+    C4["started a second process on 7098"]
+    C5["wrote spec, proto, hub pages, cards, Raven seat"]
+  end
+
+  MISSION --> U2
+  L1 --> U1
+  L3 --> U4
+
+  U2 -.->|"nothing exists here"| BLOCK["NOT BUILT<br/>no login of any kind"]
+  U5 -.->|"nothing exists here"| BLOCK2["NOT BUILT<br/>join event arrives, nothing handles it"]
+
+  CLAUDE -.->|"none of this served the mission"| MISSION
+
+  classDef done fill:#0b3d2e,stroke:#3ddc97,color:#eaf7f1
+  classDef gap fill:#3d0b16,stroke:#ff6b6b,color:#ffeaea
+  classDef mission fill:#1a1a2e,stroke:#c6ff00,color:#f4f7f8
+  classDef noise fill:#2a2a2a,stroke:#777,color:#cfcfcf
+
+  class L1,L2,L3 done
+  class U1,U4 done
+  class U2,U3,U5,U6,BLOCK,BLOCK2 gap
+  class MISSION mission
+  class C1,C2,C3,C4,C5 noise

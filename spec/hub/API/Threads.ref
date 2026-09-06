@@ -1,0 +1,132 @@
+## Forum Topics & Threads — Bot API
+
+Session isolation for bot agents: each thread = one conversation context.
+Source: core.telegram.org/bots/api
+
+---
+
+## Types
+
+### ForumTopic
+| Field | Type | Description |
+|---|---|---|
+| message_thread_id | Integer | Unique topic ID |
+| name | String | Topic name |
+| icon_color | Integer | RGB color |
+| icon_custom_emoji_id | String | Optional. Custom emoji icon |
+| is_name_implicit | Boolean | Optional. Name auto-generated, should be changed |
+
+### ForumTopicCreated (service message)
+| Field | Type | Description |
+|---|---|---|
+| name | String | Topic name |
+| icon_color | Integer | RGB color |
+| icon_custom_emoji_id | String | Optional. Custom emoji |
+| is_name_implicit | Boolean | Optional. Auto-named |
+
+### ForumTopicEdited (service message)
+| Field | Type | Description |
+|---|---|---|
+| name | String | Optional. New name |
+| icon_custom_emoji_id | String | Optional. New icon (empty = removed) |
+
+### ForumTopicClosed — no fields
+### ForumTopicReopened — no fields
+### GeneralForumTopicHidden — no fields
+### GeneralForumTopicUnhidden — no fields
+
+### DirectMessagesTopic
+| Field | Type | Description |
+|---|---|---|
+| topic_id | Integer | Unique ID (up to 52-bit, use int64) |
+| user | User | Optional. Topic creator (currently always present) |
+
+### Community
+| Field | Type | Description |
+|---|---|---|
+| id | Integer | Unique ID (up to 52-bit, use int64) |
+| name | String | Community name |
+
+---
+
+## Methods
+
+### createForumTopic
+Create topic in forum supergroup or private chat. Returns ForumTopic.
+Bot must be admin with can_manage_topics.
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| chat_id | Integer/String | Yes | Target chat |
+| name | String | Yes | 1-128 chars |
+| icon_color | Integer | Optional | RGB. Must be: 0x6FB9F0, 0xFFD67E, 0xCB86DB, 0x8EEE98, 0xFF93B2, or 0xFB6F5F |
+| icon_custom_emoji_id | String | Optional | Custom emoji from getForumTopicIconStickers |
+
+### editForumTopic
+Edit topic name/icon. Bot must be admin or topic creator. Returns True.
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| chat_id | Integer/String | Yes | Target chat |
+| message_thread_id | Integer | Yes | Topic ID |
+| name | String | Optional | 0-128 chars. Empty = keep current |
+| icon_custom_emoji_id | String | Optional | Empty = remove icon |
+
+### closeForumTopic
+Close open topic. Admin + can_manage_topics (or creator). Returns True.
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| chat_id | Integer/String | Yes | Target chat |
+| message_thread_id | Integer | Yes | Topic ID |
+
+### reopenForumTopic
+Reopen closed topic. Same permissions as close. Returns True.
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| chat_id | Integer/String | Yes | Target chat |
+| message_thread_id | Integer | Yes | Topic ID |
+
+### deleteForumTopic
+Delete topic and ALL messages. Admin + can_delete_messages. Returns True.
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| chat_id | Integer/String | Yes | Target chat |
+| message_thread_id | Integer | Yes | Topic ID |
+
+### unpinAllForumTopicMessages
+Clear pinned messages in topic. Admin + can_pin_messages. Returns True.
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| chat_id | Integer/String | Yes | Target chat |
+| message_thread_id | Integer | Yes | Topic ID |
+
+### General Topic Methods
+All require admin + can_manage_topics. Returns True.
+- editGeneralForumTopic(chat_id, name: 1-128 chars)
+- closeGeneralForumTopic(chat_id)
+- reopenGeneralForumTopic(chat_id) — auto-unhides if hidden
+- hideGeneralForumTopic(chat_id) — auto-closes if open
+- unhideGeneralForumTopic(chat_id)
+- unpinAllGeneralForumTopicMessages(chat_id)
+
+### getForumTopicIconStickers
+Get allowed custom emoji for topic icons. No parameters. Returns Array of Sticker.
+
+---
+
+## Threading in send methods
+
+Every send method accepts message_thread_id (Optional Integer):
+"Unique identifier for the target message thread (topic) of a forum;
+for forum supergroups and private chats of bots with forum topic mode enabled only"
+
+This means: sendMessage, sendRichMessage, sendRichMessageDraft, sendMessageDraft,
+sendPhoto, sendDocument, sendVideo, etc. — all support threading.
+
+## Bot agent pattern: thread = session
+
+1. User sends message → createForumTopic("Session <timestamp>")
+2. All model responses go to that thread via message_thread_id
+3. When session ends → closeForumTopic
+4. Old sessions can be deleted or archived
+5. Each thread has its own message history = natural context window
+
+:: ∎

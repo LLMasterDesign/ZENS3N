@@ -1,0 +1,104 @@
+syntax = "proto3";
+package box.station.v1;
+// STATION :: the door contract :: shape · health · readiness · pulse · deliver
+// class station · cisa 0-4 live / 5-9 reserved · see 3-Rules/station.spec
+// One contract for every station. BEAM/OTP implements it today,
+// gRPC implements it next; neither owns it.
+
+service Station {
+  // What I am — the lock, verbatim. A station that cannot answer
+  // this cannot be trusted about anything else.
+  rpc Shape (Empty) returns (Lock);
+
+  // Am I up. Cheap. Must never call anything that can hang.
+  rpc Health (Empty) returns (HealthReply);
+
+  // Can I work. Probe-backed, TTL'd. "unknown" is a valid answer;
+  // silence is not — reason is required when not ready.
+  rpc Readiness (Empty) returns (ReadinessReply);
+
+  // What I emitted. The .gensL receipt lane, streamed.
+  rpc Pulse (PulseRequest) returns (stream Receipt);
+
+  // Do one unit of work. Idempotent by envelope.id or broken.
+  // Emits exactly one receipt: ∀λᴳ ∃!τ.
+  rpc Deliver (Envelope) returns (Ack);
+}
+
+message Empty {}
+
+// ── face 1 · Lock — the one truth ──
+message Lock {
+  string station = 1;   // "telepromptr"
+  string being = 2;     // who speaks by default; a card may override
+  uint32 decade = 3;    // 7090 — the station's five used ports start here
+  string runtime = 4;   // absolute path to what actually runs
+  string key_name = 5;  // vault FILE NAME, never the secret
+  string face = 6;      // the public door humans type
+  repeated string tiers = 7;
+  map<string, int64> limits = 8;
+  repeated string law = 9;
+}
+
+// ── face 6 · Pulse ──
+// A verb and a message may not share a name in one scope —
+// protoc caught it. Replies carry the suffix.
+message HealthReply {
+  Glyph glyph = 1;
+  string tier = 2;
+  string model = 3;
+  uint64 uptime_seconds = 4;
+  uint32 port = 5;
+}
+
+message ReadinessReply {
+  Glyph glyph = 1;
+  string reason = 2;    // REQUIRED unless glyph is SEALED
+  string seat = 3;      // seat.ref that was probed
+  int64 checked_at = 4;
+  bool stale = 5;       // past TTL — answer given, freshness disclaimed
+}
+
+message Receipt {
+  Glyph glyph = 1;
+  string seat = 2;      // ⎊::<being>::<face>::<verb>@<node>
+  string kind = 3;      // "<being>.verb"
+  string id = 4;        // K-<ts>-<pid>
+  string verb = 5;
+  string ts = 6;        // 20260904T220000Z
+  string status = 7;
+  uint64 ms = 8;
+  string note = 9;
+}
+
+message PulseRequest {
+  string since_id = 1;  // empty = from now
+  repeated string verbs = 2;
+}
+
+// ── work ──
+message Envelope {
+  string id = 1;        // dedupe key — redelivery is expected
+  string thread = 2;    // forum topic / session / lane
+  string being = 3;     // who should answer; empty = the lock's default
+  string body = 4;
+  map<string, string> meta = 5;
+}
+
+message Ack {
+  Glyph glyph = 1;
+  string id = 2;        // echoes Envelope.id
+  string receipt_id = 3;
+  string note = 4;      // why, when not sealed
+}
+
+// ── the six state glyphs · no failed glyph exists ──
+enum Glyph {
+  GLYPH_UNSPECIFIED = 0;
+  SEALED = 1;    // ∎  done
+  PARTIAL = 2;   // ◑  some of it
+  HELD = 3;      // ⟊  gated, waiting on a human
+  FRAME = 4;     // 𝜵  frame close
+  RAN = 5;       // ↯  it happened
+  REFUSED = 6;   // ⌁  law said no
+}

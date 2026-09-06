@@ -1,0 +1,23 @@
+///▙▖▙▖▞▞▙▂▂▂▂▂▂▂▂▂▂ ⋮⋮[TPR]⋮⋮
+▛//▞▞ ⟦⎊⟧ :: ⧗-26.369 // TelePromptR :: the station ▞▞
+
+telos: the Telegram relay's node entry. Identity lives here,
+code does not. :: ∎
+
+type    Station
+port    7089
+gen     CENTRAL.CMD/Telegram/TelePromptR/TPR.Gen/   ← the code
+config  CENTRAL.CMD/Telegram/TelePromptR/           ← .station · ZenBots
+hub     !7HE.BRIDGE/HUB/TelePromptR/                ← the corpus
+seat    "tpr" in ~/.sysgen/registry/v1/seats.kdl
+bot     Ender_ZenBot
+webhook corbato-en0.billfish-sirius.ts.net/tpr/webhook
+
+law
+  NO code runs from Citadel. Citadel is storage.
+  Code lives in TPR.Gen (the .Gen law: <Entity>.Gen/ is the
+  polyglot runtime home). This station holds identity and
+  version slots only — same split as Ender.Gen vs
+  _TRON/Agents/Ender.
+
+:: ∎

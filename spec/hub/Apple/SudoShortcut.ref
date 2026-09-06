@@ -1,0 +1,128 @@
+## iOS Shortcut: Sudo Approval Loop
+
+Polls en0 for sudo petitions, shows approve/reject prompt, executes via SSH.
+Runs on iPhone — no app install needed (Shortcuts is built-in).
+
+---
+
+## Shortcut: "Sudo Gate"
+
+### Setup (one-time)
+1. Open Shortcuts app on iPhone
+2. Create new Shortcut named "Sudo Gate"
+3. Add actions below in order
+4. For SSH: Shortcuts uses "Run Script Over SSH" action (built-in)
+5. Set en0 connection: host = en0 tailnet IP or hostname,
+   user = enzo, auth = SSH key (add in Settings > General > SSH keys)
+
+### Flow
+
+```
+[Repeat Forever]
+
+  1. Run Script Over SSH (enzo@en0):
+     ls /home/abzu/!LAUNCHPAD/!7HE.BRIDGE/[CMD]/Sudo/pending/ 2>/dev/null
+
+  2. If [result is not empty]:
+
+     3. Run Script Over SSH (enzo@en0):
+        cat /home/abzu/!LAUNCHPAD/!7HE.BRIDGE/[CMD]/Sudo/pending/[first file]
+
+     4. Show Alert:
+        Title: "Sudo Petition"
+        Body: [file contents from step 3]
+        Buttons: "Approve" / "Reject"
+
+     5. If [tapped Approve]:
+
+        6. Run Script Over SSH (enzo@en0):
+           cd /home/abzu/!LAUNCHPAD/!7HE.BRIDGE/[CMD]/Sudo/pending && \
+           source ./[filename] && \
+           mv ./[filename] ../approved/
+
+     5b. If [tapped Reject]:
+
+        6b. Run Script Over SSH (enzo@en0):
+           mv /home/abzu/!LAUNCHPAD/!7HE.BRIDGE/[CMD]/Sudo/pending/[filename] \
+              /home/abzu/!LAUNCHPAD/!7HE.BRIDGE/[CMD]/Sudo/rejected/
+
+  7. Wait 30 seconds
+
+[End Repeat]
+```
+
+### Actual Shortcuts actions (step by step)
+
+1. **Repeat** (no count = forever)
+2. **Run Script over SSH**
+   - Host: [en0 tailnet IP]
+   - User: enzo
+   - Authentication: SSH Key
+   - Script: `ls /home/abzu/'!LAUNCHPAD'/'!7HE.BRIDGE'/'[CMD]'/Sudo/pending/ 2>/dev/null`
+   - Save output to: PendingList
+3. **If** PendingList *has any value*
+4. **Get Item from List** — First Item from PendingList → FileName
+5. **Run Script over SSH**
+   - Script: `cat /home/abzu/'!LAUNCHPAD'/'!7HE.BRIDGE'/'[CMD]'/Sudo/pending/'${FileName}'`
+   - Save output to: PetitionBody
+6. **Choose from Menu**
+   - Prompt: "Sudo: ${FileName}"
+   - Options: Approve, Reject
+7. **[Approve case]**: Run Script over SSH
+   - Script: see approve command above
+8. **[Reject case]**: Run Script over SSH
+   - Script: see reject command above
+9. **End If**
+10. **Wait** 30 seconds
+11. **End Repeat**
+
+### Petition file format (what Claude writes)
+
+```
+sudo apt-get install -y gperf
+
+reason: build telegram-bot-api (C++17 dep)
+requestor: abzu (via Claude Code)
+ttl: 300
+```
+
+The first line(s) before "reason:" are the actual commands to run.
+The shortcut extracts and executes only those lines.
+
+### Better: parse-safe petition format
+
+```
+#!/bin/bash
+# reason: build telegram-bot-api (C++17 dep)
+# requestor: abzu (via Claude Code)
+# ttl: 300
+sudo apt-get install -y gperf
+```
+
+This way the shortcut can just `bash ./filename` — the comments are metadata,
+the executable lines are the commands. Simpler and safer.
+
+---
+
+## Directory structure
+
+```
+!7HE.BRIDGE/[CMD]/Sudo/
+├── pending/      ← Claude writes petitions here
+├── approved/     ← Shortcut moves here after approve + execute
+└── rejected/     ← Shortcut moves here after reject
+```
+
+---
+
+## Automation trigger (optional)
+
+Instead of a loop, use Shortcuts Automation:
+- Trigger: "When I receive a notification from Telegram"
+  (have TPR send a Telegram message when a petition is filed)
+- Action: Run "Sudo Gate" shortcut
+
+This way it only fires when there's actually a petition,
+instead of polling every 30 seconds.
+
+:: ∎

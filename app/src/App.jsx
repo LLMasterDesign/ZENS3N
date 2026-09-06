@@ -11,7 +11,7 @@ const goldBtn = { background:C.gold, color:C.page, fontWeight:700, border:"none"
 const ghostBtn = { background:"transparent", color:C.gold, border:`1px solid ${C.border}`,
   borderRadius:10, padding:"7px 12px", fontFamily:mono, cursor:"pointer", fontSize:13 };
 const inputS = { background:C.page, color:C.ink, border:`1px solid ${C.border}`,
-  borderRadius:8, padding:"9px 11px", fontFamily:mono, fontSize:14, width:"100%", marginBottom:8 };
+  borderRadius:8, padding:"9px 11px", fontFamily:mono, fontSize:16, width:"100%", marginBottom:8 };
 
 function Row({ k, v }) {
   return (<div style={{ display:"flex", justifyContent:"space-between", padding:"7px 0", fontSize:14 }}>

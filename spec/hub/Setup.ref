@@ -1,0 +1,106 @@
+⟦⎊⟧ TPR setup — the journey a new user actually walks
+⋮⋮TPR.HUB⋮⋮
+⧗-26.392 · every "have" below was checked on the running system
+
+The rule that shapes all of it: :7090 is the first thing a person
+sees after login. The face is the product; the bot is the door to it.
+
+── 0 · THE GATE (do this first, it is not a feature) ──────────
+
+  Right now /api/tier and /api/clear are on the public funnel with
+  NO auth. A POST from anyone on the internet can switch the tier
+  — including RunPod tiers that bill $1.22-$21.76/hr — or wipe the
+  conversation spool. The mini app reads `initDataUnsafe`, which is
+  the client's word for who it is, unverified.
+
+  Login IS the gate:
+    · validate Telegram initData: HMAC-SHA256 over the sorted data
+      string, key = SHA256("WebAppData" + bot_token) — server side
+    · reject anything older than a few minutes (auth_date)
+    · issue a short session cookie; /api/* requires it
+    · anything a stranger must never touch moves to :5090, which
+      is not on the funnel at all
+  Have: nothing. This is the first build.
+:: ∎
+
+── 1 · FIND ───────────────────────────────────────────────────
+  They search @tpr_zenbot, or someone forwards them a group.
+  Have: bot exists (id 8305423651), name TelePromptR, groups on,
+  commands pushed to all four scopes.
+  Missing: the about + description are still empty — the first
+  screen a stranger reads. Copy is drafted in
+  ZenBots/TelePromptR/copy.txt, held until Lucius approves.
+:: ∎
+
+── 2 · /start IN A DM ─────────────────────────────────────────
+  Two buttons, nothing else:
+    [ Add TPR to a group ]   → t.me/tpr_zenbot?startgroup=true
+    [ Open TPR ]             → the mini app at :7090
+  Have: /start exists but answers with Ender's copy and no buttons.
+:: ∎
+
+── 3 · ADD TO A GROUP ─────────────────────────────────────────
+  The moment TPR lands in a room it should say what it needs:
+  turn Topics on, and name the first topic.
+  Have: `my_chat_member` is now in allowed_updates, so Telegram
+  WILL send the event. Nothing handles it yet.
+  Missing: the handler, and the group card it should write
+  (Pulse/tpr/Groups/<name>/group.me) so the room is known.
+:: ∎
+
+── 4 · LOGIN ──────────────────────────────────────────────────
+  Tapping [ Open TPR ] opens the mini app; Telegram hands it
+  initData; the face verifies it (step 0) and now knows the person.
+  Have: the mini app loads publicly — /tpr/app returns 200 — and
+  webapp/tpr.html is already built in the ZENSEN palette.
+  Missing: the verification, and therefore the login.
+:: ∎
+
+── 5 · LAND ON :7090 ──────────────────────────────────────────
+  The first screen. It answers four questions without being asked:
+    who am I          the Telegram identity that just logged in
+    where am I        the rooms TPR shares with me, topics listed
+    who answers       the being bound to each topic, and on what
+    is it alive       seat readiness, pulled from the brains
+  The face does not compute the last one — it asks :5090/readiness,
+  which probes the seats for real. That is the whole reason the
+  brains is a separate door.
+  Have: the page, the palette, and a live /readiness on the brains.
+  Missing: the four panels, and the session that makes them mean
+  anything.
+:: ∎
+
+── 6 · NAME A TOPIC ───────────────────────────────────────────
+  A topic with a card is a conversation with a being. Today that
+  means editing files on the box; a new user cannot do that.
+  From the face: name the topic, pick the being, pick the metal.
+  Have: the card system works end to end — cards are read into the
+  prompt, the being resolves, the tier pins, the desk is scoped.
+  Missing: writing a card from the face instead of from a shell.
+:: ∎
+
+── 7 · TALK ───────────────────────────────────────────────────
+  CORRECTED ⧗-26.392 — I wrote "done" here and it was wrong. What
+  is done belongs to @ender_zenbot, a DIFFERENT bot that has been
+  running for months. For @tpr_zenbot the honest state is: the bot
+  was created and added to a group, and nothing else.
+  Have now: its own process on :7098, identity confirmed by getMe,
+  webhook registered at /tprbot.
+  Missing: the funnel path /tprbot. Until it exists Telegram has
+  nowhere to deliver, so the bot sits in the group and says nothing.
+  That single path is the difference between a bot and a member.
+:: ∎
+
+── BUILD ORDER · smallest first, each one testable alone ──────
+  1 initData verification + session  → the gate (step 0)
+  2 /api/* behind the session; the dangerous ones move to :5090
+  3 /start with the two buttons      → step 2
+  4 my_chat_member handler           → step 3, the "add me" moment
+  5 the four panels on :7090         → step 5, the product
+  6 write a topic card from the face → step 6
+  7 a process for @tpr_zenbot        → it has a token and no seat
+
+  Nothing above needs the brains to grow. When it does grow, the
+  next thing it takes is DELIVER — the model call itself — and the
+  face becomes a thin Telegram adapter, which is the point.
+:: ∎

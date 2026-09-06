@@ -1,0 +1,256 @@
+## Rich Messages — Bot API 10.1 + 10.2 (June-July 2026)
+
+Telegram rich messages: structured blocks, streaming drafts, AI thinking.
+Source: core.telegram.org/bots/api · No llms.txt exists (2026-08-10).
+
+---
+
+## Methods
+
+### sendRichMessage
+Send rich formatted messages. Returns Message.
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| chat_id | Integer/String | Yes | Target chat |
+| message_thread_id | Integer | Optional | Forum topic / thread |
+| direct_messages_topic_id | Integer | Optional | DM topic; required if DM chat |
+| rich_message | InputRichMessage | Yes | The message |
+| business_connection_id | String | Optional | Business connection |
+| disable_notification | Boolean | Optional | Silent send |
+| protect_content | Boolean | Optional | No forward/save |
+| allow_paid_broadcast | Boolean | Optional | 1000 msg/s for 0.1 Stars each |
+| message_effect_id | String | Optional | Message effect (private only) |
+| suggested_post_parameters | SuggestedPostParameters | Optional | DM suggested post |
+| reply_parameters | ReplyParameters | Optional | Reply target |
+| reply_markup | InlineKeyboardMarkup/ReplyKeyboardMarkup/ReplyKeyboardRemove/ForceReply | Optional | Interface |
+| receiver_user_id | Integer | Optional | Ephemeral recipient |
+| callback_query_id | String | Optional | Callback query |
+
+### sendRichMessageDraft
+Stream partial rich message — 30-second ephemeral preview. Must call sendRichMessage
+to persist. Returns True.
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| chat_id | Integer | Yes | Target private chat |
+| message_thread_id | Integer | Optional | Thread |
+| draft_id | Integer | Yes | Draft ID; non-zero. Same ID = animated transitions |
+| rich_message | InputRichMessage | Yes | Partial message. No direct file upload. |
+
+### sendMessageDraft
+Stream partial plain message — 30-second ephemeral preview. Must call sendMessage
+to persist. Returns True.
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| chat_id | Integer | Yes | Target private chat |
+| message_thread_id | Integer | Optional | Thread |
+| draft_id | Integer | Yes | Draft ID; non-zero. Same ID = animated transitions |
+| text | String | Optional | 0-4096 chars. Empty = "Thinking..." placeholder |
+| parse_mode | String | Optional | HTML/Markdown |
+| entities | Array of MessageEntity | Optional | Custom entities |
+
+### editMessageText (enhanced)
+Added: rich_message (InputRichMessage, Optional) — replace text with rich content.
+
+---
+
+## InputRichMessage
+Describes a rich message to send. Exactly ONE of: html, markdown, or blocks.
+| Field | Type | Description |
+|---|---|---|
+| blocks | Array of InputRichBlock | Optional. Block composition |
+| html | String | Optional. HTML formatted content |
+| markdown | String | Optional. Markdown formatted content |
+| media | Array of InputRichMessageMedia | Optional. Media for markdown/html (tg://photo?id=, tg://video?id=, tg://audio?id=) |
+| is_rtl | Boolean | Optional. Right-to-left |
+| skip_entity_detection | Boolean | Optional. Skip auto-detection of URLs, emails, mentions, etc. |
+
+### InputRichMessageMedia
+| Field | Type | Description |
+|---|---|---|
+| id | String | 1-64 chars [A-Za-z0-9_-]. Used in tg://photo?id=X links |
+| media | InputMediaAnimation/InputMediaAudio/InputMediaPhoto/InputMediaVideo/InputMediaVoiceNote | The media |
+
+---
+
+## InputRichBlock (union — 21 types)
+
+### InputRichBlockParagraph
+type="paragraph" | text: RichText
+
+### InputRichBlockSectionHeading
+type="heading" | text: RichText
+
+### InputRichBlockPreformatted
+type="pre" | text: RichText | language: String (Optional)
+
+### InputRichBlockFooter
+type="footer" | text: RichText
+
+### InputRichBlockDivider
+type="divider" (no fields)
+
+### InputRichBlockMathematicalExpression
+type="mathematical_expression" | expression: String (LaTeX)
+
+### InputRichBlockAnchor
+type="anchor" | name: String
+
+### InputRichBlockList
+type="list" | items: Array of InputRichBlockListItem
+
+### InputRichBlockBlockQuotation
+type="blockquote" | blocks: Array of InputRichBlock | credit: RichText (Optional)
+
+### InputRichBlockPullQuotation
+type="pullquote" | text: RichText | credit: RichText (Optional)
+
+### InputRichBlockCollage
+type="collage" | blocks: Array of InputRichBlock | caption: RichBlockCaption (Optional)
+
+### InputRichBlockSlideshow
+type="slideshow" | blocks: Array of InputRichBlock | caption: RichBlockCaption (Optional)
+
+### InputRichBlockTable
+type="table" | cells: Array of Array of RichBlockTableCell | is_bordered: Boolean (Optional) | is_striped: Boolean (Optional) | caption: RichText (Optional)
+
+### InputRichBlockDetails
+type="details" | summary: RichText | blocks: Array of InputRichBlock | is_open: Boolean (Optional)
+
+### InputRichBlockMap
+type="map" | location: Location | zoom: Integer (13-20) | width: Integer | height: Integer | caption: RichBlockCaption (Optional)
+
+### InputRichBlockAnimation
+type="animation" | animation: Animation | has_spoiler: Boolean (Optional) | caption: RichBlockCaption (Optional)
+
+### InputRichBlockAudio
+type="audio" | audio: Audio | caption: RichBlockCaption (Optional)
+
+### InputRichBlockPhoto
+type="photo" | photo: Array of PhotoSize | has_spoiler: Boolean (Optional) | caption: RichBlockCaption (Optional)
+
+### InputRichBlockVideo
+type="video" | video: Video | has_spoiler: Boolean (Optional) | caption: RichBlockCaption (Optional)
+
+### InputRichBlockVoiceNote
+type="voice_note" | voice_note: Voice | caption: RichBlockCaption (Optional)
+
+### InputRichBlockThinking
+type="thinking" | text: RichText
+DRAFT ONLY — cannot appear in persisted messages. See t.me/addemoji/AIActions for recommended emoji.
+
+---
+
+## InputRichBlockListItem
+| Field | Type | Description |
+|---|---|---|
+| blocks | Array of InputRichBlock | Content |
+| has_checkbox | Boolean | Optional. Checkbox |
+| is_checked | Boolean | Optional. Checked |
+| value | Integer | Optional. Ordered list numeric value |
+| type | String | Optional. Label type: "a" "A" "i" "I" "1" |
+
+---
+
+## RichText (union — 24 types + String + Array)
+Can be: a plain String, an Array of RichText, or any of:
+
+### Simple wrappers (type + text: RichText)
+- RichTextBold (type="bold")
+- RichTextItalic (type="italic")
+- RichTextUnderline (type="underline")
+- RichTextStrikethrough (type="strikethrough")
+- RichTextSpoiler (type="spoiler")
+- RichTextSubscript (type="subscript")
+- RichTextSuperscript (type="superscript")
+- RichTextMarked (type="marked")
+- RichTextCode (type="code")
+
+### With extra fields
+- RichTextDateTime: type="date_time" | text | unix_time: Integer | date_time_format: String
+- RichTextTextMention: type="text_mention" | text | user: User
+- RichTextCustomEmoji: type="custom_emoji" | custom_emoji_id: String | alternative_text: String
+- RichTextMathematicalExpression: type="mathematical_expression" | expression: String (LaTeX)
+- RichTextUrl: type="url" | text | url: String
+- RichTextEmailAddress: type="email_address" | text | email_address: String
+- RichTextPhoneNumber: type="phone_number" | text | phone_number: String
+- RichTextBankCardNumber: type="bank_card_number" | text | bank_card_number: String
+- RichTextMention: type="mention" | text | username: String
+- RichTextHashtag: type="hashtag" | text | hashtag: String
+- RichTextCashtag: type="cashtag" | text | cashtag: String
+- RichTextBotCommand: type="bot_command" | text | bot_command: String
+- RichTextAnchor: type="anchor" | name: String
+- RichTextAnchorLink: type="anchor_link" | text | anchor_name: String (empty = top)
+- RichTextReference: type="reference" | text | name: String
+- RichTextReferenceLink: type="reference_link" | text | reference_name: String
+
+---
+
+## RichBlock (union — 21 output types, mirrors InputRichBlock)
+Same structure as InputRichBlock but received in messages.
+
+### Supporting types
+
+#### RichMessage
+| Field | Type | Description |
+|---|---|---|
+| blocks | Array of RichBlock | Content |
+| is_rtl | Boolean | Optional. Right-to-left |
+
+#### RichBlockCaption
+| Field | Type | Description |
+|---|---|---|
+| text | RichText | Caption |
+| credit | RichText | Optional. Credit (<cite>) |
+
+#### RichBlockTableCell
+| Field | Type | Description |
+|---|---|---|
+| text | RichText | Optional. Cell text (omit = invisible) |
+| is_header | Boolean | Optional. Header cell |
+| colspan | Integer | Optional. Column span |
+| rowspan | Integer | Optional. Row span |
+| align | String | "left" / "center" / "right" |
+| valign | String | "top" / "middle" / "bottom" |
+
+#### RichBlockListItem
+| Field | Type | Description |
+|---|---|---|
+| label | String | Item label |
+| blocks | Array of RichBlock | Content |
+| has_checkbox | Boolean | Optional |
+| is_checked | Boolean | Optional |
+| value | Integer | Optional. Ordered list value |
+| type | String | Optional. "a" "A" "i" "I" "1" |
+
+---
+
+## Ephemeral Messages (related)
+
+### Methods
+- editEphemeralMessageText
+- editEphemeralMessageMedia
+- editEphemeralMessageCaption
+- editEphemeralMessageReplyMarkup
+- deleteEphemeralMessage
+
+### Fields (on Message)
+- receiver_user: User — ephemeral recipient
+- ephemeral_message_id: Integer — ID inside chat
+
+### ReplyParameters additions
+- ephemeral_message_id: Integer — reply to ephemeral
+
+---
+
+## Streaming pattern for AI bots
+
+1. Receive user message in thread (message_thread_id)
+2. Send sendRichMessageDraft with draft_id=N, InputRichBlockThinking
+3. As tokens arrive, send sendRichMessageDraft with same draft_id=N,
+   blocks accumulating (paragraph, pre, list, etc.)
+4. Draft auto-expires after 30s of no updates
+5. When complete, call sendRichMessage with final blocks — persists in chat
+6. For tool calls: use InputRichBlockDetails (collapsible) to show tool
+   input/output, InputRichBlockPreformatted for code
+
+:: ∎

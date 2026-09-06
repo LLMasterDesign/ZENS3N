@@ -1,0 +1,108 @@
+## Streaming API — sendMessageDraft + sendRichMessageDraft
+
+The two streaming methods that make Telegram a real AI interface.
+
+---
+
+## sendMessageDraft (plain text streaming)
+30-second ephemeral preview. Must call sendMessage to persist. Returns True.
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| chat_id | Integer | Yes | Target private chat |
+| message_thread_id | Integer | Optional | Thread |
+| draft_id | Integer | Yes | Non-zero. Same ID = animated transitions |
+| text | String | Optional | 0-4096 chars. Empty = "Thinking..." placeholder |
+| parse_mode | String | Optional | HTML/Markdown |
+| entities | Array of MessageEntity | Optional | Custom entities |
+
+## sendRichMessageDraft (block streaming)
+30-second ephemeral preview. Must call sendRichMessage to persist. Returns True.
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| chat_id | Integer | Yes | Target private chat |
+| message_thread_id | Integer | Optional | Thread |
+| draft_id | Integer | Yes | Non-zero. Same ID = animated transitions |
+| rich_message | InputRichMessage | Yes | Partial message. No direct file upload. |
+
+---
+
+## Behavior
+
+- Draft is EPHEMERAL — disappears after 30 seconds of no updates
+- Same draft_id = transitions are ANIMATED (smooth token streaming)
+- Different draft_id = new draft replaces old
+- Empty text in sendMessageDraft = "Thinking..." placeholder
+- InputRichBlockThinking = rich version of "Thinking..." (draft only, cannot persist)
+- Must call sendMessage / sendRichMessage with final content to persist
+- Private chats only (chat_id is Integer, not String)
+- No direct file upload in draft — use file_id references
+
+---
+
+## Implementation pattern for TPR
+
+### Simple text streaming (current TPR baseline)
+```
+1. Receive update → extract chat_id, message_thread_id
+2. Start inference (Qwen-max / ORION)
+3. As tokens arrive in chunks:
+     POST sendMessageDraft { chat_id, draft_id: 1, text: accumulated_text }
+4. On completion:
+     POST sendMessage { chat_id, text: final_text, message_thread_id }
+```
+
+### Rich message streaming (full agent mode)
+```
+1. Receive update → extract chat_id, message_thread_id
+2. Start inference
+3. While generating:
+     POST sendRichMessageDraft {
+       chat_id, draft_id: 1,
+       rich_message: {
+         blocks: [
+           { type: "thinking", text: "Reasoning..." },
+           { type: "paragraph", text: partial_output }
+         ]
+       }
+     }
+4. On tool call:
+     POST sendRichMessageDraft {
+       chat_id, draft_id: 1,
+       rich_message: {
+         blocks: [
+           { type: "details", summary: "Running: read_file", blocks: [...] },
+           { type: "paragraph", text: "Reading file..." }
+         ]
+       }
+     }
+5. On completion:
+     POST sendRichMessage {
+       chat_id, message_thread_id,
+       rich_message: {
+         blocks: [
+           { type: "paragraph", text: "Here's what I found:" },
+           { type: "pre", text: code_output, language: "python" },
+           { type: "paragraph", text: explanation }
+         ]
+       }
+     }
+```
+
+### Timing considerations
+- 30s timeout = must send updates at least every 30s during long operations
+- For tool calls that take >30s: send a progress draft every ~20s
+- draft_id should be unique per "turn" — increment per user message
+- Animated transitions = smooth UX when same draft_id is reused
+
+---
+
+## Limits (observed, not all officially documented)
+- text: 0-4096 characters per draft
+- draft TTL: 30 seconds from last update
+- Private chats only for drafts
+- No file upload in drafts (use file_id from previous uploads)
+- chat_id must be Integer (not @username string)
+
+:: ∎
