@@ -1,148 +1,149 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
-import { Base44Logo } from "@/components/Base44Logo";
-import { Plus, Trash2, CheckCircle2 } from "lucide-react";
 
-const Task = base44.entities.Task;
+// ── TPR profile door · the war-room ledger ──
+const C = {
+  page: "#10141C", card: "#1A2029", border: "#262D3A",
+  ink: "#EDF1F7", dim: "#8B94A8", gold: "#F2C14E",
+  ok: "#58D6A9", bad: "#E4574F",
+};
+const mono = '"DM Mono", ui-monospace, SFMono-Regular, Menlo, monospace';
 
-export default function App() {
-  const [tasks, setTasks] = useState([]);
-  const [newTaskTitle, setNewTaskTitle] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
+const BOT = "tpr_zenbot";
 
-  const fetchTasks = async () => {
-    const data = await Task.list();
-    setTasks(data);
-    setIsLoading(false);
+function Shell({ user, agents }) {
+  const [copied, setCopied] = useState(false);
+  const copy = () => {
+    navigator.clipboard?.writeText(user.telegram_id);
+    setCopied(true); setTimeout(() => setCopied(false), 1200);
   };
-
-  useEffect(() => {
-    fetchTasks();
-  }, []);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!newTaskTitle.trim()) return;
-    await Task.create({ title: newTaskTitle.trim(), completed: false });
-    setNewTaskTitle("");
-    fetchTasks();
-  };
-
-  const toggleTask = async (id, completed) => {
-    await Task.update(id, { completed });
-    fetchTasks();
-  };
-
-  const deleteTask = async (id) => {
-    await Task.delete(id);
-    fetchTasks();
-  };
-
-  const clearCompleted = async () => {
-    await Promise.all(
-      tasks.filter((t) => t.completed).map((t) => Task.delete(t.id))
-    );
-    fetchTasks();
-  };
-
-  const completedCount = tasks.filter((t) => t.completed).length;
-  const totalCount = tasks.length;
-
+  const signed = user.last_seen
+    ? new Date(user.last_seen).toLocaleString()
+    : "just now";
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-orange-50/30">
-      <div className="max-w-lg mx-auto px-6 py-16">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-3xl font-semibold text-slate-900 tracking-tight">
-            <span className="inline-flex items-center gap-2 align-middle">
-              <Base44Logo className="w-9 h-9" />
-              <span className="font-bold">Base44</span>
-              <span>Tasks</span>
-            </span>
-          </h1>
-          {totalCount > 0 && (
-            <p className="text-slate-500 mt-2 text-sm">
-              {completedCount} of {totalCount} completed
-            </p>
-          )}
-        </div>
+    <div style={{ maxWidth: 520, margin: "0 auto", padding: "22px 16px" }}>
+      <div style={{ display: "flex", justifyContent: "space-between",
+        alignItems: "baseline", marginBottom: 18 }}>
+        <span style={{ color: C.gold, fontWeight: 700, letterSpacing: 1 }}>
+          ▛▞ TelePromptR
+        </span>
+        <span style={{ color: C.dim, fontSize: 12 }}>your door</span>
+      </div>
 
-        {/* Add Task Form */}
-        <form onSubmit={handleSubmit} className="mb-8">
-          <div className="flex gap-3">
-            <Input
-              type="text"
-              value={newTaskTitle}
-              onChange={(e) => setNewTaskTitle(e.target.value)}
-              placeholder="What needs to be done?"
-              className="flex-1 h-12 bg-white border-slate-200 rounded-xl shadow-sm"
-            />
-            <Button
-              type="submit"
-              disabled={!newTaskTitle.trim()}
-              className="h-12 px-5 rounded-xl bg-slate-900 hover:bg-slate-800 shadow-sm"
-            >
-              <Plus className="w-5 h-5" />
-            </Button>
-          </div>
-        </form>
-
-        {/* Task List */}
-        <div className="space-y-2">
-          {isLoading ? (
-            <div className="flex items-center justify-center py-12">
-              <div className="w-6 h-6 border-2 border-slate-200 border-t-orange-500 rounded-full animate-spin" />
-            </div>
-          ) : tasks.length === 0 ? (
-            <div className="text-center py-12">
-              <p className="text-slate-400">No tasks yet. Add one above!</p>
-            </div>
-          ) : (
-            tasks.map((task) => (
-              <div
-                key={task.id}
-                className="group flex items-center gap-4 p-4 bg-white rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-all duration-200"
-              >
-                <Checkbox
-                  checked={task.completed}
-                  onCheckedChange={(checked) => toggleTask(task.id, checked)}
-                  className="w-5 h-5 rounded-md border-slate-300 data-[state=checked]:bg-orange-500 data-[state=checked]:border-orange-500"
-                />
-                <span
-                  className={`flex-1 text-slate-700 transition-all ${
-                    task.completed ? "line-through text-slate-400" : ""
-                  }`}
-                >
-                  {task.title}
-                </span>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => deleteTask(task.id)}
-                  className="opacity-0 group-hover:opacity-100 h-8 w-8 text-slate-400 hover:text-red-500 hover:bg-red-50 transition-all"
-                >
-                  <Trash2 className="w-4 h-4" />
-                </Button>
-              </div>
-            ))
-          )}
-        </div>
-
-        {/* Footer */}
-        {completedCount > 0 && (
-          <div className="mt-8 text-center">
-            <button
-              onClick={clearCompleted}
-              className="text-sm text-slate-400 hover:text-slate-600 transition-colors"
-            >
-              Clear completed
+      {/* THE SHAPE — identity */}
+      <div style={cardS}>
+        <Row k="name" v={user.first_name || user.username || "—"} />
+        <Row k="telegram id" v={
+          <span>
+            <span style={{ color: C.ink }}>{user.telegram_id}</span>
+            <button onClick={copy} style={copyBtn}>
+              {copied ? "copied" : "copy"}
             </button>
+          </span>
+        } />
+        {user.username && <Row k="handle" v={"@" + user.username} />}
+        <Row k="signed in" v={signed} />
+      </div>
+
+      {/* CONNECTED AGENTS */}
+      <div style={{ ...cardS, marginTop: 14 }}>
+        <div style={{ color: C.dim, fontSize: 12, marginBottom: 10,
+          textTransform: "uppercase", letterSpacing: 1 }}>
+          Connected agents
+        </div>
+        {agents && agents.length ? agents.map((a) => (
+          <div key={a.id || a.handle} style={agentRow}>
+            <span style={{ color: C.gold, width: 22 }}>{a.glyph || "▷"}</span>
+            <span style={{ flex: 1 }}>
+              <span style={{ color: C.ink, fontWeight: 600 }}>{a.name}</span>
+              <span style={{ color: C.dim, marginLeft: 8, fontSize: 12 }}>
+                {a.handle}{a.kind ? " · " + a.kind : ""}
+              </span>
+            </span>
+            <span style={{ color: a.status === "connected" ? C.ok : C.dim,
+              fontSize: 12 }}>{a.status || "—"}</span>
+          </div>
+        )) : (
+          <div style={{ color: C.dim, fontSize: 13 }}>
+            No agents yet. Add one to your room.
           </div>
         )}
       </div>
+    </div>
+  );
+}
+
+const cardS = { background: C.card, border: `1px solid ${C.border}`,
+  borderRadius: 14, padding: 16 };
+const agentRow = { display: "flex", alignItems: "center", gap: 6,
+  padding: "8px 0", borderTop: `1px solid ${C.border}` };
+const copyBtn = { marginLeft: 10, background: "transparent", color: C.gold,
+  border: `1px solid ${C.border}`, borderRadius: 8, padding: "2px 8px",
+  fontFamily: mono, fontSize: 11, cursor: "pointer" };
+
+function Row({ k, v }) {
+  return (
+    <div style={{ display: "flex", justifyContent: "space-between",
+      padding: "7px 0", fontSize: 14 }}>
+      <span style={{ color: C.dim }}>{k}</span>
+      <span style={{ color: C.ink, textAlign: "right" }}>{v}</span>
+    </div>
+  );
+}
+
+function Door({ reason }) {
+  return (
+    <div style={{ minHeight: "70vh", display: "grid", placeItems: "center",
+      padding: 16 }}>
+      <div style={{ ...cardS, maxWidth: 360, textAlign: "center" }}>
+        <div style={{ color: C.gold, fontWeight: 700, marginBottom: 8 }}>
+          ▛▞ TelePromptR
+        </div>
+        <div style={{ color: C.ink, marginBottom: 6 }}>
+          {reason || "TelePromptR opens from Telegram"}
+        </div>
+        <a href={`https://t.me/${BOT}`} style={{
+          display: "inline-block", marginTop: 12, background: C.gold,
+          color: C.page, fontWeight: 700, textDecoration: "none",
+          padding: "10px 18px", borderRadius: 10 }}>
+          Open in Telegram
+        </a>
+      </div>
+    </div>
+  );
+}
+
+export default function App() {
+  const [state, setState] = useState({ phase: "checking" });
+
+  useEffect(() => {
+    const tg = window.Telegram?.WebApp;
+    try { tg?.ready(); tg?.expand(); } catch {}
+    const initData = tg?.initData || "";
+    if (!initData) { setState({ phase: "door" }); return; }
+    (async () => {
+      try {
+        const res = await base44.functions.invoke("auth", { initData });
+        const d = res.data;
+        if (d?.ok) setState({ phase: "in", user: d.user, agents: d.agents || [] });
+        else setState({ phase: "door", reason: "This link could not be verified. Open TPR again from Telegram." });
+      } catch (e) {
+        const reason = e?.response?.data?.reason
+          || "This link could not be verified. Open TPR again from Telegram.";
+        setState({ phase: "door", reason });
+      }
+    })();
+  }, []);
+
+  return (
+    <div style={{ minHeight: "100dvh", background: C.page, color: C.ink,
+      fontFamily: mono }}>
+      {state.phase === "checking" && (
+        <div style={{ minHeight: "70vh", display: "grid", placeItems: "center",
+          color: C.dim }}>checking signature</div>
+      )}
+      {state.phase === "door" && <Door reason={state.reason} />}
+      {state.phase === "in" && <Shell user={state.user} agents={state.agents} />}
     </div>
   );
 }

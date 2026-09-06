@@ -110,12 +110,20 @@ export default async function (req: Request): Promise<Response> {
     );
   }
 
+  // The connected agents shown on the profile door. Read past RLS
+  // for the same reason the upsert is: the caller has no Base44 auth.
+  let agents: any[] = [];
+  try { agents = await db.entities.Agent.list(); } catch { agents = []; }
+
   return Response.json({
     ok: true,
     user: {
       telegram_id: tgId,
       username: row.username,
       first_name: row.first_name,
+      created_at: row.created_at,
+      last_seen: row.last_seen,
     },
+    agents,
   });
 }
