@@ -1,0 +1,12 @@
+{
+  "name": "Member",
+  "type": "object",
+  "properties": {
+    "telegram_id": { "type": "string", "description": "Telegram user id — the key, never changes" },
+    "username":    { "type": "string", "description": "Telegram username, refreshed each login" },
+    "first_name":  { "type": "string", "description": "Telegram first name, refreshed each login" },
+    "created_at":  { "type": "string", "description": "ISO time the row was first created" },
+    "last_seen":   { "type": "string", "description": "ISO time of the most recent login" }
+  },
+  "required": ["telegram_id"]
+}

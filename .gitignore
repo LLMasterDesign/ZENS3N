@@ -30,3 +30,6 @@ https:/
 # elixir build output (orion is a separate project tree)
 orion/_build/
 orion/deps/
+
+# Base44 local link — per Base44's own note, do not commit
+app/base44/.app.jsonc
