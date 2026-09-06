@@ -7,7 +7,8 @@
     "kind":   { "type": "string", "description": "What it is — warden, relay, sidekik…" },
     "node":   { "type": "string", "description": "Where it runs, e.g. en0" },
     "status": { "type": "string", "description": "connected · idle · offline" },
-    "glyph":  { "type": "string", "description": "Its mark, e.g. ▛▞" }
+    "glyph":  { "type": "string", "description": "Its mark, e.g. ▛▞" },
+    "owner":  { "type": "string", "description": "telegram_id that added it" }
   },
   "required": ["name"]
 }

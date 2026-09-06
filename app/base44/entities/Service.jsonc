@@ -1,0 +1,14 @@
+{
+  "name": "Service",
+  "type": "object",
+  "properties": {
+    "name":   { "type": "string", "description": "Display name" },
+    "handle": { "type": "string", "description": "Address / port / handle" },
+    "kind":   { "type": "string", "description": "What it is" },
+    "node":   { "type": "string", "description": "Where it runs" },
+    "status": { "type": "string", "description": "connected · idle · offline" },
+    "glyph":  { "type": "string", "description": "Its mark" },
+    "owner":  { "type": "string", "description": "telegram_id that added it" }
+  },
+  "required": ["name"]
+}

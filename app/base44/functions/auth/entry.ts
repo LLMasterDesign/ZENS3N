@@ -112,8 +112,10 @@ export default async function (req: Request): Promise<Response> {
 
   // The connected agents shown on the profile door. Read past RLS
   // for the same reason the upsert is: the caller has no Base44 auth.
-  let agents: any[] = [];
+  let agents: any[] = [], stations: any[] = [], services: any[] = [];
   try { agents = await db.entities.Agent.list(); } catch { agents = []; }
+  try { stations = await db.entities.Station.list(); } catch { stations = []; }
+  try { services = await db.entities.Service.list(); } catch { services = []; }
 
   return Response.json({
     ok: true,
@@ -124,6 +126,6 @@ export default async function (req: Request): Promise<Response> {
       created_at: row.created_at,
       last_seen: row.last_seen,
     },
-    agents,
+    agents, stations, services,
   });
 }
