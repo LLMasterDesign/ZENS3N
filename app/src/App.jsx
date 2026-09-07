@@ -101,9 +101,9 @@ function Profile({ initData, user, data, refresh, view }) {
   };
   return (
     <div style={{ maxWidth:520, margin:"0 auto", padding:"22px 16px" }}>
-      <div style={{ display:"flex", justifyContent:"space-between", alignItems:"baseline", marginBottom:18 }}>
-        <span style={{ color:C.gold, fontWeight:700, letterSpacing:1 }}>▛▞ TelePromptR</span>
-        <span style={{ color:C.dim, fontSize:12 }}>your door</span>
+      <div style={{ marginBottom:16 }}>
+        <div style={{ color:C.gold, fontWeight:700, letterSpacing:1, fontSize:18 }}>▛▞ TelePromptR</div>
+        <div style={{ color:C.ok, fontSize:13, marginTop:4 }}>✓ signed in as {user.first_name || user.username}</div>
       </div>
       <div style={cardS}>
         <Row k="name" v={user.first_name || user.username || "—"} />
@@ -111,10 +111,10 @@ function Profile({ initData, user, data, refresh, view }) {
           <button onClick={copy} style={{ marginLeft:10, ...ghostBtn, padding:"2px 8px", fontSize:11 }}>{copied?"copied":"copy"}</button></span>} />
         {user.username && <Row k="handle" v={"@"+user.username} />}
       </div>
-      {view === "workspace" && <Groups groups={data.groups} topics={data.topics} />}
+      <Groups groups={data.groups} topics={data.topics} />
       <Section title="Agents"   kind="agent"   items={data.agents}   onAdd={add("agent")} />
-      {view === "workspace" && <Section title="Stations" kind="station" items={data.stations} onAdd={add("station")} />}
-      {view === "workspace" && <Section title="Services" kind="service" items={data.services} onAdd={add("service")} />}
+      <Section title="Stations" kind="station" items={data.stations} onAdd={add("station")} />
+      <Section title="Services" kind="service" items={data.services} onAdd={add("service")} />
     </div>
   );
 }
@@ -170,7 +170,7 @@ export default function App() {
     (async () => {
       try {
         const d = await runAuth(idata);
-        if (d?.ok) { setUser(d.user); setData({ agents:d.agents||[], stations:d.stations||[], services:d.services||[], groups:d.groups||[], topics:d.topics||[] }); setPhase("landing"); }
+        if (d?.ok) { setUser(d.user); setData({ agents:d.agents||[], stations:d.stations||[], services:d.services||[], groups:d.groups||[], topics:d.topics||[] }); setPhase("in"); }
         else { setReason("This link could not be verified. Open TPR again from Telegram."); setPhase("door"); }
       } catch (e) { setReason(e?.response?.data?.reason || "This link could not be verified. Open TPR again from Telegram."); setPhase("door"); }
     })();
