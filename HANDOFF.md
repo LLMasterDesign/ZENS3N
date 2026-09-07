@@ -41,12 +41,27 @@ The user's path, as he described it:
     · that key grants them access to use it
     · they add the TelePromptR bot to their group
 
-▛/// The TPR bot SELLS the service — it is not the service
-This is the part that is easy to get wrong. The TelePromptR bot
-asks the user what THEIR bot should be named and walks them
-through making it in BotFather. Their bot becomes their own
-TelePromptR relay. Lucius owns none of their bots, keys, or
-agents.
+▛/// UNDECIDED — do not treat as settled
+He raised one shape out loud: the TPR bot SELLS the service
+rather than being it, asking a user what THEIR bot should be
+named and walking them through BotFather so their bot becomes
+their own relay. He then said plainly: that is UNDECIDED.
+
+The order he set instead:
+    1. make TelePromptR work in HIS bot
+    2. then package it so it works in other people's bots
+
+Do not build the BotFather walkthrough. Do not design for
+multi-tenant packaging yet. Step 1 first.
+:: ∎
+
+▛/// THE LOGIN IS THE SAME PAGE FOR EVERYONE
+Non-negotiable, and he said it matters to him personally: he
+logs in with his Telegram account through the SAME page every
+user will use. He wants to FEEL like a user of the experience.
+
+No owner back door. No admin bypass. No special path for him.
+One login page, one flow, him included.
 :: ∎
 
 ════════════════════════════════════════════════════════════
