@@ -1,110 +1,34 @@
-# AGENTS.md
+# Base44 Dev Environment
 
-## Cursor Cloud specific instructions
+## What this app is
 
-### 3OX Agent Boot Sequence
+ZENS3N is a multi-project monorepo. The runnable web app is a **self-contained static
+company site** at `!WORKDESK/Websites/zensensystems/` — a single `index.html` (inline
+CSS + JS) plus `spec/` pages, local fonts, and brand assets. No build step, no
+backend, no database, no external API calls, no secrets.
 
-This repo IS a 3OX agent. The root `.3ox/` directory contains the full cube:
+## How it runs here
 
-**On agent spin-up, read these files in order:**
-1. `.3ox/_meta/SESSION.CHECKPOINT.toml` — resume anchor, truth paths, known drift
-2. `.3ox/(1)Spark/Zens3n.sparkfile.md` — system identity, PRISM kernel, response contract
-3. `.3ox/(2)Brains/brains.rs` — persona config (TOML), channels, limits
+`docker-compose.base44.yml` serves the static directory with `nginx:alpine`,
+bind-mounted read-only, mapped to host port **3000**. No image build needed —
+edits to the static files appear on reload.
 
-**The 6 Faces (numbered directories):**
+- Healthcheck: `GET /healthz` → `ok`
+- Entry page: `/` → `index.html`
+- Spec pages: `/spec/Product.html`, `/spec/Market.html`, `/spec/Valuation.html`
 
-| Face | Path | Purpose |
-|------|------|---------|
-| (1)Spark | `.3ox/(1)Spark/` | Sparkfile — system identity and behavior spec |
-| (2)Brains | `.3ox/(2)Brains/` | Agent persona config (TOML format, not compiled Rust) |
-| (3)Rules | `.3ox/(3)Rules/` | `limits.toml`, `write_policy.toml` |
-| (4)Toolkit | `.3ox/(4)Toolkit/Tools/` | `tools.yml` — tool registry |
-| (5)Links | `.3ox/(5)Links/` | `routes.json` — operation routing |
-| (6)Pulse | `.3ox/(6)Pulse/` | Receipts, archives, skills |
+## Verifying it works
 
-**Vec3 Runtime (`_meta` + `.vec3` + `vec3/`):**
-- `.3ox/_meta/` — `WHOAMI.md`, `CHANGELOG.toml`, `SESSION.CHECKPOINT.toml`, `NAMING.CONTRACT.toml`, `merkle.root`
-- `.3ox/.vec3/` — runtime binaries, device bridges, library, variable state
-- `.3ox/vec3/rc/` — lifecycle scanner (start.d, stop.d, status.d, run/)
-
-**TRON Runtime:**
-- TRON replaces cron with contract-governed runtime services
-- Rulebook at `.3ox/.vec3/var/wrkdsk/5TRATA.LAYERING/HUB.PUBLISH/TRON.RUNTIME.RULEBOOK.md`
-- Lifecycle scanner: `.3ox/vec3/rc/run/lifecycle.scanner.rb`
-- Start: `bash .3ox/vec3/rc/start.d/lifecycle.scanner.sh`
-
-**Cloud Agent cube (`!WORKDESK/CloudAgents/DebugAgent/`):**
-- Pre-configured cloud agent with `.3ox/` and `.cursorrules`
-- `.cursorrules` loads sparkfile as system context
-
-### Cursor Agent Event Logging
-
-On each significant action (task start, task complete, drift fix, proto change, build, test, deploy), append one JSON object per line to:
-
-```
-.3ox/.vec3/var/wrkdsk/agent.events.jsonl
-```
-
-**Format (one JSON per line):**
-```json
-{"ts":"ISO8601","event":"short.name","actor":"cursor.agent","summary":"..."}
-```
-
-- `ts`: ISO8601 timestamp (e.g. `2026-02-27T12:00:00Z`)
-- `event`: short snake_case name (e.g. `task.start`, `drift.fix`, `build.complete`)
-- `actor`: `cursor.agent`
-- `summary`: one-line human-readable description
-
-This stream feeds future trace analysis and remains readable alongside `ledger.jsonl` in wrkdsk.
-
-### Teleprompter Sub-Agents
-
-Teleprompter routes incoming Telegram messages to Dispatch agents via `.3ox/.vec3/var/sub_agents.toml`:
-
-- **by_topic**: Forum topic name → agent (e.g. `"Code" = "codex53"`)
-- **by_command**: `/command` → agent (e.g. `ask = "think"`, `code = "codex53"`)
-- **default**: Fallback agent (default: `think`)
-
-Commands: `/ask` → think (LLM), `/code` → codex53. Plain messages use topic or default.
-
-**Test routing (no Telegram required):**
 ```bash
-ruby .3ox/.vec3/var/test_sub_agents.rb
+docker compose -f docker-compose.base44.yml up -d
+curl -s http://localhost:3000/healthz      # → ok
+curl -s http://localhost:3000/             # → 200, <title>ZENSEN SYSTEMS</title>
 ```
 
-### Codebase Overview
+## Notes
 
-**ZENS3N** monorepo with **3OX.BUILDER** (Rust workspace + Bun + Ruby) at `3OX.Ai/3OX.BUILDER/`.
-
-### Required Toolchain
-
-- **Rust** (stable, >=1.81, edition 2021) — core build system
-- **Bun** (>=1.0.0) — for `compile-run.bun` orchestrator
-- **Ruby** (>=3.2.0) — agent runtime scripts, lifecycle scanner, vec3 tools
-- **Elixir** (>=1.14) — inference bridge, warden, API modules in `.3ox/.vec3/`
-
-### Build & Test Commands
-
-All commands run from `3OX.Ai/3OX.BUILDER/`:
-
-| Action | Command |
-|--------|---------|
-| Build all | `cargo build --release` |
-| Build CLI only | `cargo build --release --bin 3ox` |
-| Run tests | `cargo test` |
-| Run Vec3Boot | `./target/release/vec3-boot [cube_path]` |
-| Run 3ox CLI | `./target/release/3ox help` |
-| Makefile targets | `make build`, `make test`, `make clean` |
-
-See `3OX.Ai/3OX.BUILDER/README.md` for full documentation.
-
-### Gotchas
-
-- **`compile-run.bun` path bug**: References `./boot/target/release/vec3-boot` but binary is at `./target/release/vec3-boot`. Use direct cargo commands.
-- **Vec3Boot is interactive**: 5-second splash + prompts. Pipe input or use `timeout` for non-interactive runs.
-- **No lockfiles**: No `Cargo.lock` or `bun.lockb`. Dependencies resolve fresh each build.
-- **Directories with `!` prefix**: Always quote paths (`'!ZEN.HUB'`, `'!WORKDESK'`, `'!CMD.CENTER'`).
-- **Rust toolchain**: Run `rustup default stable` if cargo version is below 1.81.
-- **Root `.3ox/` uses numbered face directories**: `(1)Spark/` through `(6)Pulse/`, plus `.vec3/rc/run/run.rb`. The boot loader resolves both layouts automatically.
-- **`run.rb` location**: Root cube stores it at `.3ox/.vec3/rc/run/run.rb`, not flat `.3ox/run.rb`.
-- **`_meta/merkle.root`**: Referenced in SESSION.CHECKPOINT but file may not exist yet on fresh clone — it's generated by the receipt system.
+- The `index.html` has a redirect for the `/zensen` path-prefix deployment; serving
+  at root `/` is unaffected.
+- Other repo subdirectories (3OX.BUILDER, TelePromptR, !FORGE) are CLI/tooling
+  projects (Bun, Rust/Elixir) and are not part of the web preview.
+- No secrets are required.
