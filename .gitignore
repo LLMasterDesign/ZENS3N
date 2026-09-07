@@ -36,3 +36,9 @@ app/base44/.app.jsonc
 
 # version archive — reference only, pulled from Citadel by Zendex
 archive/
+# Base44 CLI's own skill docs — noise in the repo
+app/.agents/
+app/.claude/
+# never
+app/node_modules/
+app/dist/
