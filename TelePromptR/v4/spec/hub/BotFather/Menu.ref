@@ -1,0 +1,87 @@
+⟦⎊⟧ BotFather menu — logged, page by page
+⋮⋮TPR.HUB⋮⋮
+
+Every page BotFather shows, what it actually sets, the API method
+that does it headless, where that config lives in a ZenBot pack,
+and the doc that explains it. Logged ⧗-26.392 from the live menu.
+
+── APIkey ─────────────────────────────────────────────────────
+The token. NEVER written into a doc, a repo, or this hub.
+  home    : TelePromptR/.station/vec3/lib/keys/<KEY_NAME>
+  read by : run.py _load_token() · TPR_BOT_KEY names the file
+  wall    : hands refuses */vec3/lib/keys/* — the keyring is
+            walled for every seat, agents included
+  tripwire: the digits BEFORE the colon are the bot id and are
+            PUBLIC (getMe returns them). Bots/bots.kdl records
+            the id, so a swapped token is detectable without
+            anything reading the secret.
+  revoke  : BotFather → /revoke — old token dies instantly
+:: ∎
+
+── Settings ───────────────────────────────────────────────────
+Edit Info      name · about · description · profile photo
+  api    setMyName · setMyShortDescription · setMyDescription
+  pack   copy.txt (the prose) · setup-bot.sh pushes it
+  docs   https://core.telegram.org/bots/features#botfather
+Commands       the slash menu, PER SCOPE
+  api    setMyCommands (scope: default · all_private_chats ·
+         all_group_chats · all_chat_administrators)
+  pack   commands/{default,private,group,admin}.json
+  docs   https://core.telegram.org/bots/features#commands
+Mini Apps      the web app + the menu button that opens it
+  api    setChatMenuButton {type: web_app, web_app: {url}}
+  pack   miniapp/miniapp.json · served by run.py route /app
+  law    Telegram loads a Mini App IN THE USER'S CLIENT, so the
+         URL must be PUBLIC. A tailnet host works for Lucius and
+         for nobody else.
+  docs   https://core.telegram.org/bots/webapps
+Bot Settings   privacy · groups · inline · payments toggles
+  api    mostly BotFather-only; getMe REPORTS the result
+         (can_join_groups · can_read_all_group_messages)
+  pack   privacy/privacy.json · groups/groups.json ·
+         inline/inline.json · modes/modes.json
+  seen   @ender_zenbot has privacy OFF — reads-all=true
+  docs   https://core.telegram.org/bots/features#privacy-mode
+Login Widget   web auth by Telegram identity
+  api    no method — a JS widget + server-side hash check
+  pack   TPR.HUB/TPR.HUB (domain zensen.live, flow written)
+  docs   https://core.telegram.org/bots/telegram-login
+Serverless     Telegram-hosted bot logic (new)
+  note   NOT how TPR runs. TPR is a station on en0 metal behind
+         a webhook. Logged so the page is not a mystery.
+  docs   https://core.telegram.org/bots/serverless
+Games          HTML5 games served through the bot
+  api    sendGame · setGameScore
+  note   unused. No pack folder until there is a game.
+  docs   https://core.telegram.org/bots/games
+:: ∎
+
+── Monetization ───────────────────────────────────────────────
+Payments        real money · a provider token per currency
+  api    sendInvoice · answerPreCheckoutQuery
+  note   a live money path. Nothing automated touches it.
+  docs   https://core.telegram.org/bots/payments
+Telegram Stars  in-app currency · digital goods · subscriptions
+  api    sendInvoice with currency XTR · no provider needed
+  why    the shortest paid door for a relay: charge Stars per
+         seat instead of eating the compute
+  docs   https://core.telegram.org/bots/payments-stars
+:: ∎
+
+── Actions ────────────────────────────────────────────────────
+Transfer Ownership   moves the bot to another Telegram account
+  note   the point of @tpr_zenbot is that groups own their room,
+         not that ownership moves. Nothing here needs this.
+Delete Bot           irreversible · frees the username
+  note   the username is the asset. Deleting @<name>_zenbot
+  		 hands it back to the pool.
+:: ∎
+
+── Order to walk it, for a new bot ────────────────────────────
+1 /newbot → name → @<name>_zenbot  (BotFather decides free)
+2 token → the vault path above, nothing else
+3 bin/new-zenbot <name> → scaffolds the pack + registers it
+4 ZenBots/<Name>/setup-bot.sh → pushes Edit Info + Commands
+5 BotFather by hand: Groups · Privacy · Inline · Mini App URL
+6 getMe → confirm what actually took (setup-bot.sh prints it)
+:: ∎

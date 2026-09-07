@@ -1,0 +1,101 @@
+## Self-Hosted Bot API Server — tdlib/telegram-bot-api
+
+Source: github.com/tdlib/telegram-bot-api
+License: BSL-1.0 (Boost)
+Language: C++ (C++17)
+Version: 10.2 (2026-07-14)
+
+---
+
+## What it is
+
+The ACTUAL Bot API server that Telegram runs at api.telegram.org.
+You can self-host it and get your own instance with lifted limits.
+NOT a client library — it's the server itself.
+
+## Why self-host
+
+--local mode unlocks:
+- File downloads: NO size limit (api.telegram.org caps at 20MB)
+- File uploads: up to 2GB (vs 50MB)
+- Local file path uploads via file:// URI (no HTTP upload needed)
+- HTTP webhooks (not just HTTPS) — no SSL cert needed for dev
+- Any local IP for webhooks (127.0.0.1, LAN, etc.)
+- Webhook connections: up to 100,000 (vs 40 on public API)
+- Direct file path responses (no download round-trip)
+
+## Build
+
+Dependencies: OpenSSL, zlib, gperf, CMake 3.10+
+Compilers: Clang 5.0+ / GCC 7.0+ / MSVC 19.1+ / Intel 19+
+
+```bash
+git clone --recursive https://github.com/tdlib/telegram-bot-api.git
+cd telegram-bot-api
+mkdir build && cd build
+cmake -DCMAKE_BUILD_TYPE=Release ..
+cmake --build . --target install
+```
+
+## Run
+
+```bash
+telegram-bot-api --api-id=<ID> --api-hash=<HASH> --local
+```
+
+Required:
+  --api-id=N          Telegram API ID (from my.telegram.org)
+  --api-hash=STRING   Telegram API hash
+  OR: TELEGRAM_API_ID / TELEGRAM_API_HASH env vars
+
+Key options:
+  --local             Enable local mode (lifted limits)
+  --http-port=N       HTTP port (default 8081)
+  --help              Full options list
+
+## Rich message support timeline (from git)
+
+2026-06-08  sendRichMessage + sendRichMessageDraft added
+2026-06-08  JsonRichText
+2026-06-09  JsonRichBlock, JsonBlockTableCell, JsonRichBlockCaption
+2026-06-09  Message.rich_message, inline results, editMessageText
+2026-07-03  Ephemeral messages (send, reply, delete, bot commands)
+2026-07-03  InputRichMessageMedia, rich messages in get_input_media
+2026-07-05  InputRichMessage.blocks, get_input_page_blocks
+2026-07-10  Community cache, ChatFullInfo.community
+2026-07-12  editEphemeralMessage* (Text, Media, Caption, ReplyMarkup)
+2026-07-14  Version 10.2 release
+
+## File structure
+
+telegram-bot-api/
+  Client.cpp/.h           — main bot logic, all method handlers
+  ClientManager.cpp/.h    — multi-bot management
+  ClientParameters.h      — config/params
+  HttpConnection.cpp/.h   — HTTP server
+  HttpServer.h            — server setup
+  WebhookActor.cpp/.h     — webhook delivery
+  Query.cpp/.h            — request parsing
+  Stats.cpp/.h            — statistics
+  Watchdog.cpp/.h         — health monitoring
+  telegram-bot-api.cpp    — main entry point
+
+## Implications for TPR
+
+1. Self-hosted = zero rate limit wall for streaming drafts
+2. 2GB file uploads = code repos, datasets, model weights via Telegram
+3. Local file paths = TPR reads/writes files directly, no HTTP upload
+4. HTTP webhooks = TPR receives updates on localhost, no SSL needed
+5. 100K webhook connections = massive scale for harness product
+6. Full source = can study exact behavior of every method
+7. C++ = can patch/extend if Telegram's implementation doesn't fit
+
+## Integration with en0 stack
+
+- Build on en0 (AMD HawkPoint has the CPU for C++ compile)
+- Run as sysgenctl seat alongside cursor-proxy and TPR
+- Webhook points to TPR on localhost (HTTP, no SSL)
+- TPR calls localhost Bot API instead of api.telegram.org
+- File operations use local paths (vec3/var/ for temp, _TRON for persist)
+
+:: ∎

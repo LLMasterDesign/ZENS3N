@@ -1,0 +1,42 @@
+⟦⎊⟧ Telegram docs index — verified, not remembered
+⋮⋮TPR.HUB⋮⋮
+
+Every URL below returned 200 on ⧗-26.392. Telegram ships no
+llms.txt, so this file is the lookup table.
+
+── the pages ──────────────────────────────────────────────────
+bots intro      https://core.telegram.org/bots
+FEATURES page   https://core.telegram.org/bots/features
+  the one to open first — privacy mode, commands, menu button,
+  deep links, attachment menu, all in one place
+Bot API ref     https://core.telegram.org/bots/api
+tutorial        https://core.telegram.org/bots/tutorial
+inline mode     https://core.telegram.org/bots/inline
+mini apps       https://core.telegram.org/bots/webapps
+login widget    https://core.telegram.org/bots/telegram-login
+  (core.telegram.org/widgets/login 302s here)
+payments        https://core.telegram.org/bots/payments
+stars           https://core.telegram.org/bots/payments-stars
+games           https://core.telegram.org/bots/games
+serverless      https://core.telegram.org/bots/serverless
+:: ∎
+
+── what this hub already holds ────────────────────────────────
+API/RichMessages.ref   21 block types · 24 rich text types
+API/Streaming.ref      sendMessageDraft · 30s TTL
+API/Threads.ref        forum topics · thread = session
+API/Changelog.ref      Bot API 10.1 + 10.2 diff
+API/SelfHosted.ref     local Bot API server
+BotFather/Menu.ref     every BotFather page, logged
+Bots/bots.kdl          the registry · which bot is which
+Apple/SudoShortcut.ref iOS sudo petition loop
+TPR.HUB                login widget flow · domain zensen.live
+:: ∎
+
+── where this hub does NOT live ───────────────────────────────
+Not !CLOUD. _SRV/WHOAMI is explicit: instances live at
+!CLOUD/<NAME>/ with <NAME>.me · policy.kdl · ledger.gensL, and
+that family is storage/infra guarded by srv-snap (CITADEL is a
+ZFS pool). A bot registry is station config, and TPR already
+has a station — so the hub sits beside it, in Telegram/.
+:: ∎

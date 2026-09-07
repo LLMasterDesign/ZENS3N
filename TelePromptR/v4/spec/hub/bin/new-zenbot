@@ -1,0 +1,111 @@
+#!/usr/bin/env bash
+# ▛//▞▞ ⟦⎊⟧ :: ⧗-26.392 // TPR.HUB :: new-zenbot ▞▞
+# Scaffold a ZenBot: pack from the template, registered in the hub,
+# with the BotFather steps printed in the order they must happen.
+# It writes NO prose and invents NO token — voice and secrets are
+# Lucius's. Usage:
+#   new-zenbot <slug> ["Display Name"] ["MenuTag"]
+#   new-zenbot store "Store" "STORE"
+set -euo pipefail
+
+# Validate the ask BEFORE resolving any path — a bad slug used to
+# die on a cd error three lines later, which reads like a broken
+# tool instead of a typo.
+slug="${1:-}"
+[[ -n "$slug" ]] || { echo "usage: new-zenbot <slug> [\"Display Name\"] [\"MenuTag\"]"; exit 2; }
+[[ "$slug" =~ ^[a-z0-9_]+$ ]] || { echo "↯ slug must be [a-z0-9_] — got '$slug'"; exit 2; }
+
+HUB="${HUB_DIR:-$(cd "$(dirname "$0")/.." && pwd)}"
+if [[ -z "${STATION_ROOT:-}" ]]; then
+  STATION_ROOT="$(cd "$HUB/../TelePromptR" 2>/dev/null && pwd || true)"
+fi
+[[ -n "$STATION_ROOT" ]] || { echo "↯ cannot find the TelePromptR station — set STATION_ROOT"; exit 1; }
+ZENBOTS="${ZENBOTS_DIR:-$STATION_ROOT/ZenBots}"
+TEMPLATE="$ZENBOTS/.template"
+REGISTRY="$HUB/Bots/bots.kdl"
+[[ -d "$TEMPLATE" ]] || { echo "↯ no template at $TEMPLATE"; exit 1; }
+
+Slug="$(printf '%s' "${slug:0:1}" | tr '[:lower:]' '[:upper:]')${slug:1}"
+NAME="${2:-$Slug}"
+TAG="${3:-$(printf '%s' "$Slug" | tr '[:lower:]' '[:upper:]')}"
+USER_NAME="${slug}_zenbot"
+KEY="${Slug}_Zen"
+DEST="$ZENBOTS/$Slug"
+
+[[ -e "$DEST" ]] && { echo "↯ $DEST already exists — nothing written"; exit 1; }
+
+cp -r "$TEMPLATE" "$DEST"
+while IFS= read -r -d '' f; do
+  python3 - "$f" "$USER_NAME" "$NAME" "$KEY" "$TAG" <<'PY'
+import io, sys
+f, user, name, key, tag = sys.argv[1:6]
+s = io.open(f, encoding="utf-8").read()
+for a, b in (("{{USER}}", user), ("{{NAME}}", name),
+             ("{{KEY}}", key), ("{{TAG}}", tag)):
+    s = s.replace(a, b)
+io.open(f, "w", encoding="utf-8").write(s)
+PY
+done < <(find "$DEST" -type f -print0)
+chmod +x "$DEST/setup-bot.sh"
+
+for j in "$DEST"/*/*.json; do
+  python3 -c "import json,sys; json.load(open(sys.argv[1]))" "$j" \
+    || { echo "↯ invalid json after substitution: $j"; exit 1; }
+done
+
+# register — insert before the sentinel so the block stays valid
+python3 - "$REGISTRY" "$USER_NAME" "$KEY" "$Slug" "$NAME" <<'PY'
+import io, sys
+reg, user, key, slug, name = sys.argv[1:6]
+mark = "  // <<< new-zenbot inserts above this line"
+s = io.open(reg, encoding="utf-8").read()
+if user in s:
+    print(f"  ◑ {user} already in the registry — left alone")
+    raise SystemExit(0)
+node = f'''  bot "{user}" {{
+    being "{name}"
+    id 0                            // fill from getMe
+    key "{key}"
+    pack "ZenBots/{slug}"
+    seat "tpr"
+    status "scaffolded"             // BotFather step is Lucius's
+    privacy "on"
+    groups #true
+    inline #false
+    miniapp "route /app · needs a public URL"
+    spend "none"
+    note "scaffolded by new-zenbot"
+    env {{
+      TPR_BOT_USERNAME "{user}"
+      TPR_BOT_KEY "{key}"
+    }}
+  }}
+
+'''
+if mark not in s:
+    print("  ↯ registry sentinel missing — add the node by hand")
+    raise SystemExit(0)
+io.open(reg, "w", encoding="utf-8").write(s.replace(mark, node + mark, 1))
+print(f"  ∎ registered {user}")
+PY
+
+cat <<TXT
+
+▞▞⋮⋮ ⎊::tpr::hub::new-zenbot@EN0 :: ∎ | kind=tpr.bot | bot=$USER_NAME | pack=$DEST :: ∎
+
+@$USER_NAME · $NAME
+  pack   $DEST
+  vault  $STATION_ROOT/.station/vec3/lib/keys/$KEY
+  seat   TPR_BOT_USERNAME=$USER_NAME TPR_BOT_KEY=$KEY
+
+next, in order
+  1 BotFather → /newbot → $NAME → @$USER_NAME
+      BotFather decides if the name is free. Nothing else does.
+  2 token → the vault path above. Not into any file here.
+  3 write the prose in $DEST/copy.txt (ABOUT + DESCRIPTION)
+  4 $DEST/setup-bot.sh          pushes name + commands
+  5 BotFather by hand: Groups · Privacy · Inline · Mini App
+      the switches setup-bot.sh cannot reach — copy.txt lists them
+  6 put the id getMe printed into $REGISTRY
+  reference: $HUB/BotFather/Menu.ref  ·  $HUB/Docs.ref
+TXT

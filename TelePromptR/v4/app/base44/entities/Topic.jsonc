@@ -1,0 +1,13 @@
+{
+  "name": "Topic",
+  "type": "object",
+  "properties": {
+    "group_slug": { "type": "string", "description": "Which group this topic is in" },
+    "thread_id":  { "type": "string", "description": "Telegram forum topic id" },
+    "name":       { "type": "string", "description": "Topic name" },
+    "being":      { "type": "string", "description": "Which agent answers here" },
+    "tier":       { "type": "string", "description": "Which metal it answers on" },
+    "context":    { "type": "string", "description": "The topic card brief" }
+  },
+  "required": ["name"]
+}

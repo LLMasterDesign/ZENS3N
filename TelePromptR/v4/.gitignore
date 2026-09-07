@@ -1,0 +1,44 @@
+# Local operator and test output
+*.log
+*.tmp
+*.bak
+.DS_Store
+
+# Secrets and machine-local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+
+# Tool output
+coverage/
+reports/
+test-results/
+
+# Atlas operator surface and local rollback archive
+LOOM.html
+_versions/
+__pycache__/
+*.py[cod]
+
+# mistyped-URL artifact from a railway CLI invocation
+https:/
+
+# elixir build output (orion is a separate project tree)
+orion/_build/
+orion/deps/
+
+# Base44 local link — per Base44's own note, do not commit
+app/base44/.app.jsonc
+
+# version archive — reference only, pulled from Citadel by Zendex
+archive/
+# Base44 CLI's own skill docs — noise in the repo
+app/.agents/
+app/.claude/
+# never
+app/node_modules/
+app/dist/

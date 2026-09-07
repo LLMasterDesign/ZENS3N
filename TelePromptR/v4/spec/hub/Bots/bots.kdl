@@ -1,0 +1,58 @@
+// ⟦⎊⟧ TPR.HUB · Bots/bots.kdl — the bot registry
+// ⋮⋮TPR.HUB⋮⋮
+// One node per ZenBot. The token NEVER appears here: `key` names
+// the vault file, `id` is the token's public prefix (getMe agrees
+// or the token was swapped). Written ⧗-26.392.
+
+bots station="Telegram/TelePromptR" vault=".station/vec3/lib/keys" {
+
+  bot "ender_zenbot" {
+    being "ENDER"
+    id 8970239859
+    key "Ender_Zen"
+    pack "ZenBots/Ender"
+    seat "tpr"                      // vec3/rc/seats.kdl · :7089
+    status "live"
+    privacy "off"                   // getMe reads-all=true
+    groups #true
+    inline #true
+    miniapp "webapp/supercharge.html · route /app"
+    spend "SuperCharge chips — RunPod, real money, his own line"
+    note "Ender's own voice. Stays personal. Not the relay."
+  }
+
+  bot "tpr_zenbot" {
+    being "relay"                   // the topic names who answers
+    id 8305423651                   // getMe ⧗-26.392
+    key "TPR_Zen"
+    pack "ZenBots/TelePromptR"
+    seat "—"                        // NO PROCESS YET · needs its own
+                                    // seat: one run.py per token
+    status "registered"             // token in vault · commands +
+                                    // name pushed · about/description
+                                    // HELD until Lucius reads the copy
+    privacy "on"                    // getMe reads-all=false
+    groups #true                    // the whole product
+    inline #true
+    miniapp "webapp/tpr.html · route /app · NEEDS A PUBLIC URL"
+    spend "none — no SuperCharge, no spend commands"
+    note "Rose-style. Step 1 is: add TPR to a group. Naming law \
+is <name>_zenbot because plain `bot` is taken everywhere."
+    env {
+      TPR_BOT_USERNAME "tpr_zenbot"
+      TPR_BOT_KEY "TPR_Zen"
+    }
+  }
+
+  // <<< new-zenbot inserts above this line
+}
+
+law {
+  law "one run.py serves every bot — identity is seat env, never \
+a fork and never a new repo"
+  law "verify_identity() asks getMe at boot; the token wins over \
+the env, because a wrong username kills the group gate silently"
+  law "a bot with spend verbs is a PERSONAL bot. A public relay \
+gets Stars or an allowlist first."
+}
+:: ∎

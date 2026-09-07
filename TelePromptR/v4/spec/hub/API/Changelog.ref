@@ -1,0 +1,98 @@
+## Bot API Changelog — 10.1 + 10.2 (Rich Messages era)
+
+---
+
+## Bot API 10.2 — July 14, 2026
+
+New types:
+  InputRichMessageMedia, InputMediaVoiceNote, InputRichBlockListItem
+  21x InputRichBlock* (Paragraph, SectionHeading, Preformatted, Footer,
+    Divider, MathematicalExpression, Anchor, List, BlockQuotation,
+    PullQuotation, Collage, Slideshow, Table, Details, Map, Animation,
+    Audio, Photo, Video, VoiceNote, Thinking)
+  Community, CommunityChatAdded, CommunityChatRemoved
+  BotSubscriptionUpdated
+
+New fields:
+  InputRichMessage: media, blocks
+  BotCommand: is_ephemeral
+  Message: receiver_user, ephemeral_message_id
+  ChatFullInfo: community
+  Message/Update: community_chat_added, community_chat_removed, subscription
+
+New methods:
+  editEphemeralMessageText
+  editEphemeralMessageMedia
+  editEphemeralMessageCaption
+  editEphemeralMessageReplyMarkup
+  deleteEphemeralMessage
+
+Enhanced methods:
+  receiver_user_id + callback_query_id on send methods
+
+---
+
+## Bot API 10.1 — June 11, 2026
+
+New types (Rich Text — 24 RichText* subtypes):
+  RichTextBold, RichTextItalic, RichTextUnderline, RichTextStrikethrough,
+  RichTextSpoiler, RichTextDateTime, RichTextTextMention, RichTextSubscript,
+  RichTextSuperscript, RichTextMarked, RichTextCode, RichTextCustomEmoji,
+  RichTextMathematicalExpression, RichTextUrl, RichTextEmailAddress,
+  RichTextPhoneNumber, RichTextBankCardNumber, RichTextMention,
+  RichTextHashtag, RichTextCashtag, RichTextBotCommand, RichTextAnchor,
+  RichTextAnchorLink, RichTextReference, RichTextReferenceLink
+
+New types (Rich Block — 21 RichBlock* subtypes):
+  RichBlockParagraph, RichBlockSectionHeading, RichBlockPreformatted,
+  RichBlockFooter, RichBlockDivider, RichBlockMathematicalExpression,
+  RichBlockAnchor, RichBlockList, RichBlockBlockQuotation,
+  RichBlockPullQuotation, RichBlockCollage, RichBlockSlideshow,
+  RichBlockTable, RichBlockDetails, RichBlockMap, RichBlockAnimation,
+  RichBlockAudio, RichBlockPhoto, RichBlockVideo, RichBlockVoiceNote,
+  RichBlockThinking
+
+Container types:
+  RichText, RichBlock, RichMessage, RichBlockCaption, RichBlockTableCell,
+  RichBlockListItem, InputRichMessage, InputRichMessageContent
+
+New types (Guest mode):
+  SentGuestMessage
+
+New types (Polls):
+  PollMedia, InputMediaLink, InputPollMedia, InputPollOptionMedia
+
+New methods:
+  sendRichMessage
+  sendRichMessageDraft
+  answerGuestQuery
+  answerChatJoinRequestQuery
+  sendChatJoinRequestWebApp
+
+New fields:
+  Message: rich_message
+  User: supports_guest_queries, supports_join_request_queries
+  ChatFullInfo: guard_bot
+  Poll: media, explanation_media
+  PollOption: media
+  ChatJoinRequest: query_id
+  Message: guest_bot_caller_user, guest_bot_caller_chat, guest_query_id
+  Update: guest_message
+
+Enhanced methods:
+  editMessageText: rich_message parameter
+
+---
+
+## Key takeaways for TPR
+
+1. Rich messages are TWO APIs: blocks (structured) and html/markdown (text).
+   Use blocks for programmatic construction, html for simple cases.
+2. Streaming = sendRichMessageDraft (30s TTL) → sendRichMessage (persist).
+   Plain text streaming = sendMessageDraft → sendMessage.
+3. InputRichBlockThinking is DRAFT-ONLY — shows AI reasoning, cannot persist.
+4. Ephemeral messages = visible to one user only. Good for auth/config flows.
+5. Communities = groups of chats. New in 10.2. Watch this space.
+6. Guest mode = bots answering queries from users who haven't started them.
+
+:: ∎

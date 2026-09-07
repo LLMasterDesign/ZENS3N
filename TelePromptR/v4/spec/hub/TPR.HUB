@@ -1,0 +1,13 @@
+⟦⎊⟧ TPR.HUB — TelePromptR integration references
+⋮⋮TPR.HUB⋮⋮
+
+── Telegram Login Widget ──────────────────────────────────────
+domain: zensen.live
+bot: @Ender_ZenBot
+docs: https://core.telegram.org/bots/telegram-login
+lib:  https://core.telegram.org/bots/telegram-login#using-the-telegram-login-library
+auth: https://core.telegram.org/bots/telegram-login#validating-id-tokens
+
+purpose: web auth gate for TPR admin surfaces
+flow: visitor clicks Login → Telegram verifies identity →
+      TPR checks hash → grants access by Telegram user ID

@@ -1,0 +1,42 @@
+TPR.HUB — Telegram knowledge corpus for TelePrompTR
+
+role    = research + reference + harness patterns
+scope   = Telegram Bot API, agent patterns, training suite, harness templates
+feeds   = TelePromptR (relay station), harness product line
+
+API/
+  RichMessages.ref   — sendRichMessage, sendRichMessageDraft, all 21 block types,
+                       24 RichText types, InputRichMessage, ephemeral messaging
+  Streaming.ref      — sendMessageDraft + sendRichMessageDraft, 30s TTL behavior,
+                       implementation patterns for text + rich agent streaming
+  Threads.ref        — Forum topics, createForumTopic, thread = session pattern,
+                       Community type, DirectMessagesTopic
+  Changelog.ref      — Bot API 10.1 + 10.2 (June-July 2026), full diff
+
+BotFather/
+  Menu.ref           — every BotFather page logged: what it sets, the API
+                       method that does it headless, which file in a ZenBot
+                       pack holds it, and the doc link
+
+Bots/
+  bots.kdl           — the registry. One node per bot: being, vault KEY NAME,
+                       pack, seat env, switches, spend. The token is NEVER
+                       here; `id` is the token's public prefix, so a swapped
+                       token shows up without anything reading the secret
+
+bin/
+  new-zenbot         — scaffold a bot: pack from ZenBots/.template, register
+                       it, print the BotFather steps in order. Writes no
+                       prose and invents no token — voice and secrets are
+                       Lucius's
+
+Docs.ref             — the Telegram doc index, every URL verified 200
+
+status  = seeded (2026-08-10) · bot registry + BotFather log (⧗-26.392)
+note    = Telegram has NO llms.txt or AI-friendly docs. This hub IS that.
+note    = NOT !CLOUD. _SRV/WHOAMI: instances are !CLOUD/<NAME>/ with
+          <NAME>.me · policy.kdl · ledger.gensL, and that family is
+          storage/infra guarded by srv-snap. A bot registry is station
+          config, so the hub sits beside the station it serves.
+
+:: ∎
