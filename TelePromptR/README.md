@@ -2,34 +2,43 @@
 
 One Telegram bot. Many agents. Every message accounted for.
 
-TelePromptR is a shared Telegram gateway: only TPR talks to the
-Telegram API, and agents publish through it. A user logs in with
-their Telegram account and connects their own agents.
+Only TelePromptR talks to the Telegram API; agents publish through
+it. A person logs in with their Telegram account and connects their
+own agents.
+
+## The directory
+
+| | holds |
+|---|---|
+| `TelePromptR.ID` | the identity — what this station is, where it runs |
+| `CyberDeck/` | the specs that govern: multi-agent routing, cyberlobby, capacity, speaker mesh, route map |
+| `specs/` | the wire contracts — `TPR.MSG.v1.proto`, inbox envelope, outbox, bus schemas |
+| `runtime/` | what runs — the station, `teleprompter.rb`, the VPS ops |
+| `tools/` | `subkeyctl` · `speaker_mesh` · benchmarks and load tests |
+| `tui2go/` | the terminal face |
+| `v1/` … `v4/` | the version chunks, one per stage |
 
 ## Versions
 
 Stages, not releases.
 
-| | stage | holds |
+| | stage | what it is |
 |---|---|---|
-| **v1** | the design | Ruby gateway · CyberDeck specs (routing, lobby, capacity) · `_forge` · `tui2go` |
-| **v4** | first test run | current work — Base44 prompts, the app, the spec |
+| v0 | origins | Jan 2026 · Elixir OTP (in Citadel) |
+| v1 | the design | Ruby gateway era · the CyberDeck specs came from here |
+| v2 | the parts | stations and stubs (in Citadel) |
+| v3 | the prototype | first Python run (in Citadel) |
+| v4 | first test run | current — Base44 prompts, the app, the spec |
 
-v0 (origins, Jan 2026 Elixir) and v2–v3 live in the Citadel
-archive, not here: `/srv/7HE.CITADEL/TelePromptR/`.
+v5 is a clean run: self-running, less Python, more Rust · Ruby ·
+Elixir · gRPC. It gets built from v0–v4, never fabricated.
+Citadel archive: `/srv/7HE.CITADEL/TelePromptR/`
 
-## v4 — what is in it
+## v4 — the current stage
 
-    prompts/     001 login · 002 user page  (paste into Base44)
-    app/         the Base44 project
-                   base44/entities/    Member · Agent · Group · Topic
-                   base44/functions/   auth (Telegram signature) · connect
-                   src/                the front end
-    spec/        the routing model, station spec, Telegram corpus
-    TPR.RULES.md how this build repeats
-    HANDOFF.md   the backdrop: where TPR came from and where it goes
-
-## Where it runs
-
-Front end and backend: Base44 app `TelePromptR`.
-The live relay lives outside this repo, on en0.
+    prompts/   001 login · 002 user page  (for Base44)
+    app/       the Base44 project
+                 base44/entities/   Member · Agent · Group · Topic
+                 base44/functions/  auth (Telegram signature) · connect
+                 src/               the front end
+    spec/      routing model, station spec, Telegram corpus
