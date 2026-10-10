@@ -50,6 +50,16 @@ Confirmed example:
 
 `Weekly Ops [Service]` is the recurring capability or job being run.
 
+## Resource
+
+- Base: where the work is situated or run.
+- Model: the intelligence resource assigned to perform inference for that work.
+- A Base may remain constant while the assigned Model changes.
+
+Confirmed example:
+
+`Minsky [Base]` may remain constant while `Ornith [Model]` is replaced temporarily by a larger RunPod-backed Model.
+
 ## Entity delegation
 
 Entity authority is top-down:
