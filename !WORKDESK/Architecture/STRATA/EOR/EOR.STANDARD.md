@@ -37,6 +37,19 @@ Confirmed example:
 
 A higher model may be provisioned through a RunPod bootstrap and occupy the Model resource position without changing Raven's Entity class or the Station/Service relationship.
 
+## Operation
+
+- Station: the operational place or interface an Entity works through.
+- Service: a specific capability or job that gets run through a Station or directly by its owning Entity.
+- A Station may expose multiple Services.
+- A Service keeps the ownership of whoever starts or owns its lifecycle.
+
+Confirmed example:
+
+`TelePromptR [Station]` is the operational surface Raven can work through.
+
+`Weekly Ops [Service]` is the recurring capability or job being run.
+
 ## Entity delegation
 
 Entity authority is top-down:
