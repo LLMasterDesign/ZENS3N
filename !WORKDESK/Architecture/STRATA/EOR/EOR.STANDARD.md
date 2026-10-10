@@ -55,6 +55,16 @@ An Agent may ping a Sidekik, but an Agent cannot run a Sidekik.
 
 A ping does not grant the Agent control over the Sidekik and does not reverse the top-down Entity relationship.
 
+### Agent to Agent
+
+Agent-to-Agent authority is:
+
+`rw-`
+
+An Agent may read from and write to another Agent's permitted surface, but may not execute that Agent or its Operations.
+
+Execution remains with the owning Agent unless a higher-authority Sidekik invokes it.
+
 ## State lifecycle
 
 - `vec3/var` is temporary live state.
