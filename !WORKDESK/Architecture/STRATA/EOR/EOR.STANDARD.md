@@ -55,8 +55,13 @@ Confirmed example:
 - Base: where the work is situated or run.
 - Model: the intelligence resource assigned to perform inference for that work.
 - A Base may remain constant while the assigned Model changes.
+- A Base may host multiple Entities.
+- A Model may be shared by multiple Entities.
+- Resource assignment is not inherently exclusive.
 
 Confirmed example:
+
+`Minsky [Base]` may host multiple Entities while `Ornith [Model]` may also serve multiple Entities.
 
 `Minsky [Base]` may remain constant while `Ornith [Model]` is replaced temporarily by a larger RunPod-backed Model.
 
