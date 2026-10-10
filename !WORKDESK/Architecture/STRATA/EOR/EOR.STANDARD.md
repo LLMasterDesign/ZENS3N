@@ -39,13 +39,21 @@ A higher model may be provisioned through a RunPod bootstrap and occupy the Mode
 
 ## Entity delegation
 
-A Sidekik may call another Entity to use that Entity's available Operations.
+Entity authority is top-down:
+
+`Sidekik > Agent`
+
+A Sidekik may call an Agent to use that Agent's available Operations.
 
 Confirmed relation:
 
 `Raven [Sidekik] calls Ender [Agent] to run an available Service on Corbato [Base] using Ender's available Model.`
 
 Delegation does not transfer ownership. Ender retains ownership of its own Stations and Services when Raven invokes Ender.
+
+An Agent may ping a Sidekik, but an Agent cannot run a Sidekik.
+
+A ping does not grant the Agent control over the Sidekik and does not reverse the top-down Entity relationship.
 
 ## State lifecycle
 
