@@ -1,8 +1,45 @@
 [registry]
 name = "5TRATA"
-version = "1.0"
+version = "1.1"
 status = "active"
-updated_on = "2026-02-13"
+updated_on = "2026-10-10"
+
+[eor]
+name = "EOR"
+types = ["Entity", "Operation", "Resource"]
+class_count = 6
+classes_per_type = 2
+
+[eor.entity]
+classes = ["Agent", "Sidekik"]
+
+[eor.operation]
+classes = ["Station", "Service"]
+
+[eor.resource]
+classes = ["Base", "Model"]
+
+[eor.class.Agent]
+kind = "standard_top_level_harness"
+
+[eor.class.Sidekik]
+kind = "higher_access_top_level_harness"
+mission = "continuity"
+first = "Raven"
+
+[eor.class.Station]
+kind = "operation"
+owners = ["Agent", "Sidekik"]
+
+[eor.class.Service]
+kind = "operation"
+owners = ["Agent", "Sidekik"]
+
+[eor.class.Base]
+kind = "location_of_work"
+
+[eor.class.Model]
+kind = "llm_assigned_to_mesh_port"
 
 [layer0]
 name = "CMD"
