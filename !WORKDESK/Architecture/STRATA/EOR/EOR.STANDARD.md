@@ -46,8 +46,8 @@ A higher model may be provisioned through a RunPod bootstrap and occupy the Mode
 - A Station may be shared by multiple Entities.
 - When multiple Entities share a Base, sharing a Station is typical but not the default or a requirement.
 - Service-to-Service execution is not a direct edge.
-- A Service may call an Agent's Station to run a Service owned on that Agent's side.
-- Operation calls remain top-down through the Station rather than Service directly invoking Service.
+- A Service may call an Agent or a Station to run a Service available on that target's side.
+- Operation calls remain top-down rather than Service directly invoking Service.
 
 Confirmed example:
 
