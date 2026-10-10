@@ -25,6 +25,18 @@ EOR contains 3 types and 6 classes, exactly 2 classes per type.
 - Base: location of work.
 - Model: any LLM assigned to a mesh port.
 
+## Working relation
+
+An EOR expression can read as:
+
+`Entity [class] uses Station to run Service on Base using Model.`
+
+Confirmed example:
+
+`Raven [Sidekik] uses TelePromptR [Station] to run Weekly Ops [Service] on Minsky [Base] using Ornith [Model].`
+
+A higher model may be provisioned through a RunPod bootstrap and occupy the Model resource position without changing Raven's Entity class or the Station/Service relationship.
+
 ## State lifecycle
 
 - `vec3/var` is temporary live state.
