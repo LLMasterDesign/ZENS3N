@@ -57,11 +57,20 @@ A ping does not grant the Agent control over the Sidekik and does not reverse th
 
 ### Agent to Agent
 
-Agent-to-Agent authority is:
+An Agent may read another Agent's permitted surface but may not execute that Agent or its Operations.
 
-`rw-`
+Write permission is tier-scoped rather than universal.
 
-An Agent may read from and write to another Agent's permitted surface, but may not execute that Agent or its Operations.
+There are exactly two write tiers:
+
+- `[USER]`
+- `[CMD]`
+
+`[USER]` is the default write tier.
+
+If an Entity is explicitly assigned `[CMD]`, it may write to permitted surfaces within the `[CMD]` tier.
+
+A write-tier grant does not imply execute permission.
 
 Execution remains with the owning Agent unless a higher-authority Sidekik invokes it.
 
