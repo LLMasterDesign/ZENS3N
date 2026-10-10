@@ -107,6 +107,11 @@ A write-tier grant does not imply execute permission.
 
 Execution remains with the owning Agent unless a higher-authority Sidekik invokes it.
 
+## Authorization boundary
+
+- EOR defines what can call what.
+- en0 decides whether the call is authorized.
+
 ## State lifecycle
 
 - `vec3/var` is temporary live state.
