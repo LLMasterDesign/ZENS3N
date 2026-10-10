@@ -43,6 +43,8 @@ A higher model may be provisioned through a RunPod bootstrap and occupy the Mode
 - Service: a specific capability or job that gets run through a Station or directly by its owning Entity.
 - A Station may expose multiple Services.
 - A Service keeps the ownership of whoever starts or owns its lifecycle.
+- A Station may be shared by multiple Entities.
+- When multiple Entities share a Base, sharing a Station is typical but not the default or a requirement.
 
 Confirmed example:
 
