@@ -37,6 +37,16 @@ Confirmed example:
 
 A higher model may be provisioned through a RunPod bootstrap and occupy the Model resource position without changing Raven's Entity class or the Station/Service relationship.
 
+## Entity delegation
+
+A Sidekik may call another Entity to use that Entity's available Operations.
+
+Confirmed relation:
+
+`Raven [Sidekik] calls Ender [Agent] to run an available Service on Corbato [Base] using Ender's available Model.`
+
+Delegation does not transfer ownership. Ender retains ownership of its own Stations and Services when Raven invokes Ender.
+
 ## State lifecycle
 
 - `vec3/var` is temporary live state.
