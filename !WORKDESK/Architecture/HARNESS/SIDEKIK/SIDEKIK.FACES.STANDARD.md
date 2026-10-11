@@ -19,6 +19,16 @@ The six Sidekik faces are locked as:
 
 These names are higher abstractions than the corresponding Agent and Station faces. They are not aliases for the lower faces.
 
+
+## Invariant 01 — Agent wrapper
+
+- Every Sidekik MUST wrap at least one complete, independently valid Agent `.3ox`. One wrapped Agent is its primary Agent.
+- The wrapped Agent retains its six original faces: Spark, Brains, Rules, Toolkit, Links, Pulse. Adding the Sidekik harness must not require rewriting the Agent's internal contracts.
+- The Sidekik extends the Agent with its own six higher-level faces; it does not replace the Agent's six faces.
+- The wrapper relationship does not automatically transfer ownership of the Agent's pre-existing Stations or Services, or bypass en0 authorization.
+- The physical placement of the wrapped Agent remains undecided. This invariant does not mandate moving, copying, or relocating its existing files.
+
+
 ## Face semantics
 
 ### 1. Threads
